@@ -1,0 +1,20 @@
+PODS:
+  - Parchment (2.4.0)
+  - SnapKit (5.0.1)
+
+DEPENDENCIES:
+  - Parchment
+  - SnapKit (~> 5.0.0)
+
+SPEC REPOS:
+  trunk:
+    - Parchment
+    - SnapKit
+
+SPEC CHECKSUMS:
+  Parchment: 002785473861582385db5c6725165353c500198e
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+
+PODFILE CHECKSUM: 2cf70bbe1894fad99ee066873c9955c164c448c2
+
+COCOAPODS: 1.8.3
