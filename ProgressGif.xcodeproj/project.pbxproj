@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		491816B224BA9AD800E318FC /* FromFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491816B124BA9AD800E318FC /* FromFiles.swift */; };
 		4944CAA924B912EB00E893AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944CAA824B912EB00E893AE /* AppDelegate.swift */; };
 		4944CAAB24B912EB00E893AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944CAAA24B912EB00E893AE /* SceneDelegate.swift */; };
 		4944CAAD24B912EB00E893AE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944CAAC24B912EB00E893AE /* ViewController.swift */; };
@@ -17,7 +18,6 @@
 		4980301D24B91DE000AE277C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980301C24B91DE000AE277C /* Model.swift */; };
 		4980301F24B91E2500AE277C /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980301E24B91E2500AE277C /* PhotoCell.swift */; };
 		4980302124B9427800AE277C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302024B9427800AE277C /* Utilities.swift */; };
-		4980302324B9428800AE277C /* ViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302224B9428800AE277C /* ViewController+CollectionView.swift */; };
 		4980302524B946F200AE277C /* ViewController+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302424B946F200AE277C /* ViewController+Buttons.swift */; };
 		4980302724B94CDD00AE277C /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302624B94CDD00AE277C /* Setup.swift */; };
 		4980302924B95D8900AE277C /* FromPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302824B95D8900AE277C /* FromPhotos.swift */; };
@@ -26,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		491816B024BA9A9500E318FC /* ProgressGif.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProgressGif.entitlements; sourceTree = "<group>"; };
+		491816B124BA9AD800E318FC /* FromFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromFiles.swift; sourceTree = "<group>"; };
 		4944CAA524B912EB00E893AE /* ProgressGif.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProgressGif.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4944CAA824B912EB00E893AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4944CAAA24B912EB00E893AE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,7 +40,6 @@
 		4980301C24B91DE000AE277C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		4980301E24B91E2500AE277C /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		4980302024B9427800AE277C /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		4980302224B9428800AE277C /* ViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		4980302424B946F200AE277C /* ViewController+Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Buttons.swift"; sourceTree = "<group>"; };
 		4980302624B94CDD00AE277C /* Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
 		4980302824B95D8900AE277C /* FromPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromPhotos.swift; sourceTree = "<group>"; };
@@ -98,13 +99,13 @@
 		4944CAA724B912EB00E893AE /* ProgressGif */ = {
 			isa = PBXGroup;
 			children = (
+				491816B024BA9A9500E318FC /* ProgressGif.entitlements */,
 				4944CAA824B912EB00E893AE /* AppDelegate.swift */,
 				4944CAAA24B912EB00E893AE /* SceneDelegate.swift */,
 				4944CAAC24B912EB00E893AE /* ViewController.swift */,
 				496DD41B24BA4927007380AF /* CollectionViewController.swift */,
 				49E41ECD24B967F900EA7BB2 /* Buttons */,
 				4980302624B94CDD00AE277C /* Setup.swift */,
-				4980302224B9428800AE277C /* ViewController+CollectionView.swift */,
 				4980302024B9427800AE277C /* Utilities.swift */,
 				4980301E24B91E2500AE277C /* PhotoCell.swift */,
 				4980301C24B91DE000AE277C /* Model.swift */,
@@ -121,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				4980302824B95D8900AE277C /* FromPhotos.swift */,
+				491816B124BA9AD800E318FC /* FromFiles.swift */,
 			);
 			path = Importing;
 			sourceTree = "<group>";
@@ -251,9 +253,9 @@
 				496DD41C24BA4927007380AF /* CollectionViewController.swift in Sources */,
 				4980302524B946F200AE277C /* ViewController+Buttons.swift in Sources */,
 				4980302124B9427800AE277C /* Utilities.swift in Sources */,
-				4980302324B9428800AE277C /* ViewController+CollectionView.swift in Sources */,
 				4944CAAD24B912EB00E893AE /* ViewController.swift in Sources */,
 				4980301F24B91E2500AE277C /* PhotoCell.swift in Sources */,
+				491816B224BA9AD800E318FC /* FromFiles.swift in Sources */,
 				4944CAA924B912EB00E893AE /* AppDelegate.swift in Sources */,
 				4980302924B95D8900AE277C /* FromPhotos.swift in Sources */,
 				4944CAAB24B912EB00E893AE /* SceneDelegate.swift in Sources */,
@@ -407,6 +409,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ProgressGif/ProgressGif.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = ProgressGif/Info.plist;
@@ -428,6 +431,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ProgressGif/ProgressGif.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = ProgressGif/Info.plist;

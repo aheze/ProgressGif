@@ -65,6 +65,7 @@ class ViewController: UIViewController {
     
     @IBAction func filesPressed(_ sender: Any) {
         filesButton.scaleUp()
+        presentImportController()
         handleAddButtonPress()
     }
     

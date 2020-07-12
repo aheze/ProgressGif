@@ -13,7 +13,6 @@ import Photos
 
 class FromPhotosPicker: UIViewController {
     
-    var viewDidAppearLoaded = false
     
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
@@ -21,13 +20,6 @@ class FromPhotosPicker: UIViewController {
     @IBOutlet weak var photosLabel: UILabel!
     @IBOutlet weak var rightArrowImageView: UIImageView!
     @IBOutlet weak var videosLabel: UILabel!
-    
-    @IBOutlet weak var photosLabelLeftC: NSLayoutConstraint!
-    var photosLabelWidth = CGFloat(50)
-    
-    @IBOutlet weak var arrowLeftC: NSLayoutConstraint!
-    @IBOutlet weak var arrowRightC: NSLayoutConstraint!
-    
     
     private lazy var collectionViewController: CollectionViewController? = {
         
@@ -60,7 +52,7 @@ extension FromPhotosPicker {
    
 }
 
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension ViewController: UIImagePickerControllerDelegate {
 
     func importVideo() {
 
