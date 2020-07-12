@@ -28,6 +28,7 @@ class FromPhotosPicker: UIViewController {
             
             viewController.topInset = visualEffectView.frame.height
             viewController.collectionType = .photos
+            viewController.inset = CGFloat(4)
             
             self.add(childViewController: viewController, inView: view)
             

@@ -8,4 +8,5 @@ target 'ProgressGif' do
   # Pods for ProgressGif
 	pod 'Parchment'
 	pod 'SnapKit', '~> 5.0.0'
+  pod 'SDWebImage'
 end
