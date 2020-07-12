@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,16 @@
 		4944CAB024B912EB00E893AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4944CAAE24B912EB00E893AE /* Main.storyboard */; };
 		4944CAB224B912F000E893AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4944CAB124B912F000E893AE /* Assets.xcassets */; };
 		4944CAB524B912F000E893AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4944CAB324B912F000E893AE /* LaunchScreen.storyboard */; };
+		496DD41C24BA4927007380AF /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496DD41B24BA4927007380AF /* CollectionViewController.swift */; };
+		4980301D24B91DE000AE277C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980301C24B91DE000AE277C /* Model.swift */; };
+		4980301F24B91E2500AE277C /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980301E24B91E2500AE277C /* PhotoCell.swift */; };
+		4980302124B9427800AE277C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302024B9427800AE277C /* Utilities.swift */; };
+		4980302324B9428800AE277C /* ViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302224B9428800AE277C /* ViewController+CollectionView.swift */; };
+		4980302524B946F200AE277C /* ViewController+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302424B946F200AE277C /* ViewController+Buttons.swift */; };
+		4980302724B94CDD00AE277C /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302624B94CDD00AE277C /* Setup.swift */; };
+		4980302924B95D8900AE277C /* FromPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302824B95D8900AE277C /* FromPhotos.swift */; };
+		49E41ECC24B967E900EA7BB2 /* ViewController+AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */; };
+		E4E964261E027D98A9A86322 /* Pods_ProgressGif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A5AE6E1DBE53803838B0EB /* Pods_ProgressGif.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +34,18 @@
 		4944CAB124B912F000E893AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4944CAB424B912F000E893AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4944CAB624B912F000E893AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		496DD41B24BA4927007380AF /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		4980301C24B91DE000AE277C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		4980301E24B91E2500AE277C /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		4980302024B9427800AE277C /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		4980302224B9428800AE277C /* ViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CollectionView.swift"; sourceTree = "<group>"; };
+		4980302424B946F200AE277C /* ViewController+Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Buttons.swift"; sourceTree = "<group>"; };
+		4980302624B94CDD00AE277C /* Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
+		4980302824B95D8900AE277C /* FromPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromPhotos.swift; sourceTree = "<group>"; };
+		49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AddButton.swift"; sourceTree = "<group>"; };
+		4FA57EDA1E4358C19DA72C7C /* Pods-ProgressGif.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProgressGif.release.xcconfig"; path = "Target Support Files/Pods-ProgressGif/Pods-ProgressGif.release.xcconfig"; sourceTree = "<group>"; };
+		D3A5AE6E1DBE53803838B0EB /* Pods_ProgressGif.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProgressGif.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E27E80696EB138068D22D55E /* Pods-ProgressGif.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProgressGif.debug.xcconfig"; path = "Target Support Files/Pods-ProgressGif/Pods-ProgressGif.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +53,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4E964261E027D98A9A86322 /* Pods_ProgressGif.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09A9499D4BCFF3226F0C6EE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D3A5AE6E1DBE53803838B0EB /* Pods_ProgressGif.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4671A1C921A701C1EF46DB04 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E27E80696EB138068D22D55E /* Pods-ProgressGif.debug.xcconfig */,
+				4FA57EDA1E4358C19DA72C7C /* Pods-ProgressGif.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		4944CA9C24B912EB00E893AE = {
 			isa = PBXGroup;
 			children = (
 				4944CAA724B912EB00E893AE /* ProgressGif */,
 				4944CAA624B912EB00E893AE /* Products */,
+				4671A1C921A701C1EF46DB04 /* Pods */,
+				09A9499D4BCFF3226F0C6EE8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,12 +101,37 @@
 				4944CAA824B912EB00E893AE /* AppDelegate.swift */,
 				4944CAAA24B912EB00E893AE /* SceneDelegate.swift */,
 				4944CAAC24B912EB00E893AE /* ViewController.swift */,
+				496DD41B24BA4927007380AF /* CollectionViewController.swift */,
+				49E41ECD24B967F900EA7BB2 /* Buttons */,
+				4980302624B94CDD00AE277C /* Setup.swift */,
+				4980302224B9428800AE277C /* ViewController+CollectionView.swift */,
+				4980302024B9427800AE277C /* Utilities.swift */,
+				4980301E24B91E2500AE277C /* PhotoCell.swift */,
+				4980301C24B91DE000AE277C /* Model.swift */,
 				4944CAAE24B912EB00E893AE /* Main.storyboard */,
+				4980302A24B95D8F00AE277C /* Importing */,
 				4944CAB124B912F000E893AE /* Assets.xcassets */,
 				4944CAB324B912F000E893AE /* LaunchScreen.storyboard */,
 				4944CAB624B912F000E893AE /* Info.plist */,
 			);
 			path = ProgressGif;
+			sourceTree = "<group>";
+		};
+		4980302A24B95D8F00AE277C /* Importing */ = {
+			isa = PBXGroup;
+			children = (
+				4980302824B95D8900AE277C /* FromPhotos.swift */,
+			);
+			path = Importing;
+			sourceTree = "<group>";
+		};
+		49E41ECD24B967F900EA7BB2 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */,
+				4980302424B946F200AE277C /* ViewController+Buttons.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +141,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4944CAB924B912F000E893AE /* Build configuration list for PBXNativeTarget "ProgressGif" */;
 			buildPhases = (
+				C6B19C79D76940A76B453560 /* [CP] Check Pods Manifest.lock */,
 				4944CAA124B912EB00E893AE /* Sources */,
 				4944CAA224B912EB00E893AE /* Frameworks */,
 				4944CAA324B912EB00E893AE /* Resources */,
+				16371A9821ED3A6DCA0449CC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,14 +201,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		16371A9821ED3A6DCA0449CC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ProgressGif/Pods-ProgressGif-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ProgressGif/Pods-ProgressGif-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ProgressGif/Pods-ProgressGif-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C6B19C79D76940A76B453560 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ProgressGif-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4944CAA124B912EB00E893AE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				496DD41C24BA4927007380AF /* CollectionViewController.swift in Sources */,
+				4980302524B946F200AE277C /* ViewController+Buttons.swift in Sources */,
+				4980302124B9427800AE277C /* Utilities.swift in Sources */,
+				4980302324B9428800AE277C /* ViewController+CollectionView.swift in Sources */,
 				4944CAAD24B912EB00E893AE /* ViewController.swift in Sources */,
+				4980301F24B91E2500AE277C /* PhotoCell.swift in Sources */,
 				4944CAA924B912EB00E893AE /* AppDelegate.swift in Sources */,
+				4980302924B95D8900AE277C /* FromPhotos.swift in Sources */,
 				4944CAAB24B912EB00E893AE /* SceneDelegate.swift in Sources */,
+				49E41ECC24B967E900EA7BB2 /* ViewController+AddButton.swift in Sources */,
+				4980302724B94CDD00AE277C /* Setup.swift in Sources */,
+				4980301D24B91DE000AE277C /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,12 +403,14 @@
 		};
 		4944CABA24B912F000E893AE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E27E80696EB138068D22D55E /* Pods-ProgressGif.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = ProgressGif/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,12 +424,14 @@
 		};
 		4944CABB24B912F000E893AE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FA57EDA1E4358C19DA72C7C /* Pods-ProgressGif.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = ProgressGif/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
