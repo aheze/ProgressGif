@@ -8,6 +8,24 @@
 import UIKit
 import AVFoundation
 
+extension UIViewController {
+    func add(childViewController: UIViewController, inView: UIView) {
+        // Add Child View Controller
+        addChild(childViewController)
+
+        // Add Child View as Subview
+        inView.insertSubview(childViewController.view, at: 0)
+
+        // Configure Child View
+        childViewController.view.frame = self.view.bounds
+        childViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+        print("adding view controller")
+        // Notify Child View Controller
+        childViewController.didMove(toParent: self)
+    }
+}
+
 extension UIImageView {
     func roundCornersForAspectFit(radius: CGFloat) -> CGRect? {
         if let image = self.image {
