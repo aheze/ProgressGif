@@ -43,6 +43,17 @@ extension UIImageView {
     }
 }
 
+extension UIImageView {
+    func getAspectFitRect() -> CGRect? {
+        if let image = self.image {
+            let drawingRect = AVMakeRect(aspectRatio: image.size, insideRect: self.bounds)
+            return drawingRect
+        } else {
+            return nil
+        }
+    }
+}
+
 class ShadowView: UIView {
 
     var shouldActivate = false

@@ -15,16 +15,21 @@ enum CollectionType {
 }
 class CollectionViewController: UIViewController {
     
+//    var imageSize = CGSize(width: 0, height: 0)
+    var selectedIndexPath = IndexPath(item: 0, section: 0)
     
     var collectionType = CollectionType.projects
     var projects = [Project]()
+    
+//    var realPhotoFrames = [CGRect]()
     var photoAssets: PHFetchResult<PHAsset>!
     
     var cellSize = CGSize(width: 100, height: 100)
     
     var topInset = CGFloat(80)
     
-    let inset = CGFloat(16)
+    var inset = CGFloat(16)
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     func setupCollectionView() {
@@ -64,6 +69,14 @@ class CollectionViewController: UIViewController {
         
         setupCollectionView()
     }
+    override func present(_ viewControllerToPresent: UIViewController,
+                          animated flag: Bool,
+                          completion: (() -> Void)? = nil) {
+        if let photoVC = viewControllerToPresent as? PhotoPageContainerViewController {
+            photoVC.modalPresentationStyle = .fullScreen
+        }
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
     
     
 }
@@ -83,14 +96,42 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 photoCell.layoutIfNeeded()
                 photoCell.contentView.layer.masksToBounds = true
                 if let drawingRect = photoCell.imageView.roundCornersForAspectFit(radius: 6) {
+//                    realPhotoFrames[indexPath.item] = drawingRect
                     photoCell.imageBaseView.shouldActivate = true
                     photoCell.imageBaseView.updateShadow(rect: drawingRect, radius: 6)
+                    photoCell.realFrameRect = drawingRect
                 }
                 
             }
         }
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
+            "PhotoPageContainerViewController") as! PhotoPageContainerViewController
+        
+        selectedIndexPath = indexPath
+        
+        
+        mainContentVC.transitioningDelegate = mainContentVC.transitionController
+        mainContentVC.transitionController.fromDelegate = self
+        mainContentVC.transitionController.toDelegate = mainContentVC
+        mainContentVC.delegate = self
+        mainContentVC.currentIndex = self.selectedIndexPath.item
+        mainContentVC.photoAssets = photoAssets
+        
+//        let urls = photoAssets.objects(at: IndexSet(integersIn: 0...photoAssets.count - 1))
+//
+//        for url in urls {
+//            let urldf = url.requestContentEditingInput(with: PHContentEditingInputRequestOptions()) { (input, _) in
+//                let url = input.fullSizeImageURL
+//            }
+//        }
+        print("select and  present")
+        present(mainContentVC, animated: true, completion: nil)
+//        mainContentVC.photoSize = imageSize
+        
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -101,19 +142,16 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
             return cell
         } else {
             cell.contentView.backgroundColor = UIColor.clear
-            let asset = photoAssets.object(at: indexPath.row)
             
+            let asset = photoAssets.object(at: indexPath.row)
             
             cell.representedAssetIdentifier = asset.localIdentifier
             cell.imageBaseView.shouldActivate = true
             
             PHImageManager.default().requestImage(for: asset, targetSize: cellSize, contentMode: PHImageContentMode.aspectFit, options: nil) { (image, userInfo) -> Void in
                 
-                //                self.photoImageView.image = image
-                //                self.lblVideoTime.text = String(format: "%02d:%02d",Int((asset.duration / 60)),Int(asset.duration) % 60)
                 if cell.representedAssetIdentifier == asset.localIdentifier {
                     cell.imageView.image = image
-                    //                    cell.nameLabel.text = String(format: "%02d:%02d", Int((asset.duration / 60)), Int(asset.duration) % 60)
                     let duration = asset.duration // 2 minutes, 30 seconds
                     
                     let formatter = DateComponentsFormatter()
@@ -155,7 +193,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
         
         var eachCellWidth = availableCellWidth / CGFloat(numberOfCells)
         eachCellWidth.round(.down)
-        let size = CGSize(width: eachCellWidth, height: eachCellWidth + CGFloat(90))
+        let size = CGSize(width: eachCellWidth, height: eachCellWidth + CGFloat(50))
         cellSize = CGSize(width: size.width * UIScreen.main.scale, height: size.height * UIScreen.main.scale)
             
             
@@ -171,3 +209,171 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     }
 }
 
+extension CollectionViewController: PhotoPageContainerViewControllerDelegate {
+ 
+    func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int) {
+        self.selectedIndexPath = IndexPath(row: currentIndex, section: 0)
+        self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
+    }
+}
+
+extension CollectionViewController: ZoomAnimatorDelegate {
+    
+    func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
+        
+    }
+    
+    func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
+        
+        if let cell = self.collectionView.cellForItem(at: self.selectedIndexPath) as? PhotoCell {
+            
+            let cellFrame = self.collectionView.convert(cell.frame, to: self.view)
+            
+            if cellFrame.minY < self.collectionView.contentInset.top {
+                self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .top, animated: false)
+            } else if cellFrame.maxY > self.view.frame.height - self.collectionView.contentInset.bottom {
+                self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .bottom, animated: false)
+            }
+        }
+    }
+    
+    func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {
+        
+        //Get a guarded reference to the cell's UIImageView
+        let referenceImageView = getImageViewFromCollectionViewCell(for: self.selectedIndexPath)
+        
+        return referenceImageView
+    }
+    
+    func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
+        
+        self.view.layoutIfNeeded()
+        self.collectionView.layoutIfNeeded()
+        
+        //Get a guarded reference to the cell's frame
+        let unconvertedFrame = getFrameFromCollectionViewCell(for: self.selectedIndexPath)
+        
+        var cellFrame = self.collectionView.convert(unconvertedFrame, to: self.view)
+        
+        if cellFrame.minY < self.collectionView.contentInset.top {
+            return CGRect(x: cellFrame.minX, y: self.collectionView.contentInset.top, width: cellFrame.width, height: cellFrame.height - (self.collectionView.contentInset.top - cellFrame.minY))
+        }
+        
+        let superCellFrame = self.collectionView.convert(unconvertedFrame, to: nil)
+        let cellYDiff = superCellFrame.origin.y - cellFrame.origin.y
+        let cellXDiff = superCellFrame.origin.x - cellFrame.origin.x
+        
+        cellFrame.origin.y += cellYDiff
+        cellFrame.origin.x += cellXDiff
+        ///works on ipad now
+        ///need to fix this, no hardcoded values
+        return cellFrame
+    }
+    //This function prevents the collectionView from accessing a deallocated cell. In the event
+    //that the cell for the selectedIndexPath is nil, a default UIImageView is returned in its place
+    func getImageViewFromCollectionViewCell(for selectedIndexPath: IndexPath) -> UIImageView {
+        
+        //Get the array of visible cells in the collectionView
+        let visibleCells = self.collectionView.indexPathsForVisibleItems
+        
+        //If the current indexPath is not visible in the collectionView,
+        //scroll the collectionView to the cell to prevent it from returning a nil value
+        if !visibleCells.contains(self.selectedIndexPath) {
+            
+            //Scroll the collectionView to the current selectedIndexPath which is offscreen
+            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
+            
+            //Reload the items at the newly visible indexPaths
+            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+            self.collectionView.layoutIfNeeded()
+            
+            //Guard against nil values
+            guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? PhotoCell) else {
+                //Return a default UIImageView
+                return UIImageView(frame: CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0))
+            }
+            //The PhotoCollectionViewCell was found in the collectionView, return the image
+            return guardedCell.imageView
+        }
+        else {
+            
+            //Guard against nil return values
+            guard let guardedCell = self.collectionView.cellForItem(at: self.selectedIndexPath) as? PhotoCell else {
+                //Return a default UIImageView
+                return UIImageView(frame: CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0))
+            }
+            //The PhotoCollectionViewCell was found in the collectionView, return the image
+            return guardedCell.imageView
+        }
+        
+    }
+    
+    //This function prevents the collectionView from accessing a deallocated cell. In the
+    //event that the cell for the selectedIndexPath is nil, a default CGRect is returned in its place
+    func getFrameFromCollectionViewCell(for selectedIndexPath: IndexPath) -> CGRect {
+        
+        //Get the currently visible cells from the collectionView
+        let visibleCells = self.collectionView.indexPathsForVisibleItems
+        
+        //If the current indexPath is not visible in the collectionView,
+        //scroll the collectionView to the cell to prevent it from returning a nil value
+        if !visibleCells.contains(self.selectedIndexPath) {
+            
+            //Scroll the collectionView to the cell that is currently offscreen
+            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
+            
+            //Reload the items at the newly visible indexPaths
+            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+            self.collectionView.layoutIfNeeded()
+            
+            //Prevent the collectionView from returning a nil value
+            guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? PhotoCell) else {
+                print("No guardedCell1")
+                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
+            }
+//            guardedCell.layoutIfNeeded()
+//            if let rect = guardedCell.imageView.getAspectFitRect() {
+//                return rect
+//            } else {
+//                print("No guardedCell2")
+//                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
+//            }
+            print("real frame was not visible: \(guardedCell.realFrameRect)")
+            let imageRect = guardedCell.realFrameRect!
+            let newX = guardedCell.frame.origin.x + guardedCell.imageView.frame.origin.x + imageRect.origin.x
+            let newY = guardedCell.frame.origin.y + guardedCell.imageView.frame.origin.y + imageRect.origin.y
+            let newW = imageRect.width
+            let newH = imageRect.height
+            
+            let realFrame = CGRect(x: newX, y: newY, width: newW, height: newH)
+            return realFrame
+        }
+            //Otherwise the cell should be visible
+        else {
+            //Prevent the collectionView from returning a nil value
+            guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? PhotoCell) else {
+                print("No guardedCell3")
+                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
+            }
+            //The cell was found successfully
+//            return guardedCell.frame
+//            guardedCell.layoutIfNeeded()
+//            if let rect = guardedCell.imageView.getAspectFitRect() {
+//                print("No guardedCell4")
+//                return rect
+//            } else {
+//                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
+//            }
+            print("real frame visible: \(guardedCell.realFrameRect)")
+//            return guardedCell.realFrameRect
+            let imageRect = guardedCell.realFrameRect!
+            let newX = guardedCell.frame.origin.x + guardedCell.imageView.frame.origin.x + imageRect.origin.x
+            let newY = guardedCell.frame.origin.y + guardedCell.imageView.frame.origin.y + imageRect.origin.y
+            let newW = imageRect.width
+            let newH = imageRect.height
+            
+            let realFrame = CGRect(x: newX, y: newY, width: newW, height: newH)
+            return realFrame
+        }
+    }
+}
