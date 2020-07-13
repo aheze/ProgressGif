@@ -16,6 +16,29 @@ protocol PhotoPageContainerViewControllerDelegate: class {
 
 class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate {
 
+    
+    @IBOutlet weak var backBlurView: UIVisualEffectView!
+    
+    @IBOutlet weak var chooseBlurView: UIVisualEffectView!
+    
+    @IBOutlet weak var playerControlsBlurView: UIVisualEffectView!
+    
+    @IBOutlet weak var backButton: UIButton!
+    
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.currentViewController.scrollView.isScrollEnabled = false
+        self.transitionController.isInteractive = false
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBOutlet weak var chooseButton: UIButton!
+    @IBAction func chooseButtonPressed(_ sender: Any) {
+    }
+    
+    
+    
+    
+    
     enum ScreenMode {
         case full, normal
     }

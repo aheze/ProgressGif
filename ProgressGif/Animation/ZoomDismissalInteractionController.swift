@@ -41,6 +41,8 @@ class ZoomDismissalInteractionController: NSObject {
         
         fromVC.view.alpha = backgroundAlpha
         
+//        transitionImageView.contentMode = .scaleAspectFit
+//        transitionImageView.backgroundColor = UIColor.clear
         transitionImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
         let newCenter = CGPoint(x: anchorPoint.x + translatedPoint.x, y: anchorPoint.y + translatedPoint.y - transitionImageView.frame.height * (1 - scale) / 2.0)
         transitionImageView.center = newCenter
@@ -84,13 +86,21 @@ class ZoomDismissalInteractionController: NSObject {
             
             let finalTransitionSize = toReferenceImageViewFrame
             
+            transitionImageView.contentMode = .scaleAspectFit
+//            transitionImageView.backgroundColor = UIColor.clear
+//            fromReferenceImageView.contentMode = .scaleAspectFit
+//            fromReferenceImageView.backgroundColor = UIColor.clear
+//            toReferenceImageView.contentMode = .scaleAspectFit
+//            toReferenceImageView.backgroundColor = UIColor.clear
+//            transitionImageView.layer.cornerRadius = 0
+//            transitionImageView.layer.masksToBounds = true
             UIView.animate(withDuration: 0.25,
                            delay: 0,
                            options: [],
                            animations: {
                             fromVC.view.alpha = 0
                             transitionImageView.frame = finalTransitionSize
-                            transitionImageView.layer.cornerRadius = 6
+//                            transitionImageView.layer.cornerRadius = 6
             }, completion: { completed in
                 
                 transitionImageView.removeFromSuperview()
@@ -160,9 +170,12 @@ extension ZoomDismissalInteractionController: UIViewControllerInteractiveTransit
         //containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
         ///Had to flip fromVC and toVC for the dismiss to NOT result in a black screen!
         containerView.insertSubview(fromVC.view, aboveSubview: toVC.view)
+        
+        
+        
         if animator.transitionImageView == nil {
             let transitionImageView = UIImageView(image: referenceImage)
-            transitionImageView.contentMode = .scaleAspectFill
+            transitionImageView.contentMode = .scaleAspectFit
             transitionImageView.clipsToBounds = true
             transitionImageView.frame = fromReferenceImageViewFrame
             animator.transitionImageView = transitionImageView

@@ -423,28 +423,31 @@
                                 </connections>
                             </containerView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hg6-t0-ODs">
-                                <rect key="frame" x="82" y="670" width="250" height="50"/>
+                                <rect key="frame" x="16" y="640" width="382" height="80"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cn3-dh-fAM">
-                                    <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="382" height="80"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="Qjf-Uy-GuH"/>
-                                    <constraint firstAttribute="height" constant="50" id="Wqd-nW-9IB"/>
+                                    <constraint firstAttribute="height" constant="80" id="Wqd-nW-9IB"/>
                                 </constraints>
                                 <blurEffect style="prominent"/>
                             </visualEffectView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I4K-tN-er4">
-                                <rect key="frame" x="16" y="8" width="60" height="31"/>
+                                <rect key="frame" x="16" y="8" width="72" height="39"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="RDX-TG-36T">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="31"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="72" height="39"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vi-SL-sC4">
-                                            <rect key="frame" x="0.0" y="0.0" width="60" height="31"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="72" height="39"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                                            <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
+                                            <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <inset key="contentEdgeInsets" minX="14" minY="8" maxX="14" maxY="8"/>
                                             <state key="normal" title="Back"/>
+                                            <connections>
+                                                <action selector="backButtonPressed:" destination="OcC-f7-Hxg" eventType="touchUpInside" id="1LK-yP-k49"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -456,21 +459,61 @@
                                 </view>
                                 <blurEffect style="prominent"/>
                             </visualEffectView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ve0-PO-TGC">
+                                <rect key="frame" x="303" y="8" width="95" height="39"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EEg-Hb-3gD">
+                                    <rect key="frame" x="0.0" y="0.0" width="95" height="39"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16V-Qo-gyM">
+                                            <rect key="frame" x="0.0" y="0.0" width="95" height="39"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                            <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <inset key="contentEdgeInsets" minX="14" minY="8" maxX="14" maxY="8"/>
+                                            <state key="normal" title="Choose"/>
+                                            <connections>
+                                                <action selector="chooseButtonPressed:" destination="OcC-f7-Hxg" eventType="touchUpInside" id="s2O-Wh-55a"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="16V-Qo-gyM" secondAttribute="trailing" id="5E7-KN-DqK"/>
+                                        <constraint firstItem="16V-Qo-gyM" firstAttribute="leading" secondItem="EEg-Hb-3gD" secondAttribute="leading" id="bw3-r9-nad"/>
+                                        <constraint firstAttribute="bottom" secondItem="16V-Qo-gyM" secondAttribute="bottom" id="eEb-Gn-KKl"/>
+                                        <constraint firstItem="16V-Qo-gyM" firstAttribute="top" secondItem="EEg-Hb-3gD" secondAttribute="top" id="hiH-Kh-DmN"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="prominent"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="2Vi-SL-sC4" secondAttribute="trailing" constant="326" id="17S-qt-GBd"/>
                             <constraint firstAttribute="bottom" secondItem="95s-vk-vcl" secondAttribute="bottom" id="2Bl-mM-jLM"/>
+                            <constraint firstAttribute="bottom" secondItem="2Vi-SL-sC4" secondAttribute="bottom" constant="689" id="6Be-gh-vQ4"/>
+                            <constraint firstItem="2Vi-SL-sC4" firstAttribute="top" secondItem="nz0-wr-1d5" secondAttribute="top" constant="8" id="AbQ-4u-Jqt"/>
+                            <constraint firstItem="yHT-et-kiH" firstAttribute="trailing" secondItem="ve0-PO-TGC" secondAttribute="trailing" constant="16" id="EZ1-cw-lBw"/>
                             <constraint firstItem="95s-vk-vcl" firstAttribute="top" secondItem="nz0-wr-1d5" secondAttribute="top" id="Exg-3K-lDt"/>
                             <constraint firstItem="95s-vk-vcl" firstAttribute="leading" secondItem="yHT-et-kiH" secondAttribute="leading" id="Fce-kz-OvM"/>
+                            <constraint firstItem="ve0-PO-TGC" firstAttribute="top" secondItem="yHT-et-kiH" secondAttribute="top" constant="8" id="RBY-nF-jS9"/>
                             <constraint firstItem="I4K-tN-er4" firstAttribute="leading" secondItem="yHT-et-kiH" secondAttribute="leading" constant="16" id="RNL-4P-Wbp"/>
-                            <constraint firstItem="Hg6-t0-ODs" firstAttribute="centerX" secondItem="yHT-et-kiH" secondAttribute="centerX" id="a2e-NX-HFd"/>
+                            <constraint firstItem="Hg6-t0-ODs" firstAttribute="leading" secondItem="yHT-et-kiH" secondAttribute="leading" constant="16" id="ZEN-le-gHm"/>
                             <constraint firstItem="yHT-et-kiH" firstAttribute="bottom" secondItem="Hg6-t0-ODs" secondAttribute="bottom" constant="16" id="jD4-5t-n2d"/>
+                            <constraint firstItem="yHT-et-kiH" firstAttribute="trailing" secondItem="Hg6-t0-ODs" secondAttribute="trailing" constant="16" id="kJC-X2-69C"/>
+                            <constraint firstItem="2Vi-SL-sC4" firstAttribute="leading" secondItem="nz0-wr-1d5" secondAttribute="leading" constant="16" id="lPD-yw-evs"/>
                             <constraint firstItem="I4K-tN-er4" firstAttribute="top" secondItem="yHT-et-kiH" secondAttribute="top" constant="8" id="rAm-1B-eVk"/>
                             <constraint firstItem="yHT-et-kiH" firstAttribute="trailing" secondItem="95s-vk-vcl" secondAttribute="trailing" id="wys-h9-FhH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yHT-et-kiH"/>
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="backBlurView" destination="I4K-tN-er4" id="oqs-mc-DQT"/>
+                        <outlet property="backButton" destination="2Vi-SL-sC4" id="Zfo-vb-cWx"/>
+                        <outlet property="chooseBlurView" destination="ve0-PO-TGC" id="ocb-le-sSD"/>
+                        <outlet property="chooseButton" destination="16V-Qo-gyM" id="yI6-jE-nJp"/>
+                        <outlet property="playerControlsBlurView" destination="Hg6-t0-ODs" id="rIM-Qn-YSy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Igr-86-Md3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

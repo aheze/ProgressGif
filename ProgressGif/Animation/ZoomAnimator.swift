@@ -45,7 +45,7 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
         self.toDelegate?.transitionWillStartWith(zoomAnimator: self)
         
         /// add this so support Projector
-        toVC.view.frame = UIScreen.main.bounds
+//        toVC.view.frame = UIScreen.main.bounds
         
         toVC.view.alpha = 0
         toReferenceImageView.isHidden = true
@@ -56,13 +56,18 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
         
         if self.transitionImageView == nil {
             let transitionImageView = UIImageView(image: referenceImage)
-            transitionImageView.contentMode = .scaleAspectFill
+            transitionImageView.contentMode = .scaleAspectFit
             transitionImageView.clipsToBounds = true
             transitionImageView.frame = fromReferenceImageViewFrame
             self.transitionImageView = transitionImageView
             containerView.addSubview(transitionImageView)
-            transitionImageView.layer.cornerRadius = 6
+            transitionImageView.contentMode = .scaleAspectFit
+            transitionImageView.backgroundColor = UIColor.clear
         }
+        
+//        fromReferenceImageView.contentMode = .scaleAspectFit
+//        fromReferenceImageView.backgroundColor = UIColor.clear
+        
         
         fromReferenceImageView.isHidden = true
         
@@ -94,120 +99,80 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
     fileprivate func animateZoomOutTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
         
-        if deletedLast == true {
-            guard let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
-                let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
-                let fromReferenceImageView = self.fromDelegate?.referenceImageView(for: self),
-                let toReferenceImageView = self.toDelegate?.referenceImageView(for: self),
-                let fromReferenceImageViewFrame = self.fromDelegate?.referenceImageViewFrameInTransitioningView(for: self)
-                else {
-                    return
-            }
-            toReferenceImageView.isHidden = true
-            
-            guard let referenceImage = fromReferenceImageView.image else { return }
-            
-            if self.transitionImageView == nil {
-                let transitionImageView = UIImageView(image: referenceImage)
-                transitionImageView.contentMode = .scaleAspectFill
-                transitionImageView.clipsToBounds = true
-                transitionImageView.frame = fromReferenceImageViewFrame
-                self.transitionImageView = transitionImageView
-                containerView.addSubview(transitionImageView)
-            }
-            containerView.insertSubview(fromVC.view, aboveSubview: toVC.view)
-            fromReferenceImageView.isHidden = false
-            fromReferenceImageView.alpha = 1
-            UIView.animate(withDuration: 0.2, animations: {
-                fromReferenceImageView.alpha = 0
-            }) { _ in
-                fromReferenceImageView.isHidden = true
-            }
-            
-            let finalTransitionSize = CGRect(x: (deviceSize.width / 2) - 50, y: deviceSize.height + 200, width: 100, height: 100)
-            
-            UIView.animate(withDuration: transitionDuration(using: transitionContext),
-                           delay: 0,
-                           options: [],
-                           animations: {
-                            fromVC.view.alpha = 0
-                            self.transitionImageView?.frame = finalTransitionSize
-                            self.transitionImageView?.alpha = 0
-            }, completion: { completed in
-                
-                self.transitionImageView?.removeFromSuperview()
-                toReferenceImageView.isHidden = false
-                fromReferenceImageView.isHidden = false
-                
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-                self.toDelegate?.transitionDidEndWith(zoomAnimator: self)
-                self.fromDelegate?.transitionDidEndWith(zoomAnimator: self)
-            })
-        } else {
-            
-            guard let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
-                let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
-                let fromReferenceImageView = self.fromDelegate?.referenceImageView(for: self),
-                let toReferenceImageView = self.toDelegate?.referenceImageView(for: self),
-                let fromReferenceImageViewFrame = self.fromDelegate?.referenceImageViewFrameInTransitioningView(for: self),
-                let toReferenceImageViewFrame = self.toDelegate?.referenceImageViewFrameInTransitioningView(for: self)
-                else {
-                    return
-            }
-            
-            self.fromDelegate?.transitionWillStartWith(zoomAnimator: self)
-            self.toDelegate?.transitionWillStartWith(zoomAnimator: self)
-            
-            toReferenceImageView.isHidden = true
-            
-            guard let referenceImage = fromReferenceImageView.image else { return }
-            
-            if self.transitionImageView == nil {
-                let transitionImageView = UIImageView(image: referenceImage)
-                transitionImageView.contentMode = .scaleAspectFill
-                transitionImageView.clipsToBounds = true
-                transitionImageView.frame = fromReferenceImageViewFrame
-                self.transitionImageView = transitionImageView
-                containerView.addSubview(transitionImageView)
-            }
-            
-            //containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
-            ///also had to switch these... dismissing no longer results in Black Screen Of Death!!!
-            // containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
-            containerView.insertSubview(fromVC.view, aboveSubview: toVC.view)
-            //fromReferenceImageView.isHidden = true
-            ///prevents a white flash, use below instead of aforementioned
-            fromReferenceImageView.isHidden = false
-            fromReferenceImageView.alpha = 1
-            UIView.animate(withDuration: 0.2, animations: {
-                fromReferenceImageView.alpha = 0
-            }) { _ in
-                fromReferenceImageView.isHidden = true
-            }
-            
-            let finalTransitionSize = toReferenceImageViewFrame
-            
-            UIView.animate(withDuration: transitionDuration(using: transitionContext),
-                           delay: 0,
-                           options: [],
-                           animations: {
-                            fromVC.view.alpha = 0
-                            self.transitionImageView?.frame = finalTransitionSize
-            }, completion: { completed in
-                
-                self.transitionImageView?.removeFromSuperview()
-                toReferenceImageView.isHidden = false
-                fromReferenceImageView.isHidden = false
-                
-                self.finishedDismissing = true
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-                
-                
-                self.toDelegate?.transitionDidEndWith(zoomAnimator: self)
-                self.fromDelegate?.transitionDidEndWith(zoomAnimator: self)
-                
-            })
+        print("Animate Zoom out")
+        guard let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
+            let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
+            let fromReferenceImageView = self.fromDelegate?.referenceImageView(for: self),
+            let toReferenceImageView = self.toDelegate?.referenceImageView(for: self),
+            let fromReferenceImageViewFrame = self.fromDelegate?.referenceImageViewFrameInTransitioningView(for: self),
+            let toReferenceImageViewFrame = self.toDelegate?.referenceImageViewFrameInTransitioningView(for: self)
+            else {
+                return
         }
+        
+        self.fromDelegate?.transitionWillStartWith(zoomAnimator: self)
+        self.toDelegate?.transitionWillStartWith(zoomAnimator: self)
+        
+//        fromReferenceImageView.contentMode = .scaleAspectFit
+//        fromReferenceImageView.backgroundColor = UIColor.clear
+//        toReferenceImageView.contentMode = .scaleAspectFit
+//        toReferenceImageView.backgroundColor = UIColor.clear
+        
+        toReferenceImageView.isHidden = true
+        
+        guard let referenceImage = fromReferenceImageView.image else { return }
+        
+        if self.transitionImageView == nil {
+            let transitionImageView = UIImageView(image: referenceImage)
+            transitionImageView.contentMode = .scaleAspectFit
+            transitionImageView.clipsToBounds = true
+            transitionImageView.frame = fromReferenceImageViewFrame
+            
+            transitionImageView.contentMode = .scaleAspectFit
+            transitionImageView.backgroundColor = UIColor.clear
+            
+            self.transitionImageView = transitionImageView
+            containerView.addSubview(transitionImageView)
+        }
+        
+        //containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
+        ///also had to switch these... dismissing no longer results in Black Screen Of Death!!!
+        // containerView.insertSubview(fromVC.view, belowSubview: toVC.view)
+        containerView.insertSubview(fromVC.view, aboveSubview: toVC.view)
+//        fromReferenceImageView.isHidden = true
+        ///prevents a white flash, use below instead
+        //            fromReferenceImageView.isHidden = false
+        //            fromReferenceImageView.alpha = 1
+        //            UIView.animate(withDuration: 0.2, animations: {
+        //                fromReferenceImageView.alpha = 0
+        //            }) { _ in
+        //                fromReferenceImageView.isHidden = true
+        //            }
+        //
+        let finalTransitionSize = toReferenceImageViewFrame
+        
+        UIView.animate(withDuration: transitionDuration(using: transitionContext),
+                       delay: 0,
+                       options: [],
+                       animations: {
+                        fromVC.view.alpha = 0
+                        self.transitionImageView?.layer.cornerRadius = 6
+                        self.transitionImageView?.frame = finalTransitionSize
+        }, completion: { completed in
+            
+            self.transitionImageView?.removeFromSuperview()
+            toReferenceImageView.isHidden = false
+            fromReferenceImageView.isHidden = false
+            
+            self.finishedDismissing = true
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            
+            
+            self.toDelegate?.transitionDidEndWith(zoomAnimator: self)
+            self.fromDelegate?.transitionDidEndWith(zoomAnimator: self)
+            
+        })
+        
     }
     
     private func calculateZoomInImageFrame(image: UIImage, forView view: UIView) -> CGRect {
