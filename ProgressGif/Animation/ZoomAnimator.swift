@@ -156,7 +156,7 @@ class ZoomAnimator: NSObject, RecieveDeleteLast {
                        options: [],
                        animations: {
                         fromVC.view.alpha = 0
-                        self.transitionImageView?.layer.cornerRadius = 6
+//                        self.transitionImageView?.layer.cornerRadius = 6
                         self.transitionImageView?.frame = finalTransitionSize
         }, completion: { completed in
             

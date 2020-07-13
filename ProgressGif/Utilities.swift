@@ -66,13 +66,30 @@ class ShadowView: UIView {
             if shadowLayer == nil {
                 shadowLayer = CAShapeLayer()
                 shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.width / 2).cgPath
-                shadowLayer.fillColor = UIColor.white.cgColor
+                shadowLayer.fillColor = UIColor.clear.cgColor
 
                 shadowLayer.shadowColor = UIColor.darkGray.cgColor
                 shadowLayer.shadowPath = shadowLayer.path
                 shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
                 shadowLayer.shadowOpacity = 0.4
                 shadowLayer.shadowRadius = 3
+//                
+//                let maskLayer = CAShapeLayer()
+//                maskLayer.frame = bounds
+//                // Create the frame for the circle.
+//                let radius: CGFloat = 6
+//                // Rectangle in which circle will be drawn
+//                let circlePath = UIBezierPath(roundedRect: bounds, cornerRadius: radius)
+//                // Create a path
+//                let path = UIBezierPath(rect: bounds)
+//                // Append additional path which will create a circle
+//                path.append(circlePath)
+//                // Setup the fill rule to EvenOdd to properly mask the specified area and make a crater
+//                maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
+//                // Append the circle to the path so that it is subtracted.
+//                maskLayer.path = path.cgPath
+//                // Mask our view with Blue background so that portion of red background is visible
+//                shadowLayer.mask = maskLayer
 
                 layer.insertSublayer(shadowLayer, at: 0)
             }
@@ -83,8 +100,9 @@ extension ShadowView {
     func updateShadow(rect: CGRect, radius: CGFloat) {
 //        print("update, new rect: \(rect)")
         if let shadow = shadowLayer {
-            shadowLayer.path = UIBezierPath(roundedRect: rect, cornerRadius: radius).cgPath
-            shadowLayer.shadowPath = shadowLayer.path
+            print("let shhaodw!")
+            shadow.path = UIBezierPath(roundedRect: rect, cornerRadius: radius).cgPath
+            shadow.shadowPath = shadow.path
         }
     }
 }
@@ -120,48 +138,17 @@ class CustomButton: UIButton {
         }
     }
 }
-
-//class RoundedShadowImageView: UIView {
-//
-//    private var shadowLayer: CAShapeLayer!
-//    private var imageView: UIImageView!
-//    var image: UIImage?
-//
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//
-//        if imageView == nil {
-//            let imageV = UIImageView()
-//            imageV.frame = bounds
-//            addSubview(imageV)
-//
-//        }
-//
-//
-//        if shadowLayer == nil {
-//            shadowLayer = CAShapeLayer()
-//            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.width / 2).cgPath
-//            shadowLayer.fillColor = UIColor.white.cgColor
-//
-//            shadowLayer.shadowColor = UIColor.darkGray.cgColor
-//            shadowLayer.shadowPath = shadowLayer.path
-//            shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-//            shadowLayer.shadowOpacity = 0.4
-//            shadowLayer.shadowRadius = 3
-//
-//            layer.insertSublayer(shadowLayer, at: 0)
-//
-//            if let image = self.image {
-//                let drawingRect = AVMakeRect(aspectRatio: image.size, insideRect: self.bounds)
-//                print("drawingRect: \(drawingRect)")
-//                let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: radius)
-//                let mask = CAShapeLayer()
-//                mask.path = path.cgPath
-//                self.layer.mask = mask
-//            }
-//        }
-//    }
-//}
+class CustomSlider: UISlider {
+    
+    @IBInspectable var trackHeight: CGFloat = 2
+    
+    override func trackRect(forBounds bounds: CGRect) -> CGRect {
+        // Use properly calculated rect
+        var newRect = super.trackRect(forBounds: bounds)
+        newRect.size.height = trackHeight
+        return newRect
+    }
+}
 
 extension UIView {
     func scaleDown() {

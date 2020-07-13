@@ -16,15 +16,34 @@ protocol PhotoPageContainerViewControllerDelegate: class {
 
 class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate {
 
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    
+    
+    
     
     @IBOutlet weak var backBlurView: UIVisualEffectView!
-    
     @IBOutlet weak var chooseBlurView: UIVisualEffectView!
-    
     @IBOutlet weak var playerControlsBlurView: UIVisualEffectView!
     
-    @IBOutlet weak var backButton: UIButton!
     
+    @IBOutlet weak var slider: CustomSlider!
+    
+    @IBOutlet weak var back5Button: UIButton!
+    @IBOutlet weak var forward5Button: UIButton!
+    @IBOutlet weak var playButton: UIButton!
+    
+    @IBOutlet weak var backBaseView: UIView!
+    @IBOutlet weak var chooseBaseView: UIView!
+    @IBOutlet weak var playerBaseView: UIView!
+    
+    @IBOutlet weak var backShadowView: ShadowView!
+    @IBOutlet weak var chooseShadowView: ShadowView!
+    @IBOutlet weak var playerShadowView: ShadowView!
+    
+    @IBOutlet weak var backButton: UIButton!
     @IBAction func backButtonPressed(_ sender: Any) {
         self.currentViewController.scrollView.isScrollEnabled = false
         self.transitionController.isInteractive = false
@@ -37,6 +56,9 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     
     
     
+    @IBOutlet weak var backBlurTopC: NSLayoutConstraint!
+    @IBOutlet weak var chooseBlurTopC: NSLayoutConstraint!
+    @IBOutlet weak var playerBlurBottomC: NSLayoutConstraint!
     
     
     enum ScreenMode {
@@ -67,6 +89,29 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        slider.thumbRect(forBounds: <#T##CGRect#>, trackRect: <#T##CGRect#>, value: <#T##Float#>)
+        slider.setThumbImage(UIImage(named: "circle"), for: .normal)
+        
+        backShadowView.shouldActivate = true
+        chooseShadowView.shouldActivate = true
+        playerShadowView.shouldActivate = true
+        
+        backBaseView.clipsToBounds = false
+        chooseBaseView.clipsToBounds = false
+        playerBaseView.clipsToBounds = false
+        
+        backBaseView.alpha = 0
+        chooseBaseView.alpha = 0
+        playerBaseView.alpha = 0
+        
+        backBlurView.clipsToBounds = true
+        chooseBlurView.clipsToBounds = true
+        playerControlsBlurView.clipsToBounds = true
+        
+        backBlurView.layer.cornerRadius = 10
+        chooseBlurView.layer.cornerRadius = 10
+        playerControlsBlurView.layer.cornerRadius = 10
+        
         self.pageViewController.delegate = self
         self.pageViewController.dataSource = self
         self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPanWith(gestureRecognizer:)))
@@ -88,6 +133,21 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         ]
         
         self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        self.backShadowView.setNeedsLayout()
+        self.backShadowView.layoutIfNeeded()
+        self.chooseShadowView.setNeedsLayout()
+        self.chooseShadowView.layoutIfNeeded()
+        self.playerShadowView.setNeedsLayout()
+        self.playerShadowView.layoutIfNeeded()
+        backShadowView.updateShadow(rect: backShadowView.bounds, radius: 10)
+        chooseShadowView.updateShadow(rect: chooseShadowView.bounds, radius: 10)
+        playerShadowView.updateShadow(rect: playerShadowView.bounds, radius: 10)
+        
     }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -256,9 +316,47 @@ extension PhotoPageContainerViewController: PhotoZoomViewControllerDelegate {
 extension PhotoPageContainerViewController: ZoomAnimatorDelegate {
     
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
+        if zoomAnimator.isPresenting == false {
+            print("Really started, CHECKED!")
+            
+            backBlurTopC.constant = -16
+            chooseBlurTopC.constant = -16
+            playerBlurBottomC.constant = -16
+            
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+                self.backBaseView.alpha = 0
+                self.chooseBaseView.alpha = 0
+                self.playerBaseView.alpha = 0
+            }, completion: nil)
+            
+        }
     }
     
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
+        if zoomAnimator.isPresenting == true && zoomAnimator.finishedDismissing == false {
+            print("Really ended, CHECKED!")
+            slideControlsIn()
+        } else if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == false {
+            print("Canceled...")
+            slideControlsIn()
+        }
+    }
+    
+    func slideControlsIn() {
+        backBlurTopC.constant = 16
+        chooseBlurTopC.constant = 16
+        playerBlurBottomC.constant = 16
+        
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
+            self.view.layoutIfNeeded()
+//            self.backBlurView.alpha = 1
+//            self.chooseBlurView.alpha = 1
+//            self.playerControlsBlurView.alpha = 1
+            self.backBaseView.alpha = 1
+            self.chooseBaseView.alpha = 1
+            self.playerBaseView.alpha = 1
+        }, completion: nil)
     }
     
     func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {
