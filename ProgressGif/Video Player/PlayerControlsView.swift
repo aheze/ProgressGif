@@ -41,6 +41,7 @@ class PlayerControlsView: UIView {
     @IBOutlet weak var forward5Button: UIButton!
     
     @IBAction func backPressed(_ sender: Any) {
+        playerControlsDelegate?.backPressed()
     }
     @IBAction func playPressed(_ sender: Any) {
         if playingState == .playing {
@@ -53,18 +54,24 @@ class PlayerControlsView: UIView {
         
         playerControlsDelegate?.changedPlay(playingState: playingState)
     }
+    
+    
+    
     func stop() {
         playingState = .paused
         playButton.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
     }
+    func backToBeginning() {
+        customSlider.setValue(0, animated: true)
+    }
     
     @IBAction func forwardPressed(_ sender: Any) {
+        playerControlsDelegate?.forwardPressed()
     }
     
     
     @IBAction func sliderChangedValue(_ sender: Any, forEvent event: UIEvent) {
         print("value changed!, \(customSlider.value)")
-        
         
         if let touchEvent = event.allTouches?.first {
             
