@@ -66,7 +66,7 @@ class ShadowView: UIView {
             if shadowLayer == nil {
                 shadowLayer = CAShapeLayer()
                 shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.width / 2).cgPath
-                shadowLayer.fillColor = UIColor.clear.cgColor
+                shadowLayer.fillColor = UIColor.systemFill.cgColor
 
                 shadowLayer.shadowColor = UIColor.darkGray.cgColor
                 shadowLayer.shadowPath = shadowLayer.path

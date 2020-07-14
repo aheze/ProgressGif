@@ -72,7 +72,7 @@ class CollectionViewController: UIViewController {
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,
                           completion: (() -> Void)? = nil) {
-        if let photoVC = viewControllerToPresent as? PhotoPageContainerViewController {
+        if let photoVC = viewControllerToPresent as? PhotoPageViewController {
             photoVC.modalPresentationStyle = .fullScreen
         }
         super.present(viewControllerToPresent, animated: flag, completion: completion)
@@ -108,7 +108,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
-            "PhotoPageContainerViewController") as! PhotoPageContainerViewController
+            "PhotoPageViewController") as! PhotoPageViewController
         
         selectedIndexPath = indexPath
         
@@ -209,9 +209,9 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     }
 }
 
-extension CollectionViewController: PhotoPageContainerViewControllerDelegate {
+extension CollectionViewController: PhotoPageViewControllerDelegate {
  
-    func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int) {
+    func containerViewController(_ containerViewController: PhotoPageViewController, indexDidUpdate currentIndex: Int) {
         self.selectedIndexPath = IndexPath(row: currentIndex, section: 0)
         self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
     }

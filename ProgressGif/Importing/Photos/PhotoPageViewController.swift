@@ -1,5 +1,5 @@
 //
-//  PhotoPageContainerViewController.swift
+//  PhotoPageViewController.swift
 //  FluidPhoto
 //
 //  Created by Masamichi Ueta on 2016/12/23.
@@ -10,38 +10,25 @@ import UIKit
 import Photos
 
 
-protocol PhotoPageContainerViewControllerDelegate: class {
-    func containerViewController(_ containerViewController: PhotoPageContainerViewController, indexDidUpdate currentIndex: Int)
+protocol PhotoPageViewControllerDelegate: class {
+    func containerViewController(_ containerViewController: PhotoPageViewController, indexDidUpdate currentIndex: Int)
 }
 
-class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDelegate {
+class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
 
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
     
-    
-    
-    
     @IBOutlet weak var backBlurView: UIVisualEffectView!
     @IBOutlet weak var chooseBlurView: UIVisualEffectView!
-    @IBOutlet weak var playerControlsBlurView: UIVisualEffectView!
-    
-    
-    @IBOutlet weak var slider: CustomSlider!
-    
-    @IBOutlet weak var back5Button: UIButton!
-    @IBOutlet weak var forward5Button: UIButton!
-    @IBOutlet weak var playButton: UIButton!
     
     @IBOutlet weak var backBaseView: UIView!
     @IBOutlet weak var chooseBaseView: UIView!
-    @IBOutlet weak var playerBaseView: UIView!
+    @IBOutlet weak var playerControlsView: PlayerControlsView!
     
-    @IBOutlet weak var backShadowView: ShadowView!
-    @IBOutlet weak var chooseShadowView: ShadowView!
-    @IBOutlet weak var playerShadowView: ShadowView!
+    
     
     @IBOutlet weak var backButton: UIButton!
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -66,7 +53,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     }
     var currentMode: ScreenMode = .normal
     
-    weak var delegate: PhotoPageContainerViewControllerDelegate?
+    weak var delegate: PhotoPageViewControllerDelegate?
     
     var pageViewController: UIPageViewController {
         return self.children[0] as! UIPageViewController
@@ -75,6 +62,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     var currentViewController: PhotoZoomViewController {
         return self.pageViewController.viewControllers![0] as! PhotoZoomViewController
     }
+    var previousViewController: PhotoZoomViewController?
     
 //    var urls: [URL]!
     var photoAssets: PHFetchResult<PHAsset>!
@@ -89,28 +77,30 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        slider.thumbRect(forBounds: <#T##CGRect#>, trackRect: <#T##CGRect#>, value: <#T##Float#>)
-        slider.setThumbImage(UIImage(named: "circle"), for: .normal)
+//        slider.setThumbImage(UIImage(named: "circle"), for: .normal)
         
-        backShadowView.shouldActivate = true
-        chooseShadowView.shouldActivate = true
-        playerShadowView.shouldActivate = true
+        playerControlsView.playerControlsDelegate = self
+        
         
         backBaseView.clipsToBounds = false
         chooseBaseView.clipsToBounds = false
-        playerBaseView.clipsToBounds = false
+        playerControlsView.clipsToBounds = false
         
         backBaseView.alpha = 0
         chooseBaseView.alpha = 0
-        playerBaseView.alpha = 0
+        playerControlsView.alpha = 0
+        
+//        backBlurView.alpha = 0.7
+//        chooseBlurView.alpha = 0.7
+//        playerControlsBlurView.alpha = 0.7
         
         backBlurView.clipsToBounds = true
         chooseBlurView.clipsToBounds = true
-        playerControlsBlurView.clipsToBounds = true
+//        playerControlsBlurView.clipsToBounds = true
         
         backBlurView.layer.cornerRadius = 10
         chooseBlurView.layer.cornerRadius = 10
-        playerControlsBlurView.layer.cornerRadius = 10
+//        playerControlsBlurView.layer.cornerRadius = 10
         
         self.pageViewController.delegate = self
         self.pageViewController.dataSource = self
@@ -133,22 +123,10 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
         ]
         
         self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+        previousViewController = currentViewController
+        currentViewController.playerView.updateSliderProgress = self
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        self.backShadowView.setNeedsLayout()
-        self.backShadowView.layoutIfNeeded()
-        self.chooseShadowView.setNeedsLayout()
-        self.chooseShadowView.layoutIfNeeded()
-        self.playerShadowView.setNeedsLayout()
-        self.playerShadowView.layoutIfNeeded()
-        backShadowView.updateShadow(rect: backShadowView.bounds, radius: 10)
-        chooseShadowView.updateShadow(rect: chooseShadowView.bounds, radius: 10)
-        playerShadowView.updateShadow(rect: playerShadowView.bounds, radius: 10)
-        
-    }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         
@@ -241,7 +219,7 @@ class PhotoPageContainerViewController: UIViewController, UIGestureRecognizerDel
     }
 }
 
-extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+extension PhotoPageViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
@@ -293,9 +271,19 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
                 let zoomVC = vc as! PhotoZoomViewController
                 zoomVC.scrollView.zoomScale = zoomVC.scrollView.minimumZoomScale
             }
-
+            print("Scrolled to new page")
+            playerControlsView.stop()
+            previousViewController?.stopVideo()
+            
+//            previousViewController?.playerView.pause()
+//            previousViewController?.playerView.player = nil
+//            previousViewController?.hasInitializedPlayer = false
+            
             self.currentIndex = self.nextIndex!
             self.delegate?.containerViewController(self, indexDidUpdate: self.currentIndex)
+            
+            previousViewController = currentViewController
+            currentViewController.playerView.updateSliderProgress = self
         }
         
         self.nextIndex = nil
@@ -303,7 +291,7 @@ extension PhotoPageContainerViewController: UIPageViewControllerDelegate, UIPage
     
 }
 
-extension PhotoPageContainerViewController: PhotoZoomViewControllerDelegate {
+extension PhotoPageViewController: PhotoZoomViewControllerDelegate {
     
     func photoZoomViewController(_ photoZoomViewController: PhotoZoomViewController, scrollViewDidScroll scrollView: UIScrollView) {
         if scrollView.zoomScale != scrollView.minimumZoomScale && self.currentMode != .full {
@@ -313,7 +301,7 @@ extension PhotoPageContainerViewController: PhotoZoomViewControllerDelegate {
     }
 }
 
-extension PhotoPageContainerViewController: ZoomAnimatorDelegate {
+extension PhotoPageViewController: ZoomAnimatorDelegate {
     
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
         if zoomAnimator.isPresenting == false {
@@ -327,7 +315,7 @@ extension PhotoPageContainerViewController: ZoomAnimatorDelegate {
                 self.view.layoutIfNeeded()
                 self.backBaseView.alpha = 0
                 self.chooseBaseView.alpha = 0
-                self.playerBaseView.alpha = 0
+                self.playerControlsView.alpha = 0
             }, completion: nil)
             
         }
@@ -340,6 +328,12 @@ extension PhotoPageContainerViewController: ZoomAnimatorDelegate {
         } else if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == false {
             print("Canceled...")
             slideControlsIn()
+        }
+        
+        if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == true {
+            print("Dismissing, dealloc.")
+            currentViewController.playerView.pause()
+            currentViewController.playerView.player = nil
         }
     }
     
@@ -355,7 +349,7 @@ extension PhotoPageContainerViewController: ZoomAnimatorDelegate {
 //            self.playerControlsBlurView.alpha = 1
             self.backBaseView.alpha = 1
             self.chooseBaseView.alpha = 1
-            self.playerBaseView.alpha = 1
+            self.playerControlsView.alpha = 1
         }, completion: nil)
     }
     
