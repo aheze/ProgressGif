@@ -272,8 +272,11 @@ extension PhotoPageViewController: UIPageViewControllerDelegate, UIPageViewContr
                 zoomVC.scrollView.zoomScale = zoomVC.scrollView.minimumZoomScale
             }
             print("Scrolled to new page")
+            
             playerControlsView.stop()
             previousViewController?.stopVideo()
+            playerControlsView.backToBeginning()
+            
             
 //            previousViewController?.playerView.pause()
 //            previousViewController?.playerView.player = nil

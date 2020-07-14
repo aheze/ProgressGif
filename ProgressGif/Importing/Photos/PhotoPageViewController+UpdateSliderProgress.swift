@@ -12,4 +12,8 @@ extension PhotoPageViewController: UpdateSliderProgress {
     func updateSlider(to value: Float) {
         playerControlsView.customSlider.setValue(value, animated: false)
     }
+    
+    func finishedVideo() {
+        playerControlsView.stop()
+    }
 }

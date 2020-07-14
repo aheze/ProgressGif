@@ -92,6 +92,11 @@ class PhotoZoomViewController: UIViewController {
         hasInitializedPlayer = false
         self.imageView.alpha = 1
     }
+    func jumpForward5() {
+        hasInitializedPlayer = true
+        self.imageView.alpha = 0
+        playerView.startPlay(with: asset, shouldJumpForward5: true)
+    }
     
     
     override func didReceiveMemoryWarning() {
