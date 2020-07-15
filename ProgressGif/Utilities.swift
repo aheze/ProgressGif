@@ -98,9 +98,7 @@ class ShadowView: UIView {
 }
 extension ShadowView {
     func updateShadow(rect: CGRect, radius: CGFloat) {
-//        print("update, new rect: \(rect)")
         if let shadow = shadowLayer {
-            print("let shhaodw!")
             shadow.path = UIBezierPath(roundedRect: rect, cornerRadius: radius).cgPath
             shadow.shadowPath = shadow.path
         }

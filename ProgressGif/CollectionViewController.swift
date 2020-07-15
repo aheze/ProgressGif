@@ -15,6 +15,7 @@ enum CollectionType {
 }
 class CollectionViewController: UIViewController {
     
+    var windowStatusBarHeight = CGFloat(0)
 //    var imageSize = CGSize(width: 0, height: 0)
     var selectedIndexPath = IndexPath(item: 0, section: 0)
     
@@ -68,6 +69,8 @@ class CollectionViewController: UIViewController {
         super.viewDidLoad()
         
         setupCollectionView()
+        
+        print("height in collevtionview: \(windowStatusBarHeight)")
     }
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,
@@ -112,25 +115,15 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
         
         selectedIndexPath = indexPath
         
-        
         mainContentVC.transitioningDelegate = mainContentVC.transitionController
         mainContentVC.transitionController.fromDelegate = self
         mainContentVC.transitionController.toDelegate = mainContentVC
         mainContentVC.delegate = self
         mainContentVC.currentIndex = self.selectedIndexPath.item
         mainContentVC.photoAssets = photoAssets
+        mainContentVC.normalStatusBarHeight = windowStatusBarHeight
         
-//        let urls = photoAssets.objects(at: IndexSet(integersIn: 0...photoAssets.count - 1))
-//
-//        for url in urls {
-//            let urldf = url.requestContentEditingInput(with: PHContentEditingInputRequestOptions()) { (input, _) in
-//                let url = input.fullSizeImageURL
-//            }
-//        }
-        print("select and  present")
         present(mainContentVC, animated: true, completion: nil)
-//        mainContentVC.photoSize = imageSize
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -331,14 +324,7 @@ extension CollectionViewController: ZoomAnimatorDelegate {
                 print("No guardedCell1")
                 return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
             }
-//            guardedCell.layoutIfNeeded()
-//            if let rect = guardedCell.imageView.getAspectFitRect() {
-//                return rect
-//            } else {
-//                print("No guardedCell2")
-//                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
-//            }
-            print("real frame was not visible: \(guardedCell.realFrameRect)")
+            
             let imageRect = guardedCell.realFrameRect!
             let newX = guardedCell.frame.origin.x + guardedCell.imageView.frame.origin.x + imageRect.origin.x
             let newY = guardedCell.frame.origin.y + guardedCell.imageView.frame.origin.y + imageRect.origin.y
@@ -355,17 +341,7 @@ extension CollectionViewController: ZoomAnimatorDelegate {
                 print("No guardedCell3")
                 return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
             }
-            //The cell was found successfully
-//            return guardedCell.frame
-//            guardedCell.layoutIfNeeded()
-//            if let rect = guardedCell.imageView.getAspectFitRect() {
-//                print("No guardedCell4")
-//                return rect
-//            } else {
-//                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
-//            }
-            print("real frame visible: \(guardedCell.realFrameRect)")
-//            return guardedCell.realFrameRect
+            
             let imageRect = guardedCell.realFrameRect!
             let newX = guardedCell.frame.origin.x + guardedCell.imageView.frame.origin.x + imageRect.origin.x
             let newY = guardedCell.frame.origin.y + guardedCell.imageView.frame.origin.y + imageRect.origin.y
