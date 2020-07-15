@@ -51,9 +51,6 @@ class FromPhotosPicker: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIApplication.shared.windows.first?.layer.speed = 0.5
-        
-        
         windowStatusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
         collectionViewController?.windowStatusBarHeight = self.windowStatusBarHeight
         

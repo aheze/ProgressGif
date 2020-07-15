@@ -9,12 +9,36 @@ import UIKit
 import AVFoundation
 
 extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
+    func setUpDismissConpletion() {
+        transition.dismissCompletion = { [weak self] in
+//          guard
+//            let selectedIndexPathCell = self?.tableView.indexPathForSelectedRow,
+//            let selectedCell = self?.tableView.cellForRow(at: selectedIndexPathCell)
+//              as? RecipeTableViewCell
+//            else {
+//              return
+//          }
+//
+//          selectedCell.shadowView.isHidden = false
+            self?.currentViewController.imageView.isHidden = false
+            self?.playerControlsView.isHidden = false
+            self?.backBaseView.isHidden = false
+            self?.chooseBaseView.isHidden = false
+            UIView.animate(withDuration: 0.2, animations: {
+                if !(self?.currentViewController.hasInitializedPlayer ?? true) {
+                    self?.currentViewController.imageView.alpha = 1
+                }
+                self?.playerControlsView.alpha = 1
+                self?.backBaseView.alpha = 1
+                self?.chooseBaseView.alpha = 1
+            })
+        }
+        
+    }
     func animationController(
         forPresented presented: UIViewController,
         presenting: UIViewController, source: UIViewController)
         -> UIViewControllerAnimatedTransitioning? {
-            
-            transition.presenting = true
             
             if let generatedImage = generateImage() {
                 transition.thumbnailImage = generatedImage
@@ -22,7 +46,6 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
             
             if let aspectImageFrame = currentViewController.imageView.getAspectFitRect() {
                 let biggerOverOriginal = (aspectImageFrame.height + normalStatusBarHeight) / aspectImageFrame.height
-                print("bigger over: \(biggerOverOriginal)")
                 
                 let newWidth = aspectImageFrame.width * biggerOverOriginal
                 let offsetEdgeHalf = (newWidth - aspectImageFrame.width) / 2
@@ -33,11 +56,8 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
                                                  width: newWidth,
                                                  height: aspectImageFrame.height * biggerOverOriginal)
                 
-                print("original frame: \(aspectImageFrame), adjusted frame: \(adjustedStatusFrame)")
-                
                 if adjustedStatusFrame.width >= adjustedStatusFrame.height {
                     /// fatter image
-                    
                     let topMinus = (adjustedStatusFrame.width - adjustedStatusFrame.height) / 2
                     
                     let adjustedImageFrame = CGRect(x: adjustedStatusFrame.origin.x, y: adjustedStatusFrame.origin.y - topMinus, width: adjustedStatusFrame.width, height: adjustedStatusFrame.width)
@@ -51,17 +71,25 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
                 }
             }
             
+            transition.presenting = true
             transition.playerOriginFrame = playerControlsView.frame
-            
-            print("status bar height: \(normalStatusBarHeight)")
             transition.statusBarHeight = normalStatusBarHeight
+            transition.sliderValue = playerControlsView.customSlider.value
             
+            playerControlsView.playingState = .paused
+            playerControlsView.playButton.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
+            
+            currentViewController.stopVideo()
             UIView.animate(withDuration: 0.2, animations: {
                 self.currentViewController.imageView.alpha = 0
                 self.playerControlsView.alpha = 0
+                self.backBaseView.alpha = 0
+                self.chooseBaseView.alpha = 0
             }) { _ in
                 self.currentViewController.imageView.isHidden = true
                 self.playerControlsView.isHidden = true
+                self.backBaseView.isHidden = true
+                self.chooseBaseView.isHidden = true
             }
             
             return transition
@@ -69,7 +97,8 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forDismissed dismissed: UIViewController)
         -> UIViewControllerAnimatedTransitioning? {
-            return nil
+            transition.presenting = false
+            return transition
     }
     
 }

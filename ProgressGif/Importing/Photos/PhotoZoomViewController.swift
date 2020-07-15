@@ -94,8 +94,18 @@ class PhotoZoomViewController: UIViewController {
     }
     func jumpForward5() {
         hasInitializedPlayer = true
-        self.imageView.alpha = 0
+        UIView.animate(withDuration: 0.5, animations: {
+            self.imageView.alpha = 0
+        })
         playerView.startPlay(with: asset, playerContext: .jumpForward5)
+    }
+    
+    func startSlider() {
+        hasInitializedPlayer = true
+        UIView.animate(withDuration: 0.5, animations: {
+            self.imageView.alpha = 0
+        })
+        playerView.startPlay(with: asset, playerContext: .initialize)
     }
     
     
