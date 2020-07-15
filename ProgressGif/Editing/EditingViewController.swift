@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import Photos
 
 class EditingViewController: UIViewController {
+    
+    var asset: PHAsset!
+    var hasInitializedPlayer = false
+    
     
     @IBOutlet weak var topStatusBlurView: UIVisualEffectView!
     
@@ -21,7 +26,6 @@ class EditingViewController: UIViewController {
     
     @IBOutlet weak var galleryButton: UIButton!
     @IBAction func galleryButtonPressed(_ sender: Any) {
-//        self.dismiss(animated: true, completion: nil)
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
@@ -31,17 +35,10 @@ class EditingViewController: UIViewController {
     
     @IBOutlet weak var bottomReferenceView: UIView!
     
-//    override var prefersStatusBarHidden: Bool {
-//        return true
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("load")
-//        view.insetsLayoutMarginsFromSafeArea = false
-//        view.inset
-        
-        
+        playerControlsView.playerControlsDelegate = self
+        playerView.updateSliderProgress = self
     }
     
 }

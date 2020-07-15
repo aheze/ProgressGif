@@ -43,7 +43,8 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "EditingViewController") as? EditingViewController {
             viewController.transitioningDelegate = self
-//            generateImage
+            viewController.asset = currentViewController.asset
+            
             present(viewController, animated: true, completion: nil)
         }
     }

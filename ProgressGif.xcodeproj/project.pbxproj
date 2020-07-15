@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		491816B224BA9AD800E318FC /* FromFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491816B124BA9AD800E318FC /* FromFiles.swift */; };
+		49240FC924BFC7CA00DC9446 /* EditingViewController+PlayerControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49240FC824BFC7CA00DC9446 /* EditingViewController+PlayerControls.swift */; };
+		49240FCB24BFC88400DC9446 /* EditingViewController+PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49240FCA24BFC88400DC9446 /* EditingViewController+PlayerView.swift */; };
+		49240FCD24BFC8F000DC9446 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49240FCC24BFC8F000DC9446 /* PlayerView.swift */; };
+		49240FCF24BFC9FE00DC9446 /* EditingViewController+UpdateSliderProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49240FCE24BFC9FE00DC9446 /* EditingViewController+UpdateSliderProgress.swift */; };
 		4944CAA924B912EB00E893AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944CAA824B912EB00E893AE /* AppDelegate.swift */; };
 		4944CAAB24B912EB00E893AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944CAAA24B912EB00E893AE /* SceneDelegate.swift */; };
 		4944CAAD24B912EB00E893AE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944CAAC24B912EB00E893AE /* ViewController.swift */; };
@@ -41,6 +45,10 @@
 /* Begin PBXFileReference section */
 		491816B024BA9A9500E318FC /* ProgressGif.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProgressGif.entitlements; sourceTree = "<group>"; };
 		491816B124BA9AD800E318FC /* FromFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromFiles.swift; sourceTree = "<group>"; };
+		49240FC824BFC7CA00DC9446 /* EditingViewController+PlayerControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingViewController+PlayerControls.swift"; sourceTree = "<group>"; };
+		49240FCA24BFC88400DC9446 /* EditingViewController+PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingViewController+PlayerView.swift"; sourceTree = "<group>"; };
+		49240FCC24BFC8F000DC9446 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		49240FCE24BFC9FE00DC9446 /* EditingViewController+UpdateSliderProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingViewController+UpdateSliderProgress.swift"; sourceTree = "<group>"; };
 		4944CAA524B912EB00E893AE /* ProgressGif.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProgressGif.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4944CAA824B912EB00E893AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4944CAAA24B912EB00E893AE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +159,9 @@
 			children = (
 				498BF59724BE3C1300F7F2C6 /* Editing Animations */,
 				496F7F8524BE3AE90045DDCB /* EditingViewController.swift */,
+				49240FC824BFC7CA00DC9446 /* EditingViewController+PlayerControls.swift */,
+				49240FCA24BFC88400DC9446 /* EditingViewController+PlayerView.swift */,
+				49240FCE24BFC9FE00DC9446 /* EditingViewController+UpdateSliderProgress.swift */,
 			);
 			path = Editing;
 			sourceTree = "<group>";
@@ -206,6 +217,7 @@
 				49F80C2C24BCF6A500C0C142 /* PlayerControlsView.swift */,
 				49F80C2E24BCF6E800C0C142 /* PlayerControlsView.xib */,
 				49F80C3024BD1C2B00C0C142 /* PlayerUtilities.swift */,
+				49240FCC24BFC8F000DC9446 /* PlayerView.swift */,
 			);
 			path = "Video Player";
 			sourceTree = "<group>";
@@ -341,6 +353,8 @@
 				498BF59924BE3CCD00F7F2C6 /* PopAnimator.swift in Sources */,
 				496DD41C24BA4927007380AF /* CollectionViewController.swift in Sources */,
 				4980302524B946F200AE277C /* ViewController+Buttons.swift in Sources */,
+				49240FC924BFC7CA00DC9446 /* EditingViewController+PlayerControls.swift in Sources */,
+				49240FCF24BFC9FE00DC9446 /* EditingViewController+UpdateSliderProgress.swift in Sources */,
 				4980302124B9427800AE277C /* Utilities.swift in Sources */,
 				49A362E124BB96E800019FC6 /* PhotoPageViewController.swift in Sources */,
 				4944CAAD24B912EB00E893AE /* ViewController.swift in Sources */,
@@ -350,10 +364,12 @@
 				4980301F24B91E2500AE277C /* PhotoCell.swift in Sources */,
 				49A362DB24BB92B100019FC6 /* ZoomDismissalInteractionController.swift in Sources */,
 				49A362E024BB96E800019FC6 /* PhotoZoomViewController.swift in Sources */,
+				49240FCB24BFC88400DC9446 /* EditingViewController+PlayerView.swift in Sources */,
 				491816B224BA9AD800E318FC /* FromFiles.swift in Sources */,
 				4944CAA924B912EB00E893AE /* AppDelegate.swift in Sources */,
 				4980302924B95D8900AE277C /* FromPhotos.swift in Sources */,
 				4944CAAB24B912EB00E893AE /* SceneDelegate.swift in Sources */,
+				49240FCD24BFC8F000DC9446 /* PlayerView.swift in Sources */,
 				496F7F8224BD1F080045DDCB /* PhotoPageViewController+Player.swift in Sources */,
 				49F80C3124BD1C2B00C0C142 /* PlayerUtilities.swift in Sources */,
 				49E41ECC24B967E900EA7BB2 /* ViewController+AddButton.swift in Sources */,
