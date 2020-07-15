@@ -138,6 +138,8 @@ class PlayerView: UIView {
                         }
                     }
                 case .initialize:
+                    
+                    playerContext = .none
                     print("init")
                 }
                 
@@ -252,8 +254,14 @@ extension PhotoPageViewController: PlayerControlsDelegate {
     func sliderChanged(value: Float, event: SliderEvent) {
         switch event {
         case .began:
-            /// pause first
-            currentViewController.playerView.pause(fromSlider: true)
+            
+            if !currentViewController.hasInitializedPlayer {
+//                currentViewController.playerView.startPlay(with: currentViewController.asset, playerContext: .initialize)
+                currentViewController.startSlider()
+            } else {
+                /// pause first
+                currentViewController.playerView.pause(fromSlider: true)
+            }
         case .moved:
             if let currentTimescale = currentViewController.playerView.player?.currentItem?.duration.timescale {
                 let timeStamp = value * Float(currentViewController.asset.duration)

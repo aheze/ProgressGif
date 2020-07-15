@@ -81,6 +81,7 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpDismissConpletion()
         
         playerControlsView.playerControlsDelegate = self
         
