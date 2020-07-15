@@ -20,6 +20,9 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
         return true
     }
     
+    var normalStatusBarHeight = CGFloat(0)
+    
+    let transition = PopAnimator()
     
     @IBOutlet weak var backBlurView: UIVisualEffectView!
     @IBOutlet weak var chooseBlurView: UIVisualEffectView!
@@ -27,8 +30,6 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var backBaseView: UIView!
     @IBOutlet weak var chooseBaseView: UIView!
     @IBOutlet weak var playerControlsView: PlayerControlsView!
-    
-    
     
     @IBOutlet weak var backButton: UIButton!
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -39,18 +40,22 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var chooseButton: UIButton!
     @IBAction func chooseButtonPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "EditingViewController") as? EditingViewController {
+            viewController.transitioningDelegate = self
+//            generateImage
+            present(viewController, animated: true, completion: nil)
+        }
     }
-    
-    
     
     @IBOutlet weak var backBlurTopC: NSLayoutConstraint!
     @IBOutlet weak var chooseBlurTopC: NSLayoutConstraint!
     @IBOutlet weak var playerBlurBottomC: NSLayoutConstraint!
     
-    
     enum ScreenMode {
         case full, normal
     }
+    
     var currentMode: ScreenMode = .normal
     
     weak var delegate: PhotoPageViewControllerDelegate?
@@ -64,7 +69,6 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     var previousViewController: PhotoZoomViewController?
     
-//    var urls: [URL]!
     var photoAssets: PHFetchResult<PHAsset>!
     var currentIndex = 0
     var nextIndex: Int?
@@ -77,10 +81,8 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        slider.setThumbImage(UIImage(named: "circle"), for: .normal)
         
         playerControlsView.playerControlsDelegate = self
-        
         
         backBaseView.clipsToBounds = false
         chooseBaseView.clipsToBounds = false
@@ -90,17 +92,11 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
         chooseBaseView.alpha = 0
         playerControlsView.alpha = 0
         
-//        backBlurView.alpha = 0.7
-//        chooseBlurView.alpha = 0.7
-//        playerControlsBlurView.alpha = 0.7
-        
         backBlurView.clipsToBounds = true
         chooseBlurView.clipsToBounds = true
-//        playerControlsBlurView.clipsToBounds = true
         
         backBlurView.layer.cornerRadius = 10
         chooseBlurView.layer.cornerRadius = 10
-//        playerControlsBlurView.layer.cornerRadius = 10
         
         self.pageViewController.delegate = self
         self.pageViewController.dataSource = self
@@ -114,7 +110,7 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
         vc.delegate = self
         vc.index = self.currentIndex
-//        vc.url = self.photoAssets[self.currentIndex]
+        
         vc.asset = photoAssets.object(at: currentIndex)
         
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
@@ -126,6 +122,7 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
         previousViewController = currentViewController
         currentViewController.playerView.updateSliderProgress = self
     }
+    
     
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -160,6 +157,12 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
         return false
     }
     
+    override func present(_ viewControllerToPresent: UIViewController,
+                          animated flag: Bool,
+                          completion: (() -> Void)? = nil) {
+            viewControllerToPresent.modalPresentationStyle = .fullScreen
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -197,6 +200,7 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func changeScreenMode(to: ScreenMode) {
         if to == .full {
+            slideControlsOut()
             self.navigationController?.setNavigationBarHidden(true, animated: false)
             UIView.animate(withDuration: 0.25,
                            animations: {
@@ -205,6 +209,7 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
             }, completion: { completed in
             })
         } else {
+            slideControlsIn()
             self.navigationController?.setNavigationBarHidden(false, animated: false)
             UIView.animate(withDuration: 0.25,
                            animations: {
@@ -271,16 +276,10 @@ extension PhotoPageViewController: UIPageViewControllerDelegate, UIPageViewContr
                 let zoomVC = vc as! PhotoZoomViewController
                 zoomVC.scrollView.zoomScale = zoomVC.scrollView.minimumZoomScale
             }
-            print("Scrolled to new page")
             
             playerControlsView.stop()
             previousViewController?.stopVideo()
             playerControlsView.backToBeginning()
-            
-            
-//            previousViewController?.playerView.pause()
-//            previousViewController?.playerView.player = nil
-//            previousViewController?.hasInitializedPlayer = false
             
             self.currentIndex = self.nextIndex!
             self.delegate?.containerViewController(self, indexDidUpdate: self.currentIndex)
@@ -308,28 +307,14 @@ extension PhotoPageViewController: ZoomAnimatorDelegate {
     
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
         if zoomAnimator.isPresenting == false {
-            print("Really started, CHECKED!")
-            
-            backBlurTopC.constant = -16
-            chooseBlurTopC.constant = -16
-            playerBlurBottomC.constant = -16
-            
-            UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
-                self.view.layoutIfNeeded()
-                self.backBaseView.alpha = 0
-                self.chooseBaseView.alpha = 0
-                self.playerControlsView.alpha = 0
-            }, completion: nil)
-            
+            slideControlsOut()
         }
     }
     
     func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
         if zoomAnimator.isPresenting == true && zoomAnimator.finishedDismissing == false {
-            print("Really ended, CHECKED!")
             slideControlsIn()
         } else if zoomAnimator.isPresenting == false && zoomAnimator.finishedDismissing == false {
-            print("Canceled...")
             slideControlsIn()
         }
         
@@ -340,6 +325,18 @@ extension PhotoPageViewController: ZoomAnimatorDelegate {
         }
     }
     
+    func slideControlsOut() {
+        backBlurTopC.constant = -16
+        chooseBlurTopC.constant = -16
+        playerBlurBottomC.constant = -16
+        
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
+            self.view.layoutIfNeeded()
+            self.backBaseView.alpha = 0
+            self.chooseBaseView.alpha = 0
+            self.playerControlsView.alpha = 0
+        }, completion: nil)
+    }
     func slideControlsIn() {
         backBlurTopC.constant = 16
         chooseBlurTopC.constant = 16
@@ -347,9 +344,6 @@ extension PhotoPageViewController: ZoomAnimatorDelegate {
         
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
             self.view.layoutIfNeeded()
-//            self.backBlurView.alpha = 1
-//            self.chooseBlurView.alpha = 1
-//            self.playerControlsBlurView.alpha = 1
             self.backBaseView.alpha = 1
             self.chooseBaseView.alpha = 1
             self.playerControlsView.alpha = 1

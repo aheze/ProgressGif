@@ -21,6 +21,7 @@ class PhotoZoomViewController: UIViewController {
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var playerView: PlayerView!
     @IBOutlet weak var imageView: UIImageView!
+    var image: UIImage?
     
     weak var delegate: PhotoZoomViewControllerDelegate?
 //
@@ -50,15 +51,15 @@ class PhotoZoomViewController: UIViewController {
         PHImageManager.default().requestImage(for: asset, targetSize: targetSize, contentMode: PHImageContentMode.aspectFit, options: PHImageRequestOptions()) { (image, userInfo) -> Void in
             if let image = image {
                 
-                    self.imageView.image = image
-                    let rectFrame = CGRect(x: self.baseView.frame.origin.x,
-                    y: self.baseView.frame.origin.y,
-                    width: self.targetSize.width,
-                    height: self.targetSize.width)
-                    
-                    print("rectFrame: \(rectFrame)")
-                    self.imageView.frame = rectFrame
-                    
+                self.imageView.image = image
+                let rectFrame = CGRect(x: self.baseView.frame.origin.x,
+                                       y: self.baseView.frame.origin.y,
+                                       width: self.targetSize.width,
+                                       height: self.targetSize.width)
+                
+                self.imageView.frame = rectFrame
+                self.image = image
+                
             }
         }
         
@@ -69,14 +70,13 @@ class PhotoZoomViewController: UIViewController {
     }
     
     func playVideo() {
-        print("playing viewd")
+        print("play video! hasInitializedPlayer: \(hasInitializedPlayer)")
         if !hasInitializedPlayer {
             hasInitializedPlayer = true
             
             UIView.animate(withDuration: 0.2, animations: {
                 self.imageView.alpha = 0
             })
-            
             playerView.startPlay(with: asset)
         } else {
             playerView.play()
@@ -95,7 +95,7 @@ class PhotoZoomViewController: UIViewController {
     func jumpForward5() {
         hasInitializedPlayer = true
         self.imageView.alpha = 0
-        playerView.startPlay(with: asset, shouldJumpForward5: true)
+        playerView.startPlay(with: asset, playerContext: .jumpForward5)
     }
     
     

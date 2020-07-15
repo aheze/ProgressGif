@@ -13,6 +13,7 @@ import Photos
 
 class FromPhotosPicker: UIViewController {
     
+    var windowStatusBarHeight = CGFloat(0)
     
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
@@ -29,7 +30,6 @@ class FromPhotosPicker: UIViewController {
             viewController.topInset = visualEffectView.frame.height
             viewController.collectionType = .photos
             viewController.inset = CGFloat(4)
-            
             self.add(childViewController: viewController, inView: view)
             
             return viewController
@@ -46,6 +46,17 @@ class FromPhotosPicker: UIViewController {
         rightArrowImageView.alpha = 0.7
         
         _ = collectionViewController
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIApplication.shared.windows.first?.layer.speed = 0.5
+        
+        
+        windowStatusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        collectionViewController?.windowStatusBarHeight = self.windowStatusBarHeight
+        
     }
 }
 
@@ -81,17 +92,20 @@ extension ViewController: UIImagePickerControllerDelegate {
             break
         }
     }
-
+    
     func presentFromPhotosPicker() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "FromPhotosPicker") as? FromPhotosPicker {
-            self.present(vc, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "FromPhotosPicker") as?
+                FromPhotosPicker {
+                
+                self.present(vc, animated: true, completion: nil)
+            }
         }
-
     }
 
     func askToGoToSettingsForPhotoLibrary() {
-        let alert = UIAlertController(title: "Photo Library Permissions", message: "We need to access your photo library to import video", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Photo Library Permissions", message: "We need to access your photo library to import videos", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: {(action: UIAlertAction) in
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 if UIApplication.shared.canOpenURL(url) {
@@ -102,40 +116,5 @@ extension ViewController: UIImagePickerControllerDelegate {
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
-//    func getVideo(fromSourceType sourceType: UIImagePickerController.SourceType) {
-//
-//
-//
-//        //Check is source type available
-//        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
-//
-//            DispatchQueue.main.async {
-//                let imagePickerController = UIImagePickerController()
-//                imagePickerController.delegate = self
-//                imagePickerController.sourceType = sourceType
-//                imagePickerController.mediaTypes = [kUTTypeMovie as String]
-//                self.present(imagePickerController, animated: true, completion: nil)
-//            }
-//        }
-//    }
-//
-//    //MARK:- UIImagePickerViewDelegate.
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//
-//        self.dismiss(animated: true) { [weak self] in
-//
-//            print("got video!")
-//
-//            //            guard let video = info[UIImagePickerController.InfoKey.orig]
-//            //            guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-//            //            //Setting image to your image view
-//            //            self?.profileImgView.image = image
-//        }
-//    }
-//
-//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//        picker.dismiss(animated: true, completion: nil)
-//    }
-
+    
 }

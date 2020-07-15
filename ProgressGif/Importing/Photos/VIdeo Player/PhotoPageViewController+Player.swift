@@ -13,6 +13,12 @@ protocol UpdateSliderProgress: class {
     func updateSlider(to value: Float)
     func finishedVideo()
 }
+
+enum PlayerContext {
+    case none
+    case jumpForward5
+    case initialize
+}
 class PlayerView: UIView {
     
     weak var updateSliderProgress: UpdateSliderProgress?
@@ -26,11 +32,15 @@ class PlayerView: UIView {
     // Keep the reference and use it to observe the loading status.
     private var playerItem: AVPlayerItem?
     
-    var shouldJumpForward5 = false
+//    var shouldJumpForward5 = false
+    var playerContext = PlayerContext.none
     var playingState = PlayingState.paused
     var hasFinishedVideo = false
     
     private var avAsset: AVAsset?
+    var avURLAsset: AVURLAsset?
+    
+    
     var player: AVPlayer? {
         get {
             return playerLayer.player
@@ -74,12 +84,41 @@ class PlayerView: UIView {
             } else {
                 status = .unknown
             }
+            
             // Switch over status value
             switch status {
             case .readyToPlay:
-                print(".readyToPlay")
-                if shouldJumpForward5 {
-                    shouldJumpForward5 = false
+//                if shouldJumpForward5 {
+//                    shouldJumpForward5 = false
+//                    if let videoDuration = avAsset?.duration {
+//                        let forward5seconds = min(CMTimeGetSeconds(videoDuration), 5)
+//
+//                        if forward5seconds == CMTimeGetSeconds(videoDuration) {
+//                            hasFinishedVideo = true
+//                            updateSliderProgress?.finishedVideo()
+//                        }
+//
+//                        if let currentTimescale = player?.currentItem?.duration.timescale {
+//                            let newCMTime = CMTimeMakeWithSeconds(forward5seconds, preferredTimescale: currentTimescale)
+//                            player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
+//
+//                            if playingState == .paused {
+//                                let forwardSliderValue = Float(forward5seconds / CMTimeGetSeconds(videoDuration))
+//                                self.updateSliderProgress?.updateSlider(to: forwardSliderValue)
+//                            }
+//                        }
+//                    }
+//                } else {
+//                    playingState = .playing
+//                    player?.play()
+//                }
+                
+                switch playerContext {
+                case .none:
+                    playingState = .playing
+                    player?.play()
+                case .jumpForward5:
+                    playerContext = .none
                     if let videoDuration = avAsset?.duration {
                         let forward5seconds = min(CMTimeGetSeconds(videoDuration), 5)
                         
@@ -94,16 +133,13 @@ class PlayerView: UIView {
                             
                             if playingState == .paused {
                                 let forwardSliderValue = Float(forward5seconds / CMTimeGetSeconds(videoDuration))
-//                                playerControlsView.customSlider.setValue(forwardSliderValue, animated: false)
                                 self.updateSliderProgress?.updateSlider(to: forwardSliderValue)
                             }
                         }
                     }
-                } else {
-                    playingState = .playing
-                    player?.play()
+                case .initialize:
+                    print("init")
                 }
-                
                 
             case .failed:
                 print(".failed")
@@ -115,24 +151,23 @@ class PlayerView: UIView {
         }
     }
     
-    func startPlay(with asset: PHAsset, shouldJumpForward5: Bool = false) {
-        
-        self.shouldJumpForward5 = shouldJumpForward5
-        
+    func startPlay(with asset: PHAsset, playerContext: PlayerContext = .none) {
+//        self.shouldJumpForward5 = shouldJumpForward5
+        self.playerContext = playerContext
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
         
         PHCachingImageManager().requestAVAsset(forVideo: asset, options: nil) { (avAsset, audioMix, info) in
             self.avAsset = avAsset
             if let avAssetU = avAsset as? AVURLAsset {
                 self.setUpPlayerItem(with: avAssetU)
+                self.avURLAsset = avAssetU
             }
         }
     }
     
     func play() {
-        //        if !fromSlider {
         playingState = .playing
-        //        }
+        
         if hasFinishedVideo {
             hasFinishedVideo = false
             player?.seek(to: CMTime.zero, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30)) { [weak self](state) in
@@ -146,13 +181,13 @@ class PlayerView: UIView {
     }
     func pause(fromSlider: Bool = false) {
         if !fromSlider {
+            /// if slider paused, that means it was temporary (pause so that seek can occur)
             playingState = .paused
         }
         player?.pause()
     }
     
     @objc func playerDidFinishPlaying(note: Notification) {
-        print("Video Finished")
         hasFinishedVideo = true
         updateSliderProgress?.finishedVideo()
     }
@@ -171,7 +206,6 @@ extension PhotoPageViewController: PlayerControlsDelegate {
     func backPressed() {
         if let currentTime = currentViewController.playerView.player?.currentTime() {
             let seconds = CMTimeGetSeconds(currentTime)
-            print("current seconds: \(seconds)")
             let back5seconds = max(0, seconds - 5)
             
             if let currentTimescale = currentViewController.playerView.player?.currentItem?.duration.timescale {
@@ -189,12 +223,12 @@ extension PhotoPageViewController: PlayerControlsDelegate {
     
     func forwardPressed() {
         if !currentViewController.hasInitializedPlayer {
-            print("not init yet forard")
+            
+            /// if the user hasn't pressed play yet, but already pressed the forward button
             currentViewController.jumpForward5()
         } else {
             if let currentTime = currentViewController.playerView.player?.currentTime() {
                 let seconds = CMTimeGetSeconds(currentTime)
-                print("current seconds: \(seconds)")
                 let forward5seconds = min(currentViewController.asset.duration, seconds + 5)
                 
                 if forward5seconds == currentViewController.asset.duration {
@@ -218,8 +252,8 @@ extension PhotoPageViewController: PlayerControlsDelegate {
     func sliderChanged(value: Float, event: SliderEvent) {
         switch event {
         case .began:
+            /// pause first
             currentViewController.playerView.pause(fromSlider: true)
-            print("began")
         case .moved:
             if let currentTimescale = currentViewController.playerView.player?.currentItem?.duration.timescale {
                 let timeStamp = value * Float(currentViewController.asset.duration)
@@ -227,40 +261,19 @@ extension PhotoPageViewController: PlayerControlsDelegate {
                 currentViewController.playerView.player?.seek(to: time, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
             }
         case .ended:
-            
-            
-            
+            /// slider went to end
             if value >= 1.0 {
-                print("time overflow slider")
                 currentViewController.playerView.pause()
                 currentViewController.playerView.hasFinishedVideo = true
                 currentViewController.playerView.updateSliderProgress?.finishedVideo()
                 
             } else if currentViewController.playerView.hasFinishedVideo == true {
+                /// if the slider went to the end, then slid back again
                 currentViewController.playerView.hasFinishedVideo = false
-                print("already finished cideo")
             }
             if currentViewController.playerView.playingState == .playing {
                 currentViewController.playerView.play()
             }
-            
-//            if let currentTimescale = currentViewController.playerView.player?.currentItem?.duration.timescale {
-//                let timeStamp = value * Float(currentViewController.asset.duration)
-////                let time = CMTimeMakeWithSeconds(Float64(timeStamp), preferredTimescale: currentTimescale)
-//
-//                if let currentTime = currentViewController.playerView.player?.currentTime() {
-//
-//                    let currentTimeAsSeconds = CMTimeGetSeconds(currentTime)
-//                    if timeStamp >= Float(currentTimeAsSeconds) {
-//                        print("time overflow slider")
-//                        currentViewController.playerView.hasFinishedVideo = true
-//                        currentViewController.playerView.updateSliderProgress?.finishedVideo()
-//                    }
-//
-//                }
-//            }
-            
-            
             
         }
     }

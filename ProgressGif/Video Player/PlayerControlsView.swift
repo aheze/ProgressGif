@@ -71,7 +71,6 @@ class PlayerControlsView: UIView {
     
     
     @IBAction func sliderChangedValue(_ sender: Any, forEvent event: UIEvent) {
-        print("value changed!, \(customSlider.value)")
         
         if let touchEvent = event.allTouches?.first {
             
