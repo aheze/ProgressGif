@@ -15,12 +15,14 @@
 		49240FD324BFFB6E00DC9446 /* EditingBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49240FD224BFFB6E00DC9446 /* EditingBarVC.swift */; };
 		493E9BE924C0BA070068973B /* NumberStepper.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493E9BE824C0BA070068973B /* NumberStepper.xib */; };
 		493E9BED24C0BA820068973B /* NumberStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493E9BEC24C0BA820068973B /* NumberStepper.swift */; };
+		493E9BF224C0E8910068973B /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493E9BF124C0E8910068973B /* ColorPickerViewController.swift */; };
 		4944CAA924B912EB00E893AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944CAA824B912EB00E893AE /* AppDelegate.swift */; };
 		4944CAAB24B912EB00E893AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944CAAA24B912EB00E893AE /* SceneDelegate.swift */; };
 		4944CAAD24B912EB00E893AE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4944CAAC24B912EB00E893AE /* ViewController.swift */; };
 		4944CAB024B912EB00E893AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4944CAAE24B912EB00E893AE /* Main.storyboard */; };
 		4944CAB224B912F000E893AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4944CAB124B912F000E893AE /* Assets.xcassets */; };
 		4944CAB524B912F000E893AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4944CAB324B912F000E893AE /* LaunchScreen.storyboard */; };
+		4948C8E124C0F49400E5F5F6 /* EditingViewController+EditingDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4948C8E024C0F49400E5F5F6 /* EditingViewController+EditingDelegates.swift */; };
 		496DD41C24BA4927007380AF /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496DD41B24BA4927007380AF /* CollectionViewController.swift */; };
 		496F7F8224BD1F080045DDCB /* PhotoPageViewController+Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F7F8124BD1F080045DDCB /* PhotoPageViewController+Player.swift */; };
 		496F7F8424BD3C1E0045DDCB /* PhotoPageViewController+UpdateSliderProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F7F8324BD3C1E0045DDCB /* PhotoPageViewController+UpdateSliderProgress.swift */; };
@@ -57,6 +59,7 @@
 		49240FD224BFFB6E00DC9446 /* EditingBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingBarVC.swift; sourceTree = "<group>"; };
 		493E9BE824C0BA070068973B /* NumberStepper.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumberStepper.xib; sourceTree = "<group>"; };
 		493E9BEC24C0BA820068973B /* NumberStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberStepper.swift; sourceTree = "<group>"; };
+		493E9BF124C0E8910068973B /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		4944CAA524B912EB00E893AE /* ProgressGif.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProgressGif.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4944CAA824B912EB00E893AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4944CAAA24B912EB00E893AE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +68,7 @@
 		4944CAB124B912F000E893AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4944CAB424B912F000E893AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4944CAB624B912F000E893AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4948C8E024C0F49400E5F5F6 /* EditingViewController+EditingDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingViewController+EditingDelegates.swift"; sourceTree = "<group>"; };
 		496DD41B24BA4927007380AF /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		496F7F8124BD1F080045DDCB /* PhotoPageViewController+Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoPageViewController+Player.swift"; sourceTree = "<group>"; };
 		496F7F8324BD3C1E0045DDCB /* PhotoPageViewController+UpdateSliderProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoPageViewController+UpdateSliderProgress.swift"; sourceTree = "<group>"; };
@@ -135,10 +139,9 @@
 		49240FD124BFFB4600DC9446 /* Base Editing */ = {
 			isa = PBXGroup;
 			children = (
+				4948C8DF24C0F47800E5F5F6 /* Video Player */,
 				496F7F8524BE3AE90045DDCB /* EditingViewController.swift */,
-				49240FC824BFC7CA00DC9446 /* EditingViewController+PlayerControls.swift */,
-				49240FCA24BFC88400DC9446 /* EditingViewController+PlayerView.swift */,
-				49240FCE24BFC9FE00DC9446 /* EditingViewController+UpdateSliderProgress.swift */,
+				4948C8E024C0F49400E5F5F6 /* EditingViewController+EditingDelegates.swift */,
 			);
 			path = "Base Editing";
 			sourceTree = "<group>";
@@ -148,8 +151,17 @@
 			children = (
 				493E9BE824C0BA070068973B /* NumberStepper.xib */,
 				493E9BEC24C0BA820068973B /* NumberStepper.swift */,
+				493E9BF124C0E8910068973B /* ColorPickerViewController.swift */,
 			);
 			path = "Editing Controls";
+			sourceTree = "<group>";
+		};
+		493E9BEE24C0E59A0068973B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4980302024B9427800AE277C /* Utilities.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		4944CA9C24B912EB00E893AE = {
@@ -173,18 +185,16 @@
 		4944CAA724B912EB00E893AE /* ProgressGif */ = {
 			isa = PBXGroup;
 			children = (
+				493E9BEE24C0E59A0068973B /* Utilities */,
 				49F80C2924BCF62200C0C142 /* Video Player */,
 				491816B024BA9A9500E318FC /* ProgressGif.entitlements */,
 				4944CAA824B912EB00E893AE /* AppDelegate.swift */,
 				4944CAAA24B912EB00E893AE /* SceneDelegate.swift */,
 				4944CAAC24B912EB00E893AE /* ViewController.swift */,
+				4944CAAE24B912EB00E893AE /* Main.storyboard */,
 				496DD41B24BA4927007380AF /* CollectionViewController.swift */,
 				49E41ECD24B967F900EA7BB2 /* Buttons */,
-				4980302624B94CDD00AE277C /* Setup.swift */,
-				4980302024B9427800AE277C /* Utilities.swift */,
-				4980301E24B91E2500AE277C /* PhotoCell.swift */,
 				4980301C24B91DE000AE277C /* Model.swift */,
-				4944CAAE24B912EB00E893AE /* Main.storyboard */,
 				4980302A24B95D8F00AE277C /* Importing */,
 				4944CAB124B912F000E893AE /* Assets.xcassets */,
 				4944CAB324B912F000E893AE /* LaunchScreen.storyboard */,
@@ -194,13 +204,23 @@
 			path = ProgressGif;
 			sourceTree = "<group>";
 		};
+		4948C8DF24C0F47800E5F5F6 /* Video Player */ = {
+			isa = PBXGroup;
+			children = (
+				49240FC824BFC7CA00DC9446 /* EditingViewController+PlayerControls.swift */,
+				49240FCA24BFC88400DC9446 /* EditingViewController+PlayerView.swift */,
+				49240FCE24BFC9FE00DC9446 /* EditingViewController+UpdateSliderProgress.swift */,
+			);
+			path = "Video Player";
+			sourceTree = "<group>";
+		};
 		496F7F8724BE3B010045DDCB /* Editing */ = {
 			isa = PBXGroup;
 			children = (
 				493E9BE724C0B9C20068973B /* Editing Controls */,
-				49240FD024BFFB2F00DC9446 /* Editing View Controllers */,
 				498BF59724BE3C1300F7F2C6 /* Editing Animations */,
 				49240FD124BFFB4600DC9446 /* Base Editing */,
+				49240FD024BFFB2F00DC9446 /* Editing View Controllers */,
 			);
 			path = Editing;
 			sourceTree = "<group>";
@@ -246,6 +266,7 @@
 			children = (
 				49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */,
 				4980302424B946F200AE277C /* ViewController+Buttons.swift */,
+				4980302624B94CDD00AE277C /* Setup.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -268,6 +289,7 @@
 				49A362DF24BB96E800019FC6 /* PhotoPageViewController.swift */,
 				49A362DE24BB96E700019FC6 /* PhotoZoomViewController.swift */,
 				498BF59A24BE3D3600F7F2C6 /* PhotoPageViewController+EditingAnimation.swift */,
+				4980301E24B91E2500AE277C /* PhotoCell.swift */,
 				498BF59C24BE8BA700F7F2C6 /* VIdeo Player */,
 				49A362D324BB929D00019FC6 /* Photo Grid Animations */,
 			);
@@ -391,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				498BF59924BE3CCD00F7F2C6 /* PopAnimator.swift in Sources */,
+				4948C8E124C0F49400E5F5F6 /* EditingViewController+EditingDelegates.swift in Sources */,
 				496DD41C24BA4927007380AF /* CollectionViewController.swift in Sources */,
 				4980302524B946F200AE277C /* ViewController+Buttons.swift in Sources */,
 				49240FC924BFC7CA00DC9446 /* EditingViewController+PlayerControls.swift in Sources */,
@@ -416,6 +439,7 @@
 				49F80C3124BD1C2B00C0C142 /* PlayerUtilities.swift in Sources */,
 				49E41ECC24B967E900EA7BB2 /* ViewController+AddButton.swift in Sources */,
 				49240FD324BFFB6E00DC9446 /* EditingBarVC.swift in Sources */,
+				493E9BF224C0E8910068973B /* ColorPickerViewController.swift in Sources */,
 				493E9BED24C0BA820068973B /* NumberStepper.swift in Sources */,
 				4980302724B94CDD00AE277C /* Setup.swift in Sources */,
 				49A362DD24BB92B100019FC6 /* ZoomTransitionController.swift in Sources */,

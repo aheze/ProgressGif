@@ -11,9 +11,10 @@ import Parchment
 
 class EditingViewController: UIViewController {
     
+    var editingConfiguration = EditingConfiguration()
+    
     var asset: PHAsset!
     var hasInitializedPlayer = false
-    
     
     @IBOutlet weak var topStatusBlurView: UIVisualEffectView!
     
@@ -35,10 +36,7 @@ class EditingViewController: UIViewController {
     
     @IBOutlet weak var exportButton: UIButton!
     @IBAction func exportButtonPressed(_ sender: Any) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let editingBarVC = storyboard.instantiateViewController(withIdentifier: "EditingBarVC") as! EditingBarVC
-//        editingBarVC.title = "Bar"
-//        self.present(editingBarVC, animated: true, completion: nil)
+        
     }
     
     @IBOutlet weak var bottomReferenceView: UIView!
@@ -52,6 +50,10 @@ class EditingViewController: UIViewController {
         
         let editingBarVC = storyboard.instantiateViewController(withIdentifier: "EditingBarVC") as! EditingBarVC
         editingBarVC.title = "Bar"
+        editingBarVC.originalBarHeight = editingConfiguration.barHeight
+        editingBarVC.originalBarForegroundColor = editingConfiguration.barForegroundColor
+        editingBarVC.originalBarBackgroundColor = editingConfiguration.barBackgroundColor
+        editingBarVC.editingBarChanged = self
         
         let editingEdgesVC = storyboard.instantiateViewController(withIdentifier: "EditingEdgesVC") as! EditingEdgesVC
         editingEdgesVC.title = "Edges"
@@ -66,18 +68,16 @@ class EditingViewController: UIViewController {
         ])
 
         pagingViewController.textColor = UIColor.label
-        pagingViewController.selectedTextColor = UIColor(named: "YellorangeText") ?? UIColor.blue
+        pagingViewController.selectedTextColor = UIColor(named: "YellorangeText") ?? UIColor.blue /// will look terrible but it won't happen
+        
         pagingViewController.indicatorColor = UIColor(named: "Yellorange") ?? UIColor.blue
         pagingViewController.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         pagingViewController.borderColor = UIColor.clear
         
         pagingViewController.selectedFont = UIFont.systemFont(ofSize: 16, weight: .semibold)
         
-//        pagingViewController.menuBackgroundColor = UIColor.systemGroupedBackground
         pagingViewController.backgroundColor = UIColor.systemBackground
         pagingViewController.selectedBackgroundColor = UIColor.systemBackground
-        
-        
         
         self.add(childViewController: pagingViewController, inView: bottomReferenceView)
         
@@ -85,6 +85,4 @@ class EditingViewController: UIViewController {
     }
     
 }
-
-
 
