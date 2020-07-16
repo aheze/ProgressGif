@@ -61,6 +61,7 @@ class PlayerControlsView: UIView {
         playingState = .paused
         playButton.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
     }
+    
     func backToBeginning() {
         customSlider.setValue(0, animated: true)
     }

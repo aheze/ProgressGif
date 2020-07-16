@@ -26,6 +26,9 @@ class EditingViewController: UIViewController {
     
     @IBOutlet weak var galleryButton: UIButton!
     @IBAction func galleryButtonPressed(_ sender: Any) {
+        playerView.pause()
+        playerView.player = nil
+        hasInitializedPlayer = false
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     

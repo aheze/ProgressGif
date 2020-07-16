@@ -10,21 +10,26 @@ import AVFoundation
 
 extension EditingViewController: PlayerControlsDelegate {
     func backPressed() {
-        if let currentTime = playerView.player?.currentTime() {
-            let seconds = CMTimeGetSeconds(currentTime)
-            let back5seconds = max(0, seconds - 5)
-            
-            if back5seconds >= 0 {
-                playerView.hasFinishedVideo = false
-            }
-            
-            if let currentTimescale = playerView.player?.currentItem?.duration.timescale {
-                let newCMTime = CMTimeMakeWithSeconds(back5seconds, preferredTimescale: currentTimescale)
-                playerView.player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
+        if !hasInitializedPlayer {
+            /// if the user hasn't pressed play yet, but already pressed the forward button
+            jumpBack5(fromValue: playerControlsView.customSlider.value)
+        } else {
+            if let currentTime = playerView.player?.currentTime() {
+                let seconds = CMTimeGetSeconds(currentTime)
+                let back5seconds = max(0, seconds - 5)
                 
-                if playerView.playingState == .paused {
-                    let backSliderValue = Float(back5seconds / asset.duration)
-                    playerControlsView.customSlider.setValue(backSliderValue, animated: false)
+                if back5seconds >= 0 {
+                    playerView.hasFinishedVideo = false
+                }
+                
+                if let currentTimescale = playerView.player?.currentItem?.duration.timescale {
+                    let newCMTime = CMTimeMakeWithSeconds(back5seconds, preferredTimescale: currentTimescale)
+                    playerView.player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
+                    
+                    if playerView.playingState == .paused {
+                        let backSliderValue = Float(back5seconds / asset.duration)
+                        playerControlsView.customSlider.setValue(backSliderValue, animated: false)
+                    }
                 }
             }
         }
@@ -33,7 +38,7 @@ extension EditingViewController: PlayerControlsDelegate {
     func forwardPressed() {
         if !hasInitializedPlayer {
             /// if the user hasn't pressed play yet, but already pressed the forward button
-            jumpForward5()
+            jumpForward5(fromValue: playerControlsView.customSlider.value)
         } else {
             if let currentTime = playerView.player?.currentTime() {
                 let seconds = CMTimeGetSeconds(currentTime)
