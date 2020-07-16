@@ -1,4 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-ProgressGif/Pods-ProgressGif-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Colorful/Colorful.framework
 ${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework

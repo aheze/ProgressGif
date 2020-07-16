@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// for the delegate
+// for the delegate
 enum NumberStepperType {
     case barHeight
     case edgeInset
