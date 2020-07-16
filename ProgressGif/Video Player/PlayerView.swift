@@ -18,9 +18,13 @@ class PlayerView: UIView {
     
     enum PlayerContext {
         case none
+        case jumpBack5
         case jumpForward5
         case initialize
+        case playFromValue
     }
+    
+    var startValue = Float(-5)
     
     weak var updateSliderProgress: UpdateSliderProgress?
     
@@ -64,6 +68,8 @@ class PlayerView: UIView {
             let _ = self?.player?.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 30), queue: DispatchQueue.main) { [weak self] (time) in
                 let newProgress = Float(CMTimeGetSeconds(time)) / Float(CMTimeGetSeconds(asset.duration))
                 if self?.playingState == .playing {
+                    
+//                    print("current time: \(time), duration: \(asset.duration), new progress: \(newProgress)")
                     self?.updateSliderProgress?.updateSlider(to: newProgress)
                 }
             }
@@ -93,30 +99,90 @@ class PlayerView: UIView {
                 case .none:
                     playingState = .playing
                     player?.play()
+                case .jumpBack5:
+                    playerContext = .none
+                    if let videoDuration = avAsset?.duration {
+                        
+                        var finalSeconds = Double(0)
+                        if startValue >= 0 {
+                            let currentTime = startValue * Float(CMTimeGetSeconds(videoDuration))
+                            finalSeconds = max(0, Double(currentTime - 5))
+                            
+                            if let currentTimescale = player?.currentItem?.duration.timescale {
+                                let newCMTime = CMTimeMakeWithSeconds(finalSeconds, preferredTimescale: currentTimescale)
+                                player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
+                                
+                                if playingState == .paused {
+                                    let forwardSliderValue = Float(finalSeconds / CMTimeGetSeconds(videoDuration))
+                                    self.updateSliderProgress?.updateSlider(to: forwardSliderValue)
+                                }
+                            }
+                        }
+//                        else {
+//                            finalSeconds = max(0, 5)
+//                        }
+                        
+                        
+                    }
                 case .jumpForward5:
                     playerContext = .none
                     if let videoDuration = avAsset?.duration {
-                        let forward5seconds = min(CMTimeGetSeconds(videoDuration), 5)
                         
-                        if forward5seconds == CMTimeGetSeconds(videoDuration) {
+                        var finalSeconds = Double(0)
+                        if startValue >= 0 {
+                            let currentTime = startValue * Float(CMTimeGetSeconds(videoDuration))
+                            finalSeconds = min(CMTimeGetSeconds(videoDuration), Double(currentTime + 5))
+                        } else {
+                            finalSeconds = min(CMTimeGetSeconds(videoDuration), 5)
+                        }
+                        
+                        if finalSeconds == CMTimeGetSeconds(videoDuration) {
                             hasFinishedVideo = true
                             updateSliderProgress?.finishedVideo()
                         }
                         
                         if let currentTimescale = player?.currentItem?.duration.timescale {
-                            let newCMTime = CMTimeMakeWithSeconds(forward5seconds, preferredTimescale: currentTimescale)
+                            let newCMTime = CMTimeMakeWithSeconds(finalSeconds, preferredTimescale: currentTimescale)
                             player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
                             
                             if playingState == .paused {
-                                let forwardSliderValue = Float(forward5seconds / CMTimeGetSeconds(videoDuration))
+                                let forwardSliderValue = Float(finalSeconds / CMTimeGetSeconds(videoDuration))
                                 self.updateSliderProgress?.updateSlider(to: forwardSliderValue)
                             }
                         }
                     }
                 case .initialize:
-                    
                     playerContext = .none
-                    print("init")
+                case .playFromValue:
+                    playerContext = .none
+                    
+                    if let videoDuration = avAsset?.duration {
+                        
+                        if let currentTimescale = player?.currentItem?.duration.timescale {
+//                            let newCMTime = CMTimeMakeWithSeconds(Float64(startValue)) / videoDuration, preferredTimescale: currentTimescale)
+//                            let newCMTimePercentage = CMTimeMakeWithSeconds(Float64(startValue), preferredTimescale: currentTimescale)
+                            let newTime = startValue * Float(CMTimeGetSeconds(videoDuration))
+                            let newCMTime = CMTimeMakeWithSeconds(Float64(newTime), preferredTimescale: currentTimescale)
+                            
+                            if newCMTime == videoDuration {
+                                hasFinishedVideo = true
+                                updateSliderProgress?.finishedVideo()
+                                play()
+                                print("end")
+                            } else {
+                                print("seek, start value: \(startValue), CMTIme: \(newCMTime)")
+                                player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
+                                
+//                                { [weak self] _ in
+////                                    self?.playingState = .playing
+////                                    self?.player?.play()
+//                                }
+                                
+                                self.playingState = .playing
+                                self.player?.play()
+                            }
+                        }
+                    }
                 }
                 
             case .failed:
@@ -129,7 +195,8 @@ class PlayerView: UIView {
         }
     }
     
-    func startPlay(with asset: PHAsset, playerContext: PlayerContext = .none) {
+    func startPlay(with asset: PHAsset, playerContext: PlayerContext = .none, value: Float = -5) {
+        startValue = value
         self.playerContext = playerContext
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
         
