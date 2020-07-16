@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NumberStepper" customModule="ProgressGif" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="nsR-CT-b8i"/>
+                <outlet property="leftButton" destination="nv3-iS-ZfU" id="c6z-Jr-DnF"/>
+                <outlet property="rightButton" destination="q5d-V4-1bJ" id="x8T-L3-wg1"/>
+                <outlet property="valueLabel" destination="iyN-Dx-7GH" id="U3D-iZ-q5Y"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="119" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i6c-JB-Tsy">
+                    <rect key="frame" x="30" y="0.0" width="59.5" height="44"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyN-Dx-7GH">
+                            <rect key="frame" x="23.5" y="10" width="12" height="24"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                            <color key="textColor" name="YellorangeText"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" name="YellorangeBackground"/>
+                    <constraints>
+                        <constraint firstItem="iyN-Dx-7GH" firstAttribute="centerX" secondItem="i6c-JB-Tsy" secondAttribute="centerX" id="33i-K2-gC9"/>
+                        <constraint firstItem="iyN-Dx-7GH" firstAttribute="centerY" secondItem="i6c-JB-Tsy" secondAttribute="centerY" id="Y9K-mE-Sco"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nv3-iS-ZfU">
+                    <rect key="frame" x="0.0" y="0.0" width="30" height="44"/>
+                    <color key="backgroundColor" name="YellorangeDarkerBackground"/>
+                    <color key="tintColor" name="Yellorange"/>
+                    <state key="normal" image="minus" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" weight="semibold"/>
+                    </state>
+                    <connections>
+                        <action selector="leftButtonPressed:" destination="-1" eventType="touchUpInside" id="e08-QX-3QW"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5d-V4-1bJ">
+                    <rect key="frame" x="89.5" y="0.0" width="29.5" height="44"/>
+                    <color key="backgroundColor" name="YellorangeDarkerBackground"/>
+                    <color key="tintColor" name="Yellorange"/>
+                    <state key="normal" image="plus" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" weight="semibold"/>
+                    </state>
+                    <connections>
+                        <action selector="rightButtonPressed:" destination="-1" eventType="touchUpInside" id="ZCf-7Z-pea"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="q5d-V4-1bJ" firstAttribute="leading" secondItem="i6c-JB-Tsy" secondAttribute="trailing" id="8SH-qR-4fr"/>
+                <constraint firstItem="i6c-JB-Tsy" firstAttribute="leading" secondItem="nv3-iS-ZfU" secondAttribute="trailing" id="A2X-7V-b7A"/>
+                <constraint firstItem="q5d-V4-1bJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Di6-yi-D8e"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="nv3-iS-ZfU" secondAttribute="bottom" id="IEj-SE-G1l"/>
+                <constraint firstItem="i6c-JB-Tsy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Qnb-Zv-eK7"/>
+                <constraint firstItem="nv3-iS-ZfU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="RCB-fe-HuD"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="q5d-V4-1bJ" secondAttribute="bottom" id="S6C-6P-79y"/>
+                <constraint firstItem="i6c-JB-Tsy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="WdR-FZ-dPJ"/>
+                <constraint firstItem="i6c-JB-Tsy" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.5" id="XdX-cf-YO2"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="q5d-V4-1bJ" secondAttribute="trailing" id="ZUw-Av-oiE"/>
+                <constraint firstItem="i6c-JB-Tsy" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="bbs-n7-Tka"/>
+                <constraint firstItem="nv3-iS-ZfU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="yTf-NT-f2E"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-81.884057971014499" y="425.22321428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="minus" catalog="system" width="128" height="24"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <namedColor name="Yellorange">
+            <color red="1" green="0.84705882352941175" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="YellorangeBackground">
+            <color red="1" green="0.98154867342245422" blue="0.83028707244814659" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="YellorangeDarkerBackground">
+            <color red="1" green="0.97201945217710306" blue="0.64309319828322731" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="YellorangeText">
+            <color red="0.81713388480392157" green="0.69114087477958353" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

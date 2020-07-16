@@ -17,7 +17,7 @@ extension UIViewController {
         inView.insertSubview(childViewController.view, at: 0)
 
         // Configure Child View
-        childViewController.view.frame = self.view.bounds
+        childViewController.view.frame = inView.bounds
         childViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         print("adding view controller")
