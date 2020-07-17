@@ -1,5 +1,4 @@
 PODS:
-  - Colorful (3.0.0)
   - Parchment (2.4.0)
   - SDWebImage (5.8.1):
     - SDWebImage/Core (= 5.8.1)
@@ -7,24 +6,21 @@ PODS:
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
-  - Colorful (~> 3.0)
   - Parchment
   - SDWebImage
   - SnapKit (~> 5.0.0)
 
 SPEC REPOS:
   trunk:
-    - Colorful
     - Parchment
     - SDWebImage
     - SnapKit
 
 SPEC CHECKSUMS:
-  Colorful: 9e093edacaa9fb73512ad9da157f0707b82d2542
   Parchment: 002785473861582385db5c6725165353c500198e
   SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 080020fbbe26a5235459877e31e70e854dae3641
+PODFILE CHECKSUM: ccc740ce436132bd6c4fae1b0b45e878fd5e576a
 
 COCOAPODS: 1.8.3
