@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//import Colorful
+import Colorful
 
 enum ColorPickerType {
     case barForeground

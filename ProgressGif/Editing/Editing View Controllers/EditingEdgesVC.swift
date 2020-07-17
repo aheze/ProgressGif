@@ -11,8 +11,10 @@ protocol EditingEdgesChanged: class {
     func edgeInsetChanged(to inset: Int)
     func edgeCornerRadiusChanged(to radius: Int)
     func edgeShadowColorChanged(to color: UIColor)
-    func backgroundColorChanged(to color: UIColor)
+//    func backgroundColorChanged(to color: UIColor)
 }
+
+/// backgroundBaseView and backgroundColorButton are removed. Changing the background color of the gif will be added in later versions.
 
 class EditingEdgesVC: UIViewController {
     
@@ -21,13 +23,13 @@ class EditingEdgesVC: UIViewController {
     var originalEdgeInset = 0
     var originalEdgeCornerRadius = 0
     var originalEdgeShadowColor = UIColor.black
-    var originalEdgeBackgroundColor = UIColor.clear
+//    var originalEdgeBackgroundColor = UIColor.clear
     
     
     @IBOutlet weak var insetBaseView: UIView!
     @IBOutlet weak var cornerRadiusBaseView: UIView!
     @IBOutlet weak var shadowBaseView: UIView!
-    @IBOutlet weak var backgroundBaseView: UIView!
+//    @IBOutlet weak var backgroundBaseView: UIView!
     
     @IBOutlet weak var insetNumberStepper: NumberStepper!
     @IBOutlet weak var cornerRadiusNumberStepper: NumberStepper!
@@ -37,10 +39,10 @@ class EditingEdgesVC: UIViewController {
         self.displayColorPicker(originalColor: originalEdgeShadowColor, colorPickerType: .edgeShadow, sourceView: shadowColorButton)
     }
     
-    @IBOutlet weak var backgroundColorButton: UIButton!
-    @IBAction func backgroundColorPressed(_ sender: Any) {
-        self.displayColorPicker(originalColor: originalEdgeBackgroundColor, colorPickerType: .edgeBackground, sourceView: backgroundColorButton)
-    }
+//    @IBOutlet weak var backgroundColorButton: UIButton!
+//    @IBAction func backgroundColorPressed(_ sender: Any) {
+//        self.displayColorPicker(originalColor: originalEdgeBackgroundColor, colorPickerType: .edgeBackground, sourceView: backgroundColorButton)
+//    }
     
     
     override func viewDidLoad() {
@@ -49,10 +51,12 @@ class EditingEdgesVC: UIViewController {
         insetBaseView.layer.cornerRadius = 6
         cornerRadiusBaseView.layer.cornerRadius = 6
         shadowBaseView.layer.cornerRadius = 6
-        backgroundBaseView.layer.cornerRadius = 6
+//        backgroundBaseView.layer.cornerRadius = 6
         
         shadowColorButton.layer.cornerRadius = 6
-        backgroundColorButton.layer.cornerRadius = 6
+//        backgroundColorButton.layer.cornerRadius = 6
+        
+        shadowColorButton.addBorder(width: 3, color: UIColor.lightGray)
         
         setUpConfiguration()
     }
@@ -62,7 +66,7 @@ class EditingEdgesVC: UIViewController {
         cornerRadiusNumberStepper.value = originalEdgeCornerRadius
         
         shadowColorButton.backgroundColor = originalEdgeShadowColor
-        backgroundColorButton.backgroundColor = originalEdgeBackgroundColor
+//        backgroundColorButton.backgroundColor = originalEdgeBackgroundColor
         
         insetNumberStepper.numberStepperChanged = self
         cornerRadiusNumberStepper.numberStepperChanged = self
@@ -87,11 +91,12 @@ extension EditingEdgesVC: ColorChanged {
             originalEdgeShadowColor = color
             shadowColorButton.backgroundColor = color
             editingEdgesChanged?.edgeShadowColorChanged(to: color)
-        } else if colorPickerType == .edgeBackground {
-            originalEdgeBackgroundColor = color
-            backgroundColorButton.backgroundColor = color
-            editingEdgesChanged?.backgroundColorChanged(to: color)
         }
+//        else if colorPickerType == .edgeBackground {
+//            originalEdgeBackgroundColor = color
+//            backgroundColorButton.backgroundColor = color
+//            editingEdgesChanged?.backgroundColorChanged(to: color)
+//        }
     }
 }
 extension EditingEdgesVC: UIPopoverPresentationControllerDelegate {

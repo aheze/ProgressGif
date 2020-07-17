@@ -31,7 +31,7 @@
 		4980301F24B91E2500AE277C /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980301E24B91E2500AE277C /* PhotoCell.swift */; };
 		4980302124B9427800AE277C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302024B9427800AE277C /* Utilities.swift */; };
 		4980302524B946F200AE277C /* ViewController+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302424B946F200AE277C /* ViewController+Buttons.swift */; };
-		4980302724B94CDD00AE277C /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302624B94CDD00AE277C /* Setup.swift */; };
+		4980302724B94CDD00AE277C /* SetupButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302624B94CDD00AE277C /* SetupButtons.swift */; };
 		4980302924B95D8900AE277C /* FromPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4980302824B95D8900AE277C /* FromPhotos.swift */; };
 		498BF59924BE3CCD00F7F2C6 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BF59824BE3CCD00F7F2C6 /* PopAnimator.swift */; };
 		498BF59B24BE3D3600F7F2C6 /* PhotoPageViewController+EditingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BF59A24BE3D3600F7F2C6 /* PhotoPageViewController+EditingAnimation.swift */; };
@@ -84,7 +84,7 @@
 		4980301E24B91E2500AE277C /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		4980302024B9427800AE277C /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		4980302424B946F200AE277C /* ViewController+Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Buttons.swift"; sourceTree = "<group>"; };
-		4980302624B94CDD00AE277C /* Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
+		4980302624B94CDD00AE277C /* SetupButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupButtons.swift; sourceTree = "<group>"; };
 		4980302824B95D8900AE277C /* FromPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromPhotos.swift; sourceTree = "<group>"; };
 		498BF59824BE3CCD00F7F2C6 /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		498BF59A24BE3D3600F7F2C6 /* PhotoPageViewController+EditingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoPageViewController+EditingAnimation.swift"; sourceTree = "<group>"; };
@@ -210,7 +210,6 @@
 				4944CAAE24B912EB00E893AE /* Main.storyboard */,
 				496DD41B24BA4927007380AF /* CollectionViewController.swift */,
 				49E41ECD24B967F900EA7BB2 /* Buttons */,
-				4980301C24B91DE000AE277C /* Model.swift */,
 				4980302A24B95D8F00AE277C /* Importing */,
 				4944CAB124B912F000E893AE /* Assets.xcassets */,
 				4944CAB324B912F000E893AE /* LaunchScreen.storyboard */,
@@ -233,6 +232,7 @@
 		496F7F8724BE3B010045DDCB /* Editing */ = {
 			isa = PBXGroup;
 			children = (
+				4980301C24B91DE000AE277C /* Model.swift */,
 				493E9BE724C0B9C20068973B /* Editing Controls */,
 				498BF59724BE3C1300F7F2C6 /* Editing Animations */,
 				49240FD124BFFB4600DC9446 /* Base Editing */,
@@ -293,9 +293,9 @@
 		49E41ECD24B967F900EA7BB2 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				4980302624B94CDD00AE277C /* SetupButtons.swift */,
 				49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */,
 				4980302424B946F200AE277C /* ViewController+Buttons.swift */,
-				4980302624B94CDD00AE277C /* Setup.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -475,7 +475,7 @@
 				49240FD324BFFB6E00DC9446 /* EditingBarVC.swift in Sources */,
 				493E9BF224C0E8910068973B /* ColorPickerViewController.swift in Sources */,
 				493E9BED24C0BA820068973B /* NumberStepper.swift in Sources */,
-				4980302724B94CDD00AE277C /* Setup.swift in Sources */,
+				4980302724B94CDD00AE277C /* SetupButtons.swift in Sources */,
 				49A362DD24BB92B100019FC6 /* ZoomTransitionController.swift in Sources */,
 				49A7AEAD24C134D800318F1A /* ColorMapCursor.swift in Sources */,
 				49A362DC24BB92B100019FC6 /* ZoomAnimator.swift in Sources */,

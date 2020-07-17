@@ -5,19 +5,20 @@
 //  Created by Zheng on 7/15/20.
 //
 
-import UIKit
 
-protocol EditingOptionsChanged: class {
-    func barHeightChanged(to height: Int)
-    func foregroundColorChanged(to color: UIColor)
-    func backgroundColorChanged(to color: UIColor)
-}
+/// adding options in a later release. Options will include chaging FPS and/or scale (for shrinking file size).
 
-class EditingOptionsVC: UIViewController {
-      
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
-}
+//import UIKit
+//
+//protocol EditingOptionsChanged: class {
+
+//}
+//
+//class EditingOptionsVC: UIViewController {
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//    }
+//
+//}

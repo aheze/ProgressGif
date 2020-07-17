@@ -47,6 +47,9 @@ class EditingBarVC: UIViewController {
         foregroundColorButton.layer.cornerRadius = 6
         backgroundColorButton.layer.cornerRadius = 6
         
+        foregroundColorButton.addBorder(width: 3, color: UIColor.lightGray)
+        backgroundColorButton.addBorder(width: 3, color: UIColor.lightGray)
+        
         setUpConfiguration()
     }
     
