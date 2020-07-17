@@ -47,6 +47,7 @@
 		49A7AEAE24C134D800318F1A /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEA824C134D800318F1A /* BrightnessSlider.swift */; };
 		49A7AEAF24C134D800318F1A /* ColorMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEA924C134D800318F1A /* ColorMapView.swift */; };
 		49A7AEB024C134D800318F1A /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEAA24C134D800318F1A /* ColorPicker.swift */; };
+		49AC2D0F24C237880009AEBE /* EditingVC+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */; };
 		49E41ECC24B967E900EA7BB2 /* ViewController+AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */; };
 		49E75FA724C015DC004B3F41 /* EditingEdgesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */; };
 		49E75FA924C015E6004B3F41 /* EditingOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */; };
@@ -100,6 +101,7 @@
 		49A7AEA824C134D800318F1A /* BrightnessSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessSlider.swift; sourceTree = "<group>"; };
 		49A7AEA924C134D800318F1A /* ColorMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMapView.swift; sourceTree = "<group>"; };
 		49A7AEAA24C134D800318F1A /* ColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
+		49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+Drawing.swift"; sourceTree = "<group>"; };
 		49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AddButton.swift"; sourceTree = "<group>"; };
 		49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingEdgesVC.swift; sourceTree = "<group>"; };
 		49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingOptionsVC.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			children = (
 				4948C8DF24C0F47800E5F5F6 /* Video Player */,
 				496F7F8524BE3AE90045DDCB /* EditingViewController.swift */,
+				49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */,
 				4948C8E024C0F49400E5F5F6 /* EditingViewController+EditingDelegates.swift */,
 			);
 			path = "Base Editing";
@@ -466,6 +469,7 @@
 				49A7AEAB24C134D800318F1A /* BrightnessCursor.swift in Sources */,
 				4944CAA924B912EB00E893AE /* AppDelegate.swift in Sources */,
 				49A7AEB024C134D800318F1A /* ColorPicker.swift in Sources */,
+				49AC2D0F24C237880009AEBE /* EditingVC+Drawing.swift in Sources */,
 				4980302924B95D8900AE277C /* FromPhotos.swift in Sources */,
 				4944CAAB24B912EB00E893AE /* SceneDelegate.swift in Sources */,
 				49240FCD24BFC8F000DC9446 /* PlayerView.swift in Sources */,

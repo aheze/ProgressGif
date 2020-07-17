@@ -29,6 +29,7 @@ extension EditingViewController: PlayerControlsDelegate {
                     if playerView.playingState == .paused {
                         let backSliderValue = Float(back5seconds / asset.duration)
                         playerControlsView.customSlider.setValue(backSliderValue, animated: false)
+                        updateProgressBar(to: backSliderValue, animated: true)
                     }
                 }
             }
@@ -56,6 +57,7 @@ extension EditingViewController: PlayerControlsDelegate {
                     if playerView.playingState == .paused {
                         let forwardSliderValue = Float(forward5seconds / asset.duration)
                         playerControlsView.customSlider.setValue(forwardSliderValue, animated: false)
+                        updateProgressBar(to: forwardSliderValue, animated: true)
                     }
                 }
             }
@@ -76,6 +78,10 @@ extension EditingViewController: PlayerControlsDelegate {
                 let timeStamp = value * Float(asset.duration)
                 let time = CMTimeMakeWithSeconds(Float64(timeStamp), preferredTimescale: currentTimescale)
                 playerView.player?.seek(to: time, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
+                
+                if playerView.playingState == .paused {
+                    updateProgressBar(to: value, animated: false)
+                }
             }
         case .ended:
             /// slider went to end

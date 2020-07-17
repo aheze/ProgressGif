@@ -11,6 +11,7 @@ import Parchment
 
 class EditingViewController: UIViewController {
     
+    /// configuration of every edit. Used to render gif.
     var editingConfiguration = EditingConfiguration()
     
     var asset: PHAsset!
@@ -49,9 +50,36 @@ class EditingViewController: UIViewController {
     @IBOutlet weak var baseView: UIView!
     
     @IBOutlet weak var playerHolderView: UIView!
+    
+    /// round corners / drop shadow on this view
+    /// contains `playerView` and `drawingView`
+    @IBOutlet weak var playerBaseView: UIView!
+    
     @IBOutlet weak var playerView: PlayerView!
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var drawingView: UIView!
+    
+    // MARK: - Drawing
+    
+    /// progress bar
+    @IBOutlet weak var progressBarBackgroundView: UIView!
+    @IBOutlet weak var progressBarBackgroundHeightC: NSLayoutConstraint!
+    
+    var progressBarFullWidth: CGFloat {
+        get {
+            return progressBarBackgroundView.frame.width
+        }
+    }
+    
+    /// `progressBarView` is a subview of `progressBarBackgroundView`
+    @IBOutlet weak var progressBarView: UIView!
+    
+    /// the width of the progress bar
+    /// `equal widths` wouldn't work because `multiplier` is a read-only property
+    @IBOutlet weak var progressBarWidthC: NSLayoutConstraint!
+    
+    /// back/forward/play/slider
     @IBOutlet weak var playerControlsView: PlayerControlsView!
     
     @IBOutlet weak var galleryButton: UIButton!
@@ -71,6 +99,12 @@ class EditingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /// first hide progress bar until transition finishes
+        progressBarBackgroundHeightC.constant = 10.0
+        progressBarWidthC.constant = 0
+        
+        
         playerControlsView.playerControlsDelegate = self
         playerView.updateSliderProgress = self
         
@@ -90,7 +124,7 @@ class EditingViewController: UIViewController {
         editingEdgesVC.originalEdgeShadowColor = editingConfiguration.edgeShadowColor
         editingEdgesVC.editingEdgesChanged = self
         
-        /// options added in later release
+        /// options will be added in a later release
 //        let editingOptionsVC = storyboard.instantiateViewController(withIdentifier: "EditingOptionsVC") as! EditingOptionsVC
 //        editingOptionsVC.title = "Options"
 

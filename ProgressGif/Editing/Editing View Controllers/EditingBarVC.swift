@@ -94,25 +94,4 @@ extension EditingBarVC: UIPopoverPresentationControllerDelegate {
 }
 
 
-extension ColorChanged where Self: UIViewController, Self: UIPopoverPresentationControllerDelegate {
-    func displayColorPicker(originalColor: UIColor, colorPickerType: ColorPickerType, sourceView: UIView) {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let popoverVC = storyboard.instantiateViewController(withIdentifier: "ColorPickerViewController") as! ColorPickerViewController
-        popoverVC.modalPresentationStyle = .popover
-        popoverVC.preferredContentSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 360)
-        
-        popoverVC.originalColor = originalColor
-        popoverVC.colorChanged = self
-        popoverVC.colorPickerType = colorPickerType
-        
-        if let popoverController = popoverVC.popoverPresentationController {
-            popoverController.sourceView = sourceView
-            popoverController.sourceRect = sourceView.bounds
-            popoverController.permittedArrowDirections = .down
-            popoverController.delegate = self
-        }
-        present(popoverVC, animated: true, completion: nil)
-        
-    }
-}
+
