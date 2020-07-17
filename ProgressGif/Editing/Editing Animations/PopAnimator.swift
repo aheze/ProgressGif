@@ -7,6 +7,7 @@
 
 import UIKit
 
+//protocol PopFinishedTrans
 class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     let duration = 0.8
@@ -93,6 +94,7 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 editingViewController.view.frame.origin.y = UIScreen.main.bounds.height
             }
           }, completion: { _ in
+            editingViewController.setUpDrawing(with: editingViewController.editingConfiguration)
             transitionContext.completeTransition(true)
         })
     }

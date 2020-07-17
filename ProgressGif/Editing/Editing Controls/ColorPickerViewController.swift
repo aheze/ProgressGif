@@ -20,6 +20,13 @@ protocol ColorChanged: class {
 
 class ColorPickerViewController: UIViewController {
     
+    @IBOutlet weak var dismissButton: UIButton!
+    @IBAction func dismissButtonPressed(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     var colorPickerType = ColorPickerType.barForeground
     @IBOutlet weak var colorPicker: ColorPicker!
     
@@ -30,13 +37,36 @@ class ColorPickerViewController: UIViewController {
         
         colorPicker.addTarget(self, action: #selector(self.handleColorChanged(picker:)), for: .valueChanged)
         colorPicker.set(color: originalColor, colorSpace: .extendedSRGB)
-        
-        
     }
     
     @objc func handleColorChanged(picker: ColorPicker) {
-//        print("change: \(picker.color)")
         colorChanged?.colorChanged(color: picker.color, colorPickerType: colorPickerType)
     }
     
+}
+
+extension ColorChanged where Self: UIViewController, Self: UIPopoverPresentationControllerDelegate {
+    func displayColorPicker(originalColor: UIColor, colorPickerType: ColorPickerType, sourceView: UIView) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let popoverVC = storyboard.instantiateViewController(withIdentifier: "ColorPickerViewController") as! ColorPickerViewController
+        popoverVC.modalPresentationStyle = .popover
+        
+        let width = min(UIScreen.main.bounds.width - 32, 360)
+        
+        popoverVC.preferredContentSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 360)
+        
+        popoverVC.originalColor = originalColor
+        popoverVC.colorChanged = self
+        popoverVC.colorPickerType = colorPickerType
+        
+        if let popoverController = popoverVC.popoverPresentationController {
+            popoverController.sourceView = sourceView
+            popoverController.sourceRect = sourceView.bounds
+            popoverController.permittedArrowDirections = .down
+            popoverController.delegate = self
+        }
+        present(popoverVC, animated: true, completion: nil)
+        
+    }
 }

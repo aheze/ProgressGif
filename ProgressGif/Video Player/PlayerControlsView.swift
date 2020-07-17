@@ -54,9 +54,6 @@ class PlayerControlsView: UIView {
         
         playerControlsDelegate?.changedPlay(playingState: playingState)
     }
-    
-    
-    
     func stop() {
         playingState = .paused
         playButton.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)

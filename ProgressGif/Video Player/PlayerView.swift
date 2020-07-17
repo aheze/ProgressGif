@@ -68,8 +68,6 @@ class PlayerView: UIView {
             let _ = self?.player?.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 30), queue: DispatchQueue.main) { [weak self] (time) in
                 let newProgress = Float(CMTimeGetSeconds(time)) / Float(CMTimeGetSeconds(asset.duration))
                 if self?.playingState == .playing {
-                    
-//                    print("current time: \(time), duration: \(asset.duration), new progress: \(newProgress)")
                     self?.updateSliderProgress?.updateSlider(to: newProgress)
                 }
             }
@@ -118,10 +116,6 @@ class PlayerView: UIView {
                                 }
                             }
                         }
-//                        else {
-//                            finalSeconds = max(0, 5)
-//                        }
-                        
                         
                     }
                 case .jumpForward5:
@@ -148,6 +142,7 @@ class PlayerView: UIView {
                             if playingState == .paused {
                                 let forwardSliderValue = Float(finalSeconds / CMTimeGetSeconds(videoDuration))
                                 self.updateSliderProgress?.updateSlider(to: forwardSliderValue)
+                                
                             }
                         }
                     }
@@ -159,8 +154,6 @@ class PlayerView: UIView {
                     if let videoDuration = avAsset?.duration {
                         
                         if let currentTimescale = player?.currentItem?.duration.timescale {
-//                            let newCMTime = CMTimeMakeWithSeconds(Float64(startValue)) / videoDuration, preferredTimescale: currentTimescale)
-//                            let newCMTimePercentage = CMTimeMakeWithSeconds(Float64(startValue), preferredTimescale: currentTimescale)
                             let newTime = startValue * Float(CMTimeGetSeconds(videoDuration))
                             let newCMTime = CMTimeMakeWithSeconds(Float64(newTime), preferredTimescale: currentTimescale)
                             
@@ -172,12 +165,6 @@ class PlayerView: UIView {
                             } else {
                                 print("seek, start value: \(startValue), CMTIme: \(newCMTime)")
                                 player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
-                                
-//                                { [weak self] _ in
-////                                    self?.playingState = .playing
-////                                    self?.player?.play()
-//                                }
-                                
                                 self.playingState = .playing
                                 self.player?.play()
                             }
@@ -232,6 +219,7 @@ class PlayerView: UIView {
     }
     
     @objc func playerDidFinishPlaying(note: Notification) {
+        pause()
         hasFinishedVideo = true
         updateSliderProgress?.finishedVideo()
     }
