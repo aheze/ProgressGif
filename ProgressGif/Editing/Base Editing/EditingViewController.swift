@@ -16,7 +16,35 @@ class EditingViewController: UIViewController {
     var asset: PHAsset!
     var hasInitializedPlayer = false
     
+    /// constraints for the video player and player controls view,
+    /// because they are __not__ in the same view as the base view.
+    /// these constraints will be calculated based on the heights of subviews in the base view.
+    @IBOutlet weak var playerHolderTopC: NSLayoutConstraint!
+    @IBOutlet weak var playerControlsBottomC: NSLayoutConstraint!
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        view.layoutIfNeeded()
+        
+        let statusHeight = topStatusBlurView.frame.height
+        let topBarheight = topActionBarBlurView.frame.height
+        let topBarToPreview = topBarAndPreviewVerticalC.constant
+        let previewHeight = previewLabel.frame.height
+        let previewToPlayerMargin = CGFloat(8)
+        
+        let topConstant = statusHeight + topBarheight + topBarToPreview + previewHeight + previewToPlayerMargin
+        
+        let bottomConstant = bottomReferenceView.frame.height
+        
+        playerHolderTopC.constant = topConstant
+        playerControlsBottomC.constant = bottomConstant
+    }
+    
     @IBOutlet weak var topStatusBlurView: UIVisualEffectView!
+    @IBOutlet weak var topActionBarBlurView: UIVisualEffectView!
+    @IBOutlet weak var topBarAndPreviewVerticalC: NSLayoutConstraint!
+    @IBOutlet weak var previewLabel: UILabel!
     
     @IBOutlet weak var baseView: UIView!
     
@@ -57,14 +85,19 @@ class EditingViewController: UIViewController {
         
         let editingEdgesVC = storyboard.instantiateViewController(withIdentifier: "EditingEdgesVC") as! EditingEdgesVC
         editingEdgesVC.title = "Edges"
+        editingEdgesVC.originalEdgeInset = editingConfiguration.edgeInset
+        editingEdgesVC.originalEdgeCornerRadius = editingConfiguration.edgeCornerRadius
+        editingEdgesVC.originalEdgeShadowColor = editingConfiguration.edgeShadowColor
+        editingEdgesVC.editingEdgesChanged = self
         
-        let editingOptionsVC = storyboard.instantiateViewController(withIdentifier: "EditingOptionsVC") as! EditingOptionsVC
-        editingOptionsVC.title = "Options"
+        /// options added in later release
+//        let editingOptionsVC = storyboard.instantiateViewController(withIdentifier: "EditingOptionsVC") as! EditingOptionsVC
+//        editingOptionsVC.title = "Options"
 
         let pagingViewController = PagingViewController(viewControllers: [
           editingBarVC,
           editingEdgesVC,
-          editingOptionsVC
+//          editingOptionsVC
         ])
 
         pagingViewController.textColor = UIColor.label

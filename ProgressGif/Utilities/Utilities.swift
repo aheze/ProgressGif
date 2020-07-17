@@ -8,6 +8,12 @@
 import UIKit
 import AVFoundation
 
+extension UIView {
+    func addBorder(width: CGFloat, color: UIColor) {
+        self.layer.borderWidth = width
+        self.layer.borderColor = color.cgColor
+    }
+}
 
 extension UIViewController {
     func add(childViewController: UIViewController, inView: UIView) {

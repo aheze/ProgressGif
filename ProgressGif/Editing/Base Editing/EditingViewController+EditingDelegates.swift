@@ -20,6 +20,19 @@ extension EditingViewController: EditingBarChanged {
     func backgroundColorChanged(to color: UIColor) {
         editingConfiguration.barBackgroundColor = color
     }
+}
+
+extension EditingViewController: EditingEdgesChanged {
+    func edgeInsetChanged(to inset: Int) {
+        editingConfiguration.edgeInset = inset
+        
+    }
+    func edgeCornerRadiusChanged(to radius: Int) {
+        editingConfiguration.edgeCornerRadius = radius
+    }
     
-    
+    func edgeShadowColorChanged(to color: UIColor) {
+        editingConfiguration.edgeShadowColor = color
+        
+    }
 }

@@ -33,8 +33,10 @@ class NumberStepper: UIView {
     @IBOutlet weak var rightButton: UIButton!
     
     @IBAction func leftButtonPressed(_ sender: Any) {
-        value -= 1
-        numberStepperChanged?.valueChanged(to: value, stepperType: stepperType)
+        if value - 1 >= 0 {
+            value -= 1
+            numberStepperChanged?.valueChanged(to: value, stepperType: stepperType)
+        }
     }
     
     @IBAction func rightButtonPressed(_ sender: Any) {

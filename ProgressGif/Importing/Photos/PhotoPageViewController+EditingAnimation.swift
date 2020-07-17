@@ -11,15 +11,6 @@ import AVFoundation
 extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
     func setUpDismissConpletion() {
         transition.dismissCompletion = { [weak self] in
-//          guard
-//            let selectedIndexPathCell = self?.tableView.indexPathForSelectedRow,
-//            let selectedCell = self?.tableView.cellForRow(at: selectedIndexPathCell)
-//              as? RecipeTableViewCell
-//            else {
-//              return
-//          }
-//
-//          selectedCell.shadowView.isHidden = false
             self?.currentViewController.imageView.isHidden = false
             self?.playerControlsView.isHidden = false
             self?.backBaseView.isHidden = false

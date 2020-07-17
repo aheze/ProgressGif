@@ -47,8 +47,6 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         let initialFrame = presenting ? originFrame : editingPlayerviewFrame
         let finalFrame = presenting ? editingPlayerviewFrame : originFrame
         
-        print("is presenting? \(presenting), initial frame: \(initialFrame), final frame: \(finalFrame)")
-        
         let editingPlayerControlsViewFrame = editingPlayerControlsView.frame
         let initialPlayerControlsFrame = presenting ? playerOriginFrame : editingPlayerControlsViewFrame
         let finalPlayerControlsFrame = presenting ? editingPlayerControlsViewFrame : playerOriginFrame
@@ -56,13 +54,6 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         let initialEditingBaseViewY = presenting ? UIScreen.main.bounds.height + editingTopStatusBlurView.frame.height : 0
         let finalEditingBaseViewY = presenting ? 0 : UIScreen.main.bounds.height + editingTopStatusBlurView.frame.height
         
-        
-            
-//            editingBaseView.frame.origin.y = UIScreen.main.bounds.height
-//            editingTopStatusBlurView.frame.origin.y = editingBaseView.frame.origin.y - editingTopStatusBlurView.frame.height
-            
-            
-            
             
         if presenting {
             imageView.frame = initialFrame
@@ -75,15 +66,10 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             
             editingBaseView.frame.origin.y = initialEditingBaseViewY
             editingTopStatusBlurView.frame.origin.y = initialEditingBaseViewY - editingTopStatusBlurView.frame.height
-        } else {
-            
         }
         
-        
-        
-        
-        
         containerView.addSubview(toView)
+        
         if !self.presenting {
           self.dismissCompletion?()
         }
@@ -107,9 +93,6 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 editingViewController.view.frame.origin.y = UIScreen.main.bounds.height
             }
           }, completion: { _ in
-            
-            
-            print("finished transition.")
             transitionContext.completeTransition(true)
         })
     }
