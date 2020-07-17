@@ -9,5 +9,4 @@ target 'ProgressGif' do
 	pod 'Parchment'
 	pod 'SnapKit', '~> 5.0.0'
   pod 'SDWebImage'
-  pod "Colorful", "~> 3.0"
 end

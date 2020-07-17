@@ -34,14 +34,13 @@ class EditingEdgesVC: UIViewController {
     
     @IBOutlet weak var shadowColorButton: UIButton!
     @IBAction func shadowColorPressed(_ sender: Any) {
+        self.displayColorPicker(originalColor: originalEdgeShadowColor, colorPickerType: .edgeShadow, sourceView: shadowColorButton)
     }
     
     @IBOutlet weak var backgroundColorButton: UIButton!
     @IBAction func backgroundColorPressed(_ sender: Any) {
+        self.displayColorPicker(originalColor: originalEdgeBackgroundColor, colorPickerType: .edgeBackground, sourceView: backgroundColorButton)
     }
-    
-    
-    
     
     
     override func viewDidLoad() {
@@ -80,4 +79,27 @@ extension EditingEdgesVC: NumberStepperChanged {
             editingEdgesChanged?.edgeCornerRadiusChanged(to: value)
         }
     }
+}
+
+extension EditingEdgesVC: ColorChanged {
+    func colorChanged(color: UIColor, colorPickerType: ColorPickerType) {
+        if colorPickerType == .edgeShadow {
+            originalEdgeShadowColor = color
+            shadowColorButton.backgroundColor = color
+            editingEdgesChanged?.edgeShadowColorChanged(to: color)
+        } else if colorPickerType == .edgeBackground {
+            originalEdgeBackgroundColor = color
+            backgroundColorButton.backgroundColor = color
+            editingEdgesChanged?.backgroundColorChanged(to: color)
+        }
+    }
+}
+extension EditingEdgesVC: UIPopoverPresentationControllerDelegate {
+    
+    // Override the iPhone behavior that presents a popover as fullscreen
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        // Return no adaptive presentation style, use default presentation behaviour
+        return .none
+    }
+    
 }

@@ -40,6 +40,13 @@
 		49A362DD24BB92B100019FC6 /* ZoomTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A362D824BB92B000019FC6 /* ZoomTransitionController.swift */; };
 		49A362E024BB96E800019FC6 /* PhotoZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A362DE24BB96E700019FC6 /* PhotoZoomViewController.swift */; };
 		49A362E124BB96E800019FC6 /* PhotoPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A362DF24BB96E800019FC6 /* PhotoPageViewController.swift */; };
+		49A7AE9724C1335200318F1A /* OpacityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AE9624C1335200318F1A /* OpacityPicker.swift */; };
+		49A7AEAB24C134D800318F1A /* BrightnessCursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEA524C134D700318F1A /* BrightnessCursor.swift */; };
+		49A7AEAC24C134D800318F1A /* ColorfulEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEA624C134D700318F1A /* ColorfulEntity.swift */; };
+		49A7AEAD24C134D800318F1A /* ColorMapCursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEA724C134D700318F1A /* ColorMapCursor.swift */; };
+		49A7AEAE24C134D800318F1A /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEA824C134D800318F1A /* BrightnessSlider.swift */; };
+		49A7AEAF24C134D800318F1A /* ColorMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEA924C134D800318F1A /* ColorMapView.swift */; };
+		49A7AEB024C134D800318F1A /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEAA24C134D800318F1A /* ColorPicker.swift */; };
 		49E41ECC24B967E900EA7BB2 /* ViewController+AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */; };
 		49E75FA724C015DC004B3F41 /* EditingEdgesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */; };
 		49E75FA924C015E6004B3F41 /* EditingOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */; };
@@ -86,6 +93,13 @@
 		49A362D824BB92B000019FC6 /* ZoomTransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomTransitionController.swift; sourceTree = "<group>"; };
 		49A362DE24BB96E700019FC6 /* PhotoZoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoZoomViewController.swift; sourceTree = "<group>"; };
 		49A362DF24BB96E800019FC6 /* PhotoPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPageViewController.swift; sourceTree = "<group>"; };
+		49A7AE9624C1335200318F1A /* OpacityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpacityPicker.swift; sourceTree = "<group>"; };
+		49A7AEA524C134D700318F1A /* BrightnessCursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessCursor.swift; sourceTree = "<group>"; };
+		49A7AEA624C134D700318F1A /* ColorfulEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorfulEntity.swift; sourceTree = "<group>"; };
+		49A7AEA724C134D700318F1A /* ColorMapCursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMapCursor.swift; sourceTree = "<group>"; };
+		49A7AEA824C134D800318F1A /* BrightnessSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessSlider.swift; sourceTree = "<group>"; };
+		49A7AEA924C134D800318F1A /* ColorMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMapView.swift; sourceTree = "<group>"; };
+		49A7AEAA24C134D800318F1A /* ColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AddButton.swift"; sourceTree = "<group>"; };
 		49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingEdgesVC.swift; sourceTree = "<group>"; };
 		49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingOptionsVC.swift; sourceTree = "<group>"; };
@@ -149,9 +163,11 @@
 		493E9BE724C0B9C20068973B /* Editing Controls */ = {
 			isa = PBXGroup;
 			children = (
+				49A7AE9824C1344A00318F1A /* Color */,
 				493E9BE824C0BA070068973B /* NumberStepper.xib */,
 				493E9BEC24C0BA820068973B /* NumberStepper.swift */,
 				493E9BF124C0E8910068973B /* ColorPickerViewController.swift */,
+				49A7AE9624C1335200318F1A /* OpacityPicker.swift */,
 			);
 			path = "Editing Controls";
 			sourceTree = "<group>";
@@ -259,6 +275,19 @@
 				49A362D824BB92B000019FC6 /* ZoomTransitionController.swift */,
 			);
 			path = "Photo Grid Animations";
+			sourceTree = "<group>";
+		};
+		49A7AE9824C1344A00318F1A /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				49A7AEA524C134D700318F1A /* BrightnessCursor.swift */,
+				49A7AEA824C134D800318F1A /* BrightnessSlider.swift */,
+				49A7AEA624C134D700318F1A /* ColorfulEntity.swift */,
+				49A7AEA724C134D700318F1A /* ColorMapCursor.swift */,
+				49A7AEA924C134D800318F1A /* ColorMapView.swift */,
+				49A7AEAA24C134D800318F1A /* ColorPicker.swift */,
+			);
+			path = Color;
 			sourceTree = "<group>";
 		};
 		49E41ECD24B967F900EA7BB2 /* Buttons */ = {
@@ -417,9 +446,11 @@
 				496DD41C24BA4927007380AF /* CollectionViewController.swift in Sources */,
 				4980302524B946F200AE277C /* ViewController+Buttons.swift in Sources */,
 				49240FC924BFC7CA00DC9446 /* EditingViewController+PlayerControls.swift in Sources */,
+				49A7AEAF24C134D800318F1A /* ColorMapView.swift in Sources */,
 				49E75FA724C015DC004B3F41 /* EditingEdgesVC.swift in Sources */,
 				49240FCF24BFC9FE00DC9446 /* EditingViewController+UpdateSliderProgress.swift in Sources */,
 				4980302124B9427800AE277C /* Utilities.swift in Sources */,
+				49A7AE9724C1335200318F1A /* OpacityPicker.swift in Sources */,
 				49A362E124BB96E800019FC6 /* PhotoPageViewController.swift in Sources */,
 				4944CAAD24B912EB00E893AE /* ViewController.swift in Sources */,
 				49F80C2D24BCF6A500C0C142 /* PlayerControlsView.swift in Sources */,
@@ -428,10 +459,13 @@
 				496F7F8624BE3AE90045DDCB /* EditingViewController.swift in Sources */,
 				4980301F24B91E2500AE277C /* PhotoCell.swift in Sources */,
 				49A362DB24BB92B100019FC6 /* ZoomDismissalInteractionController.swift in Sources */,
+				49A7AEAC24C134D800318F1A /* ColorfulEntity.swift in Sources */,
 				49A362E024BB96E800019FC6 /* PhotoZoomViewController.swift in Sources */,
 				49240FCB24BFC88400DC9446 /* EditingViewController+PlayerView.swift in Sources */,
 				491816B224BA9AD800E318FC /* FromFiles.swift in Sources */,
+				49A7AEAB24C134D800318F1A /* BrightnessCursor.swift in Sources */,
 				4944CAA924B912EB00E893AE /* AppDelegate.swift in Sources */,
+				49A7AEB024C134D800318F1A /* ColorPicker.swift in Sources */,
 				4980302924B95D8900AE277C /* FromPhotos.swift in Sources */,
 				4944CAAB24B912EB00E893AE /* SceneDelegate.swift in Sources */,
 				49240FCD24BFC8F000DC9446 /* PlayerView.swift in Sources */,
@@ -443,9 +477,11 @@
 				493E9BED24C0BA820068973B /* NumberStepper.swift in Sources */,
 				4980302724B94CDD00AE277C /* Setup.swift in Sources */,
 				49A362DD24BB92B100019FC6 /* ZoomTransitionController.swift in Sources */,
+				49A7AEAD24C134D800318F1A /* ColorMapCursor.swift in Sources */,
 				49A362DC24BB92B100019FC6 /* ZoomAnimator.swift in Sources */,
 				498BF59B24BE3D3600F7F2C6 /* PhotoPageViewController+EditingAnimation.swift in Sources */,
 				4980301D24B91DE000AE277C /* Model.swift in Sources */,
+				49A7AEAE24C134D800318F1A /* BrightnessSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

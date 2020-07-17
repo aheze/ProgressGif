@@ -27,50 +27,13 @@ class EditingBarVC: UIViewController {
     @IBOutlet weak var foregroundBaseView: UIView!
     @IBOutlet weak var foregroundColorButton: UIButton!
     @IBAction func foregroundColorPressed(_ sender: Any) {
-
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let popoverVC = storyboard.instantiateViewController(withIdentifier: "ColorPickerViewController") as! ColorPickerViewController
-//        popoverVC.modalPresentationStyle = .popover
-//        popoverVC.preferredContentSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 360)
-//
-//        popoverVC.originalColor = originalBarForegroundColor
-//        popoverVC.colorChanged = self
-//        popoverVC.colorPickerType = .barForeground
-//
-//        if let popoverController = popoverVC.popoverPresentationController {
-//            popoverController.sourceView = foregroundColorButton
-//            popoverController.sourceRect = foregroundColorButton.bounds
-//            popoverController.permittedArrowDirections = .down
-//            popoverController.delegate = self
-//        }
-//        present(popoverVC, animated: true, completion: nil)
-        
         self.displayColorPicker(originalColor: originalBarForegroundColor, colorPickerType: .barForeground, sourceView: foregroundColorButton)
-        
     }
     
     @IBOutlet weak var backgroundBaseView: UIView!
     @IBOutlet weak var backgroundColorButton: UIButton!
     
     @IBAction func backgroundColorPressed(_ sender: Any) {
-        
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let popoverVC = storyboard.instantiateViewController(withIdentifier: "ColorPickerViewController") as! ColorPickerViewController
-//        popoverVC.modalPresentationStyle = .popover
-//        popoverVC.preferredContentSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 360)
-//
-//        popoverVC.originalColor = originalBarBackgroundColor
-//        popoverVC.colorChanged = self
-//        popoverVC.colorPickerType = .barBackground
-//
-//        if let popoverController = popoverVC.popoverPresentationController {
-//            popoverController.sourceView = backgroundColorButton
-//            popoverController.sourceRect = backgroundColorButton.bounds
-//            popoverController.permittedArrowDirections = .down
-//            popoverController.delegate = self
-//        }
-//        present(popoverVC, animated: true, completion: nil)
-        
         self.displayColorPicker(originalColor: originalBarBackgroundColor, colorPickerType: .barBackground, sourceView: backgroundColorButton)
     }
     
@@ -130,7 +93,7 @@ extension EditingBarVC: UIPopoverPresentationControllerDelegate {
 
 extension ColorChanged where Self: UIViewController, Self: UIPopoverPresentationControllerDelegate {
     func displayColorPicker(originalColor: UIColor, colorPickerType: ColorPickerType, sourceView: UIView) {
-        print("Display!")
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let popoverVC = storyboard.instantiateViewController(withIdentifier: "ColorPickerViewController") as! ColorPickerViewController
         popoverVC.modalPresentationStyle = .popover
