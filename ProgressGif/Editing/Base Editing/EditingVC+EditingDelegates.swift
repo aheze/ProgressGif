@@ -1,5 +1,5 @@
 //
-//  EditingViewController+EditingDelegates.swift
+//  EditingVC+EditingDelegates.swift
 //  ProgressGif
 //
 //  Created by Zheng on 7/16/20.
@@ -10,6 +10,7 @@ import UIKit
 extension EditingViewController: EditingBarChanged {
     func barHeightChanged(to height: Int) {
         editingConfiguration.barHeight = height
+//        progressBarBackgroundHeightC.constant = CGFloat(height) * percentageOfPreviewValue
         progressBarBackgroundHeightC.constant = CGFloat(height)
     }
     
