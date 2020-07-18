@@ -12,7 +12,26 @@ class ViewController: UIViewController {
     
     var projects = [Project]()
     
-    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    @IBOutlet weak var visualEffectView: UIVisualEffectView! /// the top bar
+    
+    // MARK: - Collection View
+    private lazy var collectionViewController: CollectionViewController? = {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "CollectionViewController") as? CollectionViewController {
+            
+            viewController.projects = self.projects
+            viewController.topInset = visualEffectView.frame.height
+            viewController.collectionType = .projects
+            self.add(childViewController: viewController, inView: view)
+            
+            return viewController
+        } else {
+            return nil
+        }
+        
+    }()
+    
+    // MARK: - Add button
     
     var addButtonIsPressed = false
     @IBOutlet weak var addButton: CustomButton!
@@ -27,28 +46,8 @@ class ViewController: UIViewController {
     @IBAction func addButtonTouchUpOutside(_ sender: Any) {
         handleAddButtonTouchUpOutside()
     }
-    
-    private lazy var collectionViewController: CollectionViewController? = {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "CollectionViewController") as? CollectionViewController {
-            
-            viewController.projects = self.projects
-            viewController.topInset = visualEffectView.frame.height
-            viewController.collectionType = .projects
-            
-            // Add View Controller as Child View Controller
-//            self.add(asChildViewController: viewController)
-            
-            self.add(childViewController: viewController, inView: view)
-            
-            return viewController
-        } else {
-            return nil
-        }
-        
-    }()
-    
+
+    // MARK: - Import options
     
     @IBOutlet weak var importVideoLabel: UILabel!
     @IBOutlet weak var importVideoBottomC: NSLayoutConstraint! /// 26
@@ -86,7 +85,6 @@ class ViewController: UIViewController {
     
     @IBAction func photosTouchUpOutside(_ sender: Any) {
         photosButton.scaleUp()
-        
     }
     
     @IBAction func clipboardTouchDown(_ sender: Any) {
@@ -101,23 +99,19 @@ class ViewController: UIViewController {
     }
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
+        /// make the import from files, import from photos, and import from clipboard buttons transparent
         setUpButtonAlpha()
         
-        
-        
         for _ in 0...5 {
-            
             let project = Project()
             project.title = "Title"
             projects.append(project)
         }
         
+        /// initialize the collection view
         _ = collectionViewController
         
     }

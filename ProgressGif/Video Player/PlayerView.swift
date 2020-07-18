@@ -192,7 +192,9 @@ class PlayerView: UIView {
             if let avAssetU = avAsset as? AVURLAsset {
                 self.setUpPlayerItem(with: avAssetU)
                 self.avURLAsset = avAssetU
+                
             }
+            
         }
     }
     
@@ -202,7 +204,6 @@ class PlayerView: UIView {
         if hasFinishedVideo {
             hasFinishedVideo = false
             player?.seek(to: CMTime.zero, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30)) { [weak self](state) in
-                
                 self?.player?.play()
             }
         } else {

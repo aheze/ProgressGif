@@ -1,5 +1,5 @@
 //
-//  EditingViewController+UpdateSliderProgress.swift
+//  EditingVC+UpdateSliderProgress.swift
 //  ProgressGif
 //
 //  Created by Zheng on 7/15/20.

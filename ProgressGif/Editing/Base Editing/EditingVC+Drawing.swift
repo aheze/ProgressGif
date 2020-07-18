@@ -8,6 +8,18 @@
 import UIKit
 
 extension EditingViewController {
+    
+    func calculatePreviewScale() {
+        if let videoResolution = actualVideoResolution {
+            if videoResolution.width >= videoResolution.height {
+                /// fatter
+                self.percentageOfPreviewValue = self.playerHolderView.frame.width / videoResolution.width
+            } else {
+                self.percentageOfPreviewValue = self.playerHolderView.frame.height / videoResolution.height
+            }
+        }
+    }
+    
     func setUpDrawing(with configuration: EditingConfiguration) {
         
         let progressWidth = CGFloat(playerControlsView.customSlider.value) * progressBarFullWidth
@@ -47,7 +59,6 @@ extension EditingViewController {
     func calculateAspectDrawingFrame() {
         if let aspectFrame = imageView.getAspectFitRect() {
             
-            print("frame: \(aspectFrame)")
             drawingViewLeftC.constant = aspectFrame.origin.x
             drawingViewTopC.constant = aspectFrame.origin.y
             drawingViewRightC.constant = (playerHolderView.frame.width - aspectFrame.width) / 2

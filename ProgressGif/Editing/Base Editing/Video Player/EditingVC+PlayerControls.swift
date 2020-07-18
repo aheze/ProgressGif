@@ -1,5 +1,5 @@
 //
-//  EditingViewController+PlayerControls.swift
+//  EditingVC+PlayerControls.swift
 //  ProgressGif
 //
 //  Created by Zheng on 7/15/20.

@@ -13,11 +13,19 @@ class EditingViewController: UIViewController {
     
     /// configuration of every edit. Used to render gif.
     var editingConfiguration = EditingConfiguration()
-    
     var imageAspectRect = CGRect(x: 0, y: 0, width: 50, height: 50)
+    
+    var actualVideoResolution: CGSize?
+    
+    /// how much to multiply the preview values by.
+    /// example: `percentageOfPreviewValue` = 0.8
+    /// then, a setting of `5` for the bar height would actually be `4` in the drawing preview view.
+    var percentageOfPreviewValue = CGFloat(1)
     
     var asset: PHAsset!
     var hasInitializedPlayer = false
+    
+    // MARK: - Player Constraint Calculations
     
     /// constraints for the video player and player controls view,
     /// because they are __not__ in the same view as the base view.
@@ -43,6 +51,7 @@ class EditingViewController: UIViewController {
         playerHolderTopC.constant = topConstant
         playerControlsBottomC.constant = bottomConstant
         
+        calculatePreviewScale()
         calculateAspectDrawingFrame()
     }
     
@@ -53,6 +62,8 @@ class EditingViewController: UIViewController {
     
     @IBOutlet weak var baseView: UIView!
     
+     // MARK: - Player
+    
     @IBOutlet weak var playerHolderView: UIView!
     
     /// round corners / drop shadow on this view
@@ -62,6 +73,8 @@ class EditingViewController: UIViewController {
     @IBOutlet weak var playerView: PlayerView!
     @IBOutlet weak var imageView: UIImageView!
     
+    /// back/forward/play/slider
+    @IBOutlet weak var playerControlsView: PlayerControlsView!
     
     
     // MARK: - Drawing
@@ -75,8 +88,6 @@ class EditingViewController: UIViewController {
     @IBOutlet weak var drawingViewRightC: NSLayoutConstraint!
     @IBOutlet weak var drawingViewTopC: NSLayoutConstraint!
     @IBOutlet weak var drawingViewBottomC: NSLayoutConstraint!
-    
-    
     
     @IBOutlet weak var progressBarBackgroundView: UIView!
     @IBOutlet weak var progressBarBackgroundHeightC: NSLayoutConstraint!
@@ -94,8 +105,7 @@ class EditingViewController: UIViewController {
     /// `equal widths` wouldn't work because `multiplier` is a read-only property
     @IBOutlet weak var progressBarWidthC: NSLayoutConstraint!
     
-    /// back/forward/play/slider
-    @IBOutlet weak var playerControlsView: PlayerControlsView!
+   // MARK: - Top Bar
     
     @IBOutlet weak var galleryButton: UIButton!
     @IBAction func galleryButtonPressed(_ sender: Any) {
@@ -115,6 +125,7 @@ class EditingViewController: UIViewController {
     var editingBarVC: EditingBarVC?
     var editingEdgesVC: EditingEdgesVC?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -122,57 +133,28 @@ class EditingViewController: UIViewController {
         progressBarBackgroundHeightC.constant = 0
         progressBarWidthC.constant = 0
         
-        
         playerControlsView.playerControlsDelegate = self
         playerView.updateSliderProgress = self
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        setupPagingViewControllers()
         
-        editingBarVC = storyboard.instantiateViewController(withIdentifier: "EditingBarVC") as? EditingBarVC
-        editingBarVC?.title = "Bar"
-        editingBarVC?.originalBarHeight = editingConfiguration.barHeight
-        editingBarVC?.originalBarForegroundColor = editingConfiguration.barForegroundColor
-        editingBarVC?.originalBarBackgroundColor = editingConfiguration.barBackgroundColor
-        editingBarVC?.editingBarChanged = self
-        
-        editingEdgesVC = storyboard.instantiateViewController(withIdentifier: "EditingEdgesVC") as? EditingEdgesVC
-        editingEdgesVC?.title = "Edges"
-        editingEdgesVC?.originalEdgeInset = editingConfiguration.edgeInset
-        editingEdgesVC?.originalEdgeCornerRadius = editingConfiguration.edgeCornerRadius
-        editingEdgesVC?.originalEdgeShadowColor = editingConfiguration.edgeShadowColor
-        editingEdgesVC?.editingEdgesChanged = self
-        
-        /// options will be added in a later release
-//        let editingOptionsVC = storyboard.instantiateViewController(withIdentifier: "EditingOptionsVC") as! EditingOptionsVC
-//        editingOptionsVC.title = "Options"
-
-        guard let editingBarViewController = editingBarVC,
-            let editingEdgesViewController = editingEdgesVC else {
-                return
+        PHCachingImageManager().requestAVAsset(forVideo: asset, options: nil) { (avAsset, _, _) in
+            if let videoResolution = avAsset?.resolutionSize() {
+                print("resolution: \(videoResolution)")
+                self.actualVideoResolution = videoResolution
+                
+                DispatchQueue.main.async {
+                    if videoResolution.width >= videoResolution.height {
+                        
+                        /// fatter
+                        self.percentageOfPreviewValue = self.playerHolderView.frame.width / videoResolution.width
+                    } else {
+                        self.percentageOfPreviewValue = self.playerHolderView.frame.height / videoResolution.height
+                    }
+                }
+                
+            }
         }
-        
-        let pagingViewController = PagingViewController(viewControllers: [
-          editingBarViewController,
-          editingEdgesViewController,
-//          editingOptionsVC
-        ])
-
-        pagingViewController.textColor = UIColor.label
-        pagingViewController.selectedTextColor = UIColor(named: "YellorangeText") ?? UIColor.blue /// will look terrible but it won't happen
-        
-        pagingViewController.indicatorColor = UIColor(named: "Yellorange") ?? UIColor.blue
-        pagingViewController.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        pagingViewController.selectedFont = UIFont.systemFont(ofSize: 16, weight: .semibold)
-    
-        pagingViewController.borderColor = UIColor.systemFill /// line at the bottom of the menu buttons
-        
-        pagingViewController.backgroundColor = UIColor.systemBackground
-        pagingViewController.selectedBackgroundColor = UIColor.systemBackground
-        
-        self.add(childViewController: pagingViewController, inView: bottomReferenceView)
-        
-        
     }
-    
 }
 
