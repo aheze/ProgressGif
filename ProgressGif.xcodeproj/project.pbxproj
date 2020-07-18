@@ -54,6 +54,7 @@
 		49F80C2D24BCF6A500C0C142 /* PlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F80C2C24BCF6A500C0C142 /* PlayerControlsView.swift */; };
 		49F80C2F24BCF6E800C0C142 /* PlayerControlsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F80C2E24BCF6E800C0C142 /* PlayerControlsView.xib */; };
 		49F80C3124BD1C2B00C0C142 /* PlayerUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F80C3024BD1C2B00C0C142 /* PlayerUtilities.swift */; };
+		49F8C12824C28669004686DF /* VideoUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8C12724C28669004686DF /* VideoUtilities.swift */; };
 		E4E964261E027D98A9A86322 /* Pods_ProgressGif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A5AE6E1DBE53803838B0EB /* Pods_ProgressGif.framework */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +109,7 @@
 		49F80C2C24BCF6A500C0C142 /* PlayerControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlsView.swift; sourceTree = "<group>"; };
 		49F80C2E24BCF6E800C0C142 /* PlayerControlsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerControlsView.xib; sourceTree = "<group>"; };
 		49F80C3024BD1C2B00C0C142 /* PlayerUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerUtilities.swift; sourceTree = "<group>"; };
+		49F8C12724C28669004686DF /* VideoUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUtilities.swift; sourceTree = "<group>"; };
 		4FA57EDA1E4358C19DA72C7C /* Pods-ProgressGif.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProgressGif.release.xcconfig"; path = "Target Support Files/Pods-ProgressGif/Pods-ProgressGif.release.xcconfig"; sourceTree = "<group>"; };
 		D3A5AE6E1DBE53803838B0EB /* Pods_ProgressGif.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProgressGif.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E27E80696EB138068D22D55E /* Pods-ProgressGif.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProgressGif.debug.xcconfig"; path = "Target Support Files/Pods-ProgressGif/Pods-ProgressGif.debug.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				4980302024B9427800AE277C /* Utilities.swift */,
+				49F8C12724C28669004686DF /* VideoUtilities.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				496F7F8624BE3AE90045DDCB /* EditingViewController.swift in Sources */,
 				4980301F24B91E2500AE277C /* PhotoCell.swift in Sources */,
 				49A362DB24BB92B100019FC6 /* ZoomDismissalInteractionController.swift in Sources */,
+				49F8C12824C28669004686DF /* VideoUtilities.swift in Sources */,
 				49A7AEAC24C134D800318F1A /* ColorfulEntity.swift in Sources */,
 				49A362E024BB96E800019FC6 /* PhotoZoomViewController.swift in Sources */,
 				49240FCB24BFC88400DC9446 /* EditingViewController+PlayerView.swift in Sources */,

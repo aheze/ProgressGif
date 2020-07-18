@@ -39,8 +39,8 @@ class Project: NSObject {
 
 class EditingConfiguration: NSObject {
     var barHeight = 5
-    var barForegroundColor = UIColor.yellow
-    var barBackgroundColor = UIColor.yellow
+    var barForegroundColor = UIColor(named: "Yellorange")!
+    var barBackgroundColor = #colorLiteral(red: 0.9566580653, green: 0.9566580653, blue: 0.9566580653, alpha: 1)
     
     var edgeInset = 0
     var edgeCornerRadius = 0
