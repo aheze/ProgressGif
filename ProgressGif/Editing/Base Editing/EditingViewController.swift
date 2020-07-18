@@ -14,6 +14,8 @@ class EditingViewController: UIViewController {
     /// configuration of every edit. Used to render gif.
     var editingConfiguration = EditingConfiguration()
     
+    var imageAspectRect = CGRect(x: 0, y: 0, width: 50, height: 50)
+    
     var asset: PHAsset!
     var hasInitializedPlayer = false
     
@@ -40,6 +42,8 @@ class EditingViewController: UIViewController {
         
         playerHolderTopC.constant = topConstant
         playerControlsBottomC.constant = bottomConstant
+        
+        calculateAspectDrawingFrame()
     }
     
     @IBOutlet weak var topStatusBlurView: UIVisualEffectView!
@@ -58,11 +62,22 @@ class EditingViewController: UIViewController {
     @IBOutlet weak var playerView: PlayerView!
     @IBOutlet weak var imageView: UIImageView!
     
-    @IBOutlet weak var drawingView: UIView!
+    
     
     // MARK: - Drawing
     
     /// progress bar
+    
+    /// fits right onto the aspect fit of the image, so that the progress bar appears that it is on the image.
+    @IBOutlet weak var drawingView: UIView!
+    
+    @IBOutlet weak var drawingViewLeftC: NSLayoutConstraint!
+    @IBOutlet weak var drawingViewRightC: NSLayoutConstraint!
+    @IBOutlet weak var drawingViewTopC: NSLayoutConstraint!
+    @IBOutlet weak var drawingViewBottomC: NSLayoutConstraint!
+    
+    
+    
     @IBOutlet weak var progressBarBackgroundView: UIView!
     @IBOutlet weak var progressBarBackgroundHeightC: NSLayoutConstraint!
     
@@ -95,13 +110,16 @@ class EditingViewController: UIViewController {
         
     }
     
+    // MARK: - Editing Paging VCs
     @IBOutlet weak var bottomReferenceView: UIView!
+    var editingBarVC: EditingBarVC?
+    var editingEdgesVC: EditingEdgesVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         /// first hide progress bar until transition finishes
-        progressBarBackgroundHeightC.constant = 10.0
+        progressBarBackgroundHeightC.constant = 0
         progressBarWidthC.constant = 0
         
         
@@ -110,27 +128,32 @@ class EditingViewController: UIViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let editingBarVC = storyboard.instantiateViewController(withIdentifier: "EditingBarVC") as! EditingBarVC
-        editingBarVC.title = "Bar"
-        editingBarVC.originalBarHeight = editingConfiguration.barHeight
-        editingBarVC.originalBarForegroundColor = editingConfiguration.barForegroundColor
-        editingBarVC.originalBarBackgroundColor = editingConfiguration.barBackgroundColor
-        editingBarVC.editingBarChanged = self
+        editingBarVC = storyboard.instantiateViewController(withIdentifier: "EditingBarVC") as? EditingBarVC
+        editingBarVC?.title = "Bar"
+        editingBarVC?.originalBarHeight = editingConfiguration.barHeight
+        editingBarVC?.originalBarForegroundColor = editingConfiguration.barForegroundColor
+        editingBarVC?.originalBarBackgroundColor = editingConfiguration.barBackgroundColor
+        editingBarVC?.editingBarChanged = self
         
-        let editingEdgesVC = storyboard.instantiateViewController(withIdentifier: "EditingEdgesVC") as! EditingEdgesVC
-        editingEdgesVC.title = "Edges"
-        editingEdgesVC.originalEdgeInset = editingConfiguration.edgeInset
-        editingEdgesVC.originalEdgeCornerRadius = editingConfiguration.edgeCornerRadius
-        editingEdgesVC.originalEdgeShadowColor = editingConfiguration.edgeShadowColor
-        editingEdgesVC.editingEdgesChanged = self
+        editingEdgesVC = storyboard.instantiateViewController(withIdentifier: "EditingEdgesVC") as? EditingEdgesVC
+        editingEdgesVC?.title = "Edges"
+        editingEdgesVC?.originalEdgeInset = editingConfiguration.edgeInset
+        editingEdgesVC?.originalEdgeCornerRadius = editingConfiguration.edgeCornerRadius
+        editingEdgesVC?.originalEdgeShadowColor = editingConfiguration.edgeShadowColor
+        editingEdgesVC?.editingEdgesChanged = self
         
         /// options will be added in a later release
 //        let editingOptionsVC = storyboard.instantiateViewController(withIdentifier: "EditingOptionsVC") as! EditingOptionsVC
 //        editingOptionsVC.title = "Options"
 
+        guard let editingBarViewController = editingBarVC,
+            let editingEdgesViewController = editingEdgesVC else {
+                return
+        }
+        
         let pagingViewController = PagingViewController(viewControllers: [
-          editingBarVC,
-          editingEdgesVC,
+          editingBarViewController,
+          editingEdgesViewController,
 //          editingOptionsVC
         ])
 
@@ -139,9 +162,9 @@ class EditingViewController: UIViewController {
         
         pagingViewController.indicatorColor = UIColor(named: "Yellorange") ?? UIColor.blue
         pagingViewController.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        pagingViewController.borderColor = UIColor.clear
-        
         pagingViewController.selectedFont = UIFont.systemFont(ofSize: 16, weight: .semibold)
+    
+        pagingViewController.borderColor = UIColor.systemFill /// line at the bottom of the menu buttons
         
         pagingViewController.backgroundColor = UIColor.systemBackground
         pagingViewController.selectedBackgroundColor = UIColor.systemBackground

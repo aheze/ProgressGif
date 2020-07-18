@@ -432,7 +432,7 @@
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="Y7e-FM-qwP" secondAttribute="bottom" id="5EX-SJ-T66"/>
                                                             <constraint firstAttribute="height" constant="15" id="AKN-gB-NUG"/>
@@ -506,6 +506,10 @@
                         <outlet property="baseView" destination="6ra-lK-57d" id="OEG-fL-KTW"/>
                         <outlet property="bottomReferenceView" destination="BZN-Lq-wcl" id="mjC-14-rqs"/>
                         <outlet property="drawingView" destination="2cM-Mt-1yB" id="oH0-Eb-kff"/>
+                        <outlet property="drawingViewBottomC" destination="pOT-Tc-ZR4" id="wmc-gt-azY"/>
+                        <outlet property="drawingViewLeftC" destination="eIN-YL-m0Q" id="q0Z-45-uwY"/>
+                        <outlet property="drawingViewRightC" destination="rVx-qf-nu4" id="sKz-i5-No8"/>
+                        <outlet property="drawingViewTopC" destination="V2c-rf-oaZ" id="VyI-ZF-sY1"/>
                         <outlet property="exportButton" destination="efT-XN-N6p" id="Ww9-ce-h6D"/>
                         <outlet property="galleryButton" destination="Wrn-9q-xmS" id="sjx-gF-6Xf"/>
                         <outlet property="imageView" destination="h4o-bs-cEF" id="KCT-Ht-Kwo"/>

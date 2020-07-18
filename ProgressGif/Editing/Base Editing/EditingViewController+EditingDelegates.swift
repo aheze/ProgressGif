@@ -10,15 +10,18 @@ import UIKit
 extension EditingViewController: EditingBarChanged {
     func barHeightChanged(to height: Int) {
         editingConfiguration.barHeight = height
+        progressBarBackgroundHeightC.constant = CGFloat(height)
     }
     
     func foregroundColorChanged(to color: UIColor) {
         editingConfiguration.barForegroundColor = color
+        progressBarView.backgroundColor = color
         
     }
     
     func backgroundColorChanged(to color: UIColor) {
         editingConfiguration.barBackgroundColor = color
+        progressBarBackgroundView.backgroundColor = color
     }
 }
 
