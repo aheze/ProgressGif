@@ -15,6 +15,14 @@ class EditingViewController: UIViewController {
     var editingConfiguration = EditingConfiguration()
     var imageAspectRect = CGRect(x: 0, y: 0, width: 50, height: 50)
     
+    /// is proportional to the height of the video.
+    /// the values changed in the number stepper are multiplied by this.
+    var unit: CGFloat {
+        get {
+            return drawingView.frame.height / 75
+        }
+    }
+    
     var actualVideoResolution: CGSize?
     
     /// how much to multiply the preview values by.
@@ -53,6 +61,7 @@ class EditingViewController: UIViewController {
         
         calculatePreviewScale()
         calculateAspectDrawingFrame()
+        barHeightChanged(to: editingConfiguration.barHeight)
     }
     
     @IBOutlet weak var topStatusBlurView: UIVisualEffectView!
@@ -77,17 +86,46 @@ class EditingViewController: UIViewController {
     @IBOutlet weak var playerControlsView: PlayerControlsView!
     
     
+//    @IBOutlet weak var EditingPreviewView: UIView!
+    
     // MARK: - Drawing
     
     /// progress bar
     
-    /// fits right onto the aspect fit of the image, so that the progress bar appears that it is on the image.
+    /// fits __right onto the aspect fit of the image__, so that the progress bar appears that it is on the image.
     @IBOutlet weak var drawingView: UIView!
     
     @IBOutlet weak var drawingViewLeftC: NSLayoutConstraint!
     @IBOutlet weak var drawingViewRightC: NSLayoutConstraint!
     @IBOutlet weak var drawingViewTopC: NSLayoutConstraint!
     @IBOutlet weak var drawingViewBottomC: NSLayoutConstraint!
+    
+    /// same for the transparent background view
+    
+    @IBOutlet weak var transparentBackgroundImageView: UIImageView!
+    
+    @IBOutlet weak var transparentBackgroundImageViewLeftC: NSLayoutConstraint!
+    @IBOutlet weak var transparentBackgroundImageViewRightC: NSLayoutConstraint!
+    @IBOutlet weak var transparentBackgroundImageViewTopC: NSLayoutConstraint!
+    @IBOutlet weak var transparentBackgroundImageViewBottomC: NSLayoutConstraint!
+    
+    /// same for the masking view (for corner radius)
+    @IBOutlet weak var maskingView: UIView!
+    
+//    @IBOutlet weak var maskingViewLeftC: NSLayoutConstraint!
+//    @IBOutlet weak var maskingViewRightC: NSLayoutConstraint!
+//    @IBOutlet weak var maskingViewTopC: NSLayoutConstraint!
+//    @IBOutlet weak var maskingViewBottomC: NSLayoutConstraint!
+    
+    /// same for the shadow view
+    @IBOutlet weak var shadowView: ShadowView!
+    
+    @IBOutlet weak var shadowViewLeftC: NSLayoutConstraint!
+    @IBOutlet weak var shadowViewRightC: NSLayoutConstraint!
+    @IBOutlet weak var shadowViewTopC: NSLayoutConstraint!
+    @IBOutlet weak var shadowViewBottomC: NSLayoutConstraint!
+    
+    
     
     @IBOutlet weak var progressBarBackgroundView: UIView!
     @IBOutlet weak var progressBarBackgroundHeightC: NSLayoutConstraint!
@@ -129,7 +167,10 @@ class EditingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        maskingView.isHidden = true
+        
         /// first hide progress bar until transition finishes
+        progressBarBackgroundView.alpha = 0
         progressBarBackgroundHeightC.constant = 0
         progressBarWidthC.constant = 0
         
@@ -152,7 +193,6 @@ class EditingViewController: UIViewController {
                         self.percentageOfPreviewValue = self.playerHolderView.frame.height / videoResolution.height
                     }
                 }
-                
             }
         }
     }

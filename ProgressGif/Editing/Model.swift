@@ -44,6 +44,7 @@ class EditingConfiguration: NSObject {
     
     var edgeInset = 0
     var edgeCornerRadius = 0
+    var edgeShadowOn = true
     var edgeShadowColor = UIColor.black
 //    var edgeBackgroundColor = UIColor.clear
     

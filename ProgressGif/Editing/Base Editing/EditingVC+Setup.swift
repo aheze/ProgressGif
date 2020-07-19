@@ -17,13 +17,16 @@ extension EditingViewController {
         editingBarVC?.originalBarHeight = editingConfiguration.barHeight
         editingBarVC?.originalBarForegroundColor = editingConfiguration.barForegroundColor
         editingBarVC?.originalBarBackgroundColor = editingConfiguration.barBackgroundColor
+        
         editingBarVC?.editingBarChanged = self
         
         editingEdgesVC = storyboard.instantiateViewController(withIdentifier: "EditingEdgesVC") as? EditingEdgesVC
         editingEdgesVC?.title = "Edges"
         editingEdgesVC?.originalEdgeInset = editingConfiguration.edgeInset
         editingEdgesVC?.originalEdgeCornerRadius = editingConfiguration.edgeCornerRadius
+        editingEdgesVC?.originalEdgeShadowOn = editingConfiguration.edgeShadowOn
         editingEdgesVC?.originalEdgeShadowColor = editingConfiguration.edgeShadowColor
+        
         editingEdgesVC?.editingEdgesChanged = self
         
         /// options will be added in a later release
@@ -48,7 +51,7 @@ extension EditingViewController {
         pagingViewController.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         pagingViewController.selectedFont = UIFont.systemFont(ofSize: 16, weight: .semibold)
         
-        pagingViewController.borderColor = UIColor.systemFill /// line at the bottom of the menu buttons
+        pagingViewController.borderColor = UIColor.systemFill /// the border line below the menu buttons
         
         pagingViewController.backgroundColor = UIColor.systemBackground
         pagingViewController.selectedBackgroundColor = UIColor.systemBackground
