@@ -83,7 +83,6 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
           usingSpringWithDamping: 0.9,
           initialSpringVelocity: 0.2,
           animations: {
-            
             if self.presenting {
                 editingBaseView.frame.origin.y = finalEditingBaseViewY
                 editingTopStatusBlurView.frame.origin.y = finalEditingBaseViewY - editingTopStatusBlurView.frame.height

@@ -10,11 +10,12 @@ import UIKit
 protocol EditingEdgesChanged: class {
     func edgeInsetChanged(to inset: Int)
     func edgeCornerRadiusChanged(to radius: Int)
+    func edgeShadowStateChanged(to isOn: Bool)
     func edgeShadowColorChanged(to color: UIColor)
 //    func backgroundColorChanged(to color: UIColor)
 }
 
-/// backgroundBaseView and backgroundColorButton are removed. Changing the background color of the gif will be added in later versions.
+/// backgroundBaseView and backgroundColorButton are removed: changing the background color of the gif will be added in later versions.
 
 class EditingEdgesVC: UIViewController {
     
@@ -22,6 +23,7 @@ class EditingEdgesVC: UIViewController {
     
     var originalEdgeInset = 0
     var originalEdgeCornerRadius = 0
+    var originalEdgeShadowOn = true
     var originalEdgeShadowColor = UIColor.black
 //    var originalEdgeBackgroundColor = UIColor.clear
     
@@ -33,6 +35,21 @@ class EditingEdgesVC: UIViewController {
     
     @IBOutlet weak var insetNumberStepper: NumberStepper!
     @IBOutlet weak var cornerRadiusNumberStepper: NumberStepper!
+    
+    
+    
+    @IBOutlet weak var shadowSwitch: UISwitch!
+    @IBAction func shadowSwitchToggled(_ sender: Any) {
+        if shadowSwitch.isOn {
+            shadowColorButton.isEnabled = true
+            shadowColorButton.alpha = 1
+        } else {
+            shadowColorButton.isEnabled = false
+            shadowColorButton.alpha = 0.4
+        }
+        
+        editingEdgesChanged?.edgeShadowStateChanged(to: shadowSwitch.isOn)
+    }
     
     @IBOutlet weak var shadowColorButton: UIButton!
     @IBAction func shadowColorPressed(_ sender: Any) {
@@ -59,6 +76,7 @@ class EditingEdgesVC: UIViewController {
         shadowColorButton.addBorder(width: 3, color: UIColor.lightGray)
         
         setUpConfiguration()
+        setUpSteppers()
     }
     
     func setUpConfiguration() {
@@ -71,8 +89,19 @@ class EditingEdgesVC: UIViewController {
         insetNumberStepper.numberStepperChanged = self
         cornerRadiusNumberStepper.numberStepperChanged = self
         
+        if originalEdgeShadowOn {
+            shadowColorButton.isEnabled = true
+            shadowColorButton.alpha = 1
+        } else {
+            shadowColorButton.isEnabled = false
+            shadowColorButton.alpha = 0.4
+        }
     }
     
+    func setUpSteppers() {
+        insetNumberStepper.stepperType = .edgeInset
+        cornerRadiusNumberStepper.stepperType = .edgeCornerRadius
+    }
 }
 
 extension EditingEdgesVC: NumberStepperChanged {
