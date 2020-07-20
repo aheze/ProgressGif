@@ -27,9 +27,9 @@ class FromPhotosPicker: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "CollectionViewController") as? CollectionViewController {
             
+            viewController.inset = CGFloat(4)
             viewController.topInset = visualEffectView.frame.height
             viewController.collectionType = .photos
-            viewController.inset = CGFloat(4)
             self.add(childViewController: viewController, inView: view)
             
             return viewController
@@ -95,7 +95,6 @@ extension ViewController: UIImagePickerControllerDelegate {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let vc = storyboard.instantiateViewController(withIdentifier: "FromPhotosPicker") as?
                 FromPhotosPicker {
-                
                 self.present(vc, animated: true, completion: nil)
             }
         }
