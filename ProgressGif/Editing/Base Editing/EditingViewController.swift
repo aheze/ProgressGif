@@ -119,6 +119,15 @@ class EditingViewController: UIViewController {
     /// same for the shadow view
     @IBOutlet weak var shadowView: ResizableShadowView!
     
+    /// prevent the shadow from spilling
+    @IBOutlet weak var shadowMaskingView: UIView!
+    
+    @IBOutlet weak var shadowMaskingViewLeftC: NSLayoutConstraint!
+    @IBOutlet weak var shadowMaskingViewRightC: NSLayoutConstraint!
+    @IBOutlet weak var shadowMaskingViewTopC: NSLayoutConstraint!
+    @IBOutlet weak var shadowMaskingViewBottomC: NSLayoutConstraint!
+    
+    
     @IBOutlet weak var progressBarBackgroundView: UIView!
     @IBOutlet weak var progressBarBackgroundHeightC: NSLayoutConstraint!
     
@@ -160,6 +169,7 @@ class EditingViewController: UIViewController {
         super.viewDidLoad()
         
         maskingView.isHidden = true
+        
         
         /// first hide progress bar until transition finishes
         progressBarBackgroundView.alpha = 0

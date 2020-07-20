@@ -72,8 +72,12 @@ extension EditingViewController {
             transparentBackgroundImageViewTopC.constant = aspectFrame.origin.y
             transparentBackgroundImageViewBottomC.constant = (playerHolderView.frame.height - aspectFrame.height) / 2
             
+            shadowMaskingViewLeftC.constant = aspectFrame.origin.x
+            shadowMaskingViewRightC.constant = (playerHolderView.frame.width - aspectFrame.width) / 2
+            shadowMaskingViewTopC.constant = aspectFrame.origin.y
+            shadowMaskingViewBottomC.constant = (playerHolderView.frame.height - aspectFrame.height) / 2
+            
             maskingView.frame = aspectFrame
-            shadowView.frame = aspectFrame
             
             updateProgressBar(to: playerControlsView.customSlider.value, animated: true)
             progressBarBackgroundHeightC.constant = CGFloat(editingConfiguration.barHeight) * unit
@@ -82,19 +86,19 @@ extension EditingViewController {
             let scale = 1 - (CGFloat(editingConfiguration.edgeInset) * 0.02)
             shadowScale = scale
             updateShadow(scale: scale)
+            
         }
     }
     
     func updateShadow(scale: CGFloat) {
         let adjustedShadowWidth = imageAspectRect.width * scale
         let adjustedShadowHeight = imageAspectRect.height * scale
-        let adjustedShadowRect = CGRect(x: imageAspectRect.origin.x + (imageAspectRect.width - adjustedShadowWidth) / 2,
-                                        y: imageAspectRect.origin.y + (imageAspectRect.height - adjustedShadowHeight) / 2,
+        let adjustedShadowRect = CGRect(x: (imageAspectRect.width - adjustedShadowWidth) / 2,
+                                        y: (imageAspectRect.height - adjustedShadowHeight) / 2,
                                         width: adjustedShadowWidth,
                                         height: adjustedShadowHeight)
         
         shadowView.frame = adjustedShadowRect
         shadowView.updateShadow()
-        print("updated shadow: \(adjustedShadowRect)")
     }
 }

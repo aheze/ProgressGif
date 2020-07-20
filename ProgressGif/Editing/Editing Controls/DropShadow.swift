@@ -25,14 +25,13 @@ class ResizableShadowView: UIView {
     }
     var shadowRadius = Int(1) {
         didSet {
-            print("radius")
             updateShadow()
         }
     }
     func updateShadow() {
         layer.shadowColor = color.cgColor
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
-        layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        layer.shadowOffset = CGSize(width: 0, height: 0)
         layer.shadowOpacity = min(Float(intensity) / 10, 1) /// the stepper limit is 10, but this is just in case.
         layer.shadowRadius = CGFloat(shadowRadius) * 0.5
     }
