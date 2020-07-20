@@ -13,7 +13,10 @@ class EditingViewController: UIViewController {
     
     /// configuration of every edit. Used to render gif.
     var editingConfiguration = EditingConfiguration()
+    
+    /// used to place the shadow
     var imageAspectRect = CGRect(x: 0, y: 0, width: 50, height: 50)
+    var shadowScale = CGFloat(1)
     
     /// is proportional to the height of the video.
     /// the values changed in the number stepper are multiplied by this.
@@ -109,23 +112,12 @@ class EditingViewController: UIViewController {
     @IBOutlet weak var transparentBackgroundImageViewTopC: NSLayoutConstraint!
     @IBOutlet weak var transparentBackgroundImageViewBottomC: NSLayoutConstraint!
     
-    /// same for the masking view (for corner radius)
+    /// same for the masking view (for corner radius), but no constraints this time.
+    /// maskingView's frame is directly set to whatever the image's aspect rect is
     @IBOutlet weak var maskingView: UIView!
     
-//    @IBOutlet weak var maskingViewLeftC: NSLayoutConstraint!
-//    @IBOutlet weak var maskingViewRightC: NSLayoutConstraint!
-//    @IBOutlet weak var maskingViewTopC: NSLayoutConstraint!
-//    @IBOutlet weak var maskingViewBottomC: NSLayoutConstraint!
-    
     /// same for the shadow view
-    @IBOutlet weak var shadowView: ShadowView!
-    
-    @IBOutlet weak var shadowViewLeftC: NSLayoutConstraint!
-    @IBOutlet weak var shadowViewRightC: NSLayoutConstraint!
-    @IBOutlet weak var shadowViewTopC: NSLayoutConstraint!
-    @IBOutlet weak var shadowViewBottomC: NSLayoutConstraint!
-    
-    
+    @IBOutlet weak var shadowView: ResizableShadowView!
     
     @IBOutlet weak var progressBarBackgroundView: UIView!
     @IBOutlet weak var progressBarBackgroundHeightC: NSLayoutConstraint!

@@ -65,6 +65,7 @@ class EditingBarVC: UIViewController {
 
 extension EditingBarVC: NumberStepperChanged {
     func valueChanged(to value: Int, stepperType: NumberStepperType) {
+        
         editingBarChanged?.barHeightChanged(to: value)
     }
 }
