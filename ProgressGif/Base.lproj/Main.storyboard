@@ -164,7 +164,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="PhotoCellId" translatesAutoresizingMaskIntoConstraints="NO" id="JsH-b4-N1a" customClass="PhotoCell" customModule="ProgressGif" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCellId" translatesAutoresizingMaskIntoConstraints="NO" id="JsH-b4-N1a" customClass="PhotoCell" customModule="ProgressGif" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="177"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cC7-gA-faU">
@@ -188,7 +188,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="fLM-aa-uu3" firstAttribute="leading" secondItem="cC7-gA-faU" secondAttribute="leading" constant="8" id="1wK-oB-EwS"/>
                                                 <constraint firstItem="fLM-aa-uu3" firstAttribute="top" secondItem="cC7-gA-faU" secondAttribute="top" constant="8" id="2NS-OT-MHl"/>
@@ -586,8 +586,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sce-xy-Vds">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="297"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROGRESS BAR LAYOUT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90g-im-D0A">
-                                                <rect key="frame" x="16" y="12" width="193.66666666666666" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAYOUT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90g-im-D0A">
+                                                <rect key="frame" x="16" y="12" width="64.666666666666671" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -620,8 +620,8 @@
                                                     <constraint firstItem="cJk-ym-k1p" firstAttribute="centerY" secondItem="65K-pV-1jq" secondAttribute="centerY" id="hTb-tO-ba3"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROGRESS BAR COLOR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgZ-Yp-rbx">
-                                                <rect key="frame" x="16" y="118" width="185.66666666666666" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COLOR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgZ-Yp-rbx">
+                                                <rect key="frame" x="16" y="118" width="57" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -795,10 +795,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMe-je-fKE">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="479.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="487.66666666666669"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EDGES LAYOUT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="md6-hC-Sj9">
-                                                <rect key="frame" x="15.999999999999993" y="12" width="123.33333333333331" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAYOUT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="md6-hC-Sj9">
+                                                <rect key="frame" x="16" y="12" width="64.666666666666671" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -947,7 +947,7 @@
                                                     <constraint firstItem="hXy-9C-ULD" firstAttribute="leading" secondItem="7Hq-7P-9Ux" secondAttribute="leading" constant="12" id="wxS-LF-DlH"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip: To see the shadow, Inset needs to be greater than 0" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgS-cN-00u">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip: The shadow is only visible with an inset that's greater than 0." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgS-cN-00u">
                                                 <rect key="frame" x="32" y="431" width="350" height="40.666666666666686"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -971,7 +971,7 @@
                                             <constraint firstItem="Oac-cU-o8B" firstAttribute="top" secondItem="6g1-WP-A3y" secondAttribute="bottom" constant="8" id="d3v-sb-cK7"/>
                                             <constraint firstItem="P2K-vv-Cos" firstAttribute="leading" secondItem="DMe-je-fKE" secondAttribute="leading" constant="16" id="eIL-yA-gVz"/>
                                             <constraint firstItem="cVA-bu-ZdR" firstAttribute="leading" secondItem="DMe-je-fKE" secondAttribute="leading" constant="16" id="eg0-be-4ZQ"/>
-                                            <constraint firstAttribute="bottom" secondItem="kgS-cN-00u" secondAttribute="bottom" constant="8" id="glA-dp-IpN"/>
+                                            <constraint firstAttribute="bottom" secondItem="kgS-cN-00u" secondAttribute="bottom" constant="16" id="glA-dp-IpN"/>
                                             <constraint firstItem="jHG-o5-MRB" firstAttribute="top" secondItem="cVA-bu-ZdR" secondAttribute="bottom" constant="8" id="hlz-kP-PYM"/>
                                             <constraint firstItem="6g1-WP-A3y" firstAttribute="leading" secondItem="DMe-je-fKE" secondAttribute="leading" constant="16" id="kQM-9c-jyR"/>
                                             <constraint firstAttribute="trailing" secondItem="cVA-bu-ZdR" secondAttribute="trailing" constant="16" id="mSx-SX-Hd5"/>
