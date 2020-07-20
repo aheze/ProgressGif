@@ -24,7 +24,8 @@ extension EditingViewController {
         editingEdgesVC?.title = "Edges"
         editingEdgesVC?.originalEdgeInset = editingConfiguration.edgeInset
         editingEdgesVC?.originalEdgeCornerRadius = editingConfiguration.edgeCornerRadius
-        editingEdgesVC?.originalEdgeShadowOn = editingConfiguration.edgeShadowOn
+        editingEdgesVC?.originalEdgeShadowIntensity = editingConfiguration.edgeShadowIntensity
+        editingEdgesVC?.originalEdgeShadowRadius = editingConfiguration.edgeShadowRadius
         editingEdgesVC?.originalEdgeShadowColor = editingConfiguration.edgeShadowColor
         
         editingEdgesVC?.editingEdgesChanged = self

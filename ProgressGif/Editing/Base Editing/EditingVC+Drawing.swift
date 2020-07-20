@@ -59,11 +59,7 @@ extension EditingViewController {
     }
     func calculateAspectDrawingFrame() {
         if let aspectFrame = imageView.getAspectFitRect() {
-            
-//            print("playerHolder frame: \(playerHolderView.frame)")
-//            print("playerBase frame: \(playerBaseView.frame)")
-//            print("drawingview frame: \(drawingView.frame)")
-//            print("maskingview frame: \(maskingView.frame)")
+            imageAspectRect = aspectFrame
             
             drawingViewLeftC.constant = aspectFrame.origin.x
             drawingViewRightC.constant = (playerHolderView.frame.width - aspectFrame.width) / 2
@@ -77,19 +73,28 @@ extension EditingViewController {
             transparentBackgroundImageViewBottomC.constant = (playerHolderView.frame.height - aspectFrame.height) / 2
             
             maskingView.frame = aspectFrame
-//            maskingViewLeftC.constant = aspectFrame.origin.x
-//            maskingViewRightC.constant = (playerHolderView.frame.width - aspectFrame.width) / 2
-//            maskingViewTopC.constant = aspectFrame.origin.y
-//            maskingViewBottomC.constant = (playerHolderView.frame.height - aspectFrame.height) / 2
+            shadowView.frame = aspectFrame
             
-//            print("new frames drawing: \(drawingView.frame)")
-//            print("new frames masking: \(maskingView.frame)")
-//            print("bar height 1: \(progressBarBackgroundView.frame)")
             updateProgressBar(to: playerControlsView.customSlider.value, animated: true)
             progressBarBackgroundHeightC.constant = CGFloat(editingConfiguration.barHeight) * unit
             maskingView.layer.cornerRadius = (CGFloat(editingConfiguration.edgeCornerRadius) * unit)
             
-//            print("bar height 2: \(progressBarBackgroundView.frame)")
+            let scale = 1 - (CGFloat(editingConfiguration.edgeInset) * 0.02)
+            shadowScale = scale
+            updateShadow(scale: scale)
         }
+    }
+    
+    func updateShadow(scale: CGFloat) {
+        let adjustedShadowWidth = imageAspectRect.width * scale
+        let adjustedShadowHeight = imageAspectRect.height * scale
+        let adjustedShadowRect = CGRect(x: imageAspectRect.origin.x + (imageAspectRect.width - adjustedShadowWidth) / 2,
+                                        y: imageAspectRect.origin.y + (imageAspectRect.height - adjustedShadowHeight) / 2,
+                                        width: adjustedShadowWidth,
+                                        height: adjustedShadowHeight)
+        
+        shadowView.frame = adjustedShadowRect
+        shadowView.updateShadow()
+        print("updated shadow: \(adjustedShadowRect)")
     }
 }

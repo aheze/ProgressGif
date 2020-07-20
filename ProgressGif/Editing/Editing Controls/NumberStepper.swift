@@ -12,6 +12,8 @@ enum NumberStepperType {
     case barHeight
     case edgeInset
     case edgeCornerRadius
+    case edgeShadowIntensity
+    case edgeShadowRadius
 }
 
 protocol NumberStepperChanged: class {
@@ -22,7 +24,15 @@ class NumberStepper: UIView {
     var stepperType = NumberStepperType.barHeight
     var value = 5 {
         didSet {
-            valueLabel.text = "\(value)"
+            if stepperType == .edgeShadowIntensity {
+                if value == 0 {
+                    valueLabel.text = "OFF"
+                } else {
+                    valueLabel.text = "\(value)"
+                }
+            } else {
+                valueLabel.text = "\(value)"
+            }
         }
     }
     
@@ -54,8 +64,11 @@ class NumberStepper: UIView {
     @IBAction func rightButtonPressed(_ sender: Any) {
 //        print("right touch up inside")
         cancelTimers()
-        value += 1
-        numberStepperChanged?.valueChanged(to: value, stepperType: stepperType)
+        
+        if value + 1 <= 10 {
+            value += 1
+            numberStepperChanged?.valueChanged(to: value, stepperType: stepperType)
+        }
     }
     
 
@@ -112,8 +125,10 @@ class NumberStepper: UIView {
     @objc func rapidRightPress() {
 //        print("....rapid right")
         if self.shouldRapidRight {
-            value += 1
-            numberStepperChanged?.valueChanged(to: value, stepperType: stepperType)
+            if value + 1 <= 10 {
+                value += 1
+                numberStepperChanged?.valueChanged(to: value, stepperType: stepperType)
+            }
         } else {
             cancelTimers()
         }
@@ -137,7 +152,16 @@ class NumberStepper: UIView {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        valueLabel.text = "\(value)"
+        
+        if stepperType == .edgeShadowIntensity {
+            if value == 0 {
+                valueLabel.text = "OFF"
+            } else {
+                valueLabel.text = "\(value)"
+            }
+        } else {
+            valueLabel.text = "\(value)"
+        }
         
         contentView.clipsToBounds = true
         contentView.layer.cornerRadius = 6

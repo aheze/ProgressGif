@@ -61,6 +61,7 @@ extension UIImageView {
     }
 }
 
+/// for the collectionview. The shadow for the editing preview is in DropShadow.swift
 class ShadowView: UIView {
 
     var shouldActivate = false
@@ -77,32 +78,15 @@ class ShadowView: UIView {
 
                 shadowLayer.shadowColor = UIColor.darkGray.cgColor
                 shadowLayer.shadowPath = shadowLayer.path
-                shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+                shadowLayer.shadowOffset = CGSize(width: 0, height: 0)
                 shadowLayer.shadowOpacity = 0.4
                 shadowLayer.shadowRadius = 3
-//                
-//                let maskLayer = CAShapeLayer()
-//                maskLayer.frame = bounds
-//                // Create the frame for the circle.
-//                let radius: CGFloat = 6
-//                // Rectangle in which circle will be drawn
-//                let circlePath = UIBezierPath(roundedRect: bounds, cornerRadius: radius)
-//                // Create a path
-//                let path = UIBezierPath(rect: bounds)
-//                // Append additional path which will create a circle
-//                path.append(circlePath)
-//                // Setup the fill rule to EvenOdd to properly mask the specified area and make a crater
-//                maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
-//                // Append the circle to the path so that it is subtracted.
-//                maskLayer.path = path.cgPath
-//                // Mask our view with Blue background so that portion of red background is visible
-//                shadowLayer.mask = maskLayer
-
                 layer.insertSublayer(shadowLayer, at: 0)
             }
         }
     }
 }
+
 extension ShadowView {
     func updateShadow(rect: CGRect, radius: CGFloat) {
         if let shadow = shadowLayer {
@@ -121,8 +105,8 @@ extension FloatingPoint {
     var radiansToDegrees: Self { self * 180 / .pi }
 }
 
+/// button with shadow (for importing)
 class CustomButton: UIButton {
-
     private var shadowLayer: CAShapeLayer!
 
     override func layoutSubviews() {
@@ -143,6 +127,8 @@ class CustomButton: UIButton {
         }
     }
 }
+
+/// for the video playback
 class CustomSlider: UISlider {
     
     @IBInspectable var trackHeight: CGFloat = 2
@@ -155,6 +141,7 @@ class CustomSlider: UISlider {
     }
 }
 
+/// for the import buttons
 extension UIView {
     func scaleDown() {
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveLinear, animations: {
