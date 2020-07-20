@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import RealmSwift
 
 
 protocol PhotoPageViewControllerDelegate: class {
@@ -16,6 +17,8 @@ protocol PhotoPageViewControllerDelegate: class {
 
 class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
 
+    let realm = try! Realm()
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -40,13 +43,53 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var chooseButton: UIButton!
     @IBAction func chooseButtonPressed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "EditingViewController") as? EditingViewController {
-            viewController.transitioningDelegate = self
-            viewController.asset = currentViewController.asset
+        
+        let newProject = Project()
+        newProject.title = "Untitled"
+        newProject.dateCreated = Date()
+        
+        let configuration = EditingConfiguration()
+        newProject.configuration = configuration
+        
+        let metadata = VideoMetadata()
+        newProject.metadata = metadata
+        
+        PHCachingImageManager().requestAVAsset(forVideo: currentViewController.asset, options: nil) { (avAsset, _, _) in
             
-            present(viewController, animated: true, completion: nil)
+            if let videoResolution = avAsset?.resolutionSize() {
+                metadata.resolutionWidth = Int(videoResolution.width)
+                metadata.resolutionHeight = Int(videoResolution.height)
+            }
+            
+            if let cmDuration = avAsset?.duration {
+                let duration = CMTimeGetSeconds(cmDuration)
+                metadata.duration = duration.getString() ?? "0:01"
+            }
+            DispatchQueue.main.async {
+                metadata.localIdentifier = self.currentViewController.asset.localIdentifier
+                print("id: \(metadata.localIdentifier)")
+                
+                do {
+                    try self.realm.write {
+                        self.realm.add(newProject)
+                    }
+                } catch {
+                    print("error adding object: \(error)")
+                }
+                
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let viewController = storyboard.instantiateViewController(withIdentifier: "EditingViewController") as? EditingViewController {
+                    viewController.transitioningDelegate = self
+                    viewController.asset = self.currentViewController.asset
+                    print("present")
+                    self.present(viewController, animated: true, completion: nil)
+                }
+            }
+            
         }
+        
+        
     }
     
     @IBOutlet weak var backBlurTopC: NSLayoutConstraint!

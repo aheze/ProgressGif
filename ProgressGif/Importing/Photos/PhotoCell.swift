@@ -16,8 +16,18 @@ class PhotoCell: UICollectionViewCell {
     @IBOutlet weak var imageBaseView: ShadowView!
     
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var secondaryLabel: UILabel!
+    
+    @IBOutlet weak var progressBackgroundView: UIView!
+    @IBOutlet weak var progressBarView: UIView!
+    
+    @IBOutlet weak var drawingView: UIView!
     
     
+    @IBOutlet weak var drawingLeftC: NSLayoutConstraint!
+    @IBOutlet weak var drawingRightC: NSLayoutConstraint!
+    @IBOutlet weak var drawingTopC: NSLayoutConstraint!
+    @IBOutlet weak var drawingBottomC: NSLayoutConstraint!
     
     
 }

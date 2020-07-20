@@ -6,6 +6,7 @@ target 'ProgressGif' do
   use_frameworks!
 
   # Pods for ProgressGif
+  pod 'RealmSwift'
 	pod 'Parchment'
 	pod 'SnapKit', '~> 5.0.0'
   pod 'SDWebImage'

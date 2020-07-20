@@ -26,8 +26,8 @@ extension EditingViewController {
         progressBarWidthC.constant = progressWidth
         
         progressBarBackgroundHeightC.constant = CGFloat(configuration.barHeight) * unit
-        progressBarBackgroundView.backgroundColor = configuration.barBackgroundColor
-        progressBarView.backgroundColor = configuration.barForegroundColor
+        progressBarBackgroundView.backgroundColor = UIColor(hexString: configuration.barBackgroundColorHex)
+        progressBarView.backgroundColor = UIColor(hexString: configuration.barForegroundColorHex)
         
         UIView.animate(withDuration: 0.6, animations: {
             self.progressBarBackgroundView.alpha = 1
@@ -36,12 +36,12 @@ extension EditingViewController {
         
         /// setup the paging controllers
         editingBarVC?.heightNumberStepper.value = configuration.barHeight
-        editingBarVC?.foregroundColorButton.backgroundColor = configuration.barForegroundColor
-        editingBarVC?.backgroundColorButton.backgroundColor = configuration.barBackgroundColor
+        editingBarVC?.foregroundColorButton.backgroundColor = UIColor(hexString: configuration.barForegroundColorHex)
+        editingBarVC?.backgroundColorButton.backgroundColor = UIColor(hexString: configuration.barBackgroundColorHex)
         
         editingEdgesVC?.insetNumberStepper.value = configuration.edgeInset
         editingEdgesVC?.cornerRadiusNumberStepper.value = configuration.edgeCornerRadius
-        editingEdgesVC?.shadowColorButton.backgroundColor = configuration.edgeShadowColor
+        editingEdgesVC?.shadowColorButton.backgroundColor = UIColor(hexString: configuration.edgeShadowColorHex)
         
         maskingView.isHidden = false
         playerBaseView.mask = maskingView

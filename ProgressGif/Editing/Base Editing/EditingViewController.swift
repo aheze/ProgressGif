@@ -8,11 +8,18 @@
 import UIKit
 import Photos
 import Parchment
+import RealmSwift
 
 class EditingViewController: UIViewController {
     
+    let realm = try! Realm()
+    var project: Project?
+    
     /// configuration of every edit. Used to render gif.
     var editingConfiguration = EditingConfiguration()
+    
+    /// for storage
+    var videoMetadata = VideoMetadata()
     
     /// used to place the shadow
     var imageAspectRect = CGRect(x: 0, y: 0, width: 50, height: 50)
@@ -32,6 +39,8 @@ class EditingViewController: UIViewController {
     /// example: `percentageOfPreviewValue` = 0.8
     /// then, a setting of `5` for the bar height would actually be `4` in the drawing preview view.
     var percentageOfPreviewValue = CGFloat(1)
+    
+    // MARK: - Video
     
     var asset: PHAsset!
     var hasInitializedPlayer = false
@@ -148,6 +157,15 @@ class EditingViewController: UIViewController {
     
     @IBOutlet weak var galleryButton: UIButton!
     @IBAction func galleryButtonPressed(_ sender: Any) {
+        
+        do {
+            try realm.write {
+                project?.metadata = videoMetadata
+            }
+        } catch {
+            print("error deleting category \(error)")
+        }
+        
         playerView.pause()
         playerView.player = nil
         hasInitializedPlayer = false
@@ -183,10 +201,16 @@ class EditingViewController: UIViewController {
         
         PHCachingImageManager().requestAVAsset(forVideo: asset, options: nil) { (avAsset, _, _) in
             if let videoResolution = avAsset?.resolutionSize() {
-                print("resolution: \(videoResolution)")
+                
                 self.actualVideoResolution = videoResolution
+//                self.videoMetadata.resolution = videoResolution
+                
                 
                 DispatchQueue.main.async {
+                    self.videoMetadata.resolutionWidth = Int(videoResolution.width)
+                    self.videoMetadata.resolutionHeight = Int(videoResolution.height)
+                    
+                    
                     if videoResolution.width >= videoResolution.height {
                         
                         /// fatter
@@ -196,6 +220,22 @@ class EditingViewController: UIViewController {
                     }
                 }
             }
+            
+            if let cmDuration = avAsset?.duration {
+                let duration = CMTimeGetSeconds(cmDuration)
+                self.videoMetadata.duration = duration.getString() ?? "0:01"
+            }
+            
+            self.videoMetadata.localIdentifier = self.asset.localIdentifier
+            print("id: \(self.videoMetadata.localIdentifier)")
+            
+//            if let avAssetURL = avAsset as? AVURLAsset {
+//                guard let video = try? Data(contentsOf: avAssetURL.url) else {
+//                    print("error getting avasset data")
+//                    return
+//                }
+//                
+//            }
         }
     }
 }

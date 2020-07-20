@@ -7,6 +7,7 @@
 
 import UIKit
 import Photos
+import RealmSwift
 
 enum CollectionType {
     case projects
@@ -16,13 +17,11 @@ enum CollectionType {
 class CollectionViewController: UIViewController {
     
     var windowStatusBarHeight = CGFloat(0)
-//    var imageSize = CGSize(width: 0, height: 0)
     var selectedIndexPath = IndexPath(item: 0, section: 0)
     
     var collectionType = CollectionType.projects
-    var projects = [Project]()
+    var projects: Results<Project>?
     
-//    var realPhotoFrames = [CGRect]()
     var photoAssets: PHFetchResult<PHAsset>!
     
     var cellSize = CGSize(width: 100, height: 100)
@@ -37,7 +36,7 @@ class CollectionViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.contentInset = UIEdgeInsets(top: inset + topInset, left: inset, bottom: inset, right: inset)
+        collectionView.contentInset = UIEdgeInsets(top: (inset * 4) + topInset, left: inset, bottom: inset, right: inset)
         collectionView.scrollIndicatorInsets = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
         collectionView.alwaysBounceVertical = true
         collectionView.contentInsetAdjustmentBehavior = .never
@@ -45,7 +44,7 @@ class CollectionViewController: UIViewController {
         print("setup collecitonview")
         
         if collectionType == .projects {
-            
+            getAssetFromProjects()
         } else {
             print("get assets!")
             getAssetFromPhoto()
@@ -63,6 +62,20 @@ class CollectionViewController: UIViewController {
         photoAssets = PHAsset.fetchAssets(with: options)
         
         collectionView.reloadData()
+    }
+    
+    func getAssetFromProjects() {
+        var ids = [String]()
+        if let projs = projects {
+            for proj in projs {
+                if let id = proj.metadata?.localIdentifier {
+                    ids.append(id)
+                }
+            }
+        }
+        
+        photoAssets = PHAsset.fetchAssets(withLocalIdentifiers: ids, options: nil)
+        print("assets: \(photoAssets)")
     }
     
     override func viewDidLoad() {
@@ -85,94 +98,107 @@ class CollectionViewController: UIViewController {
 }
 extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionType == .projects {
-            return projects.count
-        } else {
-            return photoAssets.count
-        }
-        
+        print("section cells: \(photoAssets.count)")
+//        if collectionType == .projects {
+//            return photoAssets.count
+//        } else {
+//            return photoAssets.count
+//        }
+        return photoAssets.count
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if collectionType == .photos {
-            if let photoCell = cell as? PhotoCell {
-                photoCell.layoutIfNeeded()
-                photoCell.contentView.layer.masksToBounds = true
-                if let drawingRect = photoCell.imageView.roundCornersForAspectFit(radius: 6) {
-//                    realPhotoFrames[indexPath.item] = drawingRect
-                    photoCell.imageBaseView.shouldActivate = true
-                    photoCell.imageBaseView.updateShadow(rect: drawingRect, radius: 6)
-                    photoCell.realFrameRect = drawingRect
-                }
+        if let photoCell = cell as? PhotoCell {
+            photoCell.layoutIfNeeded()
+            photoCell.contentView.layer.masksToBounds = true
+            if let drawingRect = photoCell.imageView.roundCornersForAspectFit(radius: 6) {
+                photoCell.imageBaseView.shouldActivate = true
+                photoCell.imageBaseView.updateShadow(rect: drawingRect, radius: 6)
+                photoCell.realFrameRect = drawingRect
+                
+                
+                
+                photoCell.drawingLeftC.constant = drawingRect.origin.x
+                photoCell.drawingRightC.constant = (photoCell.imageBaseView.frame.width - drawingRect.width) / 2
+                photoCell.drawingTopC.constant = drawingRect.origin.y
+                photoCell.drawingBottomC.constant = (photoCell.imageBaseView.frame.height - drawingRect.height) / 2
                 
             }
+            
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
-            "PhotoPageViewController") as! PhotoPageViewController
         
-        selectedIndexPath = indexPath
-        
-        mainContentVC.transitioningDelegate = mainContentVC.transitionController
-        mainContentVC.transitionController.fromDelegate = self
-        mainContentVC.transitionController.toDelegate = mainContentVC
-        mainContentVC.delegate = self
-        mainContentVC.currentIndex = self.selectedIndexPath.item
-        mainContentVC.photoAssets = photoAssets
-        mainContentVC.normalStatusBarHeight = windowStatusBarHeight
-        
-        present(mainContentVC, animated: true, completion: nil)
+        if collectionType == .projects {
+            
+        } else {
+            let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
+                "PhotoPageViewController") as! PhotoPageViewController
+            
+            selectedIndexPath = indexPath
+            mainContentVC.transitioningDelegate = mainContentVC.transitionController
+            mainContentVC.transitionController.fromDelegate = self
+            mainContentVC.transitionController.toDelegate = mainContentVC
+            mainContentVC.delegate = self
+            mainContentVC.currentIndex = self.selectedIndexPath.item
+            mainContentVC.photoAssets = photoAssets
+            mainContentVC.normalStatusBarHeight = windowStatusBarHeight
+            
+            present(mainContentVC, animated: true, completion: nil)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        print("cellForItemAt cell: \(indexPath)")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCellId", for: indexPath) as! PhotoCell
         
         if collectionType == .projects {
-            cell.contentView.layer.cornerRadius = 6
-            return cell
-        } else {
-            cell.contentView.backgroundColor = UIColor.clear
+            cell.progressBackgroundView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            cell.progressBackgroundView.layer.cornerRadius = 6
+            cell.progressBackgroundView.clipsToBounds = true
+            
+            if let project = projects?[indexPath.item] {
+                let title = project.title
+                cell.nameLabel.text = title
+                
+                if let configuration = project.configuration {
+                    cell.progressBackgroundView.backgroundColor = UIColor(hexString: configuration.barBackgroundColorHex)
+                    cell.progressBarView.backgroundColor = UIColor(hexString: configuration.barForegroundColorHex)
+                }
+            }
             
             let asset = photoAssets.object(at: indexPath.row)
-            
             cell.representedAssetIdentifier = asset.localIdentifier
             cell.imageBaseView.shouldActivate = true
+            
+            PHImageManager.default().requestImage(for: asset, targetSize: cellSize, contentMode: PHImageContentMode.aspectFit, options: nil) { (image, userInfo) -> Void in
+                print("request")
+                if cell.representedAssetIdentifier == asset.localIdentifier {
+                    cell.imageView.image = image
+                    let duration = asset.duration
+                    cell.secondaryLabel.text = duration.getString()
+                }
+            }
+            
+            return cell
+        } else {
+            
+            let asset = photoAssets.object(at: indexPath.row)
+            cell.representedAssetIdentifier = asset.localIdentifier
+            cell.imageBaseView.shouldActivate = true
+            cell.secondaryLabel.text = ""
             
             PHImageManager.default().requestImage(for: asset, targetSize: cellSize, contentMode: PHImageContentMode.aspectFit, options: nil) { (image, userInfo) -> Void in
                 
                 if cell.representedAssetIdentifier == asset.localIdentifier {
                     cell.imageView.image = image
-                    let duration = asset.duration // 2 minutes, 30 seconds
-                    
-                    let formatter = DateComponentsFormatter()
-                    formatter.unitsStyle = .positional
-                    formatter.allowedUnits = [.minute, .second]
-                    formatter.zeroFormattingBehavior = [.pad]
-                    
-                    if let formattedDuration = formatter.string(from: duration) {
-                        let firstTwoCharacters = String(formattedDuration.prefix(2))
-                        
-                        if firstTwoCharacters == "00" {
-                            var adjustedDuration = formattedDuration
-                            adjustedDuration.remove(at: formattedDuration.startIndex)
-                            cell.nameLabel.text = adjustedDuration
-                        } else {
-                            cell.nameLabel.text = formattedDuration
-                        }
-                        
-                    }
+                    let duration = asset.duration
+                    cell.nameLabel.text = duration.getString()
                 }
-                
             }
             return cell
         }
-        
-        
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

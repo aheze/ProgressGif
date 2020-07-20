@@ -14,13 +14,13 @@ extension EditingViewController: EditingBarChanged {
     }
     
     func foregroundColorChanged(to color: UIColor) {
-        editingConfiguration.barForegroundColor = color
+        editingConfiguration.barForegroundColorHex = color.hexString()
         progressBarView.backgroundColor = color
         
     }
     
     func backgroundColorChanged(to color: UIColor) {
-        editingConfiguration.barBackgroundColor = color
+        editingConfiguration.barBackgroundColorHex = color.hexString()
         progressBarBackgroundView.backgroundColor = color
     }
 }
@@ -57,7 +57,7 @@ extension EditingViewController: EditingEdgesChanged {
         shadowView.shadowRadius = radius
     }
     func edgeShadowColorChanged(to color: UIColor) {
-        editingConfiguration.edgeShadowColor = color
+        editingConfiguration.edgeShadowColorHex = color.hexString()
         shadowView.color = color
         updateShadow(scale: shadowScale)
     }

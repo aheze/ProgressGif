@@ -7,20 +7,25 @@
 
 import UIKit
 import Photos
+import RealmSwift
 
 class ViewController: UIViewController {
     
-    var projects = [Project]()
+    let realm = try! Realm()
+    var projects: Results<Project>?
     
     @IBOutlet weak var visualEffectView: UIVisualEffectView! /// the top bar
     
     // MARK: - Collection View
+    
     private lazy var collectionViewController: CollectionViewController? = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "CollectionViewController") as? CollectionViewController {
             
-            viewController.projects = self.projects
+            
+            viewController.inset = CGFloat(4)
             viewController.topInset = visualEffectView.frame.height
+            viewController.projects = self.projects
             viewController.collectionType = .projects
             self.add(childViewController: viewController, inView: view)
             
@@ -105,11 +110,18 @@ class ViewController: UIViewController {
         /// make the import from files, import from photos, and import from clipboard buttons transparent
         setUpButtonAlpha()
         
-        for _ in 0...5 {
-            let project = Project()
-            project.title = "Title"
-            projects.append(project)
+        /// load from realm
+        projects = realm.objects(Project.self)
+        
+        if let projs = projects {
+            projects = projs.sorted(byKeyPath: "dateCreated", ascending: false)
         }
+        
+//        for _ in 0...5 {
+//            let project = EditableProject()
+//            project.title = "Title"
+//            projects.append(project)
+//        }
         
         /// initialize the collection view
         _ = collectionViewController
