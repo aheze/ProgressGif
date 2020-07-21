@@ -10,9 +10,9 @@ ProgressGif does one thing only.
 3. Export as a gif
 
 ### Uses
-Tutorials with just words are boring, so we add images. And if they need to be more detailed, we add video some blogging sites like Medium 
+Tutorials with just words are boring, so we add images. And if they need to be more detailed, we add video... but video isn't always the best choice. Readers may not want to turn on audio, and if they're reading on their phone, the video will open in a full-screen modal.
 
-When writing tutorials or just blogging, words aren't enough. Pictures are great. So are videos. And in between them are gifs.
+
 
 ProgressGif is an iOS app made with Swift 5 and UIKit. 
 
