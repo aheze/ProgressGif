@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     // MARK: - Collection View
     
-    private lazy var collectionViewController: CollectionViewController? = {
+    lazy var collectionViewController: CollectionViewController? = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "CollectionViewController") as? CollectionViewController {
             

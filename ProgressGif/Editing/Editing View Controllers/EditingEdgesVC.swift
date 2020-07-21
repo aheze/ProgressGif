@@ -12,7 +12,7 @@ protocol EditingEdgesChanged: class {
     func edgeCornerRadiusChanged(to radius: Int)
     func edgeShadowIntensityChanged(to intensity: Int)
     func edgeShadowRadiusChanged(to radius: Int)
-    func edgeShadowColorChanged(to color: UIColor)
+    func edgeShadowColorChanged(to color: UIColor, hex: String)
 //    func backgroundColorChanged(to color: UIColor)
 }
 
@@ -155,11 +155,11 @@ extension EditingEdgesVC: NumberStepperChanged {
 }
 
 extension EditingEdgesVC: ColorChanged {
-    func colorChanged(color: UIColor, colorPickerType: ColorPickerType) {
+    func colorChanged(color: UIColor, hexCode: String, colorPickerType: ColorPickerType) {
         if colorPickerType == .edgeShadow {
             originalEdgeShadowColor = color
             shadowColorButton.backgroundColor = color
-            editingEdgesChanged?.edgeShadowColorChanged(to: color)
+            editingEdgesChanged?.edgeShadowColorChanged(to: color, hex: hexCode)
         }
 //        else if colorPickerType == .edgeBackground {
 //            originalEdgeBackgroundColor = color

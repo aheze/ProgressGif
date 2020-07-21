@@ -13,6 +13,8 @@ import Photos
 
 class FromPhotosPicker: UIViewController {
     
+    var onDoneBlock: ((Bool) -> Void)?
+    
     var windowStatusBarHeight = CGFloat(0)
     
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
@@ -30,6 +32,7 @@ class FromPhotosPicker: UIViewController {
             viewController.inset = CGFloat(4)
             viewController.topInset = visualEffectView.frame.height
             viewController.collectionType = .photos
+            viewController.onDoneBlock = onDoneBlock
             self.add(childViewController: viewController, inView: view)
             
             return viewController
@@ -57,10 +60,6 @@ class FromPhotosPicker: UIViewController {
     }
 }
 
-extension FromPhotosPicker {
-   
-}
-
 extension ViewController: UIImagePickerControllerDelegate {
 
     func importVideo() {
@@ -72,7 +71,6 @@ extension ViewController: UIImagePickerControllerDelegate {
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization({status in
                 if status == .authorized {
-                    //                    self.getVideo(fromSourceType: .photoLibrary)
                     self.presentFromPhotosPicker()
                 }
             })
@@ -83,7 +81,6 @@ extension ViewController: UIImagePickerControllerDelegate {
         case .denied:
             askToGoToSettingsForPhotoLibrary()
         case .authorized:
-            //            self.getVideo(fromSourceType: .photoLibrary)
             presentFromPhotosPicker()
         @unknown default:
             break
@@ -95,6 +92,21 @@ extension ViewController: UIImagePickerControllerDelegate {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let vc = storyboard.instantiateViewController(withIdentifier: "FromPhotosPicker") as?
                 FromPhotosPicker {
+                
+                vc.onDoneBlock = { _ in
+                    print("done!!!")
+                    
+                    self.projects = self.realm.objects(Project.self)
+                    
+                    if let projs = self.projects {
+                        self.projects = projs.sorted(byKeyPath: "dateCreated", ascending: false)
+                    }
+                    
+                    
+                    self.collectionViewController?.projects = self.projects
+                    self.collectionViewController?.getAssetFromProjects()
+                    self.collectionViewController?.collectionView.reloadData()
+                }
                 self.present(vc, animated: true, completion: nil)
             }
         }

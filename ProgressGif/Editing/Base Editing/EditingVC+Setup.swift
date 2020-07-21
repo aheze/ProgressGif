@@ -12,11 +12,13 @@ extension EditingViewController {
     func setupPagingViewControllers() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
+        loadConfig()
+        
         editingBarVC = storyboard.instantiateViewController(withIdentifier: "EditingBarVC") as? EditingBarVC
         editingBarVC?.title = "Bar"
         editingBarVC?.originalBarHeight = editingConfiguration.barHeight
-        editingBarVC?.originalBarForegroundColor = UIColor(hexString: editingConfiguration.barForegroundColorHex)
-        editingBarVC?.originalBarBackgroundColor = UIColor(hexString: editingConfiguration.barBackgroundColorHex)
+        editingBarVC?.originalBarForegroundColor = editingConfiguration.barForegroundColor
+        editingBarVC?.originalBarBackgroundColor = editingConfiguration.barBackgroundColor
         
         editingBarVC?.editingBarChanged = self
         
@@ -26,7 +28,7 @@ extension EditingViewController {
         editingEdgesVC?.originalEdgeCornerRadius = editingConfiguration.edgeCornerRadius
         editingEdgesVC?.originalEdgeShadowIntensity = editingConfiguration.edgeShadowIntensity
         editingEdgesVC?.originalEdgeShadowRadius = editingConfiguration.edgeShadowRadius
-        editingEdgesVC?.originalEdgeShadowColor = UIColor(hexString: editingConfiguration.edgeShadowColorHex)
+        editingEdgesVC?.originalEdgeShadowColor = editingConfiguration.edgeShadowColor
         
         editingEdgesVC?.editingEdgesChanged = self
         

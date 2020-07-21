@@ -11,17 +11,21 @@ extension EditingViewController: EditingBarChanged {
     func barHeightChanged(to height: Int) {
         editingConfiguration.barHeight = height
         progressBarBackgroundHeightC.constant = CGFloat(height) * unit
+        saveConfig()
     }
     
-    func foregroundColorChanged(to color: UIColor) {
-        editingConfiguration.barForegroundColorHex = color.hexString()
+    func foregroundColorChanged(to color: UIColor, hex: String) {
+        editingConfiguration.barForegroundColor = color
+        editingConfiguration.barForegroundColorHex = hex
         progressBarView.backgroundColor = color
-        
+        saveConfig()
     }
     
-    func backgroundColorChanged(to color: UIColor) {
-        editingConfiguration.barBackgroundColorHex = color.hexString()
+    func backgroundColorChanged(to color: UIColor, hex: String) {
+        editingConfiguration.barBackgroundColor = color
+        editingConfiguration.barBackgroundColorHex = hex
         progressBarBackgroundView.backgroundColor = color
+        saveConfig()
     }
 }
 
@@ -37,7 +41,7 @@ extension EditingViewController: EditingEdgesChanged {
         
         shadowScale = scale
         updateShadow(scale: scale)
-        
+        saveConfig()
     }
     func edgeCornerRadiusChanged(to radius: Int) {
         editingConfiguration.edgeCornerRadius = radius
@@ -47,18 +51,23 @@ extension EditingViewController: EditingEdgesChanged {
         shadowView.cornerRadius = previewRadius
         
         updateShadow(scale: shadowScale)
+        saveConfig()
     }
     func edgeShadowIntensityChanged(to intensity: Int) {
         editingConfiguration.edgeShadowIntensity = intensity
         shadowView.intensity = intensity
+        saveConfig()
     }
     func edgeShadowRadiusChanged(to radius: Int) {
         editingConfiguration.edgeShadowRadius = radius
         shadowView.shadowRadius = radius
+        saveConfig()
     }
-    func edgeShadowColorChanged(to color: UIColor) {
-        editingConfiguration.edgeShadowColorHex = color.hexString()
+    func edgeShadowColorChanged(to color: UIColor, hex: String) {
+        editingConfiguration.edgeShadowColor = color
+        editingConfiguration.edgeShadowColorHex = hex
         shadowView.color = color
         updateShadow(scale: shadowScale)
+        saveConfig()
     }
 }

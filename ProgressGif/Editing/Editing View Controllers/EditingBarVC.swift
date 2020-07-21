@@ -9,8 +9,8 @@ import UIKit
 
 protocol EditingBarChanged: class {
     func barHeightChanged(to height: Int)
-    func foregroundColorChanged(to color: UIColor)
-    func backgroundColorChanged(to color: UIColor)
+    func foregroundColorChanged(to color: UIColor, hex: String)
+    func backgroundColorChanged(to color: UIColor, hex: String)
 }
 
 class EditingBarVC: UIViewController {
@@ -65,21 +65,20 @@ class EditingBarVC: UIViewController {
 
 extension EditingBarVC: NumberStepperChanged {
     func valueChanged(to value: Int, stepperType: NumberStepperType) {
-        
         editingBarChanged?.barHeightChanged(to: value)
     }
 }
 
 extension EditingBarVC: ColorChanged {
-    func colorChanged(color: UIColor, colorPickerType: ColorPickerType) {
+    func colorChanged(color: UIColor, hexCode: String, colorPickerType: ColorPickerType) {
         if colorPickerType == .barForeground {
             originalBarForegroundColor = color
             foregroundColorButton.backgroundColor = color
-            editingBarChanged?.foregroundColorChanged(to: color)
+            editingBarChanged?.foregroundColorChanged(to: color, hex: hexCode)
         } else if colorPickerType == .barBackground {
             originalBarBackgroundColor = color
             backgroundColorButton.backgroundColor = color
-            editingBarChanged?.backgroundColorChanged(to: color)
+            editingBarChanged?.backgroundColorChanged(to: color, hex: hexCode)
         }
     }
 }

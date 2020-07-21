@@ -20,14 +20,14 @@ extension EditingViewController {
         }
     }
     
-    func setUpDrawing(with configuration: EditingConfiguration) {
+    func setUpDrawing(with configuration: EditableEditingConfiguration) {
         print("setup")
         let progressWidth = CGFloat(playerControlsView.customSlider.value) * progressBarFullWidth
         progressBarWidthC.constant = progressWidth
         
         progressBarBackgroundHeightC.constant = CGFloat(configuration.barHeight) * unit
-        progressBarBackgroundView.backgroundColor = UIColor(hexString: configuration.barBackgroundColorHex)
-        progressBarView.backgroundColor = UIColor(hexString: configuration.barForegroundColorHex)
+        progressBarBackgroundView.backgroundColor = configuration.barBackgroundColor
+        progressBarView.backgroundColor = configuration.barForegroundColor
         
         UIView.animate(withDuration: 0.6, animations: {
             self.progressBarBackgroundView.alpha = 1
@@ -36,12 +36,12 @@ extension EditingViewController {
         
         /// setup the paging controllers
         editingBarVC?.heightNumberStepper.value = configuration.barHeight
-        editingBarVC?.foregroundColorButton.backgroundColor = UIColor(hexString: configuration.barForegroundColorHex)
-        editingBarVC?.backgroundColorButton.backgroundColor = UIColor(hexString: configuration.barBackgroundColorHex)
+        editingBarVC?.foregroundColorButton.backgroundColor = configuration.barForegroundColor
+        editingBarVC?.backgroundColorButton.backgroundColor = configuration.barBackgroundColor
         
         editingEdgesVC?.insetNumberStepper.value = configuration.edgeInset
         editingEdgesVC?.cornerRadiusNumberStepper.value = configuration.edgeCornerRadius
-        editingEdgesVC?.shadowColorButton.backgroundColor = UIColor(hexString: configuration.edgeShadowColorHex)
+        editingEdgesVC?.shadowColorButton.backgroundColor = configuration.edgeShadowColor
         
         maskingView.isHidden = false
         playerBaseView.mask = maskingView

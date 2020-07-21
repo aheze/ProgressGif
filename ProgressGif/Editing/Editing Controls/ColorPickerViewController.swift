@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Colorful
+//import Colorful
 
 enum ColorPickerType {
     case barForeground
@@ -15,7 +15,7 @@ enum ColorPickerType {
     case edgeBackground
 }
 protocol ColorChanged: class {
-    func colorChanged(color: UIColor, colorPickerType: ColorPickerType)
+    func colorChanged(color: UIColor, hexCode: String, colorPickerType: ColorPickerType)
 }
 
 class ColorPickerViewController: UIViewController {
@@ -40,7 +40,7 @@ class ColorPickerViewController: UIViewController {
     }
     
     @objc func handleColorChanged(picker: ColorPicker) {
-        colorChanged?.colorChanged(color: picker.color, colorPickerType: colorPickerType)
+        colorChanged?.colorChanged(color: picker.color, hexCode: picker.hexColor, colorPickerType: colorPickerType)
     }
     
 }
@@ -52,7 +52,6 @@ extension ColorChanged where Self: UIViewController, Self: UIPopoverPresentation
         let popoverVC = storyboard.instantiateViewController(withIdentifier: "ColorPickerViewController") as! ColorPickerViewController
         popoverVC.modalPresentationStyle = .popover
         
-        let width = min(UIScreen.main.bounds.width - 32, 360)
         
         popoverVC.preferredContentSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 360)
         
