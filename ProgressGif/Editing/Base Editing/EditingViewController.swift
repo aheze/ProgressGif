@@ -73,6 +73,8 @@ class EditingViewController: UIViewController {
         calculatePreviewScale()
         calculateAspectDrawingFrame()
         barHeightChanged(to: editingConfiguration.barHeight)
+        
+        titleTextField.delegate = self
     }
     
     @IBOutlet weak var topStatusBlurView: UIVisualEffectView!
@@ -172,6 +174,9 @@ class EditingViewController: UIViewController {
         onDoneBlock!(true)
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
+    
+    @IBOutlet weak var titleTextField: UITextField!
+    
     
     @IBOutlet weak var exportButton: UIButton!
     @IBAction func exportButtonPressed(_ sender: Any) {

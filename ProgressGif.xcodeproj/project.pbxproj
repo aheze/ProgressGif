@@ -51,6 +51,7 @@
 		49B4CF9C24C74FD800A2A22A /* BrightnessCursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9624C74FD700A2A22A /* BrightnessCursor.swift */; };
 		49B4CF9D24C74FD800A2A22A /* ColorfulEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9724C74FD700A2A22A /* ColorfulEntity.swift */; };
 		49B4CF9E24C74FD800A2A22A /* ColorMapCursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9824C74FD800A2A22A /* ColorMapCursor.swift */; };
+		49B4CFA024C755E500A2A22A /* Importing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9F24C755E500A2A22A /* Importing.swift */; };
 		49E41ECC24B967E900EA7BB2 /* ViewController+AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */; };
 		49E75FA724C015DC004B3F41 /* EditingEdgesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */; };
 		49E75FA924C015E6004B3F41 /* EditingOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */; };
@@ -110,6 +111,7 @@
 		49B4CF9624C74FD700A2A22A /* BrightnessCursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessCursor.swift; sourceTree = "<group>"; };
 		49B4CF9724C74FD700A2A22A /* ColorfulEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorfulEntity.swift; sourceTree = "<group>"; };
 		49B4CF9824C74FD800A2A22A /* ColorMapCursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMapCursor.swift; sourceTree = "<group>"; };
+		49B4CF9F24C755E500A2A22A /* Importing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importing.swift; sourceTree = "<group>"; };
 		49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AddButton.swift"; sourceTree = "<group>"; };
 		49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingEdgesVC.swift; sourceTree = "<group>"; };
 		49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingOptionsVC.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			children = (
 				49F80C3224BD1C9E00C0C142 /* Photos */,
 				491816B124BA9AD800E318FC /* FromFiles.swift */,
+				49B4CF9F24C755E500A2A22A /* Importing.swift */,
 			);
 			path = Importing;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				49B4CF9224C6661C00A2A22A /* EditingVC+Saving.swift in Sources */,
 				496F7F8224BD1F080045DDCB /* PhotoPageViewController+Player.swift in Sources */,
 				49F80C3124BD1C2B00C0C142 /* PlayerUtilities.swift in Sources */,
+				49B4CFA024C755E500A2A22A /* Importing.swift in Sources */,
 				49E41ECC24B967E900EA7BB2 /* ViewController+AddButton.swift in Sources */,
 				49240FD324BFFB6E00DC9446 /* EditingBarVC.swift in Sources */,
 				493E9BF224C0E8910068973B /* ColorPickerViewController.swift in Sources */,

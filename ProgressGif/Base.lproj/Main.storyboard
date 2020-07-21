@@ -406,10 +406,18 @@
                                                         <action selector="exportButtonPressed:" destination="3Bb-QV-9X3" eventType="touchUpInside" id="gkj-G3-9mT"/>
                                                     </connections>
                                                 </button>
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Untitled" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xnD-WR-FXQ">
+                                                    <rect key="frame" x="90" y="8.6666666666666643" width="239" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Wrn-9q-xmS" firstAttribute="centerY" secondItem="bWb-d5-Imr" secondAttribute="centerY" id="IoJ-oh-rZH"/>
                                                 <constraint firstItem="efT-XN-N6p" firstAttribute="centerY" secondItem="bWb-d5-Imr" secondAttribute="centerY" id="Swo-LA-HhI"/>
+                                                <constraint firstItem="xnD-WR-FXQ" firstAttribute="leading" secondItem="Wrn-9q-xmS" secondAttribute="trailing" constant="8" id="cvI-6Q-Man"/>
+                                                <constraint firstItem="efT-XN-N6p" firstAttribute="leading" secondItem="xnD-WR-FXQ" secondAttribute="trailing" constant="8" id="e3d-01-qR6"/>
+                                                <constraint firstItem="xnD-WR-FXQ" firstAttribute="centerY" secondItem="bWb-d5-Imr" secondAttribute="centerY" id="oHN-l4-bx0"/>
                                                 <constraint firstAttribute="trailing" secondItem="efT-XN-N6p" secondAttribute="trailing" constant="12" id="rha-aY-cDf"/>
                                                 <constraint firstItem="Wrn-9q-xmS" firstAttribute="leading" secondItem="bWb-d5-Imr" secondAttribute="leading" constant="12" id="snY-ef-MY1"/>
                                             </constraints>
@@ -606,6 +614,7 @@
                         <outlet property="shadowMaskingViewRightC" destination="G4X-wq-P4V" id="tuv-bI-mOh"/>
                         <outlet property="shadowMaskingViewTopC" destination="cjx-xd-ltA" id="C9b-bO-ctZ"/>
                         <outlet property="shadowView" destination="oC7-up-fe7" id="KcW-5Z-VWG"/>
+                        <outlet property="titleTextField" destination="xnD-WR-FXQ" id="cmK-fD-eCD"/>
                         <outlet property="topActionBarBlurView" destination="TN7-vy-io7" id="fKT-l3-ust"/>
                         <outlet property="topBarAndPreviewVerticalC" destination="9Hc-Kb-4LR" id="7SH-7n-eWM"/>
                         <outlet property="topStatusBlurView" destination="0DP-Wx-wTs" id="znf-qe-mIt"/>

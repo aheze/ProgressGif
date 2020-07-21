@@ -12,7 +12,6 @@ import RealmSwift
 class ViewController: UIViewController {
     
     let realm = try! Realm()
-    var projects: Results<Project>?
     
     @IBOutlet weak var visualEffectView: UIVisualEffectView! /// the top bar
     
@@ -25,7 +24,6 @@ class ViewController: UIViewController {
             
             viewController.inset = CGFloat(4)
             viewController.topInset = visualEffectView.frame.height
-            viewController.projects = self.projects
             viewController.collectionType = .projects
             self.add(childViewController: viewController, inView: view)
             
@@ -109,13 +107,6 @@ class ViewController: UIViewController {
         
         /// make the import from files, import from photos, and import from clipboard buttons transparent
         setUpButtonAlpha()
-        
-        /// load from realm
-        projects = realm.objects(Project.self)
-        
-        if let projs = projects {
-            projects = projs.sorted(byKeyPath: "dateCreated", ascending: false)
-        }
         
 //        for _ in 0...5 {
 //            let project = EditableProject()
