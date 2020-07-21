@@ -7,19 +7,25 @@
 
 import UIKit
 
+/// title
+extension EditingViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        print("text: \(textField.text), real text: \(titleTextField.text)")
+        saveConfig()
+        return true
+    }
+}
+
 extension EditingViewController {
     func saveConfig() {
         do {
             try realm.write {
+                
+                project?.title = titleTextField.text ?? "Untitled"
+                
                 project?.configuration?.barHeight = editingConfiguration.barHeight
-//                if let foregroundHex = editingConfiguration.barForegroundColor.toHex {
-//                    project?.configuration?.barForegroundColorHex = foregroundHex
-                    print("fore hex: \(editingConfiguration.barForegroundColorHex)")
-//                }
-//                if let backgroundHex = editingConfiguration.barBackgroundColor.toHex {
-//                    project?.configuration?.barBackgroundColorHex = backgroundHex
-                    print("back hex: \(editingConfiguration.barBackgroundColorHex)")
-//                }
                 project?.configuration?.barForegroundColorHex = editingConfiguration.barForegroundColorHex
                 project?.configuration?.barBackgroundColorHex = editingConfiguration.barBackgroundColorHex
                 
@@ -27,12 +33,6 @@ extension EditingViewController {
                 project?.configuration?.edgeCornerRadius = editingConfiguration.edgeCornerRadius
                 project?.configuration?.edgeShadowIntensity = editingConfiguration.edgeShadowIntensity
                 project?.configuration?.edgeShadowRadius = editingConfiguration.edgeShadowRadius
-                
-//                if let edgeShadowHex = editingConfiguration.edgeShadowColor.toHex {
-//                    project?.configuration?.edgeShadowColorHex = edgeShadowHex
-                    print("shadow hex: \(editingConfiguration.edgeShadowColorHex)")
-//                }
-                
                 project?.configuration?.edgeShadowColorHex = editingConfiguration.edgeShadowColorHex
             }
         } catch {

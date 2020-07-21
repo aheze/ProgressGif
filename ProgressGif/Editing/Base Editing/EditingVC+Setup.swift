@@ -14,6 +14,8 @@ extension EditingViewController {
         
         loadConfig()
         
+        titleTextField.text = project?.title
+        
         editingBarVC = storyboard.instantiateViewController(withIdentifier: "EditingBarVC") as? EditingBarVC
         editingBarVC?.title = "Bar"
         editingBarVC?.originalBarHeight = editingConfiguration.barHeight

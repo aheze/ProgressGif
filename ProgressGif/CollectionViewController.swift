@@ -16,6 +16,8 @@ enum CollectionType {
 }
 class CollectionViewController: UIViewController {
     
+    let realm = try! Realm()
+    
     var onDoneBlock: ((Bool) -> Void)?
     
     var windowStatusBarHeight = CGFloat(0)
@@ -65,8 +67,25 @@ class CollectionViewController: UIViewController {
         
         collectionView.reloadData()
     }
-    
+    func updateAssets() {
+//        projects = realm.objects(Project.self)
+//        
+//        if let projs = projects {
+//            projects = projs.sorted(byKeyPath: "dateCreated", ascending: false)
+//        }
+        
+        getAssetFromProjects()
+        
+        let firstIndex = IndexPath(item: 0, section: 0)
+        collectionView.insertItems(at: [firstIndex])
+    }
     func getAssetFromProjects() {
+        
+        projects = realm.objects(Project.self)
+        
+        if let projs = projects {
+            projects = projs.sorted(byKeyPath: "dateCreated", ascending: false)
+        }
         
         var ids = [String]()
         if let projs = projects {
@@ -93,7 +112,6 @@ class CollectionViewController: UIViewController {
             }
         }
         
-       
         projectPhotoAssets = newPHAssets
         
     }
@@ -112,6 +130,7 @@ class CollectionViewController: UIViewController {
     }
 }
 extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionType == .projects {
             return projectPhotoAssets.count
@@ -138,7 +157,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
             
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionType == .projects {
@@ -176,7 +195,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 
                 if let configuration = project.configuration {
                     cell.progressBackgroundView.backgroundColor = UIColor(hexString: configuration.barBackgroundColorHex)
-//                    cell.progressBackgroundView.backgroundColor = UIColor(with)
+                    //                    cell.progressBackgroundView.backgroundColor = UIColor(with)
                     cell.progressBarView.backgroundColor = UIColor(hexString: configuration.barForegroundColorHex)
                 }
             }
@@ -228,8 +247,8 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
         eachCellWidth.round(.down)
         let size = CGSize(width: eachCellWidth, height: eachCellWidth + CGFloat(50))
         cellSize = CGSize(width: size.width * UIScreen.main.scale, height: size.height * UIScreen.main.scale)
-            
-            
+        
+        
         return size
         
     }
@@ -240,10 +259,48 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return inset
     }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        UIContextMenuConfiguration(identifier: indexPath as NSIndexPath, previewProvider: nil) { suggestedActions in
+            
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
+                
+                let alert = UIAlertController(title: "Delete this project?", message: "This action can't be undone.", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+                    
+                    if let selectedProject = self.projects?[indexPath.item] {
+                        do {
+                            try self.realm.write {
+                                self.realm.delete(selectedProject)
+                            }
+                        } catch {
+                            print("Error deleting project: \(error)")
+                        }
+                        
+                        self.getAssetFromProjects()
+                        collectionView.performBatchUpdates({
+                            self.collectionView.deleteItems(at: [indexPath])
+                        }, completion: nil)
+                        
+                    }
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+            
+            if self.collectionType == .projects {
+                return UIMenu(title: "", children: [delete])
+            } else {
+                return nil
+            }
+        }
+    }
 }
 
 extension CollectionViewController: PhotoPageViewControllerDelegate {
- 
+    
     func containerViewController(_ containerViewController: PhotoPageViewController, indexDidUpdate currentIndex: Int) {
         self.selectedIndexPath = IndexPath(row: currentIndex, section: 0)
         self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
