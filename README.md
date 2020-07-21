@@ -2,6 +2,9 @@
   <img width="500" height="123.3" src="https://raw.githubusercontent.com/zjohnzheng/ProgressGif/main/Assets/Logos/Beta%20Logo.png?token=AL4C6P7HP63TJTRBSAFGCJK7C46UQ">
 </p>
 
+# ProgressGif is currently under development, and almost finished. Check back in a few days!
+
+
 ## Overview
 ### Features
 ProgressGif does one thing only.
@@ -13,6 +16,7 @@ ProgressGif does one thing only.
 Tutorials with only words are boring, so we add images. And if they need to be more detailed, we add video... but video isn't always the best choice.
 - Readers may not want to turn on audio.
 - If they're on their phone, the video will open in a full-screen modal. That disrupts the reading experience.
+That's why we use gifs instead
 
 ### About
 ProgressGif is an iOS app made with Swift 5 and UIKit. 
