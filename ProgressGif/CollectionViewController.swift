@@ -16,6 +16,8 @@ enum CollectionType {
 }
 class CollectionViewController: UIViewController {
     
+    var onDoneBlock: ((Bool) -> Void)?
+    
     var windowStatusBarHeight = CGFloat(0)
     var selectedIndexPath = IndexPath(item: 0, section: 0)
     
@@ -23,6 +25,7 @@ class CollectionViewController: UIViewController {
     var projects: Results<Project>?
     
     var photoAssets: PHFetchResult<PHAsset>!
+    var projectPhotoAssets = [PHAsset]()
     
     var cellSize = CGSize(width: 100, height: 100)
     
@@ -49,7 +52,6 @@ class CollectionViewController: UIViewController {
             print("get assets!")
             getAssetFromPhoto()
         }
-        
     }
     
     
@@ -65,6 +67,7 @@ class CollectionViewController: UIViewController {
     }
     
     func getAssetFromProjects() {
+        
         var ids = [String]()
         if let projs = projects {
             for proj in projs {
@@ -73,17 +76,31 @@ class CollectionViewController: UIViewController {
                 }
             }
         }
+        var rawPHAssets: PHFetchResult<PHAsset>!
+        rawPHAssets = PHAsset.fetchAssets(withLocalIdentifiers: ids, options: nil)
         
-        photoAssets = PHAsset.fetchAssets(withLocalIdentifiers: ids, options: nil)
-        print("assets: \(photoAssets)")
+        /// the user may have multiple projects with the same video
+        /// so we need to make a new array that contains possible duplicate video
+        let phAssets = rawPHAssets.objects(at: IndexSet(0...rawPHAssets.count - 1))
+        
+        var newPHAssets = [PHAsset]()
+        for id in ids {
+            for asset in phAssets {
+                if asset.localIdentifier == id {
+                    newPHAssets.append(asset)
+                    break
+                }
+            }
+        }
+        
+       
+        projectPhotoAssets = newPHAssets
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupCollectionView()
-        
-        print("height in collevtionview: \(windowStatusBarHeight)")
     }
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,
@@ -93,18 +110,14 @@ class CollectionViewController: UIViewController {
         }
         super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
-    
-    
 }
 extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("section cells: \(photoAssets.count)")
-//        if collectionType == .projects {
-//            return photoAssets.count
-//        } else {
-//            return photoAssets.count
-//        }
-        return photoAssets.count
+        if collectionType == .projects {
+            return projectPhotoAssets.count
+        } else {
+            return photoAssets.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -115,8 +128,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 photoCell.imageBaseView.shouldActivate = true
                 photoCell.imageBaseView.updateShadow(rect: drawingRect, radius: 6)
                 photoCell.realFrameRect = drawingRect
-                
-                
                 
                 photoCell.drawingLeftC.constant = drawingRect.origin.x
                 photoCell.drawingRightC.constant = (photoCell.imageBaseView.frame.width - drawingRect.width) / 2
@@ -144,6 +155,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
             mainContentVC.currentIndex = self.selectedIndexPath.item
             mainContentVC.photoAssets = photoAssets
             mainContentVC.normalStatusBarHeight = windowStatusBarHeight
+            mainContentVC.onDoneBlock = onDoneBlock
             
             present(mainContentVC, animated: true, completion: nil)
         }
@@ -164,11 +176,13 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 
                 if let configuration = project.configuration {
                     cell.progressBackgroundView.backgroundColor = UIColor(hexString: configuration.barBackgroundColorHex)
+//                    cell.progressBackgroundView.backgroundColor = UIColor(with)
                     cell.progressBarView.backgroundColor = UIColor(hexString: configuration.barForegroundColorHex)
                 }
             }
             
-            let asset = photoAssets.object(at: indexPath.row)
+            let asset = projectPhotoAssets[indexPath.item]
+            
             cell.representedAssetIdentifier = asset.localIdentifier
             cell.imageBaseView.shouldActivate = true
             

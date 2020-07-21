@@ -41,15 +41,16 @@
 		49A362E024BB96E800019FC6 /* PhotoZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A362DE24BB96E700019FC6 /* PhotoZoomViewController.swift */; };
 		49A362E124BB96E800019FC6 /* PhotoPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A362DF24BB96E800019FC6 /* PhotoPageViewController.swift */; };
 		49A7AE9724C1335200318F1A /* OpacityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AE9624C1335200318F1A /* OpacityPicker.swift */; };
-		49A7AEAB24C134D800318F1A /* BrightnessCursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEA524C134D700318F1A /* BrightnessCursor.swift */; };
-		49A7AEAC24C134D800318F1A /* ColorfulEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEA624C134D700318F1A /* ColorfulEntity.swift */; };
-		49A7AEAD24C134D800318F1A /* ColorMapCursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEA724C134D700318F1A /* ColorMapCursor.swift */; };
-		49A7AEAE24C134D800318F1A /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEA824C134D800318F1A /* BrightnessSlider.swift */; };
-		49A7AEAF24C134D800318F1A /* ColorMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEA924C134D800318F1A /* ColorMapView.swift */; };
-		49A7AEB024C134D800318F1A /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AEAA24C134D800318F1A /* ColorPicker.swift */; };
 		49AC2D0F24C237880009AEBE /* EditingVC+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */; };
 		49B4CF8B24C51C3F00A2A22A /* DropShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF8A24C51C3F00A2A22A /* DropShadow.swift */; };
 		49B4CF8E24C6018500A2A22A /* Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF8D24C6018500A2A22A /* Saving.swift */; };
+		49B4CF9224C6661C00A2A22A /* EditingVC+Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */; };
+		49B4CF9924C74FD800A2A22A /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9324C74FD700A2A22A /* BrightnessSlider.swift */; };
+		49B4CF9A24C74FD800A2A22A /* ColorMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9424C74FD700A2A22A /* ColorMapView.swift */; };
+		49B4CF9B24C74FD800A2A22A /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9524C74FD700A2A22A /* ColorPicker.swift */; };
+		49B4CF9C24C74FD800A2A22A /* BrightnessCursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9624C74FD700A2A22A /* BrightnessCursor.swift */; };
+		49B4CF9D24C74FD800A2A22A /* ColorfulEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9724C74FD700A2A22A /* ColorfulEntity.swift */; };
+		49B4CF9E24C74FD800A2A22A /* ColorMapCursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9824C74FD800A2A22A /* ColorMapCursor.swift */; };
 		49E41ECC24B967E900EA7BB2 /* ViewController+AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */; };
 		49E75FA724C015DC004B3F41 /* EditingEdgesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */; };
 		49E75FA924C015E6004B3F41 /* EditingOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */; };
@@ -99,15 +100,16 @@
 		49A362DE24BB96E700019FC6 /* PhotoZoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoZoomViewController.swift; sourceTree = "<group>"; };
 		49A362DF24BB96E800019FC6 /* PhotoPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPageViewController.swift; sourceTree = "<group>"; };
 		49A7AE9624C1335200318F1A /* OpacityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpacityPicker.swift; sourceTree = "<group>"; };
-		49A7AEA524C134D700318F1A /* BrightnessCursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessCursor.swift; sourceTree = "<group>"; };
-		49A7AEA624C134D700318F1A /* ColorfulEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorfulEntity.swift; sourceTree = "<group>"; };
-		49A7AEA724C134D700318F1A /* ColorMapCursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMapCursor.swift; sourceTree = "<group>"; };
-		49A7AEA824C134D800318F1A /* BrightnessSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessSlider.swift; sourceTree = "<group>"; };
-		49A7AEA924C134D800318F1A /* ColorMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMapView.swift; sourceTree = "<group>"; };
-		49A7AEAA24C134D800318F1A /* ColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+Drawing.swift"; sourceTree = "<group>"; };
 		49B4CF8A24C51C3F00A2A22A /* DropShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadow.swift; sourceTree = "<group>"; };
 		49B4CF8D24C6018500A2A22A /* Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saving.swift; sourceTree = "<group>"; };
+		49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+Saving.swift"; sourceTree = "<group>"; };
+		49B4CF9324C74FD700A2A22A /* BrightnessSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessSlider.swift; sourceTree = "<group>"; };
+		49B4CF9424C74FD700A2A22A /* ColorMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMapView.swift; sourceTree = "<group>"; };
+		49B4CF9524C74FD700A2A22A /* ColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
+		49B4CF9624C74FD700A2A22A /* BrightnessCursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessCursor.swift; sourceTree = "<group>"; };
+		49B4CF9724C74FD700A2A22A /* ColorfulEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorfulEntity.swift; sourceTree = "<group>"; };
+		49B4CF9824C74FD800A2A22A /* ColorMapCursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMapCursor.swift; sourceTree = "<group>"; };
 		49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AddButton.swift"; sourceTree = "<group>"; };
 		49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingEdgesVC.swift; sourceTree = "<group>"; };
 		49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingOptionsVC.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			children = (
 				4948C8DF24C0F47800E5F5F6 /* Video Player */,
 				496F7F8524BE3AE90045DDCB /* EditingViewController.swift */,
+				49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */,
 				49F8C12924C28803004686DF /* EditingVC+Setup.swift */,
 				49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */,
 				4948C8E024C0F49400E5F5F6 /* EditingVC+EditingDelegates.swift */,
@@ -294,12 +297,12 @@
 		49A7AE9824C1344A00318F1A /* Color */ = {
 			isa = PBXGroup;
 			children = (
-				49A7AEA524C134D700318F1A /* BrightnessCursor.swift */,
-				49A7AEA824C134D800318F1A /* BrightnessSlider.swift */,
-				49A7AEA624C134D700318F1A /* ColorfulEntity.swift */,
-				49A7AEA724C134D700318F1A /* ColorMapCursor.swift */,
-				49A7AEA924C134D800318F1A /* ColorMapView.swift */,
-				49A7AEAA24C134D800318F1A /* ColorPicker.swift */,
+				49B4CF9624C74FD700A2A22A /* BrightnessCursor.swift */,
+				49B4CF9324C74FD700A2A22A /* BrightnessSlider.swift */,
+				49B4CF9724C74FD700A2A22A /* ColorfulEntity.swift */,
+				49B4CF9824C74FD800A2A22A /* ColorMapCursor.swift */,
+				49B4CF9424C74FD700A2A22A /* ColorMapView.swift */,
+				49B4CF9524C74FD700A2A22A /* ColorPicker.swift */,
 			);
 			path = Color;
 			sourceTree = "<group>";
@@ -469,7 +472,6 @@
 				496DD41C24BA4927007380AF /* CollectionViewController.swift in Sources */,
 				4980302524B946F200AE277C /* ViewController+Buttons.swift in Sources */,
 				49240FC924BFC7CA00DC9446 /* EditingVC+PlayerControls.swift in Sources */,
-				49A7AEAF24C134D800318F1A /* ColorMapView.swift in Sources */,
 				49E75FA724C015DC004B3F41 /* EditingEdgesVC.swift in Sources */,
 				49240FCF24BFC9FE00DC9446 /* EditingVC+UpdateSliderProgress.swift in Sources */,
 				4980302124B9427800AE277C /* Utilities.swift in Sources */,
@@ -481,35 +483,37 @@
 				496F7F8424BD3C1E0045DDCB /* PhotoPageViewController+UpdateSliderProgress.swift in Sources */,
 				49B4CF8E24C6018500A2A22A /* Saving.swift in Sources */,
 				496F7F8624BE3AE90045DDCB /* EditingViewController.swift in Sources */,
+				49B4CF9D24C74FD800A2A22A /* ColorfulEntity.swift in Sources */,
 				4980301F24B91E2500AE277C /* PhotoCell.swift in Sources */,
+				49B4CF9924C74FD800A2A22A /* BrightnessSlider.swift in Sources */,
 				49A362DB24BB92B100019FC6 /* ZoomDismissalInteractionController.swift in Sources */,
 				49F8C12824C28669004686DF /* VideoUtilities.swift in Sources */,
-				49A7AEAC24C134D800318F1A /* ColorfulEntity.swift in Sources */,
+				49B4CF9C24C74FD800A2A22A /* BrightnessCursor.swift in Sources */,
 				49A362E024BB96E800019FC6 /* PhotoZoomViewController.swift in Sources */,
 				49240FCB24BFC88400DC9446 /* EditingVC+PlayerView.swift in Sources */,
 				491816B224BA9AD800E318FC /* FromFiles.swift in Sources */,
-				49A7AEAB24C134D800318F1A /* BrightnessCursor.swift in Sources */,
 				4944CAA924B912EB00E893AE /* AppDelegate.swift in Sources */,
+				49B4CF9A24C74FD800A2A22A /* ColorMapView.swift in Sources */,
 				49F8C12A24C28803004686DF /* EditingVC+Setup.swift in Sources */,
-				49A7AEB024C134D800318F1A /* ColorPicker.swift in Sources */,
 				49AC2D0F24C237880009AEBE /* EditingVC+Drawing.swift in Sources */,
 				4980302924B95D8900AE277C /* FromPhotos.swift in Sources */,
 				4944CAAB24B912EB00E893AE /* SceneDelegate.swift in Sources */,
 				49240FCD24BFC8F000DC9446 /* PlayerView.swift in Sources */,
+				49B4CF9224C6661C00A2A22A /* EditingVC+Saving.swift in Sources */,
 				496F7F8224BD1F080045DDCB /* PhotoPageViewController+Player.swift in Sources */,
 				49F80C3124BD1C2B00C0C142 /* PlayerUtilities.swift in Sources */,
 				49E41ECC24B967E900EA7BB2 /* ViewController+AddButton.swift in Sources */,
 				49240FD324BFFB6E00DC9446 /* EditingBarVC.swift in Sources */,
 				493E9BF224C0E8910068973B /* ColorPickerViewController.swift in Sources */,
 				493E9BED24C0BA820068973B /* NumberStepper.swift in Sources */,
+				49B4CF9B24C74FD800A2A22A /* ColorPicker.swift in Sources */,
 				4980302724B94CDD00AE277C /* SetupButtons.swift in Sources */,
 				49A362DD24BB92B100019FC6 /* ZoomTransitionController.swift in Sources */,
-				49A7AEAD24C134D800318F1A /* ColorMapCursor.swift in Sources */,
+				49B4CF9E24C74FD800A2A22A /* ColorMapCursor.swift in Sources */,
 				49B4CF8B24C51C3F00A2A22A /* DropShadow.swift in Sources */,
 				49A362DC24BB92B100019FC6 /* ZoomAnimator.swift in Sources */,
 				498BF59B24BE3D3600F7F2C6 /* PhotoPageViewController+EditingAnimation.swift in Sources */,
 				4980301D24B91DE000AE277C /* Model.swift in Sources */,
-				49A7AEAE24C134D800318F1A /* BrightnessSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

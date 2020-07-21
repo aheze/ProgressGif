@@ -16,10 +16,9 @@ class EditingViewController: UIViewController {
     var project: Project?
     
     /// configuration of every edit. Used to render gif.
-    var editingConfiguration = EditingConfiguration()
+    var editingConfiguration = EditableEditingConfiguration()
     
-    /// for storage
-    var videoMetadata = VideoMetadata()
+    var onDoneBlock: ((Bool) -> Void)?
     
     /// used to place the shadow
     var imageAspectRect = CGRect(x: 0, y: 0, width: 50, height: 50)
@@ -158,23 +157,25 @@ class EditingViewController: UIViewController {
     @IBOutlet weak var galleryButton: UIButton!
     @IBAction func galleryButtonPressed(_ sender: Any) {
         
-        do {
-            try realm.write {
-                project?.metadata = videoMetadata
-            }
-        } catch {
-            print("error deleting category \(error)")
-        }
+//        do {
+//            try realm.write {
+////                project?.metadata = videoMetadata
+//            }
+//        } catch {
+//            print("error deleting category \(error)")
+//        }
         
         playerView.pause()
         playerView.player = nil
         hasInitializedPlayer = false
+        
+        onDoneBlock!(true)
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBOutlet weak var exportButton: UIButton!
     @IBAction func exportButtonPressed(_ sender: Any) {
-        
+//        print("project now: \()")
     }
     
     // MARK: - Editing Paging VCs
@@ -199,44 +200,18 @@ class EditingViewController: UIViewController {
         
         setupPagingViewControllers()
         
-        PHCachingImageManager().requestAVAsset(forVideo: asset, options: nil) { (avAsset, _, _) in
-            if let videoResolution = avAsset?.resolutionSize() {
-                
-                self.actualVideoResolution = videoResolution
-//                self.videoMetadata.resolution = videoResolution
-                
-                
-                DispatchQueue.main.async {
-                    self.videoMetadata.resolutionWidth = Int(videoResolution.width)
-                    self.videoMetadata.resolutionHeight = Int(videoResolution.height)
-                    
-                    
-                    if videoResolution.width >= videoResolution.height {
-                        
-                        /// fatter
-                        self.percentageOfPreviewValue = self.playerHolderView.frame.width / videoResolution.width
-                    } else {
-                        self.percentageOfPreviewValue = self.playerHolderView.frame.height / videoResolution.height
-                    }
-                }
+        if let projectMetadata = project?.metadata {
+            actualVideoResolution = CGSize(width: projectMetadata.resolutionWidth, height: projectMetadata.resolutionHeight)
+            if projectMetadata.resolutionWidth >= projectMetadata.resolutionHeight {
+                /// fatter
+                self.percentageOfPreviewValue = self.playerHolderView.frame.width / CGFloat(projectMetadata.resolutionWidth)
+            } else {
+                self.percentageOfPreviewValue = self.playerHolderView.frame.height / CGFloat(projectMetadata.resolutionHeight)
             }
-            
-            if let cmDuration = avAsset?.duration {
-                let duration = CMTimeGetSeconds(cmDuration)
-                self.videoMetadata.duration = duration.getString() ?? "0:01"
-            }
-            
-            self.videoMetadata.localIdentifier = self.asset.localIdentifier
-            print("id: \(self.videoMetadata.localIdentifier)")
-            
-//            if let avAssetURL = avAsset as? AVURLAsset {
-//                guard let video = try? Data(contentsOf: avAssetURL.url) else {
-//                    print("error getting avasset data")
-//                    return
-//                }
-//                
-//            }
         }
+        
+
+        print("editing. Vid resolution: \(actualVideoResolution)")
     }
 }
 

@@ -55,11 +55,16 @@ class EditableEditingConfiguration: NSObject {
     var barForegroundColor = UIColor(named: "Yellorange")!
     var barBackgroundColor = #colorLiteral(red: 0.9566580653, green: 0.9566580653, blue: 0.9566580653, alpha: 1)
     
+    var barForegroundColorHex = "00aeef"
+    var barBackgroundColorHex = "000000"
+    
     var edgeInset = 0
     var edgeCornerRadius = 0
     var edgeShadowIntensity = 0
     var edgeShadowRadius = 0
     var edgeShadowColor = UIColor.black
+    
+    var edgeShadowColorHex = "000000"
 //    var edgeBackgroundColor = UIColor.clear
 }
 

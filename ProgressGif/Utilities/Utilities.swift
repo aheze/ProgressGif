@@ -9,6 +9,9 @@ import UIKit
 import AVFoundation
 
 extension UIColor {
+    
+    
+    
     convenience init(hexString: String) {
         let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int = UInt64()
@@ -27,15 +30,38 @@ extension UIColor {
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
     
-    func hexString() -> String {
-       let components = self.cgColor.components
-       let r: CGFloat = components?[0] ?? 0.0
-       let g: CGFloat = components?[1] ?? 0.0
-       let b: CGFloat = components?[2] ?? 0.0
+}
+extension UIColor {
 
-       let hexString = String.init(format: "#%02lX%02lX%02lX", lroundf(Float(r * 255)), lroundf(Float(g * 255)), lroundf(Float(b * 255)))
-       return hexString
+    // MARK: - Computed Properties
+
+    var toHex: String? {
+        return toHex()
     }
+
+    // MARK: - From UIColor to String
+
+    func toHex(alpha: Bool = false) -> String? {
+        guard let components = cgColor.components, components.count >= 3 else {
+            return nil
+        }
+
+        let r = Float(components[0])
+        let g = Float(components[1])
+        let b = Float(components[2])
+        var a = Float(1.0)
+
+        if components.count >= 4 {
+            a = Float(components[3])
+        }
+
+        if alpha {
+            return String(format: "%02lX%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255), lroundf(a * 255))
+        } else {
+            return String(format: "%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255))
+        }
+    }
+
 }
 
 extension UIView {
@@ -49,14 +75,14 @@ extension UIViewController {
     func add(childViewController: UIViewController, inView: UIView) {
         // Add Child View Controller
         addChild(childViewController)
-
+        
         // Add Child View as Subview
         inView.insertSubview(childViewController.view, at: 0)
-
+        
         // Configure Child View
         childViewController.view.frame = inView.bounds
         childViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
+        
         print("adding view controller")
         // Notify Child View Controller
         childViewController.didMove(toParent: self)
@@ -91,19 +117,19 @@ extension UIImageView {
 
 /// for the collectionview. The shadow for the editing preview is in DropShadow.swift
 class ShadowView: UIView {
-
+    
     var shouldActivate = false
     private var shadowLayer: CAShapeLayer!
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-
+        
         if shouldActivate {
             if shadowLayer == nil {
                 shadowLayer = CAShapeLayer()
                 shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.width / 2).cgPath
                 shadowLayer.fillColor = UIColor.systemFill.cgColor
-
+                
                 shadowLayer.shadowColor = UIColor.darkGray.cgColor
                 shadowLayer.shadowPath = shadowLayer.path
                 shadowLayer.shadowOffset = CGSize(width: 0, height: 0)
@@ -136,21 +162,21 @@ extension FloatingPoint {
 /// button with shadow (for importing)
 class CustomButton: UIButton {
     private var shadowLayer: CAShapeLayer!
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-
+        
         if shadowLayer == nil {
             shadowLayer = CAShapeLayer()
             shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.width / 2).cgPath
             shadowLayer.fillColor = UIColor.white.cgColor
-
+            
             shadowLayer.shadowColor = UIColor.darkGray.cgColor
             shadowLayer.shadowPath = shadowLayer.path
             shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
             shadowLayer.shadowOpacity = 0.4
             shadowLayer.shadowRadius = 3
-
+            
             layer.insertSublayer(shadowLayer, at: 0)
         }
     }

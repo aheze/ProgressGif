@@ -19,6 +19,8 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
 
     let realm = try! Realm()
     
+    var onDoneBlock: ((Bool) -> Void)?
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -57,18 +59,26 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
         PHCachingImageManager().requestAVAsset(forVideo: currentViewController.asset, options: nil) { (avAsset, _, _) in
             
             if let videoResolution = avAsset?.resolutionSize() {
+                print("yes size: \(videoResolution)")
                 metadata.resolutionWidth = Int(videoResolution.width)
                 metadata.resolutionHeight = Int(videoResolution.height)
+            } else {
+                print("no size")
             }
             
             if let cmDuration = avAsset?.duration {
                 let duration = CMTimeGetSeconds(cmDuration)
+                print("yes duration: \(duration)")
                 metadata.duration = duration.getString() ?? "0:01"
+            } else {
+                print("no duration")
             }
             DispatchQueue.main.async {
                 metadata.localIdentifier = self.currentViewController.asset.localIdentifier
                 print("id: \(metadata.localIdentifier)")
                 
+                
+                print("project currently: \(newProject)")
                 do {
                     try self.realm.write {
                         self.realm.add(newProject)
@@ -82,6 +92,8 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
                 if let viewController = storyboard.instantiateViewController(withIdentifier: "EditingViewController") as? EditingViewController {
                     viewController.transitioningDelegate = self
                     viewController.asset = self.currentViewController.asset
+                    viewController.project = newProject
+                    viewController.onDoneBlock = self.onDoneBlock
                     print("present")
                     self.present(viewController, animated: true, completion: nil)
                 }
