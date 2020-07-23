@@ -10,6 +10,7 @@ PODS:
     - SDWebImage/Core (= 5.8.1)
   - SDWebImage/Core (5.8.1)
   - SnapKit (5.0.1)
+  - SwiftGifOrigin (1.7.0)
 
 DEPENDENCIES:
   - Parchment
@@ -17,6 +18,7 @@ DEPENDENCIES:
   - Regift
   - SDWebImage
   - SnapKit (~> 5.0.0)
+  - SwiftGifOrigin (~> 1.7.0)
 
 SPEC REPOS:
   trunk:
@@ -26,6 +28,7 @@ SPEC REPOS:
     - Regift
     - SDWebImage
     - SnapKit
+    - SwiftGifOrigin
 
 SPEC CHECKSUMS:
   Parchment: 002785473861582385db5c6725165353c500198e
@@ -34,7 +37,8 @@ SPEC CHECKSUMS:
   Regift: a7c1a7e377c60bfc34301d6f532e099e5ae109a8
   SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
 
-PODFILE CHECKSUM: 6aa761831a1df91456d8a552c6d0e434fa45619f
+PODFILE CHECKSUM: ed9771af62b9a8f1177b9cb80b9b9f3b014b2a3c
 
 COCOAPODS: 1.8.3
