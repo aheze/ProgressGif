@@ -20,8 +20,6 @@ extension ExportViewController {
         let startRect = CGRect(x: 0, y: 0, width: 0, height: height)
         let endRect = CGRect(x: 0, y: 0, width: drawingSize.width, height: height)
         
-        print("end width: \(endRect)")
-        
         progressBarBackgroundLayer.frame = endRect
         
         progressBarBackgroundLayer.displayIfNeeded()
@@ -37,13 +35,9 @@ extension ExportViewController {
         progressBarForegroundLayer.anchorPoint = CGPoint(x: 0, y: 0)
         
         let boundsAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.bounds))
-//        boundsAnimation.fromValue = 0
-//        boundsAnimation.toValue = 1.2
         
         boundsAnimation.fromValue = NSValue(cgRect: startRect)
         boundsAnimation.toValue = NSValue(cgRect: endRect)
-        
-        print("tovalue: \(NSValue(cgRect: endRect))")
         
         boundsAnimation.duration = CMTimeGetSeconds(renderingAsset.duration)
         boundsAnimation.timingFunction = CAMediaTimingFunction(name: .linear)
@@ -127,7 +121,9 @@ extension ExportViewController {
         }
 
         compositionTrack.preferredTransform = assetTrack.preferredTransform
-        let videoInfo = orientation(from: assetTrack.preferredTransform)
+//        let videoInfo = orientation(from: assetTrack.preferredTransform)
+        
+        let videoInfo = assetTrack.preferredTransform.getOrientation()
         
         let videoSize: CGSize
         if videoInfo.isPortrait {
@@ -154,8 +150,6 @@ extension ExportViewController {
         
         /// adjust for edge insets
         let adjustedVideoFrame = getAdjustedFrame(for: videoSize, configuration: configuration)
-        print("adjusted frame: \(adjustedVideoFrame), normal: \(videoSize)")
-        
         
         videoLayer.frame = adjustedVideoFrame
         overlayLayer.frame = adjustedVideoFrame
@@ -203,7 +197,6 @@ extension ExportViewController {
                 print("Cannot create export session.")
                 return
         }
-        print("has export setssino")
         
         let videoName = UUID().uuidString
         let exportURL = URL(fileURLWithPath: NSTemporaryDirectory())
@@ -225,7 +218,6 @@ extension ExportViewController {
         
         exportSession.exportAsynchronously {
             exportProgressBarTimer.invalidate()
-            print("asynd")
             DispatchQueue.main.async {
                 switch exportSession.status {
                 case .completed:
@@ -262,6 +254,26 @@ extension ExportViewController {
         } else if transform.a == 1.0 && transform.b == 0 && transform.c == 0 && transform.d == 1.0 {
             assetOrientation = .up
         } else if transform.a == -1.0 && transform.b == 0 && transform.c == 0 && transform.d == -1.0 {
+            assetOrientation = .down
+        }
+        
+        return (assetOrientation, isPortrait)
+    }
+}
+
+extension CGAffineTransform {
+    func getOrientation() -> (orientation: UIImage.Orientation, isPortrait: Bool) {
+        var assetOrientation = UIImage.Orientation.up
+        var isPortrait = false
+        if self.a == 0 && self.b == 1.0 && self.c == -1.0 && self.d == 0 {
+            assetOrientation = .right
+            isPortrait = true
+        } else if self.a == 0 && self.b == -1.0 && self.c == 1.0 && self.d == 0 {
+            assetOrientation = .left
+            isPortrait = true
+        } else if self.a == 1.0 && self.b == 0 && self.c == 0 && self.d == 1.0 {
+            assetOrientation = .up
+        } else if self.a == -1.0 && self.b == 0 && self.c == 0 && self.d == -1.0 {
             assetOrientation = .down
         }
         

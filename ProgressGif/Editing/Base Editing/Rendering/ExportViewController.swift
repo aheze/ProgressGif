@@ -8,6 +8,8 @@
 import UIKit
 import AVFoundation
 import AVKit
+import Regift
+import SwiftGifOrigin
 
 class ExportViewController: UIViewController {
     
@@ -34,11 +36,10 @@ class ExportViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var progressBaseView: UIView!
+    
+    @IBOutlet weak var progressStatusLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var segmentIndicator: ANSegmentIndicator!
-    
-    
-    
     
     @IBOutlet weak var exportButtonBaseView: UIView!
     
@@ -84,6 +85,8 @@ class ExportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imageView.alpha = 0
+        
         processingLabel.alpha = 0
         playerBaseView.layer.cornerRadius = 12
         playerBackgroundView.layer.cornerRadius = 12
@@ -105,7 +108,7 @@ class ExportViewController: UIViewController {
         var settings = ANSegmentIndicatorSettings()
         settings.defaultSegmentColor = UIColor.tertiarySystemBackground
         settings.segmentBorderType = .round
-        settings.segmentsCount = 2
+        settings.segmentsCount = 1
         settings.segmentWidth = 16
         settings.animationDuration = 0.1
         settings.segmentColor = UIColor(named: "Yellorange")!
@@ -114,7 +117,7 @@ class ExportViewController: UIViewController {
     }
     
     func updateProgress(to progress: Float) {
-        let progressPercent = progress * 50
+        let progressPercent = progress * 100
         segmentIndicator.updateProgress(percent: Degrees(progressPercent))
         progressLabel.fadeTransition(0.1)
         progressLabel.text = "\(Int(progressPercent))%"
@@ -123,14 +126,13 @@ class ExportViewController: UIViewController {
     
     /// finished rendering video. Then need to convert to gif.
     func finishedExport() {
+        segmentIndicator.updateProgress(percent: 100)
+        progressLabel.text = "100%"
+        
+        progressStatusLabel.fadeTransition(0.6)
+        progressStatusLabel.text = "Finishing"
         
         
-        
-        segmentIndicator.updateProgress(percent: 50)
-        
-        progressLabel.text = "50%"
-        
-        imageView.alpha = 0
         
         var aspectRect = imageView.frame
         if let image = playerURL.generateImage() {
@@ -143,58 +145,57 @@ class ExportViewController: UIViewController {
             playerBackgroundRightC.constant = (playerBaseView.bounds.width - aspectRect.width) / 2
             playerBackgroundBottomC.constant = (playerBaseView.bounds.height - aspectRect.height) / 2
         }
-        
-        
-        
-        
-        
         UIView.animate(withDuration: 0.5, delay: 0.4, options: .curveLinear, animations: {
             self.playerBackgroundView.layer.cornerRadius = 0
-            self.view.layoutIfNeeded()
+            self.playerBaseView.layoutIfNeeded()
         }) { _ in
-            UIView.animate(withDuration: 0.6, delay: 0.4, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
-                self.imageView.alpha = 0.4
-            }, completion: nil)
+            
+            Regift.createGIFFromSource(self.playerURL, startTime: 0, duration: Float(CMTimeGetSeconds(self.renderingAsset.duration)), frameRate: 16) { (url) in
+                if let gifUrl = url {
+                    print("Convert to GIF completed! Export URL: \(gifUrl)")
+                    self.finishedConversion(gifURL: gifUrl)
+                } else {
+                    self.processingLabel.text = "Error"
+                }
+            }
         }
+        
+        /// start exporting to gif
+        
+        
     }
     
-    func finishedConversion() {
+    func finishedConversion(gifURL: URL) {
         processingLabel.layer.removeAllAnimations()
+        
+        do {
+            let imageData = try Data(contentsOf: gifURL)
+            self.imageView.image = UIImage.gif(data: imageData)
+        } catch {
+            print("error reading gif file: \(error)")
+        }
         
         UIView.animate(withDuration: 0.6, animations: {
             self.processingLabel.alpha = 0
             self.cancelButton.alpha = 0
             self.segmentIndicator.alpha = 0
             self.progressLabel.alpha = 0
+            self.progressStatusLabel.alpha = 0
         }) { _ in
             
             self.processingLabel.text = "Here you go!"
             
-            self.exportButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-            UIView.animate(withDuration: 0.6, delay: 0.4, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
+            UIView.animate(withDuration: 0.6, animations: {
                 self.processingLabel.alpha = 1
                 self.imageView.alpha = 1
+            })
+            
+            self.exportButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            UIView.animate(withDuration: 1, delay: 0.4, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
                 self.exportButton.alpha = 1
                 self.exportButton.transform = CGAffineTransform.identity
             }, completion: nil)
-            
         }
-        
-//        UIView.animate(withDuration: 0.5, delay: 0.4, options: .curveLinear, animations: {
-//        //            self.segmentIndicator.alpha = 0
-//        //            self.progressLabel.alpha = 0
-//                    self.cancelButton.alpha = 0
-//
-//                    self.playerBackgroundView.layer.cornerRadius = 0
-//
-//                    self.view.layoutIfNeeded()
-//                })
-//
-//        UIView.animate(withDuration: 0.6, delay: 0.4, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
-//            self.imageView.alpha = 1
-//            self.exportButton.alpha = 1
-//            self.exportButton.transform = CGAffineTransform.identity
-//        }, completion: nil)
         
     }
 }

@@ -42,20 +42,7 @@ extension ViewController {
                 FromPhotosPicker {
                 
                 vc.onDoneBlock = { _ in
-                    print("done!!!")
-                    
                     self.self.collectionViewController?.updateAssets()
-//                    self.projects = self.realm.objects(Project.self)
-//
-//                    if let projs = self.projects {
-//                        self.projects = projs.sorted(byKeyPath: "dateCreated", ascending: false)
-//                    }
-//
-//                    self.collectionViewController?.projects = self.projects
-//                    self.collectionViewController?.getAssetFromProjects()
-//
-//                    let firstIndex = IndexPath(item: 0, section: 0)
-//                    self.collectionViewController?.collectionView.insertItems(at: [firstIndex])
                 }
                 self.present(vc, animated: true, completion: nil)
             }
