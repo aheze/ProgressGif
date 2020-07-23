@@ -52,6 +52,8 @@
 		49B4CF9D24C74FD800A2A22A /* ColorfulEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9724C74FD700A2A22A /* ColorfulEntity.swift */; };
 		49B4CF9E24C74FD800A2A22A /* ColorMapCursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9824C74FD800A2A22A /* ColorMapCursor.swift */; };
 		49B4CFA024C755E500A2A22A /* Importing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9F24C755E500A2A22A /* Importing.swift */; };
+		49B4CFA324C7A90900A2A22A /* Rendering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CFA224C7A90900A2A22A /* Rendering.swift */; };
+		49B4CFA524C7B2B600A2A22A /* ExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CFA424C7B2B600A2A22A /* ExportViewController.swift */; };
 		49E41ECC24B967E900EA7BB2 /* ViewController+AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */; };
 		49E75FA724C015DC004B3F41 /* EditingEdgesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */; };
 		49E75FA924C015E6004B3F41 /* EditingOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */; };
@@ -112,6 +114,8 @@
 		49B4CF9724C74FD700A2A22A /* ColorfulEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorfulEntity.swift; sourceTree = "<group>"; };
 		49B4CF9824C74FD800A2A22A /* ColorMapCursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMapCursor.swift; sourceTree = "<group>"; };
 		49B4CF9F24C755E500A2A22A /* Importing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importing.swift; sourceTree = "<group>"; };
+		49B4CFA224C7A90900A2A22A /* Rendering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rendering.swift; sourceTree = "<group>"; };
+		49B4CFA424C7B2B600A2A22A /* ExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewController.swift; sourceTree = "<group>"; };
 		49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AddButton.swift"; sourceTree = "<group>"; };
 		49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingEdgesVC.swift; sourceTree = "<group>"; };
 		49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingOptionsVC.swift; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 		49240FD124BFFB4600DC9446 /* Base Editing */ = {
 			isa = PBXGroup;
 			children = (
+				49B4CFA124C7A8F500A2A22A /* Rendering */,
 				4948C8DF24C0F47800E5F5F6 /* Video Player */,
 				496F7F8524BE3AE90045DDCB /* EditingViewController.swift */,
 				49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */,
@@ -317,6 +322,15 @@
 				49B4CF8D24C6018500A2A22A /* Saving.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		49B4CFA124C7A8F500A2A22A /* Rendering */ = {
+			isa = PBXGroup;
+			children = (
+				49B4CFA224C7A90900A2A22A /* Rendering.swift */,
+				49B4CFA424C7B2B600A2A22A /* ExportViewController.swift */,
+			);
+			path = Rendering;
 			sourceTree = "<group>";
 		};
 		49E41ECD24B967F900EA7BB2 /* Buttons */ = {
@@ -491,6 +505,7 @@
 				49B4CF9924C74FD800A2A22A /* BrightnessSlider.swift in Sources */,
 				49A362DB24BB92B100019FC6 /* ZoomDismissalInteractionController.swift in Sources */,
 				49F8C12824C28669004686DF /* VideoUtilities.swift in Sources */,
+				49B4CFA324C7A90900A2A22A /* Rendering.swift in Sources */,
 				49B4CF9C24C74FD800A2A22A /* BrightnessCursor.swift in Sources */,
 				49A362E024BB96E800019FC6 /* PhotoZoomViewController.swift in Sources */,
 				49240FCB24BFC88400DC9446 /* EditingVC+PlayerView.swift in Sources */,
@@ -513,6 +528,7 @@
 				49B4CF9B24C74FD800A2A22A /* ColorPicker.swift in Sources */,
 				4980302724B94CDD00AE277C /* SetupButtons.swift in Sources */,
 				49A362DD24BB92B100019FC6 /* ZoomTransitionController.swift in Sources */,
+				49B4CFA524C7B2B600A2A22A /* ExportViewController.swift in Sources */,
 				49B4CF9E24C74FD800A2A22A /* ColorMapCursor.swift in Sources */,
 				49B4CF8B24C51C3F00A2A22A /* DropShadow.swift in Sources */,
 				49A362DC24BB92B100019FC6 /* ZoomAnimator.swift in Sources */,

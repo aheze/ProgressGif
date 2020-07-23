@@ -46,12 +46,9 @@ class CollectionViewController: UIViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.contentInsetAdjustmentBehavior = .never
         
-        print("setup collecitonview")
-        
         if collectionType == .projects {
             getAssetFromProjects()
         } else {
-            print("get assets!")
             getAssetFromPhoto()
         }
     }
@@ -69,7 +66,7 @@ class CollectionViewController: UIViewController {
     }
     func updateAssets() {
 //        projects = realm.objects(Project.self)
-//        
+//
 //        if let projs = projects {
 //            projects = projs.sorted(byKeyPath: "dateCreated", ascending: false)
 //        }
@@ -181,7 +178,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("cellForItemAt cell: \(indexPath)")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCellId", for: indexPath) as! PhotoCell
         
         if collectionType == .projects {
@@ -206,7 +202,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
             cell.imageBaseView.shouldActivate = true
             
             PHImageManager.default().requestImage(for: asset, targetSize: cellSize, contentMode: PHImageContentMode.aspectFit, options: nil) { (image, userInfo) -> Void in
-                print("request")
                 if cell.representedAssetIdentifier == asset.localIdentifier {
                     cell.imageView.image = image
                     let duration = asset.duration

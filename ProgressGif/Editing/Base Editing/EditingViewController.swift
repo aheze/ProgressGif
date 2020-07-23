@@ -28,20 +28,21 @@ class EditingViewController: UIViewController {
     /// the values changed in the number stepper are multiplied by this.
     var unit: CGFloat {
         get {
-            return drawingView.frame.height / 75
+            return drawingView.frame.height / Constants.unitDivision
         }
     }
     
     var actualVideoResolution: CGSize?
     
-    /// how much to multiply the preview values by.
-    /// example: `percentageOfPreviewValue` = 0.8
-    /// then, a setting of `5` for the bar height would actually be `4` in the drawing preview view.
+    /// how much to multiply the preview values by, for rendering
+    /// example: `percentageOfPreviewValue` = 4
+    /// then, a setting of `5` for the bar height would actually be `20` for rendering
     var percentageOfPreviewValue = CGFloat(1)
     
     // MARK: - Video
     
     var asset: PHAsset!
+    var avAsset: AVAsset!
     var hasInitializedPlayer = false
     
     // MARK: - Player Constraint Calculations
@@ -70,11 +71,11 @@ class EditingViewController: UIViewController {
         playerHolderTopC.constant = topConstant
         playerControlsBottomC.constant = bottomConstant
         
-        calculatePreviewScale()
+        
         calculateAspectDrawingFrame()
         barHeightChanged(to: editingConfiguration.barHeight)
+        calculatePreviewScale()
         
-        titleTextField.delegate = self
     }
     
     @IBOutlet weak var topStatusBlurView: UIVisualEffectView!
@@ -159,13 +160,7 @@ class EditingViewController: UIViewController {
     @IBOutlet weak var galleryButton: UIButton!
     @IBAction func galleryButtonPressed(_ sender: Any) {
         
-//        do {
-//            try realm.write {
-////                project?.metadata = videoMetadata
-//            }
-//        } catch {
-//            print("error deleting category \(error)")
-//        }
+        saveConfig()
         
         playerView.pause()
         playerView.player = nil
@@ -181,6 +176,35 @@ class EditingViewController: UIViewController {
     @IBOutlet weak var exportButton: UIButton!
     @IBAction func exportButtonPressed(_ sender: Any) {
 //        print("project now: \()")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "ExportViewController") as? ExportViewController {
+            
+//            if let urlAsset = avAsset as? AVURLAsset {
+//                render(from: urlAsset, with: editingConfiguration) { exportedURL in
+//                    guard let exportedURL = exportedURL else {
+//                      return
+//                    }
+//                    viewController.playerURL = exportedURL
+//                    viewController.finishedExport()
+//                    print("render")
+//                }
+//            }
+            
+            if let resolutionWidth = project?.metadata?.resolutionWidth {
+                if let resolutionHeight = project?.metadata?.resolutionHeight {
+                    
+                    let largerSide = max(CGFloat(resolutionWidth), CGFloat(resolutionHeight))
+                    viewController.unit = largerSide / Constants.unitDivision
+                    
+                }
+            }
+            
+            viewController.renderingAsset = avAsset
+            viewController.editingConfiguration = editingConfiguration
+            self.present(viewController, animated: true, completion: nil)
+            
+        }
     }
     
     // MARK: - Editing Paging VCs
@@ -194,6 +218,7 @@ class EditingViewController: UIViewController {
         
         maskingView.isHidden = true
         
+        titleTextField.delegate = self
         
         /// first hide progress bar until transition finishes
         progressBarBackgroundView.alpha = 0
@@ -209,14 +234,12 @@ class EditingViewController: UIViewController {
             actualVideoResolution = CGSize(width: projectMetadata.resolutionWidth, height: projectMetadata.resolutionHeight)
             if projectMetadata.resolutionWidth >= projectMetadata.resolutionHeight {
                 /// fatter
-                self.percentageOfPreviewValue = self.playerHolderView.frame.width / CGFloat(projectMetadata.resolutionWidth)
+                self.percentageOfPreviewValue = CGFloat(projectMetadata.resolutionWidth) / self.playerHolderView.frame.width
             } else {
-                self.percentageOfPreviewValue = self.playerHolderView.frame.height / CGFloat(projectMetadata.resolutionHeight)
+                self.percentageOfPreviewValue = CGFloat(projectMetadata.resolutionHeight) / self.playerHolderView.frame.height
             }
         }
         
-
-        print("editing. Vid resolution: \(actualVideoResolution)")
     }
 }
 
