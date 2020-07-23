@@ -5,6 +5,7 @@ PODS:
   - Realm/Headers (5.1.0)
   - RealmSwift (5.1.0):
     - Realm (= 5.1.0)
+  - Regift (1.6.0)
   - SDWebImage (5.8.1):
     - SDWebImage/Core (= 5.8.1)
   - SDWebImage/Core (5.8.1)
@@ -13,6 +14,7 @@ PODS:
 DEPENDENCIES:
   - Parchment
   - RealmSwift
+  - Regift
   - SDWebImage
   - SnapKit (~> 5.0.0)
 
@@ -21,6 +23,7 @@ SPEC REPOS:
     - Parchment
     - Realm
     - RealmSwift
+    - Regift
     - SDWebImage
     - SnapKit
 
@@ -28,9 +31,10 @@ SPEC CHECKSUMS:
   Parchment: 002785473861582385db5c6725165353c500198e
   Realm: bdea546851e37b4cf0a2400cef115c7c26fda488
   RealmSwift: 70945aa168db93b215c460e9c8ef680261aa28af
+  Regift: a7c1a7e377c60bfc34301d6f532e099e5ae109a8
   SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 63eb5acfe0c14c720fdc0e520dc8eb0675f6d9d7
+PODFILE CHECKSUM: 6aa761831a1df91456d8a552c6d0e434fa45619f
 
 COCOAPODS: 1.8.3
