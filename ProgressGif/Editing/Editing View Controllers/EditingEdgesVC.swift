@@ -90,7 +90,6 @@ class EditingEdgesVC: UIViewController {
     
     func setUpConfiguration() {
         
-        print("start edge: \(originalEdgeInset)")
         insetNumberStepper.value = originalEdgeInset
         cornerRadiusNumberStepper.value = originalEdgeCornerRadius
         shadowIntensityNumberStepper.value = originalEdgeShadowIntensity

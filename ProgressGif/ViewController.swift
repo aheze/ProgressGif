@@ -75,7 +75,6 @@ class ViewController: UIViewController {
         filesButton.scaleUp()
     }
     
-    
     @IBAction func photosTouchDown(_ sender: Any) {
         photosButton.scaleDown()
     }
@@ -101,18 +100,12 @@ class ViewController: UIViewController {
         clipboardButton.scaleUp()
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         /// make the import from files, import from photos, and import from clipboard buttons transparent
         setUpButtonAlpha()
         
-//        for _ in 0...5 {
-//            let project = EditableProject()
-//            project.title = "Title"
-//            projects.append(project)
-//        }
         
         /// initialize the collection view
         _ = collectionViewController

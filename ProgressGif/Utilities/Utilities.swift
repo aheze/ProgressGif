@@ -8,10 +8,18 @@
 import UIKit
 import AVFoundation
 
+extension UIView {
+    func fadeTransition(_ duration:CFTimeInterval) {
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name:
+            CAMediaTimingFunctionName.easeInEaseOut)
+        animation.type = CATransitionType.fade
+        animation.duration = duration
+        layer.add(animation, forKey: CATransitionType.fade.rawValue)
+    }
+}
+
 extension UIColor {
-    
-    
-    
     convenience init(hexString: String) {
         let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int = UInt64()
@@ -29,7 +37,6 @@ extension UIColor {
         }
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
-    
 }
 extension UIColor {
 
@@ -83,7 +90,6 @@ extension UIViewController {
         childViewController.view.frame = inView.bounds
         childViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        print("adding view controller")
         // Notify Child View Controller
         childViewController.didMove(toParent: self)
     }

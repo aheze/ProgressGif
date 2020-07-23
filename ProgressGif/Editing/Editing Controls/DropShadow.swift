@@ -33,6 +33,8 @@ class ResizableShadowView: UIView {
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
         layer.shadowOffset = CGSize(width: 0, height: 0)
         layer.shadowOpacity = min(Float(intensity) / 10, 1) /// the stepper limit is 10, but this is just in case.
-        layer.shadowRadius = CGFloat(shadowRadius) * 0.5
+//        layer.shadowRadius = CGFloat(shadowRadius) * 0.5
+        
+        layer.shadowRadius = CGFloat(shadowRadius) * Constants.shadowRadiusMultiplier
     }
 }

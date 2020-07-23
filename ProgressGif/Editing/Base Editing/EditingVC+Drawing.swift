@@ -13,15 +13,14 @@ extension EditingViewController {
         if let videoResolution = actualVideoResolution {
             if videoResolution.width >= videoResolution.height {
                 /// fatter
-                self.percentageOfPreviewValue = self.playerHolderView.frame.width / videoResolution.width
+                self.percentageOfPreviewValue = CGFloat(videoResolution.width) / self.playerHolderView.frame.width
             } else {
-                self.percentageOfPreviewValue = self.playerHolderView.frame.height / videoResolution.height
+                self.percentageOfPreviewValue = CGFloat(videoResolution.height) / self.playerHolderView.frame.height
             }
         }
     }
     
     func setUpDrawing(with configuration: EditableEditingConfiguration) {
-        print("setup")
         let progressWidth = CGFloat(playerControlsView.customSlider.value) * progressBarFullWidth
         progressBarWidthC.constant = progressWidth
         
@@ -83,7 +82,7 @@ extension EditingViewController {
             progressBarBackgroundHeightC.constant = CGFloat(editingConfiguration.barHeight) * unit
             maskingView.layer.cornerRadius = (CGFloat(editingConfiguration.edgeCornerRadius) * unit)
             
-            let scale = 1 - (CGFloat(editingConfiguration.edgeInset) * 0.02)
+            let scale = 1 - (CGFloat(editingConfiguration.edgeInset) * Constants.transformMultiplier)
             shadowScale = scale
             updateShadow(scale: scale)
             
