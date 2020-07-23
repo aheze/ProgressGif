@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import AVKit
 
 class ExportViewController: UIViewController {
     
@@ -30,11 +31,25 @@ class ExportViewController: UIViewController {
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBAction func cancelButtonPressed(_ sender: Any) {
+        if let exportSession = export {
+            exportSession.cancelExport()
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBOutlet weak var exportButton: UIButton!
     @IBAction func exportButtonPresse(_ sender: Any) {
+        
+        let player = AVPlayer(url: playerURL)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+        
     }
+    
+    var export: AVAssetExportSession?
     
     /// is proportional to the height of the video.
     /// multiply this by the editingConfiguration values
@@ -45,16 +60,29 @@ class ExportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("lload")
+        
+        
         processingLabel.alpha = 0
+        
+//        UIView.animate(withDuration: 0.6, delay: 0, options: [.repeat, .autoreverse], animations: {
+//            self.processingLabel.alpha = 1
+//        }, completion: nil)
+        
+//        UIView.animate(withDuration: 2, animations: {
+//            self.processingLabel.alpha = 1
+//        })
         
         playerBaseView.layer.cornerRadius = 12
         playerBaseView.clipsToBounds = true
+        
+        exportButton.layer.cornerRadius = 12
         
         exportButton.alpha = 0
         
         if let urlAsset = renderingAsset as? AVURLAsset {
             render(from: urlAsset, with: editingConfiguration) { exportedURL in
-                
+                print("done")
                 guard let exportedURL = exportedURL else {
                     return
                 }
@@ -72,6 +100,7 @@ class ExportViewController: UIViewController {
     }
     
     func finishedExport() {
+        processingLabel.layer.removeAllAnimations()
         
         progressLabel.text = "100%"
         imageView.alpha = 0
@@ -83,6 +112,9 @@ class ExportViewController: UIViewController {
         UIView.animate(withDuration: 0.8, delay: 0.6, options: .curveLinear, animations: {
             self.progressLabel.alpha = 0
             self.imageView.alpha = 1
+            
+            self.cancelButton.alpha = 0
+            self.exportButton.alpha = 1
         }, completion: nil)
     }
 }
