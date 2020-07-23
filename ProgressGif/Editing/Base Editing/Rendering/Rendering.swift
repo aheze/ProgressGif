@@ -150,7 +150,7 @@ extension ExportViewController {
         let overlayLayer = CALayer()
         overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
         
-        backgroundLayer.backgroundColor = UIColor.white.cgColor
+        backgroundLayer.backgroundColor = UIColor.clear.cgColor
         
         /// adjust for edge insets
         let adjustedVideoFrame = getAdjustedFrame(for: videoSize, configuration: configuration)
@@ -181,6 +181,8 @@ extension ExportViewController {
             postProcessingAsVideoLayer: videoLayer,
             in: outputLayer)
         
+        
+        
         let instruction = AVMutableVideoCompositionInstruction()
         instruction.timeRange = CMTimeRange(
             start: .zero,
@@ -193,14 +195,8 @@ extension ExportViewController {
 
         export = AVAssetExportSession(
             asset: composition,
-            presetName: AVAssetExportPresetHighestQuality)
-            
-//        else {
-//                onComplete(nil)
-//                print("Cannot create export session.")
-//                return
-//        }
-        
+            presetName: AVAssetExportPresetHEVCHighestQualityWithAlpha)
+       
         guard let exportSession = export
             else {
                 onComplete(nil)
