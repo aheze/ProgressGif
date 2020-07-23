@@ -17,27 +17,42 @@ extension ExportViewController {
         
         let height = configuration.barHeight.getBarHeightFromValue(withUnit: unit)
         
-        progressBarBackgroundLayer.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: drawingSize.width,
-            height: height)
+        let startRect = CGRect(x: 0, y: 0, width: 0, height: height)
+        let endRect = CGRect(x: 0, y: 0, width: drawingSize.width, height: height)
+        
+        print("end width: \(endRect)")
+        
+        progressBarBackgroundLayer.frame = endRect
         
         progressBarBackgroundLayer.displayIfNeeded()
         layer.addSublayer(progressBarBackgroundLayer)
         
         let progressBarForegroundLayer = CALayer()
         progressBarForegroundLayer.backgroundColor = configuration.barForegroundColor.cgColor
-        
-        progressBarForegroundLayer.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: drawingSize.width * 0.5,
-            height: height)
-        
+        progressBarForegroundLayer.frame = startRect
         progressBarForegroundLayer.displayIfNeeded()
-        layer.addSublayer(progressBarForegroundLayer)
         
+        progressBarForegroundLayer.bounds = CGRect(x: 0, y: 0, width: drawingSize.width, height: height)
+        progressBarForegroundLayer.position = CGPoint(x: 0, y: 0)
+        progressBarForegroundLayer.anchorPoint = CGPoint(x: 0, y: 0)
+        
+        let boundsAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.bounds))
+//        boundsAnimation.fromValue = 0
+//        boundsAnimation.toValue = 1.2
+        
+        boundsAnimation.fromValue = NSValue(cgRect: startRect)
+        boundsAnimation.toValue = NSValue(cgRect: endRect)
+        
+        print("tovalue: \(NSValue(cgRect: endRect))")
+        
+        boundsAnimation.duration = CMTimeGetSeconds(renderingAsset.duration)
+        boundsAnimation.timingFunction = CAMediaTimingFunction(name: .linear)
+
+        boundsAnimation.beginTime = AVCoreAnimationBeginTimeAtZero
+        progressBarForegroundLayer.add(boundsAnimation, forKey: "bounds animation")
+
+        
+        layer.addSublayer(progressBarForegroundLayer)
     }
     
     /// to background, so need to calculate frame
@@ -59,7 +74,6 @@ extension ExportViewController {
         shadowLayer.displayIfNeeded()
         layer.addSublayer(shadowLayer)
         
-        
     }
     
     private func maskCorners(for layer: CALayer, maskSize: CGSize, configuration: EditableEditingConfiguration) {
@@ -71,28 +85,9 @@ extension ExportViewController {
         maskLayer.fillColor = UIColor.white.cgColor
         
         maskLayer.displayIfNeeded()
-//        layer.addSublayer(shadowLayer)
         
         layer.mask = maskLayer
-        
-        
     }
-    
-    private func scaleVideoForInset(for videoLayer: CALayer, and overlayLayer: CALayer, videoSize: CGSize, configuration: EditableEditingConfiguration) {
-        
-        let scale = configuration.edgeInset.getScaleFromInsetValue()
-        
-        let adjustedVideoWidth = videoSize.width * scale
-        let adjustedVideoHeight = videoSize.height * scale
-        let adjustedVideoRect = CGRect(x: (videoSize.width - adjustedVideoWidth) / 2,
-                                        y: (videoSize.height - adjustedVideoHeight) / 2,
-                                        width: adjustedVideoWidth,
-                                        height: adjustedVideoHeight)
-        
-        videoLayer.frame = adjustedVideoRect
-        overlayLayer.frame = adjustedVideoRect
-    }
-
     
     private func getAdjustedFrame(for videoSize: CGSize, configuration: EditableEditingConfiguration) -> CGRect {
         let scale = configuration.edgeInset.getScaleFromInsetValue()
@@ -103,7 +98,6 @@ extension ExportViewController {
                                         y: (videoSize.height - adjustedVideoHeight) / 2,
                                         width: adjustedVideoWidth,
                                         height: adjustedVideoHeight)
-        
         return adjustedVideoRect
     }
     
@@ -122,25 +116,11 @@ extension ExportViewController {
                 return
         }
         
-        
         do {
-            // 1
             let timeRange = CMTimeRange(start: .zero, duration: asset.duration)
-            // 2
             try compositionTrack.insertTimeRange(timeRange, of: assetTrack, at: .zero)
             
-            // 3
-            if let audioAssetTrack = asset.tracks(withMediaType: .audio).first,
-                let compositionAudioTrack = composition.addMutableTrack(
-                    withMediaType: .audio,
-                    preferredTrackID: kCMPersistentTrackID_Invalid) {
-                try compositionAudioTrack.insertTimeRange(
-                    timeRange,
-                    of: audioAssetTrack,
-                    at: .zero)
-            }
         } catch {
-            // 4
             onComplete(nil)
             print(error)
             return
@@ -158,27 +138,35 @@ extension ExportViewController {
             videoSize = assetTrack.naturalSize
         }
         
+        /// the clear background + shadow
         let backgroundLayer = CALayer()
         backgroundLayer.frame = CGRect(origin: .zero, size: videoSize)
+        
+        /// the video
         let videoLayer = CALayer()
         videoLayer.frame = CGRect(origin: .zero, size: videoSize)
+        
+        /// progress bar
         let overlayLayer = CALayer()
         overlayLayer.frame = CGRect(origin: .zero, size: videoSize)
         
         backgroundLayer.backgroundColor = UIColor.white.cgColor
         
+        /// adjust for edge insets
         let adjustedVideoFrame = getAdjustedFrame(for: videoSize, configuration: configuration)
+        print("adjusted frame: \(adjustedVideoFrame), normal: \(videoSize)")
+        
         
         videoLayer.frame = adjustedVideoFrame
         overlayLayer.frame = adjustedVideoFrame
         
+        /// add corner radius
         maskCorners(for: videoLayer, maskSize: adjustedVideoFrame.size, configuration: configuration)
         maskCorners(for: overlayLayer, maskSize: adjustedVideoFrame.size, configuration: configuration)
         
+        
         addProgressBar(to: overlayLayer, drawingSize: adjustedVideoFrame.size, configuration: configuration)
         addShadow(to: backgroundLayer, drawingRect: adjustedVideoFrame, configuration: configuration)
-        
-//        scaleVideoForInset(for: videoLayer, and: overlayLayer, videoSize: videoSize, configuration: configuration)
         
         let outputLayer = CALayer()
         outputLayer.frame = CGRect(origin: .zero, size: videoSize)
@@ -203,52 +191,58 @@ extension ExportViewController {
             assetTrack: assetTrack)
         instruction.layerInstructions = [layerInstruction]
 
-        guard let export = AVAssetExportSession(
+        export = AVAssetExportSession(
             asset: composition,
             presetName: AVAssetExportPresetHighestQuality)
+            
+//        else {
+//                onComplete(nil)
+//                print("Cannot create export session.")
+//                return
+//        }
+        
+        guard let exportSession = export
             else {
                 onComplete(nil)
                 print("Cannot create export session.")
                 return
         }
+        print("has export setssino")
         
         let videoName = UUID().uuidString
         let exportURL = URL(fileURLWithPath: NSTemporaryDirectory())
             .appendingPathComponent(videoName)
             .appendingPathExtension("mov")
         
-        export.videoComposition = videoComposition
-        export.outputFileType = .mov
-        export.outputURL = exportURL
+        exportSession.videoComposition = videoComposition
+        exportSession.outputFileType = .mov
+        exportSession.outputURL = exportURL
 
-        //`AVAssetExportSession` code above
+        /// export progress timer
         var exportProgressBarTimer = Timer() // initialize timer
         
         exportProgressBarTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            self.updateProgress(to: export.progress)
+            
+            /// update the progress label
+            self.updateProgress(to: exportSession.progress)
         }
         
-        export.exportAsynchronously {
-//            self.updateProgress(to: 100)
+        exportSession.exportAsynchronously {
             exportProgressBarTimer.invalidate()
-            
+            print("asynd")
             DispatchQueue.main.async {
-                switch export.status {
+                switch exportSession.status {
                 case .completed:
                     print("Completed export! Export URL: \(exportURL)")
                     onComplete(exportURL)
                 default:
                     print("Something went wrong during export.")
-                    print(export.error ?? "unknown error")
+                    print(exportSession.error ?? "unknown error")
                     onComplete(nil)
                     break
                 }
             }
         }
-
-        
-        
-        
     }
     
     private func compositionLayerInstruction(for track: AVCompositionTrack, assetTrack: AVAssetTrack) -> AVMutableVideoCompositionLayerInstruction {
