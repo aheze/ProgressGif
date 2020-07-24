@@ -44,6 +44,7 @@
 		49AC2D0F24C237880009AEBE /* EditingVC+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */; };
 		49B236B824CA1E0700905917 /* RenderingProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236B724CA1E0700905917 /* RenderingProgress.swift */; };
 		49B236BB24CA3BA900905917 /* Licenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236BA24CA3BA900905917 /* Licenses.swift */; };
+		49B236BE24CA6D9400905917 /* Regift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236BD24CA6D9400905917 /* Regift.swift */; };
 		49B4CF8B24C51C3F00A2A22A /* DropShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF8A24C51C3F00A2A22A /* DropShadow.swift */; };
 		49B4CF8E24C6018500A2A22A /* Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF8D24C6018500A2A22A /* Saving.swift */; };
 		49B4CF9224C6661C00A2A22A /* EditingVC+Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */; };
@@ -108,6 +109,7 @@
 		49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+Drawing.swift"; sourceTree = "<group>"; };
 		49B236B724CA1E0700905917 /* RenderingProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingProgress.swift; sourceTree = "<group>"; };
 		49B236BA24CA3BA900905917 /* Licenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Licenses.swift; sourceTree = "<group>"; };
+		49B236BD24CA6D9400905917 /* Regift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regift.swift; sourceTree = "<group>"; };
 		49B4CF8A24C51C3F00A2A22A /* DropShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadow.swift; sourceTree = "<group>"; };
 		49B4CF8D24C6018500A2A22A /* Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saving.swift; sourceTree = "<group>"; };
 		49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+Saving.swift"; sourceTree = "<group>"; };
@@ -328,6 +330,14 @@
 			path = About;
 			sourceTree = "<group>";
 		};
+		49B236BC24CA6D8600905917 /* Regift */ = {
+			isa = PBXGroup;
+			children = (
+				49B236BD24CA6D9400905917 /* Regift.swift */,
+			);
+			path = Regift;
+			sourceTree = "<group>";
+		};
 		49B4CF8C24C6016500A2A22A /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,6 +350,7 @@
 		49B4CFA124C7A8F500A2A22A /* Rendering */ = {
 			isa = PBXGroup;
 			children = (
+				49B236BC24CA6D8600905917 /* Regift */,
 				49B4CFA224C7A90900A2A22A /* Rendering.swift */,
 				49B4CFA424C7B2B600A2A22A /* ExportViewController.swift */,
 				49B236B724CA1E0700905917 /* RenderingProgress.swift */,
@@ -514,6 +525,7 @@
 				49E75FA924C015E6004B3F41 /* EditingOptionsVC.swift in Sources */,
 				496F7F8424BD3C1E0045DDCB /* PhotoPageViewController+UpdateSliderProgress.swift in Sources */,
 				49B4CF8E24C6018500A2A22A /* Saving.swift in Sources */,
+				49B236BE24CA6D9400905917 /* Regift.swift in Sources */,
 				496F7F8624BE3AE90045DDCB /* EditingViewController.swift in Sources */,
 				49B4CF9D24C74FD800A2A22A /* ColorfulEntity.swift in Sources */,
 				4980301F24B91E2500AE277C /* PhotoCell.swift in Sources */,
