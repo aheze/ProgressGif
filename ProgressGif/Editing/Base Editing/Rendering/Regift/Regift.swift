@@ -35,6 +35,15 @@ private struct Group {
     func wait() { let _ = group.wait(timeout: DispatchTime.distantFuture) }
 }
 
+public extension AVAssetImageGenerator {
+    func generateCGImagesAsynchronouslyForTimePoints(timePoints: [TimePoint], completionHandler: @escaping AVAssetImageGeneratorCompletionHandler) {
+        let times = timePoints.map {timePoint in
+            return NSValue(time: timePoint)
+        }
+        self.generateCGImagesAsynchronously(forTimes: times, completionHandler: completionHandler)
+    }
+}
+
 /// Easily convert a video to a GIF. It can convert the whole thing, or you can choose a section to trim out.
 ///
 /// Synchronous Usage:
@@ -62,10 +71,8 @@ private struct Group {
 public struct Regift {
 
     // Static conversion methods, for convenient and easy-to-use API:
-
     /**
         Create a GIF from a movie stored at the given URL. This converts the whole video to a GIF meeting the requested output parameters.
-
         - parameters:
             - sourceFileURL: The source file to create the GIF from.
             - destinationFileURL: An optional destination file to write the GIF to. If you don't include this, a default path will be provided.
@@ -99,7 +106,6 @@ public struct Regift {
 
     /**
         Create a GIF from a movie stored at the given URL. This allows you to choose a start time and duration in the source material that will be used to create the GIF which meets the output parameters.
-
         - parameters:
             - sourceFileURL: The source file to create the GIF from.
             - destinationFileURL: An optional destination file to write the GIF to. If you don't include this, a default path will be provided.
@@ -156,7 +162,7 @@ public struct Regift {
     }
 
     private struct Constants {
-        static let FileName = "regift.gif"
+        static let FileName = "A gif with a progress bar.gif"
         static let TimeInterval: Int32 = 600
         static let Tolerance = 0.01
     }
@@ -196,7 +202,6 @@ public struct Regift {
     
     /**
         Create a GIF from a movie stored at the given URL. This converts the whole video to a GIF meeting the requested output parameters.
-
         - parameters:
             - sourceFileURL: The source file to create the GIF from.
             - destinationFileURL: An optional destination file to write the GIF to. If you don't include this, a default path will be provided.
@@ -204,7 +209,6 @@ public struct Regift {
             - delayTime: The amount of time each frame exists for in the GIF.
             - loopCount: The number of times the GIF will repeat. This defaults to `0`, which means that the GIF will repeat infinitely.
             - size: The maximum size of generated GIF. This defaults to `nil`, which specifies the asset’s unscaled dimensions. Setting size will not change the image aspect ratio.
-
      */
     public init(sourceFileURL: URL, destinationFileURL: URL? = nil, frameCount: Int, delayTime: Float, loopCount: Int = 0, size: CGSize? = nil, progress: ProgressHandler? = nil) {
         self.sourceFileURL = sourceFileURL
@@ -221,7 +225,6 @@ public struct Regift {
 
     /**
         Create a GIF from a movie stored at the given URL. This allows you to choose a start time and duration in the source material that will be used to create the GIF which meets the output parameters.
-
         - parameters:
             - sourceFileURL: The source file to create the GIF from.
             - destinationFileURL: An optional destination file to write the GIF to. If you don't include this, a default path will be provided.
@@ -230,7 +233,6 @@ public struct Regift {
             - frameRate: The desired frame rate of the outputted GIF.
             - loopCount: The number of times the GIF will repeat. This defaults to `0`, which means that the GIF will repeat infinitely.
             - size: The maximum size of generated GIF. This defaults to `nil`, which specifies the asset’s unscaled dimensions. Setting size will not change the image aspect ratio.
-
      */
     public init(sourceFileURL: URL, destinationFileURL: URL? = nil, startTime: Float, duration: Float, frameRate: Int, loopCount: Int = 0, size: CGSize? = nil, progress: ProgressHandler? = nil) {
         self.sourceFileURL = sourceFileURL
@@ -268,7 +270,6 @@ public struct Regift {
 
     /**
         Get the URL of the GIF created with the attributes provided in the initializer.
-
         - returns: The path to the created GIF, or `nil` if there was an error creating it.
     */
     public func createGif() -> URL? {
@@ -314,7 +315,6 @@ public struct Regift {
             - frameProperties: The desired attributes of each frame in the resulting GIF.
             - frameCount: The desired number of frames for the GIF. *NOTE: This seems redundant to me, as `timePoints.count` should really be what we are after, but I'm hesitant to change the API here.*
             - size: The maximum size of generated GIF. This defaults to `nil`, which specifies the asset’s unscaled dimensions. Setting size will not change the image aspect ratio.
-
         - returns: The path to the created GIF, or `nil` if there was an error creating it.
     */
     public func createGIFForTimePoints(_ timePoints: [TimePoint], fileProperties: [String: AnyObject], frameProperties: [String: AnyObject], frameCount: Int, size: CGSize? = nil) throws -> URL {

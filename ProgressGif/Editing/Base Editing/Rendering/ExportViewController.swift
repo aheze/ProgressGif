@@ -8,7 +8,6 @@
 import UIKit
 import AVFoundation
 import AVKit
-import Regift
 import SwiftGifOrigin
 
 class ExportViewController: UIViewController {
@@ -16,9 +15,9 @@ class ExportViewController: UIViewController {
     var renderingAsset: AVAsset!
     var editingConfiguration: EditableEditingConfiguration!
     var playerURL = URL(fileURLWithPath: "")
+    var exportedGifURL = URL(fileURLWithPath: "")
     
     @IBOutlet weak var backgroundBlurView: UIVisualEffectView!
-    
     
     @IBOutlet weak var processingLabel: UILabel!
     
@@ -52,15 +51,19 @@ class ExportViewController: UIViewController {
     }
     
     @IBOutlet weak var exportButton: UIButton!
-    @IBAction func exportButtonPresse(_ sender: Any) {
+    @IBAction func exportButtonPressed(_ sender: Any) {
         
-        let player = AVPlayer(url: playerURL)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
-        self.present(playerViewController, animated: true) {
-            playerViewController.player!.play()
-        }
+        let shareItems = [exportedGifURL]
+        let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+        self.present(activityViewController, animated: true, completion: nil)
         
+        /// the following was for testing (the rendered video, not yet converted to gif)
+//        let player = AVPlayer(url: playerURL)
+//        let playerViewController = AVPlayerViewController()
+//        playerViewController.player = player
+//        self.present(playerViewController, animated: true) {
+//            playerViewController.player!.play()
+//        }
     }
     
     var export: AVAssetExportSession?
@@ -133,7 +136,6 @@ class ExportViewController: UIViewController {
         progressStatusLabel.text = "Finishing"
         
         
-        
         var aspectRect = imageView.frame
         if let image = playerURL.generateImage() {
             imageView.image = image
@@ -145,24 +147,22 @@ class ExportViewController: UIViewController {
             playerBackgroundRightC.constant = (playerBaseView.bounds.width - aspectRect.width) / 2
             playerBackgroundBottomC.constant = (playerBaseView.bounds.height - aspectRect.height) / 2
         }
-        UIView.animate(withDuration: 0.5, delay: 0.4, options: .curveLinear, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.4, options: .curveEaseOut, animations: {
             self.playerBackgroundView.layer.cornerRadius = 0
             self.playerBaseView.layoutIfNeeded()
         }) { _ in
             
+            /// start exporting to gif
             Regift.createGIFFromSource(self.playerURL, startTime: 0, duration: Float(CMTimeGetSeconds(self.renderingAsset.duration)), frameRate: 16) { (url) in
                 if let gifUrl = url {
                     print("Convert to GIF completed! Export URL: \(gifUrl)")
                     self.finishedConversion(gifURL: gifUrl)
+                    self.exportedGifURL = gifUrl
                 } else {
                     self.processingLabel.text = "Error"
                 }
             }
         }
-        
-        /// start exporting to gif
-        
-        
     }
     
     func finishedConversion(gifURL: URL) {
