@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4905C10024CCBAB9004C27EE /* CollectionVC+GalleryAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905C0FF24CCBAB9004C27EE /* CollectionVC+GalleryAnimation.swift */; };
 		491816B224BA9AD800E318FC /* FromFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491816B124BA9AD800E318FC /* FromFiles.swift */; };
 		49240FC924BFC7CA00DC9446 /* EditingVC+PlayerControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49240FC824BFC7CA00DC9446 /* EditingVC+PlayerControls.swift */; };
 		49240FCB24BFC88400DC9446 /* EditingVC+PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49240FCA24BFC88400DC9446 /* EditingVC+PlayerView.swift */; };
@@ -45,6 +46,7 @@
 		49B236B824CA1E0700905917 /* RenderingProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236B724CA1E0700905917 /* RenderingProgress.swift */; };
 		49B236BB24CA3BA900905917 /* Licenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236BA24CA3BA900905917 /* Licenses.swift */; };
 		49B236BE24CA6D9400905917 /* Regift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236BD24CA6D9400905917 /* Regift.swift */; };
+		49B236C624CA86C500905917 /* EditingVC+GalleryAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236C524CA86C500905917 /* EditingVC+GalleryAnimation.swift */; };
 		49B4CF8B24C51C3F00A2A22A /* DropShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF8A24C51C3F00A2A22A /* DropShadow.swift */; };
 		49B4CF8E24C6018500A2A22A /* Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF8D24C6018500A2A22A /* Saving.swift */; };
 		49B4CF9224C6661C00A2A22A /* EditingVC+Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */; };
@@ -69,6 +71,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4905C0FF24CCBAB9004C27EE /* CollectionVC+GalleryAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionVC+GalleryAnimation.swift"; sourceTree = "<group>"; };
 		491816B024BA9A9500E318FC /* ProgressGif.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProgressGif.entitlements; sourceTree = "<group>"; };
 		491816B124BA9AD800E318FC /* FromFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromFiles.swift; sourceTree = "<group>"; };
 		49240FC824BFC7CA00DC9446 /* EditingVC+PlayerControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+PlayerControls.swift"; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 		49B236B724CA1E0700905917 /* RenderingProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingProgress.swift; sourceTree = "<group>"; };
 		49B236BA24CA3BA900905917 /* Licenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Licenses.swift; sourceTree = "<group>"; };
 		49B236BD24CA6D9400905917 /* Regift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regift.swift; sourceTree = "<group>"; };
+		49B236C524CA86C500905917 /* EditingVC+GalleryAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+GalleryAnimation.swift"; sourceTree = "<group>"; };
 		49B4CF8A24C51C3F00A2A22A /* DropShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadow.swift; sourceTree = "<group>"; };
 		49B4CF8D24C6018500A2A22A /* Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saving.swift; sourceTree = "<group>"; };
 		49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+Saving.swift"; sourceTree = "<group>"; };
@@ -180,6 +184,7 @@
 				49B4CFA124C7A8F500A2A22A /* Rendering */,
 				4948C8DF24C0F47800E5F5F6 /* Video Player */,
 				496F7F8524BE3AE90045DDCB /* EditingViewController.swift */,
+				49B236C524CA86C500905917 /* EditingVC+GalleryAnimation.swift */,
 				49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */,
 				49F8C12924C28803004686DF /* EditingVC+Setup.swift */,
 				49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */,
@@ -231,6 +236,7 @@
 		4944CAA724B912EB00E893AE /* ProgressGif */ = {
 			isa = PBXGroup;
 			children = (
+				49B236BF24CA825900905917 /* Main */,
 				49B236B924CA3B9A00905917 /* About */,
 				49B4CF8C24C6016500A2A22A /* Storage */,
 				493E9BEE24C0E59A0068973B /* Utilities */,
@@ -238,10 +244,7 @@
 				491816B024BA9A9500E318FC /* ProgressGif.entitlements */,
 				4944CAA824B912EB00E893AE /* AppDelegate.swift */,
 				4944CAAA24B912EB00E893AE /* SceneDelegate.swift */,
-				4944CAAC24B912EB00E893AE /* ViewController.swift */,
-				4944CAAE24B912EB00E893AE /* Main.storyboard */,
 				496DD41B24BA4927007380AF /* CollectionViewController.swift */,
-				49E41ECD24B967F900EA7BB2 /* Buttons */,
 				4980302A24B95D8F00AE277C /* Importing */,
 				4944CAB124B912F000E893AE /* Assets.xcassets */,
 				4944CAB324B912F000E893AE /* LaunchScreen.storyboard */,
@@ -336,6 +339,17 @@
 				49B236BD24CA6D9400905917 /* Regift.swift */,
 			);
 			path = Regift;
+			sourceTree = "<group>";
+		};
+		49B236BF24CA825900905917 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4905C0FF24CCBAB9004C27EE /* CollectionVC+GalleryAnimation.swift */,
+				4944CAAC24B912EB00E893AE /* ViewController.swift */,
+				4944CAAE24B912EB00E893AE /* Main.storyboard */,
+				49E41ECD24B967F900EA7BB2 /* Buttons */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		49B4CF8C24C6016500A2A22A /* Storage */ = {
@@ -528,6 +542,7 @@
 				49B236BE24CA6D9400905917 /* Regift.swift in Sources */,
 				496F7F8624BE3AE90045DDCB /* EditingViewController.swift in Sources */,
 				49B4CF9D24C74FD800A2A22A /* ColorfulEntity.swift in Sources */,
+				4905C10024CCBAB9004C27EE /* CollectionVC+GalleryAnimation.swift in Sources */,
 				4980301F24B91E2500AE277C /* PhotoCell.swift in Sources */,
 				49B4CF9924C74FD800A2A22A /* BrightnessSlider.swift in Sources */,
 				49A362DB24BB92B100019FC6 /* ZoomDismissalInteractionController.swift in Sources */,
@@ -537,6 +552,7 @@
 				49A362E024BB96E800019FC6 /* PhotoZoomViewController.swift in Sources */,
 				49240FCB24BFC88400DC9446 /* EditingVC+PlayerView.swift in Sources */,
 				491816B224BA9AD800E318FC /* FromFiles.swift in Sources */,
+				49B236C624CA86C500905917 /* EditingVC+GalleryAnimation.swift in Sources */,
 				4944CAA924B912EB00E893AE /* AppDelegate.swift in Sources */,
 				49B4CF9A24C74FD800A2A22A /* ColorMapView.swift in Sources */,
 				49F8C12A24C28803004686DF /* EditingVC+Setup.swift in Sources */,

@@ -42,6 +42,9 @@ extension EditingViewController {
         editingEdgesVC?.cornerRadiusNumberStepper.value = configuration.edgeCornerRadius
         editingEdgesVC?.shadowColorButton.backgroundColor = configuration.edgeShadowColor
         
+        transparentBackgroundImageView.alpha = 1
+        shadowView.alpha = 1
+        
         maskingView.isHidden = false
         playerBaseView.mask = maskingView
     }
@@ -76,7 +79,7 @@ extension EditingViewController {
             shadowMaskingViewTopC.constant = aspectFrame.origin.y
             shadowMaskingViewBottomC.constant = (playerHolderView.frame.height - aspectFrame.height) / 2
             
-            maskingView.frame = aspectFrame
+            
             
             updateProgressBar(to: playerControlsView.customSlider.value, animated: true)
             progressBarBackgroundHeightC.constant = CGFloat(editingConfiguration.barHeight) * unit
@@ -85,6 +88,8 @@ extension EditingViewController {
             let scale = 1 - (CGFloat(editingConfiguration.edgeInset) * Constants.transformMultiplier)
             shadowScale = scale
             updateShadow(scale: scale)
+            maskingView.frame = aspectFrame
+            print("mask frame: \(aspectFrame)")
             
         }
     }

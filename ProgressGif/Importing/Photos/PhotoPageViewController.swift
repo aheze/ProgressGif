@@ -61,16 +61,13 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
             if let videoResolution = avAsset?.resolutionSize() {
                 metadata.resolutionWidth = Int(videoResolution.width)
                 metadata.resolutionHeight = Int(videoResolution.height)
-            } else {
-                print("no size")
             }
             
             if let cmDuration = avAsset?.duration {
                 let duration = CMTimeGetSeconds(cmDuration)
                 metadata.duration = duration.getString() ?? "0:01"
-            } else {
-                print("no duration")
             }
+            
             DispatchQueue.main.async {
                 metadata.localIdentifier = self.currentViewController.asset.localIdentifier
                 do {
@@ -80,7 +77,6 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
                 } catch {
                     print("error adding object: \(error)")
                 }
-                
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let viewController = storyboard.instantiateViewController(withIdentifier: "EditingViewController") as? EditingViewController {
@@ -92,10 +88,7 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.present(viewController, animated: true, completion: nil)
                 }
             }
-            
         }
-        
-        
     }
     
     @IBOutlet weak var backBlurTopC: NSLayoutConstraint!
@@ -131,7 +124,7 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpDismissConpletion()
+        setUpDismissCompletion()
         
         playerControlsView.playerControlsDelegate = self
         
