@@ -12,8 +12,10 @@ extension ViewController {
  
         
         self.importVideoBottomC.constant = importVideoBottomCShownConstant
-        UIView.animate(withDuration: 0.6, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.importVideoLabel.alpha = 1
+            self.overlayBlurView.alpha = 1
+            self.overlayColorView.alpha = 0.05
 //            self.buttonContainerView.alpha = 1
             self.view.layoutIfNeeded()
         })
@@ -37,8 +39,10 @@ extension ViewController {
     func hideButtons() {
         
         self.importVideoBottomC.constant = importVideoBottomCHiddenConstant
-        UIView.animate(withDuration: 0.6, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.importVideoLabel.alpha = 0
+            self.overlayBlurView.alpha = 0
+            self.overlayColorView.alpha = 0
 //            self.buttonContainerView.alpha = 0
             self.view.layoutIfNeeded()
         })

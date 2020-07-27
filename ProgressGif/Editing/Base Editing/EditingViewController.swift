@@ -12,6 +12,10 @@ import RealmSwift
 
 class EditingViewController: UIViewController {
     
+//    var transitionController = GalleryTransitionController()
+    
+    var dismissing = false
+    
     let realm = try! Realm()
     var project: Project?
     
@@ -55,10 +59,17 @@ class EditingViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        if !dismissing {
+            let statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+            topBarTopC.constant = statusHeight
+            view.layoutIfNeeded()
+            updateFrames(statusHeight: statusHeight)
+        }
+    }
+    func updateFrames(statusHeight: CGFloat) {
         
-        view.layoutIfNeeded()
+        print("Update frames, status height: \(statusHeight)")
         
-        let statusHeight = topStatusBlurView.frame.height
         let topBarheight = topActionBarBlurView.frame.height
         let topBarToPreview = topBarAndPreviewVerticalC.constant
         let previewHeight = previewLabel.frame.height
@@ -68,6 +79,8 @@ class EditingViewController: UIViewController {
         
         let bottomConstant = bottomReferenceView.frame.height
         
+        
+//        topBarTopC.constant = statusHeight
         playerHolderTopC.constant = topConstant
         playerControlsBottomC.constant = bottomConstant
         
@@ -75,10 +88,13 @@ class EditingViewController: UIViewController {
         calculateAspectDrawingFrame()
         barHeightChanged(to: editingConfiguration.barHeight)
         calculatePreviewScale()
-        
     }
+  
     
-    @IBOutlet weak var topStatusBlurView: UIVisualEffectView!
+//    @IBOutlet weak var topStatusBlurView: UIVisualEffectView!
+    
+    @IBOutlet weak var topBarTopC: NSLayoutConstraint!
+    
     @IBOutlet weak var topActionBarBlurView: UIVisualEffectView!
     @IBOutlet weak var topBarAndPreviewVerticalC: NSLayoutConstraint!
     @IBOutlet weak var previewLabel: UILabel!
@@ -166,7 +182,8 @@ class EditingViewController: UIViewController {
         playerView.player = nil
         hasInitializedPlayer = false
         
-        onDoneBlock!(true)
+        
+        onDoneBlock?(true)
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
@@ -175,21 +192,9 @@ class EditingViewController: UIViewController {
     
     @IBOutlet weak var exportButton: UIButton!
     @IBAction func exportButtonPressed(_ sender: Any) {
-//        print("project now: \()")
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "ExportViewController") as? ExportViewController {
-            
-//            if let urlAsset = avAsset as? AVURLAsset {
-//                render(from: urlAsset, with: editingConfiguration) { exportedURL in
-//                    guard let exportedURL = exportedURL else {
-//                      return
-//                    }
-//                    viewController.playerURL = exportedURL
-//                    viewController.finishedExport()
-//                    print("render")
-//                }
-//            }
             
             if let resolutionWidth = project?.metadata?.resolutionWidth {
                 if let resolutionHeight = project?.metadata?.resolutionHeight {
@@ -216,6 +221,8 @@ class EditingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         maskingView.isHidden = true
         
         titleTextField.delegate = self
@@ -240,6 +247,7 @@ class EditingViewController: UIViewController {
             }
         }
         
+//        updateFrames()
     }
 }
 

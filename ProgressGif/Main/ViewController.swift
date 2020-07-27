@@ -15,6 +15,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var visualEffectView: UIVisualEffectView! /// the top bar
     
+    @IBOutlet weak var overlayColorView: UIView!
+    @IBOutlet weak var overlayBlurView: UIVisualEffectView!
+    
+    
     // MARK: - Collection View
     
     lazy var collectionViewController: CollectionViewController? = {
@@ -106,6 +110,8 @@ class ViewController: UIViewController {
         /// make the import from files, import from photos, and import from clipboard buttons transparent
         setUpButtonAlpha()
         
+        overlayBlurView.alpha = 0
+        overlayColorView.alpha = 0
         
         /// initialize the collection view
         _ = collectionViewController
