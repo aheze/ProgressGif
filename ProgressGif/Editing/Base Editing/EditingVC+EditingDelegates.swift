@@ -35,27 +35,69 @@ extension Int {
     
 }
 
+extension EditingViewController {
+    func barHeightChangePreview(to height: Int) {
+        progressBarBackgroundHeightC.constant = height.getBarHeightFromValue(withUnit: unit)
+    }
+    func foregroundColorChangePreview(to color: UIColor) {
+        progressBarView.backgroundColor = color
+    }
+    func backgroundColorChangePreview(to color: UIColor) {
+        progressBarBackgroundView.backgroundColor = color
+    }
+    
+    func edgeInsetChangePreview(to inset: Int) {
+        let scale = inset.getScaleFromInsetValue()
+        playerBaseView.transform = CGAffineTransform(scaleX: scale, y: scale)
+        updateShadow(scale: scale)
+        shadowScale = scale
+    }
+    func edgeCornerRadiusChangePreview(to radius: Int, animate: Bool = false) {
+        print("corner change")
+        
+        let previewRadius = radius.getRadiusFromValue(withUnit: unit)
+        if animate {
+            maskingView.animateCornerRadius(to: previewRadius, duration: 0.5)
+        } else {
+            maskingView.layer.cornerRadius = previewRadius
+        }
+        shadowView.cornerRadius = previewRadius
+        updateShadow(scale: shadowScale)
+    }
+    func edgeShadowIntensityChangePreview(to intensity: Int) {
+        shadowView.intensity = intensity
+    }
+    func edgeShadowRadiusChangePreview(to radius: Int) {
+        let shadowRadius = radius.getShadowRadiusFromValue(withUnit: unit)
+        shadowView.shadowRadius = Int(shadowRadius)
+    }
+    func edgeShadowColorChangePreview(to color: UIColor) {
+        shadowView.color = color
+        updateShadow(scale: shadowScale)
+    }
+}
 
 extension EditingViewController: EditingBarChanged {
     func barHeightChanged(to height: Int) {
         editingConfiguration.barHeight = height
-//        progressBarBackgroundHeightC.constant = CGFloat(height) * unit
-        
-        progressBarBackgroundHeightC.constant = height.getBarHeightFromValue(withUnit: unit)
+//        progressBarBackgroundHeightC.constant = height.getBarHeightFromValue(withUnit: unit)
+        barHeightChangePreview(to: height)
         saveConfig()
     }
     
     func foregroundColorChanged(to color: UIColor, hex: String) {
         editingConfiguration.barForegroundColor = color
         editingConfiguration.barForegroundColorHex = hex
-        progressBarView.backgroundColor = color
+//        progressBarView.backgroundColor = color
+        foregroundColorChangePreview(to: color)
         saveConfig()
     }
     
     func backgroundColorChanged(to color: UIColor, hex: String) {
         editingConfiguration.barBackgroundColor = color
         editingConfiguration.barBackgroundColorHex = hex
-        progressBarBackgroundView.backgroundColor = color
+//        progressBarBackgroundView.backgroundColor = color
+        backgroundColorChangePreview(to: color)
         saveConfig()
     }
 }
@@ -69,43 +111,50 @@ extension EditingViewController: EditingEdgesChanged {
         /// transform values will automaitally adjust based on the size of the playerHolderView.
 //        let scale = 1 - (CGFloat(inset) * Constants.transformMultiplier)
         
-        let scale = inset.getScaleFromInsetValue()
-        playerBaseView.transform = CGAffineTransform(scaleX: scale, y: scale)
+//        let scale = inset.getScaleFromInsetValue()
+//        playerBaseView.transform = CGAffineTransform(scaleX: scale, y: scale)
+//        updateShadow(scale: scale)
+//        shadowScale = scale
         
-        shadowScale = scale
-        updateShadow(scale: scale)
+        edgeInsetChangePreview(to: inset)
+        
         saveConfig()
     }
     func edgeCornerRadiusChanged(to radius: Int) {
         editingConfiguration.edgeCornerRadius = radius
         
-//        let previewRadius = CGFloat(radius) * unit
-        let previewRadius = radius.getRadiusFromValue(withUnit: unit)
-        maskingView.layer.cornerRadius = previewRadius
-        shadowView.cornerRadius = previewRadius
+//        let previewRadius = radius.getRadiusFromValue(withUnit: unit)
+//        maskingView.layer.cornerRadius = previewRadius
+//        shadowView.cornerRadius = previewRadius
+//        updateShadow(scale: shadowScale)
         
-        updateShadow(scale: shadowScale)
+        edgeCornerRadiusChangePreview(to: radius)
+        
         saveConfig()
     }
     func edgeShadowIntensityChanged(to intensity: Int) {
         editingConfiguration.edgeShadowIntensity = intensity
-        shadowView.intensity = intensity
+//        shadowView.intensity = intensity
+        
+        edgeShadowIntensityChangePreview(to: intensity)
         saveConfig()
     }
     func edgeShadowRadiusChanged(to radius: Int) {
         editingConfiguration.edgeShadowRadius = radius
         
+//        let shadowRadius = radius.getShadowRadiusFromValue(withUnit: unit)
+//        shadowView.shadowRadius = Int(shadowRadius)
         
-        let shadowRadius = radius.getShadowRadiusFromValue(withUnit: unit)
-//        shadowView.shadowRadius = radius
-        shadowView.shadowRadius = Int(shadowRadius)
+        edgeShadowRadiusChangePreview(to: radius)
+        
         saveConfig()
     }
     func edgeShadowColorChanged(to color: UIColor, hex: String) {
         editingConfiguration.edgeShadowColor = color
         editingConfiguration.edgeShadowColorHex = hex
-        shadowView.color = color
-        updateShadow(scale: shadowScale)
+//        shadowView.color = color
+//        updateShadow(scale: shadowScale)
+        edgeShadowColorChangePreview(to: color)
         saveConfig()
     }
 }
