@@ -19,6 +19,7 @@ extension ViewController {
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization({status in
                 if status == .authorized {
+                    self.collectionViewController?.updateAssets()
                     self.presentFromPhotosPicker()
                 }
             })
@@ -29,6 +30,7 @@ extension ViewController {
         case .denied:
             askToGoToSettingsForPhotoLibrary()
         case .authorized:
+            collectionViewController?.updateAssets()
             presentFromPhotosPicker()
         @unknown default:
             break
@@ -42,7 +44,7 @@ extension ViewController {
                 FromPhotosPicker {
                 
                 vc.onDoneBlock = { _ in
-                    self.self.collectionViewController?.updateAssets()
+                    self.collectionViewController?.updateAssets()
                 }
                 self.present(vc, animated: true, completion: nil)
             }

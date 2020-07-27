@@ -15,7 +15,7 @@ protocol ZoomAnimatorDelegate: class {
     func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect?
 }
 
-class ZoomAnimator: NSObject, RecieveDeleteLast {
+class ZoomAnimator: NSObject {
     
     let deviceSize = UIScreen.main.bounds.size
     

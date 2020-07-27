@@ -16,9 +16,10 @@ enum CollectionType {
 }
 class CollectionViewController: UIViewController {
     
-    let realm = try! Realm()
-    
+    let transition = PopAnimator()
     var onDoneBlock: ((Bool) -> Void)?
+    
+    let realm = try! Realm()
     
     var windowStatusBarHeight = CGFloat(0)
     var selectedIndexPath = IndexPath(item: 0, section: 0)
@@ -95,36 +96,49 @@ class CollectionViewController: UIViewController {
         var rawPHAssets: PHFetchResult<PHAsset>!
         rawPHAssets = PHAsset.fetchAssets(withLocalIdentifiers: ids, options: nil)
         
-        /// the user may have multiple projects with the same video
-        /// so we need to make a new array that contains possible duplicate video
-        let phAssets = rawPHAssets.objects(at: IndexSet(0...rawPHAssets.count - 1))
-        
-        var newPHAssets = [PHAsset]()
-        for id in ids {
-            for asset in phAssets {
-                if asset.localIdentifier == id {
-                    newPHAssets.append(asset)
-                    break
+        if rawPHAssets != nil {
+            if rawPHAssets.count > 0 {
+                /// the user may have multiple projects with the same video
+                /// so we need to make a new array that contains possible duplicate video
+                let phAssets = rawPHAssets.objects(at: IndexSet(0...rawPHAssets.count - 1))
+                
+                var newPHAssets = [PHAsset]()
+                for id in ids {
+                    for asset in phAssets {
+                        if asset.localIdentifier == id {
+                            newPHAssets.append(asset)
+                            break
+                        }
+                    }
                 }
+                
+                projectPhotoAssets = newPHAssets
             }
         }
-        
-        projectPhotoAssets = newPHAssets
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        setUpDismissCompletion()
     }
+//    override func present(_ viewControllerToPresent: UIViewController,
+//                          animated flag: Bool,
+//                          completion: (() -> Void)? = nil) {
+//        if let photoVC = viewControllerToPresent as? PhotoPageViewController {
+//            photoVC.modalPresentationStyle = .fullScreen
+//        }
+//        super.present(viewControllerToPresent, animated: flag, completion: completion)
+//    }
+    
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,
                           completion: (() -> Void)? = nil) {
-        if let photoVC = viewControllerToPresent as? PhotoPageViewController {
-            photoVC.modalPresentationStyle = .fullScreen
-        }
+            viewControllerToPresent.modalPresentationStyle = .fullScreen
         super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
+    
 }
 extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -158,7 +172,37 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionType == .projects {
+            selectedIndexPath = indexPath
             
+            let editingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
+            "EditingViewController") as! EditingViewController
+            
+            if let projs = projects {
+                let project = projs[indexPath.item]
+                
+                editingViewController.transitioningDelegate = self
+                editingViewController.asset = projectPhotoAssets[indexPath.item]
+                editingViewController.project = project
+                editingViewController.onDoneBlock = self.onDoneBlock
+                
+                PHCachingImageManager().requestAVAsset(forVideo: projectPhotoAssets[indexPath.item], options: nil) { (avAsset, _, _) in
+                    editingViewController.avAsset = avAsset
+                    
+                    print("present")
+                    DispatchQueue.main.async {
+                        self.present(editingViewController, animated: true, completion: nil)
+                    }
+                    
+                }
+                
+//                viewController.transitioningDelegate = self
+//                viewController.asset = self.currentViewController.asset
+//                viewController.avAsset = avAsset
+//                viewController.project = newProject
+//                viewController.onDoneBlock = self.onDoneBlock
+//                self.present(viewController, animated: true, completion: nil)
+            }
+        
         } else {
             let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
                 "PhotoPageViewController") as! PhotoPageViewController
@@ -293,15 +337,57 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
         }
     }
 }
+//
+//extension CollectionViewController: UIViewControllerTransitioningDelegate {
+//    
+//}
+//
+//
+//extension CollectionViewController: GalleryAnimatorDelegate {
+//    func transitionWillStartWith(zoomAnimator: GalleryAnimator) {
+//    }
+//    
+//    func transitionDidEndWith(zoomAnimator: GalleryAnimator) {
+//    }
+//    
+//    func referenceImageView(for zoomAnimator: GalleryAnimator) -> UIImageView? {
+//        return getImageViewFromCollectionViewCell(for: selectedIndexPath)
+//    }
+//    
+//    func referenceImageViewFrameInTransitioningView(for zoomAnimator: GalleryAnimator) -> CGRect? {
+//        self.view.layoutIfNeeded()
+//        self.collectionView.layoutIfNeeded()
+//        
+//        //Get a guarded reference to the cell's frame
+//        let unconvertedFrame = getFrameFromCollectionViewCell(for: self.selectedIndexPath)
+//        
+//        var cellFrame = self.collectionView.convert(unconvertedFrame, to: self.view)
+//        
+//        if cellFrame.minY < self.collectionView.contentInset.top {
+//            return CGRect(x: cellFrame.minX, y: self.collectionView.contentInset.top, width: cellFrame.width, height: cellFrame.height - (self.collectionView.contentInset.top - cellFrame.minY))
+//        }
+//        
+//        let superCellFrame = self.collectionView.convert(unconvertedFrame, to: nil)
+//        let cellYDiff = superCellFrame.origin.y - cellFrame.origin.y
+//        let cellXDiff = superCellFrame.origin.x - cellFrame.origin.x
+//        
+//        cellFrame.origin.y += cellYDiff
+//        cellFrame.origin.x += cellXDiff
+//        ///works on ipad now
+//        ///need to fix this, no hardcoded values
+//        return cellFrame
+//    }
+//    
+//}
+
+
 
 extension CollectionViewController: PhotoPageViewControllerDelegate {
-    
     func containerViewController(_ containerViewController: PhotoPageViewController, indexDidUpdate currentIndex: Int) {
         self.selectedIndexPath = IndexPath(row: currentIndex, section: 0)
         self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
     }
 }
-
 extension CollectionViewController: ZoomAnimatorDelegate {
     
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
@@ -313,7 +399,6 @@ extension CollectionViewController: ZoomAnimatorDelegate {
         if let cell = self.collectionView.cellForItem(at: self.selectedIndexPath) as? PhotoCell {
             
             let cellFrame = self.collectionView.convert(cell.frame, to: self.view)
-            
             if cellFrame.minY < self.collectionView.contentInset.top {
                 self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .top, animated: false)
             } else if cellFrame.maxY > self.view.frame.height - self.collectionView.contentInset.bottom {
@@ -330,6 +415,30 @@ extension CollectionViewController: ZoomAnimatorDelegate {
         return referenceImageView
     }
     
+    func getImageViewFrame() -> CGRect? {
+        self.view.layoutIfNeeded()
+        self.collectionView.layoutIfNeeded()
+        
+        //Get a guarded reference to the cell's frame
+        let unconvertedFrame = getFrameFromCollectionViewCell(for: self.selectedIndexPath)
+        
+        var cellFrame = self.collectionView.convert(unconvertedFrame, to: self.view)
+        
+        if cellFrame.minY < self.collectionView.contentInset.top {
+            return CGRect(x: cellFrame.minX, y: self.collectionView.contentInset.top, width: cellFrame.width, height: cellFrame.height - (self.collectionView.contentInset.top - cellFrame.minY))
+        }
+        
+        let superCellFrame = self.collectionView.convert(unconvertedFrame, to: nil)
+        let cellYDiff = superCellFrame.origin.y - cellFrame.origin.y
+        let cellXDiff = superCellFrame.origin.x - cellFrame.origin.x
+        
+        cellFrame.origin.y += cellYDiff
+        cellFrame.origin.x += cellXDiff
+        
+        ///works on ipad now
+        ///need to fix this, no hardcoded values
+        return cellFrame
+    }
     func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
         
         self.view.layoutIfNeeded()
@@ -350,6 +459,7 @@ extension CollectionViewController: ZoomAnimatorDelegate {
         
         cellFrame.origin.y += cellYDiff
         cellFrame.origin.x += cellXDiff
+        
         ///works on ipad now
         ///need to fix this, no hardcoded values
         return cellFrame

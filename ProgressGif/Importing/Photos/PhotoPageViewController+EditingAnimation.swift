@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 
 extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
-    func setUpDismissConpletion() {
+    func setUpDismissCompletion() {
         transition.dismissCompletion = { [weak self] in
             self?.currentViewController.imageView.isHidden = false
             self?.playerControlsView.isHidden = false
@@ -31,9 +31,18 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
         presenting: UIViewController, source: UIViewController)
         -> UIViewControllerAnimatedTransitioning? {
             
-            if let generatedImage = generateImage() {
-                transition.thumbnailImage = generatedImage
+            if playerControlsView.customSlider.value > 0 {
+                print("over 0")
+                if let generatedImage = generateImage() {
+                    transition.thumbnailImage = generatedImage
+                }
+            } else {
+                print("not over 0")
+                if let currentImage = currentViewController.image {
+                    transition.thumbnailImage = currentImage
+                }
             }
+            
             
             if let aspectImageFrame = currentViewController.imageView.getAspectFitRect() {
                 let biggerOverOriginal = (aspectImageFrame.height + normalStatusBarHeight) / aspectImageFrame.height
@@ -71,6 +80,7 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
             playerControlsView.playButton.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
             
             currentViewController.stopVideo()
+            
             UIView.animate(withDuration: 0.2, animations: {
                 self.currentViewController.imageView.alpha = 0
                 self.playerControlsView.alpha = 0
@@ -83,6 +93,7 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
                 self.chooseBaseView.isHidden = true
             }
             
+            print("return")
             return transition
     }
     

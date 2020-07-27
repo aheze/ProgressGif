@@ -175,9 +175,9 @@ class CustomButton: UIButton {
         if shadowLayer == nil {
             shadowLayer = CAShapeLayer()
             shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.width / 2).cgPath
-            shadowLayer.fillColor = UIColor.white.cgColor
+            shadowLayer.fillColor = UIColor.systemBackground.cgColor
             
-            shadowLayer.shadowColor = UIColor.darkGray.cgColor
+            shadowLayer.shadowColor = UIColor.secondaryLabel.cgColor
             shadowLayer.shadowPath = shadowLayer.path
             shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
             shadowLayer.shadowOpacity = 0.4

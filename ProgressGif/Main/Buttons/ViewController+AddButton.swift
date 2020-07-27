@@ -29,7 +29,7 @@ extension ViewController {
         } else {
             hideButtons()
         }
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveLinear, animations: {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveLinear, animations: {
             self.addButton.transform = transform
         })
     }
@@ -40,7 +40,7 @@ extension ViewController {
             transform = transform.rotated(by: -45.degreesToRadians)
         }
         
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveLinear, animations: {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveLinear, animations: {
             self.addButton.transform = transform
         })
     }
