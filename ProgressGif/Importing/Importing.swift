@@ -44,7 +44,20 @@ extension ViewController {
                 FromPhotosPicker {
                 
                 vc.onDoneBlock = { _ in
-                    self.collectionViewController?.updateAssets()
+                    if let collectionVC = self.collectionViewController {
+                        collectionVC.updateAssets()
+                        if let cell = collectionVC.collectionView.cellForItem(at: collectionVC.selectedIndexPath) as? PhotoCell {
+                            DispatchQueue.main.async {
+                                UIView.animate(withDuration: 1, animations: {
+                                    cell.drawingView.backgroundColor = UIColor.white
+                                }) { _ in
+                                    UIView.animate(withDuration: 1, animations: {
+                                        cell.drawingView.backgroundColor = UIColor.clear
+                                    })
+                                }
+                            }
+                        }
+                    }
                 }
                 self.present(vc, animated: true, completion: nil)
             }

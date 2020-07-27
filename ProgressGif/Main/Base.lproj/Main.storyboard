@@ -589,7 +589,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="6ra-lK-57d" secondAttribute="trailing" id="B8H-Lf-4b6"/>
                             <constraint firstItem="4SI-eu-1Qk" firstAttribute="centerX" secondItem="K7e-ls-pGr" secondAttribute="centerX" id="HHX-h6-eev"/>

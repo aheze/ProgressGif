@@ -182,7 +182,6 @@ class EditingViewController: UIViewController {
         playerView.player = nil
         hasInitializedPlayer = false
         
-        
         onDoneBlock?(true)
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
@@ -221,8 +220,9 @@ class EditingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
+//        playerHolderView.alpha = 0
+        transparentBackgroundImageView.alpha = 0
+        shadowView.alpha = 0
         maskingView.isHidden = true
         
         titleTextField.delegate = self

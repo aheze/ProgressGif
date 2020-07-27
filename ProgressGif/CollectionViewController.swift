@@ -66,11 +66,6 @@ class CollectionViewController: UIViewController {
         collectionView.reloadData()
     }
     func updateAssets() {
-//        projects = realm.objects(Project.self)
-//
-//        if let projs = projects {
-//            projects = projs.sorted(byKeyPath: "dateCreated", ascending: false)
-//        }
         
         getAssetFromProjects()
         
@@ -164,6 +159,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 photoCell.drawingTopC.constant = drawingRect.origin.y
                 photoCell.drawingBottomC.constant = (photoCell.imageBaseView.frame.height - drawingRect.height) / 2
                 
+                photoCell.drawingView.layer.cornerRadius = 6
             }
             
         }
@@ -187,20 +183,30 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 
                 PHCachingImageManager().requestAVAsset(forVideo: projectPhotoAssets[indexPath.item], options: nil) { (avAsset, _, _) in
                     editingViewController.avAsset = avAsset
+                    editingViewController.onDoneBlock = { _ in
+                        
+                        self.getAssetFromProjects()
+                        self.collectionView.reloadItems(at: [self.selectedIndexPath])
+                        if let cell = collectionView.cellForItem(at: self.selectedIndexPath) as? PhotoCell {
+                            DispatchQueue.main.async {
+                                UIView.animate(withDuration: 1, animations: {
+                                    cell.drawingView.backgroundColor = UIColor.white
+                                }) { _ in
+                                    UIView.animate(withDuration: 1, animations: {
+                                        cell.drawingView.backgroundColor = UIColor.clear
+                                    })
+                                }
+                            }
+                        }
+                    }
                     
                     print("present")
                     DispatchQueue.main.async {
                         self.present(editingViewController, animated: true, completion: nil)
                     }
                     
+                    
                 }
-                
-//                viewController.transitioningDelegate = self
-//                viewController.asset = self.currentViewController.asset
-//                viewController.avAsset = avAsset
-//                viewController.project = newProject
-//                viewController.onDoneBlock = self.onDoneBlock
-//                self.present(viewController, animated: true, completion: nil)
             }
         
         } else {

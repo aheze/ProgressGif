@@ -23,7 +23,6 @@ class PhotoCell: UICollectionViewCell {
     
     @IBOutlet weak var drawingView: UIView!
     
-    
     @IBOutlet weak var drawingLeftC: NSLayoutConstraint!
     @IBOutlet weak var drawingRightC: NSLayoutConstraint!
     @IBOutlet weak var drawingTopC: NSLayoutConstraint!
