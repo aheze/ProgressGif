@@ -151,9 +151,9 @@ class ExportViewController: UIViewController {
             self.playerBackgroundView.layer.cornerRadius = 0
             self.playerBaseView.layoutIfNeeded()
         }) { _ in
-            
             /// start exporting to gif
             Regift.createGIFFromSource(self.playerURL, startTime: 0, duration: Float(CMTimeGetSeconds(self.renderingAsset.duration)), frameRate: 16) { (url) in
+                
                 if let gifUrl = url {
                     print("Convert to GIF completed! Export URL: \(gifUrl)")
                     self.finishedConversion(gifURL: gifUrl)
@@ -163,6 +163,8 @@ class ExportViewController: UIViewController {
                 }
             }
         }
+        
+        
     }
     
     func finishedConversion(gifURL: URL) {

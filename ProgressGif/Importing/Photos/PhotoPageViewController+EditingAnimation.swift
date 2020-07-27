@@ -112,6 +112,7 @@ extension PhotoPageViewController {
             if let avAssetURL = currentViewController.playerView.avURLAsset {
                 let asset = AVAsset(url: avAssetURL.url)
                 let imageGenerator = AVAssetImageGenerator(asset: asset)
+                imageGenerator.appliesPreferredTrackTransform = true
                 if let time = currentViewController.playerView.player?.currentTime() {
                     do {
                         let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
