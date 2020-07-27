@@ -9,6 +9,22 @@ import UIKit
 import AVFoundation
 
 extension UIView {
+    func animateCornerRadius(to: CGFloat, duration: CFTimeInterval) {
+        let initialCornerRadius = layer.cornerRadius
+        
+        CATransaction.begin()
+        layer.cornerRadius = to
+        let animation = CABasicAnimation(keyPath: "cornerRadius")
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.fromValue = initialCornerRadius
+        animation.toValue = to
+        animation.duration = duration
+        layer.add(animation, forKey: "cornerRadius")
+        CATransaction.commit()
+    }
+}
+
+extension UIView {
     func fadeTransition(_ duration:CFTimeInterval) {
         let animation = CATransition()
         animation.timingFunction = CAMediaTimingFunction(name:
@@ -39,36 +55,36 @@ extension UIColor {
     }
 }
 extension UIColor {
-
+    
     // MARK: - Computed Properties
-
+    
     var toHex: String? {
         return toHex()
     }
-
+    
     // MARK: - From UIColor to String
-
+    
     func toHex(alpha: Bool = false) -> String? {
         guard let components = cgColor.components, components.count >= 3 else {
             return nil
         }
-
+        
         let r = Float(components[0])
         let g = Float(components[1])
         let b = Float(components[2])
         var a = Float(1.0)
-
+        
         if components.count >= 4 {
             a = Float(components[3])
         }
-
+        
         if alpha {
             return String(format: "%02lX%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255), lroundf(a * 255))
         } else {
             return String(format: "%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255))
         }
     }
-
+    
 }
 
 extension UIView {
@@ -121,71 +137,6 @@ extension UIImageView {
     }
 }
 
-extension UIView {
-  
-  // ->1
-  enum Direction: Int {
-    case topToBottom = 0
-    case bottomToTop
-    case leftToRight
-    case rightToLeft
-  }
-  
-  func startShimmeringAnimation(animationSpeed: Float = 1.4,
-                                direction: Direction = .leftToRight,
-                                repeatCount: Float = MAXFLOAT) {
-    
-    // Create color  ->2
-    let lightColor = UIColor(displayP3Red: 1.0, green: 1.0, blue: 1.0, alpha: 0.1).cgColor
-    let blackColor = UIColor.black.cgColor
-    
-    // Create a CAGradientLayer  ->3
-    let gradientLayer = CAGradientLayer()
-    gradientLayer.colors = [blackColor, lightColor, blackColor]
-    gradientLayer.frame = CGRect(x: -self.bounds.size.width, y: -self.bounds.size.height, width: 3 * self.bounds.size.width, height: 3 * self.bounds.size.height)
-    
-    switch direction {
-    case .topToBottom:
-      gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
-      gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-      
-    case .bottomToTop:
-      gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
-      gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
-      
-    case .leftToRight:
-      gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-      gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
-      
-    case .rightToLeft:
-      gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.5)
-      gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.5)
-    }
-    
-    gradientLayer.locations =  [0.35, 0.50, 0.65] //[0.4, 0.6]
-    self.layer.mask = gradientLayer
-    
-    print("begin shimmer")
-    // Add animation over gradient Layer  ->4
-    CATransaction.begin()
-    let animation = CABasicAnimation(keyPath: "locations")
-    animation.fromValue = [0.0, 0.1, 0.2]
-    animation.toValue = [0.8, 0.9, 1.0]
-    animation.duration = CFTimeInterval(animationSpeed)
-    animation.repeatCount = repeatCount
-    CATransaction.setCompletionBlock { [weak self] in
-      guard let strongSelf = self else { return }
-      strongSelf.layer.mask = nil
-    }
-    gradientLayer.add(animation, forKey: "shimmerAnimation")
-    CATransaction.commit()
-  }
-  
-  func stopShimmeringAnimation() {
-    self.layer.mask = nil
-  }
-  
-}
 
 
 /// for the collectionview. The shadow for the editing preview is in DropShadow.swift

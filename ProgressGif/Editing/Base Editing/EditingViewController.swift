@@ -235,7 +235,7 @@ class EditingViewController: UIViewController {
         playerControlsView.playerControlsDelegate = self
         playerView.updateSliderProgress = self
         
-        setupPagingViewControllers()
+        setUpPagingViewControllers()
         
         if let projectMetadata = project?.metadata {
             actualVideoResolution = CGSize(width: projectMetadata.resolutionWidth, height: projectMetadata.resolutionHeight)
@@ -246,8 +246,6 @@ class EditingViewController: UIViewController {
                 self.percentageOfPreviewValue = CGFloat(projectMetadata.resolutionHeight) / self.playerHolderView.frame.height
             }
         }
-        
-//        updateFrames()
     }
 }
 
