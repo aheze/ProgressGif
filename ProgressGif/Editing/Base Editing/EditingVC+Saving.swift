@@ -12,7 +12,6 @@ extension EditingViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        print("text: \(textField.text), real text: \(titleTextField.text)")
         saveConfig()
         return true
     }
@@ -43,13 +42,16 @@ extension EditingViewController {
         if let projectConfiguration = project?.configuration {
             editingConfiguration.barHeight = projectConfiguration.barHeight
             editingConfiguration.barForegroundColor = UIColor(hexString: projectConfiguration.barForegroundColorHex)
+            editingConfiguration.barForegroundColorHex = projectConfiguration.barForegroundColorHex
             editingConfiguration.barBackgroundColor = UIColor(hexString: projectConfiguration.barBackgroundColorHex)
+            editingConfiguration.barBackgroundColorHex = projectConfiguration.barBackgroundColorHex
             
             editingConfiguration.edgeInset = projectConfiguration.edgeInset
             editingConfiguration.edgeCornerRadius = projectConfiguration.edgeCornerRadius
             editingConfiguration.edgeShadowIntensity = projectConfiguration.edgeShadowIntensity
             editingConfiguration.edgeShadowRadius = projectConfiguration.edgeShadowRadius
             editingConfiguration.edgeShadowColor = UIColor(hexString: projectConfiguration.edgeShadowColorHex)
+            editingConfiguration.edgeShadowColorHex = projectConfiguration.edgeShadowColorHex
         }
     }
 }

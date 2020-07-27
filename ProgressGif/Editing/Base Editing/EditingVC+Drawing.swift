@@ -47,6 +47,8 @@ extension EditingViewController {
         
         maskingView.isHidden = false
         playerBaseView.mask = maskingView
+        
+        setUpPreview()
     }
     
     func updateProgressBar(to value: Float, animated: Bool) {
@@ -83,7 +85,7 @@ extension EditingViewController {
             
             updateProgressBar(to: playerControlsView.customSlider.value, animated: true)
             progressBarBackgroundHeightC.constant = CGFloat(editingConfiguration.barHeight) * unit
-            maskingView.layer.cornerRadius = (CGFloat(editingConfiguration.edgeCornerRadius) * unit)
+//            maskingView.layer.cornerRadius = (CGFloat(editingConfiguration.edgeCornerRadius) * unit)
             
             let scale = 1 - (CGFloat(editingConfiguration.edgeInset) * Constants.transformMultiplier)
             shadowScale = scale
@@ -105,4 +107,22 @@ extension EditingViewController {
         shadowView.frame = adjustedShadowRect
         shadowView.updateShadow()
     }
+    
+    func setUpPreview() {
+        self.edgeCornerRadiusChangePreview(to: self.editingConfiguration.edgeCornerRadius, animate: true)
+        
+        UIView.animate(withDuration: 0.6, animations: {
+            
+            self.barHeightChangePreview(to: self.editingConfiguration.barHeight)
+            self.foregroundColorChangePreview(to: self.editingConfiguration.barForegroundColor)
+            self.backgroundColorChangePreview(to: self.editingConfiguration.barBackgroundColor)
+            
+            self.edgeInsetChangePreview(to: self.editingConfiguration.edgeInset)
+            
+            self.edgeShadowIntensityChangePreview(to: self.editingConfiguration.edgeShadowIntensity)
+            self.edgeShadowRadiusChangePreview(to: self.editingConfiguration.edgeShadowRadius)
+            self.edgeShadowColorChangePreview(to: self.editingConfiguration.edgeShadowColor)
+        })
+    }
+    
 }
