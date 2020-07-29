@@ -16,7 +16,8 @@ ProgressGif does one thing only.
 Tutorials with only words are boring, so we add images. And if they need to be more detailed, we add video... but video isn't always the best choice.
 - Readers may not want to turn on audio.
 - If they're on their phone, the video will open in a full-screen modal. That disrupts the reading experience.
-- Some blogging sites don't allow video embeds/
+- Some blogging sites don't allow video embeds
+
 That's why we use gifs instead! (Yes, gifs are memory-inefficient, but they're really convenient... and I'll be adding options to change framerate / scale soon.)
 
 ### About
