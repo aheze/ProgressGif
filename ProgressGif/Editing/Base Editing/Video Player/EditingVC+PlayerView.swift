@@ -22,7 +22,7 @@ extension EditingViewController {
         UIView.animate(withDuration: 0.5, animations: {
             self.imageView.alpha = 0
         })
-        playerView.startPlay(with: asset, playerContext: .playFromValue, value: sliderValue)
+        playerView.startPlay(with: avAsset, playerContext: .playFromValue, value: sliderValue)
         
     }
     
@@ -41,14 +41,14 @@ extension EditingViewController {
         UIView.animate(withDuration: 0.5, animations: {
             self.imageView.alpha = 0
         })
-        playerView.startPlay(with: asset, playerContext: .jumpBack5, value: fromValue)
+        playerView.startPlay(with: avAsset, playerContext: .jumpBack5, value: fromValue)
     }
     func jumpForward5(fromValue: Float) {
         hasInitializedPlayer = true
         UIView.animate(withDuration: 0.5, animations: {
             self.imageView.alpha = 0
         })
-        playerView.startPlay(with: asset, playerContext: .jumpForward5, value: fromValue)
+        playerView.startPlay(with: avAsset, playerContext: .jumpForward5, value: fromValue)
     }
     
     func startSlider() {
@@ -56,6 +56,6 @@ extension EditingViewController {
         UIView.animate(withDuration: 0.5, animations: {
             self.imageView.alpha = 0
         })
-        playerView.startPlay(with: asset, playerContext: .initialize)
+        playerView.startPlay(with: avAsset, playerContext: .initialize)
     }
 }
