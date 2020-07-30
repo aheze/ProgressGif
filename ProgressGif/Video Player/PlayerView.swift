@@ -182,20 +182,20 @@ class PlayerView: UIView {
         }
     }
     
-    func startPlay(with asset: PHAsset, playerContext: PlayerContext = .none, value: Float = -5) {
+    func startPlay(with asset: AVAsset, playerContext: PlayerContext = .none, value: Float = -5) {
         startValue = value
         self.playerContext = playerContext
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
         
-        PHCachingImageManager().requestAVAsset(forVideo: asset, options: nil) { (avAsset, audioMix, info) in
-            self.avAsset = avAsset
-            if let avAssetU = avAsset as? AVURLAsset {
+//        PHCachingImageManager().requestAVAsset(forVideo: asset, options: nil) { (avAsset, audioMix, info) in
+            self.avAsset = asset
+            if let avAssetU = asset as? AVURLAsset {
                 self.setUpPlayerItem(with: avAssetU)
                 self.avURLAsset = avAssetU
                 
             }
             
-        }
+//        }
     }
     
     func play() {

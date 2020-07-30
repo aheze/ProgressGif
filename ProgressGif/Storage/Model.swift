@@ -44,7 +44,10 @@ class VideoMetadata: Object {
     @objc dynamic var duration = "0:00"
     @objc dynamic var resolutionWidth = 500
     @objc dynamic var resolutionHeight = 500
+    
+    @objc dynamic var copiedFileIntoStorage = false
     @objc dynamic var localIdentifier = ""
+    @objc dynamic var filePathEnding = ""
 }
 class EditingConfiguration: Object {
     @objc dynamic var barHeight = 5
@@ -71,7 +74,10 @@ class EditableProject: NSObject {
 class EditableVideoMetadata: NSObject {
     var duration: String = "0:00"
     var resolution: CGSize = CGSize(width: 500, height: 500)
+    
+    var copiedFileIntoStorage = false
     var localIdentifier: String = ""
+    var filePathEnding = ""
 }
 class EditableEditingConfiguration: NSObject {
     var barHeight = 5

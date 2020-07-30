@@ -45,7 +45,7 @@ class EditingViewController: UIViewController {
     
     // MARK: - Video
     
-    var asset: PHAsset!
+//    var asset: PHAsset!
     var avAsset: AVAsset!
     var hasInitializedPlayer = false
     
@@ -219,7 +219,7 @@ class EditingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("got asset: \(avAsset)")
 //        playerHolderView.alpha = 0
         transparentBackgroundImageView.alpha = 0
         shadowView.alpha = 0
