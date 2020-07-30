@@ -12,22 +12,42 @@ import RealmSwift
 class ViewController: UIViewController {
     
     let realm = try! Realm()
-    
-    @IBOutlet weak var visualEffectView: UIVisualEffectView! /// the top bar
-    
-    @IBOutlet weak var overlayColorView: UIView!
-    @IBOutlet weak var overlayBlurView: UIVisualEffectView!
-    
     var globalURL = URL(fileURLWithPath: "")
     var copyingFileToStorage = false
     
+    // MARK: - Header
+    @IBOutlet weak var visualEffectView: UIVisualEffectView! /// the top bar
+    @IBOutlet weak var overlayColorView: UIView!
+    @IBOutlet weak var overlayBlurView: UIVisualEffectView!
+    @IBOutlet weak var topMarginC: NSLayoutConstraint!
+    
+    @IBOutlet weak var logoButton: UIButton!
+    @IBAction func logoButtonPressed(_ sender: Any) {
+        
+    }
+    
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBAction func settingsButtonPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController {
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        topMarginC.constant = statusHeight
+        view.layoutIfNeeded()
+        collectionViewController?.topInset = visualEffectView.frame.height
+        collectionViewController?.updateTopInset()
+    }
     
     // MARK: - Collection View
     
     lazy var collectionViewController: CollectionViewController? = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "CollectionViewController") as? CollectionViewController {
-            
             
             viewController.inset = CGFloat(4)
             viewController.topInset = visualEffectView.frame.height

@@ -36,11 +36,13 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var foregroundView: UIView!
     @IBOutlet weak var foregroundColorButton: UIButton!
     @IBAction func foregroundColorPressed(_ sender: Any) {
+        self.displayColorPicker(originalColor: UIColor(hexString: barForegroundColorHex), colorPickerType: .barForeground, sourceView: foregroundColorButton)
     }
     
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var backgroundColorButton: UIButton!
     @IBAction func backgroundColorPressed(_ sender: Any) {
+        self.displayColorPicker(originalColor: UIColor(hexString: barBackgroundColorHex), colorPickerType: .barBackground, sourceView: backgroundColorButton)
     }
     
     // MARK: - Default Edge Values
@@ -61,14 +63,30 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var shadowColorView: UIView!
     @IBOutlet weak var shadowColorColorButton: UIButton!
     @IBAction func shadowColorColorPressed(_ sender: Any) {
+        self.displayColorPicker(originalColor: UIColor(hexString: edgeShadowColorHex), colorPickerType: .edgeShadow, sourceView: shadowColorColorButton)
     }
+    // MARK: - Default Value Storage
+    let defaults = UserDefaults.standard
+    
+    var barHeight = 5
+    var barForegroundColorHex = "FFB500"
+    var barBackgroundColorHex = "F4F4F4"
+    
+    var edgeInset = 0
+    var edgeCornerRadius = 0
+    var edgeShadowIntensity = 0
+    var edgeShadowRadius = 0
+    var edgeShadowColorHex = "000000"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let topInset = headerBlurView.frame.height
+        scrollView.contentInset.top = topInset
+        scrollView.verticalScrollIndicatorInsets.top = topInset
         
+        setUp()
         
     }
-    
     
 }

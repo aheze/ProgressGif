@@ -54,6 +54,12 @@ class CollectionViewController: UIViewController {
         }
     }
     
+    func updateTopInset() {
+        print("update: \(topInset)")
+        collectionView.contentInset = UIEdgeInsets(top: (inset * 4) + topInset, left: inset, bottom: inset, right: inset)
+        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
+    }
+    
     
     // get all videos from Photos library you need to import Photos framework
     // user photos array in collectionView for disaplying video thumnail
