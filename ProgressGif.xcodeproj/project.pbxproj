@@ -43,6 +43,7 @@
 		49A362E024BB96E800019FC6 /* PhotoZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A362DE24BB96E700019FC6 /* PhotoZoomViewController.swift */; };
 		49A362E124BB96E800019FC6 /* PhotoPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A362DF24BB96E800019FC6 /* PhotoPageViewController.swift */; };
 		49A7AE9724C1335200318F1A /* OpacityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AE9624C1335200318F1A /* OpacityPicker.swift */; };
+		49A7F43624D349A100DD4DEA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7F43524D349A100DD4DEA /* SettingsViewController.swift */; };
 		49AC2D0F24C237880009AEBE /* EditingVC+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */; };
 		49B236B824CA1E0700905917 /* RenderingProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236B724CA1E0700905917 /* RenderingProgress.swift */; };
 		49B236BB24CA3BA900905917 /* Licenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236BA24CA3BA900905917 /* Licenses.swift */; };
@@ -111,6 +112,7 @@
 		49A362DE24BB96E700019FC6 /* PhotoZoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoZoomViewController.swift; sourceTree = "<group>"; };
 		49A362DF24BB96E800019FC6 /* PhotoPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPageViewController.swift; sourceTree = "<group>"; };
 		49A7AE9624C1335200318F1A /* OpacityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpacityPicker.swift; sourceTree = "<group>"; };
+		49A7F43524D349A100DD4DEA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+Drawing.swift"; sourceTree = "<group>"; };
 		49B236B724CA1E0700905917 /* RenderingProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingProgress.swift; sourceTree = "<group>"; };
 		49B236BA24CA3BA900905917 /* Licenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Licenses.swift; sourceTree = "<group>"; };
@@ -170,27 +172,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		49240FD024BFFB2F00DC9446 /* Editing View Controllers */ = {
+		49240FD024BFFB2F00DC9446 /* Paging View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				49240FD224BFFB6E00DC9446 /* EditingBarVC.swift */,
 				49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */,
 				49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */,
 			);
-			path = "Editing View Controllers";
+			path = "Paging View Controllers";
 			sourceTree = "<group>";
 		};
 		49240FD124BFFB4600DC9446 /* Base Editing */ = {
 			isa = PBXGroup;
 			children = (
+				49A7F43724D349DE00DD4DEA /* Editing View Controller */,
 				49B4CFA124C7A8F500A2A22A /* Rendering */,
 				4948C8DF24C0F47800E5F5F6 /* Video Player */,
-				496F7F8524BE3AE90045DDCB /* EditingViewController.swift */,
-				49B236C524CA86C500905917 /* EditingVC+GalleryAnimation.swift */,
-				49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */,
-				49F8C12924C28803004686DF /* EditingVC+Setup.swift */,
-				49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */,
-				4948C8E024C0F49400E5F5F6 /* EditingVC+EditingDelegates.swift */,
 			);
 			path = "Base Editing";
 			sourceTree = "<group>";
@@ -211,6 +208,10 @@
 		493E9BEE24C0E59A0068973B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				4944CAA824B912EB00E893AE /* AppDelegate.swift */,
+				4944CAAA24B912EB00E893AE /* SceneDelegate.swift */,
+				491816B024BA9A9500E318FC /* ProgressGif.entitlements */,
+				49F80C2924BCF62200C0C142 /* Video Player */,
 				4980302024B9427800AE277C /* Utilities.swift */,
 				49F8C12724C28669004686DF /* VideoUtilities.swift */,
 			);
@@ -243,14 +244,9 @@
 				49B236B924CA3B9A00905917 /* About */,
 				49B4CF8C24C6016500A2A22A /* Storage */,
 				493E9BEE24C0E59A0068973B /* Utilities */,
-				49F80C2924BCF62200C0C142 /* Video Player */,
-				491816B024BA9A9500E318FC /* ProgressGif.entitlements */,
-				4944CAA824B912EB00E893AE /* AppDelegate.swift */,
-				4944CAAA24B912EB00E893AE /* SceneDelegate.swift */,
 				496DD41B24BA4927007380AF /* CollectionViewController.swift */,
 				4980302A24B95D8F00AE277C /* Importing */,
 				4944CAB124B912F000E893AE /* Assets.xcassets */,
-				4944CAB324B912F000E893AE /* LaunchScreen.storyboard */,
 				4944CAB624B912F000E893AE /* Info.plist */,
 				496F7F8724BE3B010045DDCB /* Editing */,
 			);
@@ -273,7 +269,6 @@
 				493E9BE724C0B9C20068973B /* Editing Controls */,
 				498BF59724BE3C1300F7F2C6 /* Editing Animations */,
 				49240FD124BFFB4600DC9446 /* Base Editing */,
-				49240FD024BFFB2F00DC9446 /* Editing View Controllers */,
 			);
 			path = Editing;
 			sourceTree = "<group>";
@@ -328,6 +323,20 @@
 			path = Color;
 			sourceTree = "<group>";
 		};
+		49A7F43724D349DE00DD4DEA /* Editing View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				49240FD024BFFB2F00DC9446 /* Paging View Controllers */,
+				496F7F8524BE3AE90045DDCB /* EditingViewController.swift */,
+				49B236C524CA86C500905917 /* EditingVC+GalleryAnimation.swift */,
+				49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */,
+				49F8C12924C28803004686DF /* EditingVC+Setup.swift */,
+				49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */,
+				4948C8E024C0F49400E5F5F6 /* EditingVC+EditingDelegates.swift */,
+			);
+			path = "Editing View Controller";
+			sourceTree = "<group>";
+		};
 		49B236B924CA3B9A00905917 /* About */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,10 +356,11 @@
 		49B236BF24CA825900905917 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				49E41ECD24B967F900EA7BB2 /* Buttons */,
 				4905C0FF24CCBAB9004C27EE /* CollectionVC+GalleryAnimation.swift */,
 				4944CAAC24B912EB00E893AE /* ViewController.swift */,
 				4944CAAE24B912EB00E893AE /* Main.storyboard */,
-				49E41ECD24B967F900EA7BB2 /* Buttons */,
+				4944CAB324B912F000E893AE /* LaunchScreen.storyboard */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -360,6 +370,7 @@
 			children = (
 				4980301C24B91DE000AE277C /* Model.swift */,
 				49B4CF8D24C6018500A2A22A /* Saving.swift */,
+				49A7F43524D349A100DD4DEA /* SettingsViewController.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -550,6 +561,7 @@
 				4980301F24B91E2500AE277C /* PhotoCell.swift in Sources */,
 				49B4CF9924C74FD800A2A22A /* BrightnessSlider.swift in Sources */,
 				49A362DB24BB92B100019FC6 /* ZoomDismissalInteractionController.swift in Sources */,
+				49A7F43624D349A100DD4DEA /* SettingsViewController.swift in Sources */,
 				49F8C12824C28669004686DF /* VideoUtilities.swift in Sources */,
 				49B4CFA324C7A90900A2A22A /* Rendering.swift in Sources */,
 				49B4CF9C24C74FD800A2A22A /* BrightnessCursor.swift in Sources */,
