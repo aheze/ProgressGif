@@ -250,7 +250,6 @@
 				49B236B924CA3B9A00905917 /* About */,
 				49B4CF8C24C6016500A2A22A /* Storage */,
 				493E9BEE24C0E59A0068973B /* Utilities */,
-				496DD41B24BA4927007380AF /* CollectionViewController.swift */,
 				4980302A24B95D8F00AE277C /* Importing */,
 				4944CAB124B912F000E893AE /* Assets.xcassets */,
 				4944CAB624B912F000E893AE /* Info.plist */,
@@ -374,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				49E41ECD24B967F900EA7BB2 /* Buttons */,
+				496DD41B24BA4927007380AF /* CollectionViewController.swift */,
 				4905C0FF24CCBAB9004C27EE /* CollectionVC+GalleryAnimation.swift */,
 				4944CAAC24B912EB00E893AE /* ViewController.swift */,
 				4944CAAE24B912EB00E893AE /* Main.storyboard */,

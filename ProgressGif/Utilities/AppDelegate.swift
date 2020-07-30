@@ -14,6 +14,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        UserDefaults.standard.register(defaults: [
+            DefaultKeys.barHeight: 5,
+            DefaultKeys.barForegroundColorHex: "FFB500",
+            DefaultKeys.barBackgroundColorHex: "F4F4F4",
+            
+            DefaultKeys.edgeInset: 0,
+            DefaultKeys.edgeCornerRadius: 0,
+            DefaultKeys.edgeShadowIntensity: 0,
+            DefaultKeys.edgeShadowRadius: 0,
+            DefaultKeys.edgeShadowColorHex: "000000"
+        ])
+        
         return true
     }
 
