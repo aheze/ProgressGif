@@ -7,6 +7,32 @@
 
 import UIKit
 
+extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return fpsOptions.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return fpsOptions[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        let selectedFPS = fpsOptionList[row]
+        let fpsDescription = selectedFPS.getDescription()
+        let fpsString = selectedFPS.getString()
+        
+        defaults.set(fpsString, forKey: DefaultKeys.fps)
+        DispatchQueue.main.async {
+            self.fpsButton.setTitle(fpsDescription, for: .normal)
+        }
+    }
+}
+
 extension SettingsViewController: NumberStepperChanged {
     func valueChanged(to value: Int, stepperType: NumberStepperType) {
         switch stepperType {

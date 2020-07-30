@@ -47,7 +47,7 @@
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e46-3Y-7Nc">
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e46-3Y-7Nc" customClass="InputViewButton" customModule="ProgressGif" customModuleProvider="target">
                                                                             <rect key="frame" x="198" y="7.9999999999999929" width="140" height="49"/>
                                                                             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <constraints>
@@ -507,7 +507,7 @@
                         <outlet property="defaultEdgeValuesBaseView" destination="VQ6-4L-bev" id="Gle-9i-xuZ"/>
                         <outlet property="foregroundColorButton" destination="w8P-P7-2ng" id="cyv-PW-iVU"/>
                         <outlet property="foregroundView" destination="oPh-sY-WMY" id="ZkB-y9-GWp"/>
-                        <outlet property="fpsButton" destination="e46-3Y-7Nc" id="Bis-MY-kZL"/>
+                        <outlet property="fpsButton" destination="e46-3Y-7Nc" id="woL-jL-8Ei"/>
                         <outlet property="fpsView" destination="Gpc-5O-rGy" id="wm8-KR-RFw"/>
                         <outlet property="generalBaseView" destination="hbd-Hn-m4r" id="ekH-AH-AE8"/>
                         <outlet property="headerBlurView" destination="4Bc-d7-s2X" id="jMo-I6-7gD"/>
