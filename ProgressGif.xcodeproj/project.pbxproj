@@ -44,6 +44,9 @@
 		49A362E124BB96E800019FC6 /* PhotoPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A362DF24BB96E800019FC6 /* PhotoPageViewController.swift */; };
 		49A7AE9724C1335200318F1A /* OpacityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7AE9624C1335200318F1A /* OpacityPicker.swift */; };
 		49A7F43624D349A100DD4DEA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7F43524D349A100DD4DEA /* SettingsViewController.swift */; };
+		49A7F43A24D354C300DD4DEA /* SettingsVC+EditingDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7F43924D354C300DD4DEA /* SettingsVC+EditingDelegates.swift */; };
+		49A7F43C24D3563500DD4DEA /* SettingsVC+LoadValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7F43B24D3563500DD4DEA /* SettingsVC+LoadValues.swift */; };
+		49A7F43E24D357C100DD4DEA /* SettingsVC+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7F43D24D357C100DD4DEA /* SettingsVC+Setup.swift */; };
 		49AC2D0F24C237880009AEBE /* EditingVC+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */; };
 		49B236B824CA1E0700905917 /* RenderingProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236B724CA1E0700905917 /* RenderingProgress.swift */; };
 		49B236BB24CA3BA900905917 /* Licenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236BA24CA3BA900905917 /* Licenses.swift */; };
@@ -113,6 +116,9 @@
 		49A362DF24BB96E800019FC6 /* PhotoPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPageViewController.swift; sourceTree = "<group>"; };
 		49A7AE9624C1335200318F1A /* OpacityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpacityPicker.swift; sourceTree = "<group>"; };
 		49A7F43524D349A100DD4DEA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		49A7F43924D354C300DD4DEA /* SettingsVC+EditingDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsVC+EditingDelegates.swift"; sourceTree = "<group>"; };
+		49A7F43B24D3563500DD4DEA /* SettingsVC+LoadValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsVC+LoadValues.swift"; sourceTree = "<group>"; };
+		49A7F43D24D357C100DD4DEA /* SettingsVC+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsVC+Setup.swift"; sourceTree = "<group>"; };
 		49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+Drawing.swift"; sourceTree = "<group>"; };
 		49B236B724CA1E0700905917 /* RenderingProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingProgress.swift; sourceTree = "<group>"; };
 		49B236BA24CA3BA900905917 /* Licenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Licenses.swift; sourceTree = "<group>"; };
@@ -337,6 +343,17 @@
 			path = "Editing View Controller";
 			sourceTree = "<group>";
 		};
+		49A7F43824D354B100DD4DEA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				49A7F43524D349A100DD4DEA /* SettingsViewController.swift */,
+				49A7F43D24D357C100DD4DEA /* SettingsVC+Setup.swift */,
+				49A7F43924D354C300DD4DEA /* SettingsVC+EditingDelegates.swift */,
+				49A7F43B24D3563500DD4DEA /* SettingsVC+LoadValues.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		49B236B924CA3B9A00905917 /* About */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,7 +387,7 @@
 			children = (
 				4980301C24B91DE000AE277C /* Model.swift */,
 				49B4CF8D24C6018500A2A22A /* Saving.swift */,
-				49A7F43524D349A100DD4DEA /* SettingsViewController.swift */,
+				49A7F43824D354B100DD4DEA /* Settings */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -541,10 +558,12 @@
 				498BF59924BE3CCD00F7F2C6 /* PopAnimator.swift in Sources */,
 				4948C8E124C0F49400E5F5F6 /* EditingVC+EditingDelegates.swift in Sources */,
 				496DD41C24BA4927007380AF /* CollectionViewController.swift in Sources */,
+				49A7F43A24D354C300DD4DEA /* SettingsVC+EditingDelegates.swift in Sources */,
 				49B236BB24CA3BA900905917 /* Licenses.swift in Sources */,
 				4980302524B946F200AE277C /* ViewController+Buttons.swift in Sources */,
 				49240FC924BFC7CA00DC9446 /* EditingVC+PlayerControls.swift in Sources */,
 				49E75FA724C015DC004B3F41 /* EditingEdgesVC.swift in Sources */,
+				49A7F43E24D357C100DD4DEA /* SettingsVC+Setup.swift in Sources */,
 				49240FCF24BFC9FE00DC9446 /* EditingVC+UpdateSliderProgress.swift in Sources */,
 				4980302124B9427800AE277C /* Utilities.swift in Sources */,
 				49A7AE9724C1335200318F1A /* OpacityPicker.swift in Sources */,
@@ -568,6 +587,7 @@
 				49A362E024BB96E800019FC6 /* PhotoZoomViewController.swift in Sources */,
 				49240FCB24BFC88400DC9446 /* EditingVC+PlayerView.swift in Sources */,
 				491816B224BA9AD800E318FC /* FromFiles.swift in Sources */,
+				49A7F43C24D3563500DD4DEA /* SettingsVC+LoadValues.swift in Sources */,
 				49B236C624CA86C500905917 /* EditingVC+GalleryAnimation.swift in Sources */,
 				4944CAA924B912EB00E893AE /* AppDelegate.swift in Sources */,
 				49B4CF9A24C74FD800A2A22A /* ColorMapView.swift in Sources */,
@@ -741,7 +761,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ProgressGif/ProgressGif.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ProgressGif/Utilities/ProgressGif.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = ProgressGif/Info.plist;
@@ -763,7 +783,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ProgressGif/ProgressGif.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ProgressGif/Utilities/ProgressGif.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = ProgressGif/Info.plist;
