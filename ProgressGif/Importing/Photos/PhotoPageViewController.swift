@@ -50,7 +50,30 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
         newProject.title = "Untitled"
         newProject.dateCreated = Date()
         
+        let defaults = UserDefaults.standard
+        
+        let barHeight = defaults.value(forKey: DefaultKeys.barHeight) as? Int ?? 5
+        let barForegroundColorHex = defaults.value(forKey: DefaultKeys.barForegroundColorHex) as? String ?? "FFB500"
+        let barBackgroundColorHex = defaults.value(forKey: DefaultKeys.barBackgroundColorHex) as? String ?? "F4F4F4"
+        
+        let edgeInset = defaults.value(forKey: DefaultKeys.edgeInset) as? Int ?? 0
+        let edgeCornerRadius = defaults.value(forKey: DefaultKeys.edgeCornerRadius) as? Int ?? 0
+        let edgeShadowIntensity = defaults.value(forKey: DefaultKeys.edgeShadowIntensity) as? Int ?? 0
+        let edgeShadowRadius = defaults.value(forKey: DefaultKeys.edgeShadowRadius) as? Int ?? 0
+        let edgeShadowColorHex = defaults.value(forKey: DefaultKeys.edgeShadowColorHex) as? String ?? "000000"
+        
+        
         let configuration = EditingConfiguration()
+        configuration.barHeight = barHeight
+        configuration.barForegroundColorHex = barForegroundColorHex
+        configuration.barBackgroundColorHex = barBackgroundColorHex
+        
+        configuration.edgeInset = edgeInset
+        configuration.edgeCornerRadius = edgeCornerRadius
+        configuration.edgeShadowIntensity = edgeShadowIntensity
+        configuration.edgeShadowRadius = edgeShadowRadius
+        configuration.edgeShadowColorHex = edgeShadowColorHex
+        
         newProject.configuration = configuration
         
         let metadata = VideoMetadata()
