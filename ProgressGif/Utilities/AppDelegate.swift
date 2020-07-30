@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         UserDefaults.standard.register(defaults: [
+            DefaultKeys.fps: FPS.normal.getString(),
+            
             DefaultKeys.barHeight: 5,
             DefaultKeys.barForegroundColorHex: "FFB500",
             DefaultKeys.barBackgroundColorHex: "F4F4F4",

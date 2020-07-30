@@ -32,8 +32,83 @@ class Constants {
     static var shadowRadiusMultiplier = CGFloat(0.5)
 }
 
+enum FPS {
+    case low
+    case medium
+    case normal
+    case high
+    case max
+}
+extension String {
+    func getFPS() -> FPS {
+        switch self {
+        case "low":
+            return .low
+        case "medium":
+            return .medium
+        case "normal":
+            return .normal
+        case "high":
+            return .high
+        case "max":
+            return .max
+        default:
+            return .normal
+        }
+    }
+}
+extension FPS {
+    
+    func getValue() -> Int {
+        switch self {
+        case .low:
+            return 10
+        case .medium:
+            return 15
+        case .normal:
+            return 24
+        case .high:
+            return 30
+        case .max:
+            return 45
+        }
+    }
+    
+    func getString() -> String {
+        switch self {
+        case .low:
+            return "low"
+        case .medium:
+            return "medium"
+        case .normal:
+            return "normal"
+        case .high:
+            return "high"
+        case .max:
+            return "max"
+        }
+    }
+    
+    func getDescription() -> String {
+        switch self {
+        case .low:
+            return "Low (10)"
+        case .medium:
+            return "Medium (15)"
+        case .normal:
+            return "Normal (24)"
+        case .high:
+            return "High (30)"
+        case .max:
+            return "Max (45)"
+        }
+    }
+}
+
 
 class DefaultKeys {
+    static var fps = "fps"
+    
     static var barHeight = "barHeight"
     static var barForegroundColorHex = "barForegroundColorHex"
     static var barBackgroundColorHex = "barBackgroundColorHex"

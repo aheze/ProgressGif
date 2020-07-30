@@ -9,6 +9,8 @@ import UIKit
 
 extension SettingsViewController {
     func loadValues() {
+        fpsString = defaults.string(forKey: DefaultKeys.fps) ?? FPS.normal.getString()
+        
         barHeight = defaults.integer(forKey: DefaultKeys.barHeight)
         barForegroundColorHex = defaults.string(forKey: DefaultKeys.barForegroundColorHex) ?? "FFB500"
         barBackgroundColorHex = defaults.string(forKey: DefaultKeys.barBackgroundColorHex) ?? "F4F4F4"
