@@ -32,6 +32,19 @@ class Constants {
     static var shadowRadiusMultiplier = CGFloat(0.5)
 }
 
+
+class DefaultKeys {
+    static var barHeight = "barHeight"
+    static var barForegroundColorHex = "barForegroundColorHex"
+    static var barBackgroundColorHex = "barBackgroundColorHex"
+    
+    static var edgeInset = "edgeInset"
+    static var edgeCornerRadius = "edgeCornerRadius"
+    static var edgeShadowIntensity = "edgeShadowIntensity"
+    static var edgeShadowRadius = "edgeShadowRadius"
+    static var edgeShadowColorHex = "edgeShadowColorHex"
+}
+
 /// for realm
 class Project: Object {
     @objc dynamic var dateCreated = Date()
@@ -65,7 +78,6 @@ class EditingConfiguration: Object {
 /// for editing
 class EditableProject: NSObject {
     var dateCreated = Date()
-    
     var title: String = ""
     var metadata = VideoMetadata()
     var configuration = EditingConfiguration()

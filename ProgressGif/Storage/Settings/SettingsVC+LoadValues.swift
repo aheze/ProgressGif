@@ -9,13 +9,14 @@ import UIKit
 
 extension SettingsViewController {
     func loadValues() {
-        barHeight = defaults.integer(forKey: "helpPressCount")
-        barForegroundColorHex = defaults.string(forKey: "barForegroundColorHex") ?? "FFB500"
-        barBackgroundColorHex = defaults.string(forKey: "barBackgroundColorHex") ?? "F4F4F4"
+        barHeight = defaults.integer(forKey: DefaultKeys.barHeight)
+        barForegroundColorHex = defaults.string(forKey: DefaultKeys.barForegroundColorHex) ?? "FFB500"
+        barBackgroundColorHex = defaults.string(forKey: DefaultKeys.barBackgroundColorHex) ?? "F4F4F4"
         
-        edgeInset = defaults.integer(forKey: "edgeInset")
-        edgeCornerRadius = defaults.integer(forKey: "edgeCornerRadius")
-        edgeShadowIntensity = defaults.integer(forKey: "edgeShadowIntensity")
-        edgeShadowColorHex = defaults.string(forKey: "edgeShadowColorHex") ?? "000000"
+        edgeInset = defaults.integer(forKey: DefaultKeys.edgeInset)
+        edgeCornerRadius = defaults.integer(forKey: DefaultKeys.edgeCornerRadius)
+        edgeShadowIntensity = defaults.integer(forKey: DefaultKeys.edgeShadowIntensity)
+        edgeShadowRadius = defaults.integer(forKey: DefaultKeys.edgeShadowRadius)
+        edgeShadowColorHex = defaults.string(forKey: DefaultKeys.edgeShadowColorHex) ?? "000000"
     }
 }
