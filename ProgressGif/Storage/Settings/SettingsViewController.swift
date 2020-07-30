@@ -22,11 +22,22 @@ class SettingsViewController: UIViewController {
     // MARK: - General
     @IBOutlet weak var generalBaseView: UIView!
     
-    @IBOutlet weak var fpsView: UIView!
-    @IBOutlet weak var fpsButton: UIButton!
-    @IBAction func fpsButtonPressed(_ sender: Any) {
-    }
+    let pickerView = UIPickerView()
     
+    let fpsOptionList: [FPS] = [.low, .medium, .normal, .high, .max]
+    let fpsOptions = ["Low (10)", "Medium (15)", "Normal (24)", "High (30)", "Max (45)"]
+    
+    @IBOutlet weak var fpsView: UIView!
+    @IBOutlet weak var fpsButton: InputViewButton!
+    @IBAction func fpsButtonPressed(_ sender: Any) {
+        
+        let fpsFromString = fpsString.getFPS()
+        if let firstIndex = fpsOptionList.firstIndex(of: fpsFromString) {
+            pickerView.selectRow(firstIndex, inComponent: 0, animated: false)
+        }
+        
+        fpsButton.becomeFirstResponder()
+    }
     // MARK: - Default Bar Values
     @IBOutlet weak var defaultBarValuesBaseView: UIView!
     
@@ -67,6 +78,8 @@ class SettingsViewController: UIViewController {
     }
     // MARK: - Default Value Storage
     let defaults = UserDefaults.standard
+    
+    var fpsString = FPS.normal.getString()
     
     var barHeight = 5
     var barForegroundColorHex = "FFB500"

@@ -17,19 +17,19 @@ class ExportViewController: UIViewController {
     var playerURL = URL(fileURLWithPath: "")
     var exportedGifURL = URL(fileURLWithPath: "")
     
+    /// for framerate
+    let defaults = UserDefaults.standard
+    
     @IBOutlet weak var backgroundBlurView: UIVisualEffectView!
     
     @IBOutlet weak var processingLabel: UILabel!
     
     @IBOutlet weak var playerBaseView: UIView!
-    
     @IBOutlet weak var playerBackgroundView: UIView!
-    
     @IBOutlet weak var playerBackgroundLeftC: NSLayoutConstraint!
     @IBOutlet weak var playerBackgroundRightC: NSLayoutConstraint!
     @IBOutlet weak var playerBackgroundTopC: NSLayoutConstraint!
     @IBOutlet weak var playerBackgroundBottomC: NSLayoutConstraint!
-    
     
     @IBOutlet weak var playerView: PlayerView!
     @IBOutlet weak var imageView: UIImageView!
@@ -111,7 +111,7 @@ class ExportViewController: UIViewController {
         var settings = ANSegmentIndicatorSettings()
         settings.defaultSegmentColor = UIColor.tertiarySystemBackground
         settings.segmentBorderType = .round
-        settings.segmentsCount = 1
+        settings.segmentsCount = 2
         settings.segmentWidth = 16
         settings.animationDuration = 0.1
         settings.segmentColor = UIColor(named: "Yellorange")!
@@ -120,7 +120,7 @@ class ExportViewController: UIViewController {
     }
     
     func updateProgress(to progress: Float) {
-        let progressPercent = progress * 100
+        let progressPercent = progress * 50
         segmentIndicator.updateProgress(percent: Degrees(progressPercent))
         progressLabel.fadeTransition(0.1)
         progressLabel.text = "\(Int(progressPercent))%"
@@ -129,11 +129,13 @@ class ExportViewController: UIViewController {
     
     /// finished rendering video. Then need to convert to gif.
     func finishedExport() {
-        segmentIndicator.updateProgress(percent: 100)
+        segmentIndicator.updateProgress(percent: 50)
         progressLabel.text = "100%"
         
         progressStatusLabel.fadeTransition(0.6)
-        progressStatusLabel.text = "Finishing"
+        
+        let frameRate = self.defaults.string(forKey: DefaultKeys.fps)?.getFPS().getValue() ?? FPS.normal.getValue()
+        progressStatusLabel.text = "Finishing (\(frameRate) FPS)"
         
         
         var aspectRect = imageView.frame
@@ -150,23 +152,46 @@ class ExportViewController: UIViewController {
         UIView.animate(withDuration: 0.5, delay: 0.4, options: .curveEaseOut, animations: {
             self.playerBackgroundView.layer.cornerRadius = 0
             self.playerBaseView.layoutIfNeeded()
-        }) { _ in
-            /// start exporting to gif
-            Regift.createGIFFromSource(self.playerURL, startTime: 0, duration: Float(CMTimeGetSeconds(self.renderingAsset.duration)), frameRate: 16) { (url) in
-                
-                if let gifUrl = url {
-                    print("Convert to GIF completed! Export URL: \(gifUrl)")
-                    self.finishedConversion(gifURL: gifUrl)
-                    self.exportedGifURL = gifUrl
-                } else {
-                    self.processingLabel.text = "Error"
+        })
+//        { _ in
+            
+            
+            
+//            let frameRate = self.defaults.string(forKey: DefaultKeys.fps)?.getFPS().getValue() ?? FPS.normal.getValue()
+//            print("frame rate: \(frameRate)")
+            
+            
+            DispatchQueue.global(qos: .utility).async { [weak self] in
+                /// start exporting to gif
+                if let selfU = self {
+                    
+                    Regift.createGIFFromSource(selfU.playerURL, startTime: 0, duration: Float(CMTimeGetSeconds(selfU.renderingAsset.duration)), frameRate: frameRate, progress: { (progress) in
+                        print("progress: \(progress)")
+                        DispatchQueue.main.async {
+                            print("progress MAIN: \(progress)")
+                            
+                            let progressPercent = (progress * 50) + 50
+                            selfU.segmentIndicator.updateProgress(percent: Degrees(progressPercent))
+                            selfU.progressLabel.fadeTransition(0.1)
+                            selfU.progressLabel.text = "\(Int(progressPercent))%"
+                        }
+                    }) { (url) in
+                        DispatchQueue.main.async {
+                            if let gifUrl = url {
+                                print("Convert to GIF completed! Export URL: \(gifUrl)")
+                                selfU.finishedConversion(gifURL: gifUrl)
+                                selfU.exportedGifURL = gifUrl
+                            } else {
+                                selfU.processingLabel.text = "Error"
+                            }
+                        }
+                    }
                 }
             }
-        }
-        
+//        }
         
     }
-    
+
     func finishedConversion(gifURL: URL) {
         processingLabel.layer.removeAllAnimations()
         

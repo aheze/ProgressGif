@@ -15,9 +15,10 @@ extension SettingsViewController {
         setUpDelegates()
         setUpDisplayValues()
         setUpCornerRadius()
+        setUpFPSPicker()
     }
+    
     func setUpDelegates() {
-        
         heightNumberStepper.numberStepperChanged = self
         insetNumberStepper.numberStepperChanged = self
         cornerRadiusNumberStepper.numberStepperChanged = self
@@ -32,8 +33,22 @@ extension SettingsViewController {
         shadowRadiusNumberStepper.stepperType = .edgeShadowRadius
     }
     
-    func setUpCornerRadius() {
+    func setUpDisplayValues() {
+        fpsButton.setTitle(fpsString.getFPS().getDescription(), for: .normal)
         
+        heightNumberStepper.value = barHeight
+        insetNumberStepper.value = edgeInset
+        
+        cornerRadiusNumberStepper.value = edgeCornerRadius
+        shadowIntensityNumberStepper.value = edgeShadowIntensity
+        shadowRadiusNumberStepper.value = edgeShadowRadius
+        
+        foregroundColorButton.backgroundColor =  UIColor(hexString: barForegroundColorHex)
+        backgroundColorButton.backgroundColor =  UIColor(hexString: barBackgroundColorHex)
+        shadowColorColorButton.backgroundColor =  UIColor(hexString: edgeShadowColorHex)
+    }
+    
+    func setUpCornerRadius() {
         generalBaseView.layer.cornerRadius = 8
         defaultBarValuesBaseView.layer.cornerRadius = 8
         defaultEdgeValuesBaseView.layer.cornerRadius = 8
@@ -62,16 +77,22 @@ extension SettingsViewController {
         shadowColorColorButton.addBorder(width: 3, color: UIColor.lightGray)
     }
     
-    func setUpDisplayValues() {
-        heightNumberStepper.value = barHeight
-        insetNumberStepper.value = edgeInset
+    
+    func setUpFPSPicker() {
         
-        cornerRadiusNumberStepper.value = edgeCornerRadius
-        shadowIntensityNumberStepper.value = edgeShadowIntensity
-        shadowRadiusNumberStepper.value = edgeShadowRadius
+        pickerView.delegate = self
+        fpsButton.inputView = pickerView
         
-        foregroundColorButton.backgroundColor =  UIColor(hexString: barForegroundColorHex)
-        backgroundColorButton.backgroundColor =  UIColor(hexString: barBackgroundColorHex)
-        shadowColorColorButton.backgroundColor =  UIColor(hexString: edgeShadowColorHex)
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let button = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.dismissPicker))
+        toolBar.setItems([button], animated: true)
+        toolBar.isUserInteractionEnabled = true
+        
+        fpsButton.inputAccessoryView = toolBar
+    }
+    
+    @objc func dismissPicker() {
+        view.endEditing(true)
     }
 }
