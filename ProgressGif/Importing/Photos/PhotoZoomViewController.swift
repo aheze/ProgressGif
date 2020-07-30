@@ -27,6 +27,8 @@ class PhotoZoomViewController: UIViewController {
 //
     var index: Int = 0
     var asset: PHAsset!
+    var avAsset: AVAsset!
+    
     var imageSize: CGSize = CGSize(width: 0, height: 0)
     var targetSize: CGSize {
         let scale = UIScreen.main.scale
@@ -48,8 +50,11 @@ class PhotoZoomViewController: UIViewController {
             self.scrollView.contentInsetAdjustmentBehavior = .never
         }
         
-        PHImageManager.default().requestImage(for: asset, targetSize: targetSize, contentMode: PHImageContentMode.aspectFit, options: PHImageRequestOptions()) { (image, userInfo) -> Void in
-            if let image = image {
+        PHCachingImageManager().requestAVAsset(forVideo: asset, options: nil) { (avAssetU, _, _) in
+            self.avAsset = avAssetU
+        }
+        PHImageManager.default().requestImage(for: asset, targetSize: targetSize, contentMode: PHImageContentMode.aspectFit, options: PHImageRequestOptions()) { (imageU, userInfo) -> Void in
+            if let image = imageU {
                 
                 self.imageView.image = image
                 let rectFrame = CGRect(x: self.baseView.frame.origin.x,
@@ -77,7 +82,7 @@ class PhotoZoomViewController: UIViewController {
             UIView.animate(withDuration: 0.2, animations: {
                 self.imageView.alpha = 0
             })
-            playerView.startPlay(with: asset)
+            playerView.startPlay(with: avAsset)
         } else {
             playerView.play()
         }
@@ -97,7 +102,7 @@ class PhotoZoomViewController: UIViewController {
         UIView.animate(withDuration: 0.5, animations: {
             self.imageView.alpha = 0
         })
-        playerView.startPlay(with: asset, playerContext: .jumpForward5)
+        playerView.startPlay(with: avAsset, playerContext: .jumpForward5)
     }
     
     func startSlider() {
@@ -105,7 +110,7 @@ class PhotoZoomViewController: UIViewController {
         UIView.animate(withDuration: 0.5, animations: {
             self.imageView.alpha = 0
         })
-        playerView.startPlay(with: asset, playerContext: .initialize)
+        playerView.startPlay(with: avAsset, playerContext: .initialize)
     }
     
     

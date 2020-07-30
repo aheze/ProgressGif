@@ -18,6 +18,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var overlayColorView: UIView!
     @IBOutlet weak var overlayBlurView: UIVisualEffectView!
     
+    var globalURL = URL(fileURLWithPath: "")
+    var copyingFileToStorage = false
+    
     
     // MARK: - Collection View
     
@@ -115,6 +118,14 @@ class ViewController: UIViewController {
         
         /// initialize the collection view
         _ = collectionViewController
+        
+        guard let url = URL.createFolder(folderName: "ProgressGifStoredVideos") else {
+            print("Can't create url")
+            return
+        }
+        
+        globalURL = url
+        
         
     }
 

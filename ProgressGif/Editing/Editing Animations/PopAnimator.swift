@@ -69,7 +69,7 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         if !self.presenting {
             self.dismissCompletion?()
         }
-        
+//        print("frame frame: : \(editingBaseView.frame)")
         UIView.animate(
             withDuration: duration,
             delay: 0.0,
@@ -77,6 +77,7 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             initialSpringVelocity: 0.2,
             animations: {
                 if self.presenting {
+//                    print("frame: \(editingBaseView.frame)")
                     editingBaseView.frame.origin.y = 0
                     imageView.frame = finalFrame
                     editingPlayerControlsView.frame = finalPlayerControlsFrame

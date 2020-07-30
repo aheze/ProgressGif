@@ -27,7 +27,7 @@ extension EditingViewController: PlayerControlsDelegate {
                     playerView.player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
                     
                     if playerView.playingState == .paused {
-                        let backSliderValue = Float(back5seconds / asset.duration)
+                        let backSliderValue = Float(back5seconds / CMTimeGetSeconds(avAsset.duration))
                         playerControlsView.customSlider.setValue(backSliderValue, animated: false)
                         updateProgressBar(to: backSliderValue, animated: true)
                     }
@@ -43,9 +43,9 @@ extension EditingViewController: PlayerControlsDelegate {
         } else {
             if let currentTime = playerView.player?.currentTime() {
                 let seconds = CMTimeGetSeconds(currentTime)
-                let forward5seconds = min(asset.duration, seconds + 5)
+                let forward5seconds = min(CMTimeGetSeconds(avAsset.duration), seconds + 5)
                 
-                if forward5seconds == asset.duration {
+                if forward5seconds >= CMTimeGetSeconds(avAsset.duration) {
                     playerView.hasFinishedVideo = true
                     playerView.updateSliderProgress?.finishedVideo()
                 }
@@ -55,7 +55,7 @@ extension EditingViewController: PlayerControlsDelegate {
                     playerView.player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
                     
                     if playerView.playingState == .paused {
-                        let forwardSliderValue = Float(forward5seconds / asset.duration)
+                        let forwardSliderValue = Float(forward5seconds / CMTimeGetSeconds(avAsset.duration))
                         playerControlsView.customSlider.setValue(forwardSliderValue, animated: false)
                         updateProgressBar(to: forwardSliderValue, animated: true)
                     }
@@ -75,7 +75,7 @@ extension EditingViewController: PlayerControlsDelegate {
             }
         case .moved:
             if let currentTimescale = playerView.player?.currentItem?.duration.timescale {
-                let timeStamp = value * Float(asset.duration)
+                let timeStamp = value * Float(CMTimeGetSeconds(avAsset.duration))
                 let time = CMTimeMakeWithSeconds(Float64(timeStamp), preferredTimescale: currentTimescale)
                 playerView.player?.seek(to: time, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
                 

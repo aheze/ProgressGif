@@ -3,6 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>keychain-access-groups</key>
-	<array/>
+	<array>
+		<string>$(AppIdentifierPrefix)com.example.ProgressGif</string>
+	</array>
 </dict>
 </plist>

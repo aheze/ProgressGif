@@ -63,10 +63,11 @@ class CollectionViewController: UIViewController {
         options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
         photoAssets = PHAsset.fetchAssets(with: options)
         
+        print("get photos")
         collectionView.reloadData()
     }
     func updateAssets() {
-        
+        print("update")
         getAssetFromProjects()
         
         let firstIndex = IndexPath(item: 0, section: 0)
@@ -177,7 +178,8 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 let project = projs[indexPath.item]
                 
                 editingViewController.transitioningDelegate = self
-                editingViewController.asset = projectPhotoAssets[indexPath.item]
+//                editingViewController.asset = projectPhotoAssets[indexPath.item]
+                
                 editingViewController.project = project
                 editingViewController.onDoneBlock = self.onDoneBlock
                 
