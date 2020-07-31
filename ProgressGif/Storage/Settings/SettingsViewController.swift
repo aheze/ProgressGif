@@ -32,6 +32,8 @@ class SettingsViewController: UIViewController {
     @IBAction func fpsButtonPressed(_ sender: Any) {
         
         let fpsFromString = fpsString.getFPS()
+        
+        print("current fps: \(fpsFromString)")
         if let firstIndex = fpsOptionList.firstIndex(of: fpsFromString) {
             pickerView.selectRow(firstIndex, inComponent: 0, animated: false)
         }
