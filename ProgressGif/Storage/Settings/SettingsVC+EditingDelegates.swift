@@ -24,12 +24,14 @@ extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         
         let selectedFPS = fpsOptionList[row]
         let fpsDescription = selectedFPS.getDescription()
-        let fpsString = selectedFPS.getString()
+        fpsString = selectedFPS.getString()
         
         defaults.set(fpsString, forKey: DefaultKeys.fps)
         DispatchQueue.main.async {
             self.fpsButton.setTitle(fpsDescription, for: .normal)
         }
+        
+        
     }
 }
 
