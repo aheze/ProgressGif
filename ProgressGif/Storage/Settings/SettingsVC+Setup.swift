@@ -85,8 +85,11 @@ extension SettingsViewController {
         
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
+        
+        let flexibleButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         let button = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.dismissPicker))
-        toolBar.setItems([button], animated: true)
+        
+        toolBar.setItems([flexibleButton, button], animated: true)
         toolBar.isUserInteractionEnabled = true
         
         fpsButton.inputAccessoryView = toolBar

@@ -153,43 +153,34 @@ class ExportViewController: UIViewController {
             self.playerBackgroundView.layer.cornerRadius = 0
             self.playerBaseView.layoutIfNeeded()
         })
-//        { _ in
-            
-            
-            
-//            let frameRate = self.defaults.string(forKey: DefaultKeys.fps)?.getFPS().getValue() ?? FPS.normal.getValue()
-//            print("frame rate: \(frameRate)")
-            
-            
-            DispatchQueue.global(qos: .utility).async { [weak self] in
-                /// start exporting to gif
-                if let selfU = self {
-                    
-                    Regift.createGIFFromSource(selfU.playerURL, startTime: 0, duration: Float(CMTimeGetSeconds(selfU.renderingAsset.duration)), frameRate: frameRate, progress: { (progress) in
-                        print("progress: \(progress)")
-                        DispatchQueue.main.async {
-                            print("progress MAIN: \(progress)")
-                            
-                            let progressPercent = (progress * 50) + 50
-                            selfU.segmentIndicator.updateProgress(percent: Degrees(progressPercent))
-                            selfU.progressLabel.fadeTransition(0.1)
-                            selfU.progressLabel.text = "\(Int(progressPercent))%"
-                        }
-                    }) { (url) in
-                        DispatchQueue.main.async {
-                            if let gifUrl = url {
-                                print("Convert to GIF completed! Export URL: \(gifUrl)")
-                                selfU.finishedConversion(gifURL: gifUrl)
-                                selfU.exportedGifURL = gifUrl
-                            } else {
-                                selfU.processingLabel.text = "Error"
-                            }
+        
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            /// start exporting to gif
+            if let selfU = self {
+                
+                Regift.createGIFFromSource(selfU.playerURL, startTime: 0, duration: Float(CMTimeGetSeconds(selfU.renderingAsset.duration)), frameRate: frameRate, progress: { (progress) in
+                    print("progress: \(progress)")
+                    DispatchQueue.main.async {
+                        print("progress MAIN: \(progress)")
+                        
+                        let progressPercent = (progress * 50) + 50
+                        selfU.segmentIndicator.updateProgress(percent: Degrees(progressPercent))
+                        selfU.progressLabel.fadeTransition(0.1)
+                        selfU.progressLabel.text = "\(Int(progressPercent))%"
+                    }
+                }) { (url) in
+                    DispatchQueue.main.async {
+                        if let gifUrl = url {
+                            print("Convert to GIF completed! Export URL: \(gifUrl)")
+                            selfU.finishedConversion(gifURL: gifUrl)
+                            selfU.exportedGifURL = gifUrl
+                        } else {
+                            selfU.processingLabel.text = "Error"
                         }
                     }
                 }
             }
-//        }
-        
+        }
     }
 
     func finishedConversion(gifURL: URL) {
