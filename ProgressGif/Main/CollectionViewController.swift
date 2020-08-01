@@ -14,19 +14,14 @@ enum CollectionType {
     case projects
     case photos
 }
-
-//class ProjectThumbnail: NSObject {
-//    var savingMethod = ProjectSavingMethod.realmSwift
-//    var phAsset: PHAsset?
-//    var filePathEnding: String?
-//}
-
 class ProjectThumbnailAsset: NSObject {
     var project = Project()
+    var dateCreated = Date()
     var savingMethod = ProjectSavingMethod.realmSwift
     var phAsset: PHAsset?
     var filePathEnding: String?
 }
+
 class CollectionViewController: UIViewController {
     
     let transition = PopAnimator()
@@ -42,20 +37,13 @@ class CollectionViewController: UIViewController {
     var projects: Results<Project>?
     
     var photoAssets: PHFetchResult<PHAsset>!
-//    var projectPhotoAssets = [PHAsset]()
-//    var projectThumbnails = [ProjectThumbnail]()
-//    var projectsToThumbnails = [Project: ProjectThumbnail]()
     var projectThumbs = [ProjectThumbnailAsset]()
-
     
     var cellSize = CGSize(width: 100, height: 100)
-    
     var topInset = CGFloat(80)
-    
     var inset = CGFloat(16)
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
     func setupCollectionView() {
         
         collectionView.delegate = self
@@ -77,7 +65,6 @@ class CollectionViewController: UIViewController {
         collectionView.scrollIndicatorInsets = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
     }
     
-    
     // get all videos from Photos library you need to import Photos framework
     // user photos array in collectionView for disaplying video thumnail
     func getAssetFromPhoto() {
@@ -86,11 +73,9 @@ class CollectionViewController: UIViewController {
         options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
         photoAssets = PHAsset.fetchAssets(with: options)
         
-        print("get photos")
         collectionView.reloadData()
     }
     func updateAssets() {
-        print("update")
         getAssetFromProjects()
         
         let firstIndex = IndexPath(item: 0, section: 0)
@@ -104,17 +89,8 @@ class CollectionViewController: UIViewController {
             projects = projs.sorted(byKeyPath: "dateCreated", ascending: false)
         }
         
-//        var thumbnails = [ProjectThumbnail]()
-        
-//        var ids = [String]()
-        
         var thumbs = [ProjectThumbnailAsset]()
-        
         var projectsImportedFromPhotos = [Project]()
-        
-//        var projsToThumbnails = [Project: ProjectThumbnail]()
-        
-//        var projectToPhotoID = [Project: String]()
         
         if let projs = projects {
             for proj in projs {
@@ -123,30 +99,15 @@ class CollectionViewController: UIViewController {
                     thumbnail.project = proj
                     thumbnail.savingMethod = .documentsDirectory
                     thumbnail.filePathEnding = proj.metadata?.filePathEnding
+                    thumbnail.dateCreated = proj.dateCreated
                     
                     thumbs.append(thumbnail)
-                    
-//                    let thumbnail = ProjectThumbnail()
-//                    thumbnail.savingMethod = .documentsDirectory
-//                    thumbnail.filePathEnding = proj.metadata?.filePathEnding
-                    
-//                    print("saving to proj: \(proj)")
-//                    projsToThumbnails[proj] = thumbnail
-//                    projectToPhotoID[proj] = thum
                 } else {
-                    
                     projectsImportedFromPhotos.append(proj)
-//                    if let id = proj.metadata?.localIdentifier {
-////                        ids.append(id)
-//                        projectToPhotoID[proj] = id
-//                    }
                 }
-                
-                
             }
         }
         
-//        let photoIDs = Array(projectToPhotoID.values)
         var photoIDs = [String]()
         for project in projectsImportedFromPhotos {
             if let identifier = project.metadata?.localIdentifier {
@@ -163,20 +124,6 @@ class CollectionViewController: UIViewController {
                 /// so we need to make a new array that contains possible duplicate video
                 let phAssets = rawPHAssets.objects(at: IndexSet(0...rawPHAssets.count - 1))
                 
-//                for (project, photoID) in projectToPhotoID {
-//                    print("Looping: project: \(project), id: \(photoID)")
-//                    for asset in phAssets {
-//                        if photoID == asset.localIdentifier {
-//                            print("local match!")
-//                            let thumbnail = ProjectThumbnail()
-//                            thumbnail.savingMethod = .realmSwift
-//                            thumbnail.phAsset = asset
-//
-//                            projsToThumbnails[project] = thumbnail
-//                        }
-//                    }
-//
-//                }
                 for project in projectsImportedFromPhotos {
                     if let identifier = project.metadata?.localIdentifier {
                         for asset in phAssets {
@@ -185,64 +132,23 @@ class CollectionViewController: UIViewController {
                                 thumbnail.project = project
                                 thumbnail.savingMethod = .realmSwift
                                 thumbnail.phAsset = asset
+                                thumbnail.dateCreated = project.dateCreated
                                 
                                 thumbs.append(thumbnail)
                             }
                         }
                     }
                 }
-                
-//                for id in photoIDs {
-//                    for asset in phAssets {
-//                        if asset.localIdentifier == id {
-//                            newPHAssets.append(asset)
-//                            break
-//                        }
-//                    }
-//                }
-                
-//                projectPhotoAssets = newPHAssets
             }
         }
         
-//        projectsToThumbnails = projsToThumbnails
-//        print("Projects: \(projsToThumbnails)")
+        
+        thumbs = thumbs.sorted(by: {
+            $0.dateCreated.compare($1.dateCreated) == .orderedDescending
+        })
+
         projectThumbs = thumbs
-        
-        for thumb in projectThumbs {
-            if thumb.savingMethod == .realmSwift {
-                print("thumb realm: \(thumb.phAsset)")
-            } else {
-                print("thumb docu: \(thumb.filePathEnding)")
-            }
-//            print("thumb: \(thumb.savingMethod), \(thumb.)")
-        }
         collectionView.reloadData()
-        
-//        let photoIDs = Array(projectToPhotoID.values)
-//        var rawPHAssets: PHFetchResult<PHAsset>!
-//        rawPHAssets = PHAsset.fetchAssets(withLocalIdentifiers: photoIDs, options: nil)
-//
-//        if rawPHAssets != nil {
-//            if rawPHAssets.count > 0 {
-//                /// the user may have multiple projects with the same video
-//                /// so we need to make a new array that contains possible duplicate video
-//                let phAssets = rawPHAssets.objects(at: IndexSet(0...rawPHAssets.count - 1))
-//
-//                var newPHAssets = [PHAsset]()
-//                for id in photoIDs {
-//                    for asset in phAssets {
-//                        if asset.localIdentifier == id {
-//                            newPHAssets.append(asset)
-//                            break
-//                        }
-//                    }
-//                }
-//
-//                projectPhotoAssets = newPHAssets
-//            }
-//        }
-        
         
     }
     
@@ -251,14 +157,6 @@ class CollectionViewController: UIViewController {
         setupCollectionView()
         setUpDismissCompletion()
     }
-//    override func present(_ viewControllerToPresent: UIViewController,
-//                          animated flag: Bool,
-//                          completion: (() -> Void)? = nil) {
-//        if let photoVC = viewControllerToPresent as? PhotoPageViewController {
-//            photoVC.modalPresentationStyle = .fullScreen
-//        }
-//        super.present(viewControllerToPresent, animated: flag, completion: completion)
-//    }
     
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,
@@ -272,10 +170,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionType == .projects {
-//            return projectPhotoAssets.count
-            print("CELL COUNT: \(projectThumbs.count)")
             return projectThumbs.count
-            
         } else {
             return photoAssets.count
         }
@@ -297,7 +192,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 
                 photoCell.drawingView.layer.cornerRadius = 6
             }
-            
         }
     }
     
@@ -308,21 +202,14 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
             
             let editingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
                 "EditingViewController") as! EditingViewController
-            
-            //                let project = projs[indexPath.item]
+            editingViewController.transitioningDelegate = self
             
             let projectThumb = projectThumbs[indexPath.item]
-            
-            editingViewController.transitioningDelegate = self
-            //                editingViewController.asset = projectPhotoAssets[indexPath.item]
-            
             editingViewController.project = projectThumb.project
             editingViewController.onDoneBlock = self.onDoneBlock
             
-            //            let thumbnail = projectsToThumbnails[project]
-            //            if let thumb = thumbnail {
             if projectThumb.savingMethod == .realmSwift {
-                print("saved with realm")
+                
                 guard let savedPHAsset = projectThumb.phAsset else { print("no phAsset"); return }
                 
                 PHCachingImageManager().requestAVAsset(forVideo: savedPHAsset, options: nil) { (avAsset, _, _) in
@@ -343,23 +230,17 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                             }
                         }
                     }
-                    
-                    print("present")
                     DispatchQueue.main.async {
                         self.present(editingViewController, animated: true, completion: nil)
                     }
-                    
-                    
                 }
             } else {
-                print("not saved with realm")
                 
                 guard let fileURLEnding = projectThumb.filePathEnding else { print("no url from filePathEnding"); return }
                 let videoURL = globalURL.appendingPathComponent(fileURLEnding)
                 
                 let avAsset = AVAsset(url: videoURL)
                 editingViewController.avAsset = avAsset
-                
                 editingViewController.onDoneBlock = { _ in
                     
                     self.getAssetFromProjects()
@@ -376,13 +257,10 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                         }
                     }
                 }
-                
-                print("present")
                 DispatchQueue.main.async {
                     self.present(editingViewController, animated: true, completion: nil)
                 }
             }
-            
         } else {
             let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
                 "PhotoPageViewController") as! PhotoPageViewController
@@ -402,19 +280,17 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCellId", for: indexPath) as! PhotoCell
         
-        print("cell for item")
-        
         if collectionType == .projects {
-            print("pojects")
             cell.progressBackgroundView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
             cell.progressBackgroundView.layer.cornerRadius = 6
             cell.progressBackgroundView.clipsToBounds = true
             cell.imageBaseView.shouldActivate = true
             
             let projectThumb = projectThumbs[indexPath.item]
-            print("has thumbnail")
+            
             let title = projectThumb.project.title
             cell.nameLabel.text = title
             
@@ -424,38 +300,36 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
             }
             
             if projectThumb.savingMethod == .realmSwift {
-                print("cell for row via realm")
                 guard let savedPHAsset = projectThumb.phAsset else { print("no phAsset"); return cell }
-                
                 cell.representedAssetIdentifier = savedPHAsset.localIdentifier
-                
                 
                 PHImageManager.default().requestImage(for: savedPHAsset, targetSize: cellSize, contentMode: PHImageContentMode.aspectFit, options: nil) { (image, userInfo) -> Void in
                     if cell.representedAssetIdentifier == savedPHAsset.localIdentifier {
                         cell.imageView.image = image
                         let duration = savedPHAsset.duration
-                        cell.secondaryLabel.text = duration.getString()
+                        cell.secondaryLabel.text = duration.getFormattedString()
                     }
                 }
-                
             } else {
+                
                 guard let fileURLEnding = projectThumb.filePathEnding else { print("no url from filePathEnding"); return cell }
-                
-                
                 
                 let videoURL = globalURL.appendingPathComponent(fileURLEnding)
                 
-                print("cell for row via documents directory: \(videoURL)")
                 
-                if let generatedImage = videoURL.generateImage() {
+//                if let generatedImage = videoURL.generateImage() {
+//                    cell.imageView.image = generatedImage
+//                }
+                let generatedData = videoURL.generateImageAndDuration()
+                if let generatedImage = generatedData.0 {
                     cell.imageView.image = generatedImage
-                } else {
-                    print("no image")
                 }
-                
-                
+                if let formattedString = generatedData.1 {
+                    cell.secondaryLabel.text = formattedString
+                }
             }
             return cell
+            
         } else {
             
             let asset = photoAssets.object(at: indexPath.row)
@@ -468,7 +342,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 if cell.representedAssetIdentifier == asset.localIdentifier {
                     cell.imageView.image = image
                     let duration = asset.duration
-                    cell.nameLabel.text = duration.getString()
+                    cell.nameLabel.text = duration.getFormattedString()
                 }
             }
             return cell
@@ -476,9 +350,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let availableWidth = collectionView.frame.width
-        
         let numberOfCells = (availableWidth / 125).rounded(.down)
         
         let totalInset = (inset * CGFloat(numberOfCells)) + inset
@@ -489,10 +361,9 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
         let size = CGSize(width: eachCellWidth, height: eachCellWidth + CGFloat(50))
         cellSize = CGSize(width: size.width * UIScreen.main.scale, height: size.height * UIScreen.main.scale)
         
-        
         return size
-        
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return inset
     }

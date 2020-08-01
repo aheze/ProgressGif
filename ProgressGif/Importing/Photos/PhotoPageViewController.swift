@@ -88,7 +88,7 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
             
             if let cmDuration = avAsset?.duration {
                 let duration = CMTimeGetSeconds(cmDuration)
-                metadata.duration = duration.getString() ?? "0:01"
+                metadata.duration = duration.getFormattedString() ?? "0:01"
             }
             
             DispatchQueue.main.async {
