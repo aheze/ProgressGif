@@ -57,8 +57,8 @@ extension String {
         }
     }
 }
+
 extension FPS {
-    
     func getValue() -> Int {
         switch self {
         case .low:
@@ -118,6 +118,11 @@ class DefaultKeys {
     static var edgeShadowIntensity = "edgeShadowIntensity"
     static var edgeShadowRadius = "edgeShadowRadius"
     static var edgeShadowColorHex = "edgeShadowColorHex"
+}
+
+enum ProjectSavingMethod {
+    case realmSwift
+    case documentsDirectory
 }
 
 /// for realm
