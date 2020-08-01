@@ -8,158 +8,258 @@
 import UIKit
 import MobileCoreServices
 import AVFoundation
+import AVKit
 
-extension ViewController: UIDocumentPickerDelegate {
+extension ViewController: DocumentDelegate {
     
-//    override func present(_ viewControllerToPresent: UIViewController,
-//                          animated flag: Bool,
-//                          completion: (() -> Void)? = nil) {
-//        if let editingVC = viewControllerToPresent as? EditingViewController {
-//            print("print editing vc")
-//            viewControllerToPresent.modalPresentationStyle = .fullScreen
-//        }
-//        super.present(viewControllerToPresent, animated: flag, completion: completion)
-//    }
-    
-    
-    func presentImportController() {
-        let importController = UIDocumentPickerViewController(documentTypes: ["public.movie"], in: .import)
-        importController.delegate = self
-        present(importController, animated: true, completion: nil)
-        
+    func importFromFiles() {
+        documentPicker.displayPicker()
     }
     
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        //        }
-        print("import result : \(url)")
-        
-//        if !copyingFileToStorage {
-//            copyingFileToStorage = true
+    func didPickDocument(document: Document?) {
+        if let pickedDoc = document {
+            let fileURL = pickedDoc.fileURL
+            print("File url of doc: \(fileURL)")
             
-            guard controller.documentPickerMode == .open, url.startAccessingSecurityScopedResource() else { return }
-            defer {
-                DispatchQueue.main.async {
-                    url.stopAccessingSecurityScopedResource()
-                }
-            }
-            saveDocument(temporaryDocumentURL: url)
-//        }
-        
+            saveDocument(temporaryDocumentURL: fileURL)
+        }
     }
-//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-////            if !copyingFileToStorage {
-////                copyingFileToStorage = true
-//
-//        guard let documentURL = urls.first else { return }
-//        print("DocumentURL: \(documentURL)")
-//
-////        let sampleDocumentURL = URL(fileURLWithPath: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")
-////        saveDocument(temporaryDocumentURL: sampleDocumentURL)
-//
-//        let sampleURL = URL(fileURLWithPath: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")
-//        saveDocument(temporaryDocumentURL: sampleURL)
-////        let shouldStopAccessing = documentURL.startAccessingSecurityScopedResource()
-////        defer {
-////            if shouldStopAccessing {
-////                documentURL.stopAccessingSecurityScopedResource()
-////            }
-////        }
-////        NSFileCoordinator().coordinate(readingItemAt: documentURL, error: NSErrorPointer.none) { (fileURL) in
-////            let file = URL(fileURLWithPath: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")
-////            saveDocument(temporaryDocumentURL: file)
-////        }
-//
-//    }
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-//        let sampleURL = URL(fileURLWithPath: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")
-        let sampleURL = Bundle.main.url(forResource: "IMG_6678.MOV", withExtension: "")!
-        saveDocument(temporaryDocumentURL: sampleURL)
-    }
-    
-    
-            
-    
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        print("view was cancelled")
-        let sampleURL = Bundle.main.url(forResource: "IMG_6678.MOV", withExtension: "")!
-        saveDocument(temporaryDocumentURL: sampleURL)
-    }
-}
-
-extension ViewController {
     
     func saveDocument(temporaryDocumentURL: URL) {
         let date = Date()
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "MMddyy"
-//        let dateAsString = formatter.string(from: date)
-//
-//        let timeFormatter = DateFormatter()
-//        timeFormatter.dateFormat = "HHmmss-SSSS"
-//        let timeAsString = timeFormatter.string(from: date)
-//
-//        let videoFileName = "=\(dateAsString)=\(timeAsString)"
-//
-//        let permanentFileURL = globalURL.appendingPathComponent(videoFileName)
-//
-//        DispatchQueue.global().async {
-//            do {
-//                let videoData = try Data(contentsOf: temporaryDocumentURL)
-//                try videoData.write(to: permanentFileURL)
-//            } catch {
-//                print("Error making video data: \(error)")
-//            }
-//
-//        }
         
-        let avAsset = AVAsset(url: temporaryDocumentURL)
-        let newProject = Project()
-        newProject.title = "Untitled"
-        newProject.dateCreated = date
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMddyy"
+        let dateAsString = formatter.string(from: date)
         
-        let configuration = EditingConfiguration()
-        newProject.configuration = configuration
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HHmmss-SSSS"
+        let timeAsString = timeFormatter.string(from: date)
         
-        let metadata = VideoMetadata()
-        newProject.metadata = metadata
+        let videoFileName = "=\(dateAsString)=\(timeAsString)"
         
-        if let videoResolution = avAsset.resolutionSize() {
-            metadata.resolutionWidth = Int(videoResolution.width)
-            metadata.resolutionHeight = Int(videoResolution.height)
-        }
         
-        let cmDuration = avAsset.duration
-        let duration = CMTimeGetSeconds(cmDuration)
-        metadata.duration = duration.getString() ?? "0:01"
-        
-        metadata.copiedFileIntoStorage = true
-//        metadata.filePathEnding = videoFileName
-        
-        DispatchQueue.main.async {
+        let permanentFileURL = globalURL.appendingPathComponent(videoFileName).appendingPathExtension(temporaryDocumentURL.pathExtension)
+        print("perma: \(permanentFileURL)")
+        DispatchQueue.global().async {
             do {
-                try self.realm.write {
-                    self.realm.add(newProject)
+                let videoData = try Data(contentsOf: temporaryDocumentURL)
+                //                try videoData.write(to: permanentFileURL)
+                try videoData.write(to: permanentFileURL, options: .atomic)
+                print("done writing!!!")
+                
+                DispatchQueue.main.async {
+                    let avAsset = AVAsset(url: temporaryDocumentURL)
+                    let newProject = Project()
+                    newProject.title = "Untitled"
+                    newProject.dateCreated = date
+                    
+                    let configuration = EditingConfiguration()
+                    newProject.configuration = configuration
+                    
+                    let metadata = VideoMetadata()
+                    newProject.metadata = metadata
+                    
+                    if let videoResolution = avAsset.resolutionSize() {
+                        metadata.resolutionWidth = Int(videoResolution.width)
+                        metadata.resolutionHeight = Int(videoResolution.height)
+                    }
+                    
+                    let cmDuration = avAsset.duration
+                    let duration = CMTimeGetSeconds(cmDuration)
+                    metadata.duration = duration.getString() ?? "0:01"
+                    
+                    metadata.copiedFileIntoStorage = true
+                    metadata.filePathEnding = videoFileName
+                    
+                    print("saving proj: \(newProject)")
+                    
+                    do {
+                        try self.realm.write {
+                            self.realm.add(newProject)
+                        }
+                    } catch {
+                        print("error adding object: \(error)")
+                    }
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let viewController = storyboard.instantiateViewController(withIdentifier: "EditingViewController") as? EditingViewController {
+                        
+                        viewController.avAsset = avAsset
+                        viewController.project = newProject
+                        viewController.modalPresentationStyle = .fullScreen
+                        self.present(viewController, animated: true, completion: nil)
+                        
+                        viewController.onDoneBlock = { _ in
+                            print("done! done!")
+                        }
+                    }
                 }
+                self.copyingFileToStorage = false
             } catch {
-                print("error adding object: \(error)")
+                print("Error making video data: \(error)")
             }
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(withIdentifier: "EditingViewController") as? EditingViewController {
-                
-                viewController.avAsset = avAsset
-                viewController.project = newProject
-//                viewController.modalPresentationStyle = .fullScreen
-                self.present(viewController, animated: true, completion: nil)
-                
-                viewController.onDoneBlock = { _ in
-                    print("done! done!")
-                }
-            }
         }
-        copyingFileToStorage = false
+        
+        
     }
+    
 }
+
+
+
+//extension ViewController: UIDocumentPickerDelegate {
+//
+////    override func present(_ viewControllerToPresent: UIViewController,
+////                          animated flag: Bool,
+////                          completion: (() -> Void)? = nil) {
+////        if let editingVC = viewControllerToPresent as? EditingViewController {
+////            print("print editing vc")
+////            viewControllerToPresent.modalPresentationStyle = .fullScreen
+////        }
+////        super.present(viewControllerToPresent, animated: flag, completion: completion)
+////    }
+//
+//
+//    func presentImportController() {
+//        let importController = UIDocumentPickerViewController(documentTypes: ["public.movie"], in: .import)
+//        importController.delegate = self
+//        present(importController, animated: true, completion: nil)
+//
+//    }
+//
+//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+//        //        }
+//        print("import result : \(url)")
+//
+////        if !copyingFileToStorage {
+////            copyingFileToStorage = true
+//
+//            guard controller.documentPickerMode == .open, url.startAccessingSecurityScopedResource() else { return }
+//            defer {
+//                DispatchQueue.main.async {
+//                    url.stopAccessingSecurityScopedResource()
+//                }
+//            }
+//            saveDocument(temporaryDocumentURL: url)
+////        }
+//
+//    }
+////    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+//////            if !copyingFileToStorage {
+//////                copyingFileToStorage = true
+////
+////        guard let documentURL = urls.first else { return }
+////        print("DocumentURL: \(documentURL)")
+////
+//////        let sampleDocumentURL = URL(fileURLWithPath: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")
+//////        saveDocument(temporaryDocumentURL: sampleDocumentURL)
+////
+////        let sampleURL = URL(fileURLWithPath: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")
+////        saveDocument(temporaryDocumentURL: sampleURL)
+//////        let shouldStopAccessing = documentURL.startAccessingSecurityScopedResource()
+//////        defer {
+//////            if shouldStopAccessing {
+//////                documentURL.stopAccessingSecurityScopedResource()
+//////            }
+//////        }
+//////        NSFileCoordinator().coordinate(readingItemAt: documentURL, error: NSErrorPointer.none) { (fileURL) in
+//////            let file = URL(fileURLWithPath: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")
+//////            saveDocument(temporaryDocumentURL: file)
+//////        }
+////
+////    }
+//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+////        let sampleURL = URL(fileURLWithPath: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")
+//        let sampleURL = Bundle.main.url(forResource: "IMG_6678.MOV", withExtension: "")!
+//        saveDocument(temporaryDocumentURL: sampleURL)
+//    }
+//
+//
+//
+//
+//    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+//        print("view was cancelled")
+//        let sampleURL = Bundle.main.url(forResource: "IMG_6678.MOV", withExtension: "")!
+//        saveDocument(temporaryDocumentURL: sampleURL)
+//    }
+//}
+
+//extension ViewController {
+//
+//    func saveDocument(temporaryDocumentURL: URL) {
+//        let date = Date()
+////        let formatter = DateFormatter()
+////        formatter.dateFormat = "MMddyy"
+////        let dateAsString = formatter.string(from: date)
+////
+////        let timeFormatter = DateFormatter()
+////        timeFormatter.dateFormat = "HHmmss-SSSS"
+////        let timeAsString = timeFormatter.string(from: date)
+////
+////        let videoFileName = "=\(dateAsString)=\(timeAsString)"
+////
+////        let permanentFileURL = globalURL.appendingPathComponent(videoFileName)
+////
+////        DispatchQueue.global().async {
+////            do {
+////                let videoData = try Data(contentsOf: temporaryDocumentURL)
+////                try videoData.write(to: permanentFileURL)
+////            } catch {
+////                print("Error making video data: \(error)")
+////            }
+////
+////        }
+//
+//        let avAsset = AVAsset(url: temporaryDocumentURL)
+//        let newProject = Project()
+//        newProject.title = "Untitled"
+//        newProject.dateCreated = date
+//
+//        let configuration = EditingConfiguration()
+//        newProject.configuration = configuration
+//
+//        let metadata = VideoMetadata()
+//        newProject.metadata = metadata
+//
+//        if let videoResolution = avAsset.resolutionSize() {
+//            metadata.resolutionWidth = Int(videoResolution.width)
+//            metadata.resolutionHeight = Int(videoResolution.height)
+//        }
+//
+//        let cmDuration = avAsset.duration
+//        let duration = CMTimeGetSeconds(cmDuration)
+//        metadata.duration = duration.getString() ?? "0:01"
+//
+//        metadata.copiedFileIntoStorage = true
+////        metadata.filePathEnding = videoFileName
+//
+//        DispatchQueue.main.async {
+//            do {
+//                try self.realm.write {
+//                    self.realm.add(newProject)
+//                }
+//            } catch {
+//                print("error adding object: \(error)")
+//            }
+//
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            if let viewController = storyboard.instantiateViewController(withIdentifier: "EditingViewController") as? EditingViewController {
+//
+//                viewController.avAsset = avAsset
+//                viewController.project = newProject
+////                viewController.modalPresentationStyle = .fullScreen
+//                self.present(viewController, animated: true, completion: nil)
+//
+//                viewController.onDoneBlock = { _ in
+//                    print("done! done!")
+//                }
+//            }
+//        }
+//        copyingFileToStorage = false
+//    }
+//}
 
 
 //class Document: UIDocument {
