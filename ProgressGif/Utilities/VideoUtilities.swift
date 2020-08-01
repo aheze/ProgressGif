@@ -17,7 +17,7 @@ extension AVAsset {
 }
 
 extension TimeInterval {
-    func getString() -> String? {
+    func getFormattedString() -> String? {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .positional
         formatter.allowedUnits = [.minute, .second]
