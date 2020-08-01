@@ -354,7 +354,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
             } else {
                 print("not saved with realm")
                 
-                //                        guard let savedFilePathEnding = thumb.filePathEnding else { print("no filePathEnding"); return }
                 guard let fileURLEnding = projectThumb.filePathEnding else { print("no url from filePathEnding"); return }
                 let videoURL = globalURL.appendingPathComponent(fileURLEnding)
                 
@@ -383,9 +382,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                     self.present(editingViewController, animated: true, completion: nil)
                 }
             }
-            //            }
-            
-            
             
         } else {
             let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier:
@@ -416,12 +412,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
             cell.progressBackgroundView.layer.cornerRadius = 6
             cell.progressBackgroundView.clipsToBounds = true
             cell.imageBaseView.shouldActivate = true
-            
-            //            if let project = projects?[indexPath.item] {
-            
-            //                let thumbnail = projectsToThumbnails[project]
-            
-            //                if let thumb = thumbnail {
             
             let projectThumb = projectThumbs[indexPath.item]
             print("has thumbnail")
@@ -465,16 +455,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 
                 
             }
-            //                }
-            //            }
-            
-//            let asset = projectPhotoAssets[indexPath.item]
-            
-            
-//            let videoThumbnail = videoU
-            
-            
-            
             return cell
         } else {
             
@@ -559,51 +539,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
         }
     }
 }
-//
-//extension CollectionViewController: UIViewControllerTransitioningDelegate {
-//    
-//}
-//
-//
-//extension CollectionViewController: GalleryAnimatorDelegate {
-//    func transitionWillStartWith(zoomAnimator: GalleryAnimator) {
-//    }
-//    
-//    func transitionDidEndWith(zoomAnimator: GalleryAnimator) {
-//    }
-//    
-//    func referenceImageView(for zoomAnimator: GalleryAnimator) -> UIImageView? {
-//        return getImageViewFromCollectionViewCell(for: selectedIndexPath)
-//    }
-//    
-//    func referenceImageViewFrameInTransitioningView(for zoomAnimator: GalleryAnimator) -> CGRect? {
-//        self.view.layoutIfNeeded()
-//        self.collectionView.layoutIfNeeded()
-//        
-//        //Get a guarded reference to the cell's frame
-//        let unconvertedFrame = getFrameFromCollectionViewCell(for: self.selectedIndexPath)
-//        
-//        var cellFrame = self.collectionView.convert(unconvertedFrame, to: self.view)
-//        
-//        if cellFrame.minY < self.collectionView.contentInset.top {
-//            return CGRect(x: cellFrame.minX, y: self.collectionView.contentInset.top, width: cellFrame.width, height: cellFrame.height - (self.collectionView.contentInset.top - cellFrame.minY))
-//        }
-//        
-//        let superCellFrame = self.collectionView.convert(unconvertedFrame, to: nil)
-//        let cellYDiff = superCellFrame.origin.y - cellFrame.origin.y
-//        let cellXDiff = superCellFrame.origin.x - cellFrame.origin.x
-//        
-//        cellFrame.origin.y += cellYDiff
-//        cellFrame.origin.x += cellXDiff
-//        ///works on ipad now
-//        ///need to fix this, no hardcoded values
-//        return cellFrame
-//    }
-//    
-//}
-
-
-
 extension CollectionViewController: PhotoPageViewControllerDelegate {
     func containerViewController(_ containerViewController: PhotoPageViewController, indexDidUpdate currentIndex: Int) {
         self.selectedIndexPath = IndexPath(row: currentIndex, section: 0)

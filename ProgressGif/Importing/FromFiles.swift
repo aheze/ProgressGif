@@ -36,20 +36,20 @@ extension ViewController: DocumentDelegate {
         timeFormatter.dateFormat = "HHmmss-SSSS"
         let timeAsString = timeFormatter.string(from: date)
         
-        let videoFileName = "=\(dateAsString)=\(timeAsString)"
+        let timeName = "=\(dateAsString)=\(timeAsString)"
+        let permanentFileURL = globalURL.appendingPathComponent(timeName).appendingPathExtension(temporaryDocumentURL.pathExtension)
+        let permanentFileEnding = permanentFileURL.lastPathComponent
         
-        
-        let permanentFileURL = globalURL.appendingPathComponent(videoFileName).appendingPathExtension(temporaryDocumentURL.pathExtension)
-        print("perma: \(permanentFileURL)")
+        print("perma: \(permanentFileURL), permaStirng: \(permanentFileEnding)")
         DispatchQueue.global().async {
+            
             do {
                 let videoData = try Data(contentsOf: temporaryDocumentURL)
-                //                try videoData.write(to: permanentFileURL)
                 try videoData.write(to: permanentFileURL, options: .atomic)
                 print("done writing!!!")
                 
                 DispatchQueue.main.async {
-                    let avAsset = AVAsset(url: temporaryDocumentURL)
+                    let avAsset = AVAsset(url: permanentFileURL)
                     let newProject = Project()
                     newProject.title = "Untitled"
                     newProject.dateCreated = date
@@ -70,9 +70,7 @@ extension ViewController: DocumentDelegate {
                     metadata.duration = duration.getString() ?? "0:01"
                     
                     metadata.copiedFileIntoStorage = true
-                    metadata.filePathEnding = videoFileName
-                    
-                    print("saving proj: \(newProject)")
+                    metadata.filePathEnding = permanentFileEnding
                     
                     do {
                         try self.realm.write {
@@ -90,8 +88,8 @@ extension ViewController: DocumentDelegate {
                         viewController.modalPresentationStyle = .fullScreen
                         self.present(viewController, animated: true, completion: nil)
                         
-                        viewController.onDoneBlock = { _ in
-                            print("done! done!")
+                        viewController.onDoneBlock = { [weak self] _ in
+                            self?.refreshCollectionViewInsert()
                         }
                     }
                 }
