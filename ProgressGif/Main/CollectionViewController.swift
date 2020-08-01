@@ -54,8 +54,20 @@ class CollectionViewController: UIViewController {
         collectionView.contentInsetAdjustmentBehavior = .never
         
         if collectionType == .projects {
-            getAssetFromProjects()
+            projects = realm.objects(Project.self)
+            if let projs = projects {
+                if projs.count == 0 {
+                    print("No projects yet!")
+                } else {
+                    getAssetFromProjects()
+                }
+            } else {
+                getAssetFromProjects()
+            }
+            
+            
         } else {
+            
             getAssetFromPhoto()
         }
     }
@@ -148,7 +160,7 @@ class CollectionViewController: UIViewController {
         })
 
         projectThumbs = thumbs
-        collectionView.reloadData()
+//        collectionView.reloadData()
         
     }
     
@@ -382,6 +394,32 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
                     
                     if let selectedProject = self.projects?[indexPath.item] {
+//                        for projThumbnail in projectThumbs {
+//                            if projThumbnail.dateCreated == selectedProject.dateCreated {
+//                                print("Found date match!")
+//
+//                                if projThumbnail.savingMethod == .documentsDirectory {
+//
+//                                }
+//                            }
+                        //                        }
+                        if let videoMetadata = selectedProject.metadata {
+                            if videoMetadata.copiedFileIntoStorage ?? false {
+                                print("Deleting from file now")
+                                
+                                let deletePath = self.globalURL.appendingPathComponent(videoMetadata.filePathEnding)
+                                let fileManager = FileManager.default
+                                print("file... \(deletePath)")
+                                do {
+                                    try fileManager.removeItem(at: deletePath)
+                                } catch {
+                                    print("Could not delete item: \(error)")
+                                }
+                                
+                            }
+                        }
+                        
+                        
                         do {
                             try self.realm.write {
                                 self.realm.delete(selectedProject)
