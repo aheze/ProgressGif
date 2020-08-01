@@ -33,7 +33,7 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
             
             if playerControlsView.customSlider.value > 0 {
                 print("over 0")
-                if let generatedImage = generateImage() {
+                if let generatedImage = generateImageFromCurrentPlayer() {
                     transition.thumbnailImage = generatedImage
                 }
             } else {
@@ -93,7 +93,6 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
                 self.chooseBaseView.isHidden = true
             }
             
-            print("return")
             return transition
     }
     
@@ -106,28 +105,13 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
 }
 
 extension PhotoPageViewController {
-    func generateImage() -> UIImage? {
+    func generateImageFromCurrentPlayer() -> UIImage? {
         if currentViewController.hasInitializedPlayer {
-            
             if let avAssetURL = currentViewController.playerView.avURLAsset {
-                let asset = AVAsset(url: avAssetURL.url)
-                let imageGenerator = AVAssetImageGenerator(asset: asset)
-                imageGenerator.appliesPreferredTrackTransform = true
                 if let time = currentViewController.playerView.player?.currentTime() {
-                    do {
-                        let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
-                        let thumbnail = UIImage(cgImage: imageRef)
-                        
-                        return thumbnail
-                    } catch {
-                        print("error copying image")
-                        return nil
-                    }
-                } else {
-                    return nil
+                    let image = avAssetURL.url.generateImage(atTime: time)
+                    return image
                 }
-            } else {
-                return nil
             }
         } else {
             //            return asset
@@ -137,20 +121,72 @@ extension PhotoPageViewController {
                 return nil
             }
         }
+        return nil
     }
 }
 
 extension URL {
-    func generateImage() -> UIImage? {
+    func generateImage(atTime time: CMTime = CMTimeMake(value: 1, timescale: 60)) -> UIImage? {
         let asset: AVAsset = AVAsset(url: self)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
 
         do {
-            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
+            let thumbnailImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
             return UIImage(cgImage: thumbnailImage)
         } catch let error {
             print(error)
             return nil
         }
+    }
+    func generateImageAndDuration() -> (UIImage?, String?) {
+        
+        let asset: AVAsset = AVAsset(url: self)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        
+        let duration = CMTimeGetSeconds(asset.duration)
+        let durationString = duration.getFormattedString()
+
+        do {
+            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
+            return (UIImage(cgImage: thumbnailImage), durationString)
+        } catch let error {
+            print(error)
+            return (nil, durationString)
+        }
+        
+        
+//        if currentViewController.hasInitializedPlayer {
+//
+//            if let avAssetURL = currentViewController.playerView.avURLAsset {
+//                let asset = AVAsset(url: avAssetURL.url)
+//                let duration = CMTimeGetSeconds(asset.duration)
+//                let durationString = duration.getFormattedString()
+//
+//                let imageGenerator = AVAssetImageGenerator(asset: asset)
+//                imageGenerator.appliesPreferredTrackTransform = true
+//                if let time = currentViewController.playerView.player?.currentTime() {
+//                    do {
+//                        let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+//                        let thumbnail = UIImage(cgImage: imageRef)
+//
+//                        return (thumbnail, durationString)
+//                    } catch {
+//                        print("error copying image")
+//                        return (nil, nil)
+//                    }
+//                } else {
+//                    return (nil, nil)
+//                }
+//            } else {
+//                return (nil, nil)
+//            }
+//        } else {
+//            //            return asset
+//            if let thumbnailImage = currentViewController.image {
+//                return (thumbnailImage, nil)
+//            } else {
+//                return (nil, nil)
+//            }
+//        }
     }
 }
