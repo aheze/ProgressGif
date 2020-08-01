@@ -25,6 +25,7 @@
 		4944CAB524B912F000E893AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4944CAB324B912F000E893AE /* LaunchScreen.storyboard */; };
 		4948C8E124C0F49400E5F5F6 /* EditingVC+EditingDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4948C8E024C0F49400E5F5F6 /* EditingVC+EditingDelegates.swift */; };
 		4954764E24D2293900C97569 /* IMG_6678.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 4954764D24D2293900C97569 /* IMG_6678.MOV */; };
+		49649F7224D4AB800048D59D /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49649F7124D4AB800048D59D /* DocumentPicker.swift */; };
 		496DD41C24BA4927007380AF /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496DD41B24BA4927007380AF /* CollectionViewController.swift */; };
 		496F7F8224BD1F080045DDCB /* PhotoPageViewController+Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F7F8124BD1F080045DDCB /* PhotoPageViewController+Player.swift */; };
 		496F7F8424BD3C1E0045DDCB /* PhotoPageViewController+UpdateSliderProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F7F8324BD3C1E0045DDCB /* PhotoPageViewController+UpdateSliderProgress.swift */; };
@@ -97,6 +98,7 @@
 		4944CAB624B912F000E893AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4948C8E024C0F49400E5F5F6 /* EditingVC+EditingDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+EditingDelegates.swift"; sourceTree = "<group>"; };
 		4954764D24D2293900C97569 /* IMG_6678.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_6678.MOV; sourceTree = "<group>"; };
+		49649F7124D4AB800048D59D /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		496DD41B24BA4927007380AF /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		496F7F8124BD1F080045DDCB /* PhotoPageViewController+Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoPageViewController+Player.swift"; sourceTree = "<group>"; };
 		496F7F8324BD3C1E0045DDCB /* PhotoPageViewController+UpdateSliderProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoPageViewController+UpdateSliderProgress.swift"; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				49B4CF9F24C755E500A2A22A /* Importing.swift */,
 				49F80C3224BD1C9E00C0C142 /* Photos */,
 				491816B124BA9AD800E318FC /* FromFiles.swift */,
+				49649F7124D4AB800048D59D /* DocumentPicker.swift */,
 			);
 			path = Importing;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				49A7F43624D349A100DD4DEA /* SettingsViewController.swift in Sources */,
 				49F8C12824C28669004686DF /* VideoUtilities.swift in Sources */,
 				49B4CFA324C7A90900A2A22A /* Rendering.swift in Sources */,
+				49649F7224D4AB800048D59D /* DocumentPicker.swift in Sources */,
 				49B4CF9C24C74FD800A2A22A /* BrightnessCursor.swift in Sources */,
 				49A362E024BB96E800019FC6 /* PhotoZoomViewController.swift in Sources */,
 				49240FCB24BFC88400DC9446 /* EditingVC+PlayerView.swift in Sources */,

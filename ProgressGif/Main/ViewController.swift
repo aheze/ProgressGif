@@ -43,7 +43,10 @@ class ViewController: UIViewController {
         collectionViewController?.updateTopInset()
     }
     
-    // MARK: - Collection View
+    // MARK: - Import From Files
+    var documentPicker: DocumentPicker!
+    
+    // MARK: - Photos Collection View
     
     lazy var collectionViewController: CollectionViewController? = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -52,6 +55,7 @@ class ViewController: UIViewController {
             viewController.inset = CGFloat(4)
             viewController.topInset = visualEffectView.frame.height
             viewController.collectionType = .projects
+            viewController.globalURL = self.globalURL
             self.add(childViewController: viewController, inView: view)
             
             return viewController
@@ -94,7 +98,8 @@ class ViewController: UIViewController {
     
     @IBAction func filesPressed(_ sender: Any) {
         filesButton.scaleUp()
-        presentImportController()
+//        presentImportController()
+        importFromFiles()
         handleAddButtonPress()
     }
     
@@ -136,9 +141,6 @@ class ViewController: UIViewController {
         overlayBlurView.alpha = 0
         overlayColorView.alpha = 0
         
-        /// initialize the collection view
-        _ = collectionViewController
-        
         guard let url = URL.createFolder(folderName: "ProgressGifStoredVideos") else {
             print("Can't create url")
             return
@@ -146,6 +148,13 @@ class ViewController: UIViewController {
         
         globalURL = url
         
+        print("global url: \(url)")
+        /// initialize the collection view
+        _ = collectionViewController
+        
+        
+        
+        documentPicker = DocumentPicker(presentationController: self, delegate: self)
         
     }
 
