@@ -15,11 +15,6 @@ class ViewController: UIViewController {
     var globalURL = URL(fileURLWithPath: "")
     var copyingFileToStorage = false
     
-    // MARK: - Welcome
-    
-    @IBOutlet var welcomeView: UIView!
-    
-    
     
     // MARK: - Header
     @IBOutlet weak var visualEffectView: UIVisualEffectView! /// the top bar
