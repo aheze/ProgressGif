@@ -8,6 +8,7 @@
 import UIKit
 import Photos
 import RealmSwift
+import SnapKit
 
 
 enum CollectionType {
@@ -23,6 +24,18 @@ class ProjectThumbnailAsset: NSObject {
 }
 
 class CollectionViewController: UIViewController {
+    
+    // MARK: - Welcome
+    
+    @IBOutlet var welcomeView: UIView!
+    
+    // MARK: - Photo Permissions
+    @IBOutlet var accessPhotosView: UIView!
+    @IBOutlet weak var accessPhotosGrantAccessButton: UIButton!
+    @IBAction func grantAccessButtonPressed(_ sender: Any) {
+    }
+    
+    
     
     let transition = PopAnimator()
     var onDoneBlock: ((Bool) -> Void)?
@@ -58,6 +71,19 @@ class CollectionViewController: UIViewController {
             if let projs = projects {
                 if projs.count == 0 {
                     print("No projects yet!")
+                    
+                    view.addSubview(welcomeView)
+                    welcomeView.snp.makeConstraints { (make) in
+//                        make.width.equalToSuperview()
+////                        make.height.equalTo()
+//                        make.top.equalToSuperview().inset(topInset * 2)
+//                        make.bottom.equalToSuperview().inset(topInset * 2)
+//                        make.left.equalToSuperview()
+//                        make.right.equalToSuperview()
+                        make.edges.equalToSuperview()
+                    }
+                    
+                    
                 } else {
                     getAssetFromProjects()
                 }

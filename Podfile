@@ -11,4 +11,5 @@ target 'ProgressGif' do
 	pod 'SnapKit', '~> 5.0.0'
   pod 'SDWebImage'
   pod 'SwiftGifOrigin', '~> 1.7.0'
+  pod 'SnapKit'
 end
