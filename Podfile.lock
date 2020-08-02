@@ -15,6 +15,7 @@ DEPENDENCIES:
   - Parchment
   - RealmSwift
   - SDWebImage
+  - SnapKit
   - SnapKit (~> 5.0.0)
   - SwiftGifOrigin (~> 1.7.0)
 
@@ -35,6 +36,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
 
-PODFILE CHECKSUM: 8ab86e98c77e0e58bb069d1f13079c8d9c34a544
+PODFILE CHECKSUM: 5ae1cf7c74689c4c94149178d9a4a7589cf1ee0c
 
 COCOAPODS: 1.8.3
