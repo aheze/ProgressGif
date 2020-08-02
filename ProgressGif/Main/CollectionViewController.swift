@@ -25,20 +25,12 @@ class ProjectThumbnailAsset: NSObject {
 
 class CollectionViewController: UIViewController {
     
-    // MARK: - Welcome
-    
-    @IBOutlet var welcomeView: UIView!
-    
-    // MARK: - Photo Permissions
-    @IBOutlet var accessPhotosView: UIView!
-    @IBOutlet weak var accessPhotosGrantAccessButton: UIButton!
-    @IBAction func grantAccessButtonPressed(_ sender: Any) {
-    }
-    
-    
     
     let transition = PopAnimator()
     var onDoneBlock: ((Bool) -> Void)?
+    
+    var displayWelcome: ((Bool) -> Void)?
+    var displayPhotoPermissions: ((PhotoPermissionType) -> Void)?
     
     let realm = try! Realm()
     var globalURL = URL(fileURLWithPath: "")
@@ -49,7 +41,7 @@ class CollectionViewController: UIViewController {
     var collectionType = CollectionType.projects
     var projects: Results<Project>?
     
-    var photoAssets: PHFetchResult<PHAsset>!
+    var photoAssets: PHFetchResult<PHAsset>?
     var projectThumbs = [ProjectThumbnailAsset]()
     
     var cellSize = CGSize(width: 100, height: 100)
@@ -67,33 +59,32 @@ class CollectionViewController: UIViewController {
         collectionView.contentInsetAdjustmentBehavior = .never
         
         if collectionType == .projects {
-            projects = realm.objects(Project.self)
-            if let projs = projects {
-                if projs.count == 0 {
-                    print("No projects yet!")
-                    
-                    view.addSubview(welcomeView)
-                    welcomeView.snp.makeConstraints { (make) in
-//                        make.width.equalToSuperview()
-////                        make.height.equalTo()
-//                        make.top.equalToSuperview().inset(topInset * 2)
-//                        make.bottom.equalToSuperview().inset(topInset * 2)
-//                        make.left.equalToSuperview()
-//                        make.right.equalToSuperview()
-                        make.edges.equalToSuperview()
-                    }
-                    
-                    
-                } else {
-                    getAssetFromProjects()
-                }
-            } else {
-                getAssetFromProjects()
-            }
-            
-            
+            getAssetFromProjects()
+//            projects = realm.objects(Project.self)
+//            if let projs = projects {
+//                if projs.count == 0 {
+//                    print("No projects yet!")
+//
+//                    displayWelcome?(true)
+//
+////                    view.addSubview(welcomeView)
+////                    welcomeView.snp.makeConstraints { (make) in
+//////                        make.width.equalToSuperview()
+////////                        make.height.equalTo()
+//////                        make.top.equalToSuperview().inset(topInset * 2)
+//////                        make.bottom.equalToSuperview().inset(topInset * 2)
+//////                        make.left.equalToSuperview()
+//////                        make.right.equalToSuperview()
+////                        make.edges.equalToSuperview()
+////                    }
+//
+//                } else {
+//                    getAssetFromProjects()
+//                }
+//            } else {
+//                getAssetFromProjects()
+//            }
         } else {
-            
             getAssetFromPhoto()
         }
     }
@@ -106,12 +97,28 @@ class CollectionViewController: UIViewController {
     // get all videos from Photos library you need to import Photos framework
     // user photos array in collectionView for disaplying video thumnail
     func getAssetFromPhoto() {
-        let options = PHFetchOptions()
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
-        photoAssets = PHAsset.fetchAssets(with: options)
-        
-        collectionView.reloadData()
+        let photoPermissions = PHPhotoLibrary.authorizationStatus()
+        switch photoPermissions {
+
+        case .notDetermined:
+            displayPhotoPermissions?(.askForAccess)
+        case .restricted:
+            let alert = UIAlertController(title: "Restricted 😢", message: "You're restricted from accessing the photo library", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: { _ in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        case .denied:
+            displayPhotoPermissions?(.goToSettings)
+        case .authorized:
+            let options = PHFetchOptions()
+            options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+            options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
+            photoAssets = PHAsset.fetchAssets(with: options)
+            collectionView.reloadData()
+        @unknown default:
+            break
+        }
     }
     func updateAssets() {
         getAssetFromProjects()
@@ -122,27 +129,35 @@ class CollectionViewController: UIViewController {
     func getAssetFromProjects() {
         
         projects = realm.objects(Project.self)
-        
         if let projs = projects {
             projects = projs.sorted(byKeyPath: "dateCreated", ascending: false)
         }
         
+        guard let projs = projects,
+            projs.count > 0 else  {
+                print("no projects!!!!!!")
+                projectThumbs.removeAll()
+//                collectionView.reloadData()
+                displayWelcome?(true)
+                return
+        }
+        
+        displayWelcome?(false)
+        
         var thumbs = [ProjectThumbnailAsset]()
         var projectsImportedFromPhotos = [Project]()
         
-        if let projs = projects {
-            for proj in projs {
-                if proj.metadata?.copiedFileIntoStorage ?? false { /// saved into documents directory
-                    let thumbnail = ProjectThumbnailAsset()
-                    thumbnail.project = proj
-                    thumbnail.savingMethod = .documentsDirectory
-                    thumbnail.filePathEnding = proj.metadata?.filePathEnding
-                    thumbnail.dateCreated = proj.dateCreated
-                    
-                    thumbs.append(thumbnail)
-                } else {
-                    projectsImportedFromPhotos.append(proj)
-                }
+        for proj in projs {
+            if proj.metadata?.copiedFileIntoStorage ?? false { /// saved into documents directory
+                let thumbnail = ProjectThumbnailAsset()
+                thumbnail.project = proj
+                thumbnail.savingMethod = .documentsDirectory
+                thumbnail.filePathEnding = proj.metadata?.filePathEnding
+                thumbnail.dateCreated = proj.dateCreated
+                
+                thumbs.append(thumbnail)
+            } else {
+                projectsImportedFromPhotos.append(proj)
             }
         }
         
@@ -180,14 +195,11 @@ class CollectionViewController: UIViewController {
             }
         }
         
-        
         thumbs = thumbs.sorted(by: {
             $0.dateCreated.compare($1.dateCreated) == .orderedDescending
         })
 
         projectThumbs = thumbs
-//        collectionView.reloadData()
-        
     }
     
     override func viewDidLoad() {
@@ -210,7 +222,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
         if collectionType == .projects {
             return projectThumbs.count
         } else {
-            return photoAssets.count
+            return photoAssets?.count ?? 0
         }
     }
     
@@ -370,17 +382,18 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
             
         } else {
             
-            let asset = photoAssets.object(at: indexPath.row)
-            cell.representedAssetIdentifier = asset.localIdentifier
-            cell.imageBaseView.shouldActivate = true
-            cell.secondaryLabel.text = ""
-            
-            PHImageManager.default().requestImage(for: asset, targetSize: cellSize, contentMode: PHImageContentMode.aspectFit, options: nil) { (image, userInfo) -> Void in
+            if let asset = photoAssets?.object(at: indexPath.row) {
+                cell.representedAssetIdentifier = asset.localIdentifier
+                cell.imageBaseView.shouldActivate = true
+                cell.secondaryLabel.text = ""
                 
-                if cell.representedAssetIdentifier == asset.localIdentifier {
-                    cell.imageView.image = image
-                    let duration = asset.duration
-                    cell.nameLabel.text = duration.getFormattedString()
+                PHImageManager.default().requestImage(for: asset, targetSize: cellSize, contentMode: PHImageContentMode.aspectFit, options: nil) { (image, userInfo) -> Void in
+                    
+                    if cell.representedAssetIdentifier == asset.localIdentifier {
+                        cell.imageView.image = image
+                        let duration = asset.duration
+                        cell.nameLabel.text = duration.getFormattedString()
+                    }
                 }
             }
             return cell
@@ -418,19 +431,14 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 let alert = UIAlertController(title: "Delete this project?", message: "This action can't be undone.", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
+                    print("delete!")
                     
-                    if let selectedProject = self.projects?[indexPath.item] {
-//                        for projThumbnail in projectThumbs {
-//                            if projThumbnail.dateCreated == selectedProject.dateCreated {
-//                                print("Found date match!")
-//
-//                                if projThumbnail.savingMethod == .documentsDirectory {
-//
-//                                }
-//                            }
-                        //                        }
+//                    if let selectedProject = self.projects?[indexPath.item] {
+                    let selectedProject = self.projectThumbs[indexPath.item].project
+                        print("has delete select project")
+                        
                         if let videoMetadata = selectedProject.metadata {
-                            if videoMetadata.copiedFileIntoStorage ?? false {
+                            if videoMetadata.copiedFileIntoStorage {
                                 print("Deleting from file now")
                                 
                                 let deletePath = self.globalURL.appendingPathComponent(videoMetadata.filePathEnding)
@@ -438,6 +446,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                                 print("file... \(deletePath)")
                                 do {
                                     try fileManager.removeItem(at: deletePath)
+                                    
                                 } catch {
                                     print("Could not delete item: \(error)")
                                 }
@@ -445,21 +454,18 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                             }
                         }
                         
-                        
                         do {
                             try self.realm.write {
                                 self.realm.delete(selectedProject)
                             }
+                            self.getAssetFromProjects()
+                            collectionView.performBatchUpdates({
+                                self.collectionView.deleteItems(at: [indexPath])
+                            }, completion: nil)
                         } catch {
-                            print("Error deleting project: \(error)")
+                            print("Error deleting project from realm: \(error)")
                         }
-                        
-                        self.getAssetFromProjects()
-                        collectionView.performBatchUpdates({
-                            self.collectionView.deleteItems(at: [indexPath])
-                        }, completion: nil)
-                        
-                    }
+//                    }
                 }))
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
