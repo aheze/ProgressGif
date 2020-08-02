@@ -8,12 +8,17 @@
 import UIKit
 import Photos
 import RealmSwift
+import SnapKit
 
 class ViewController: UIViewController {
     
     let realm = try! Realm()
     var globalURL = URL(fileURLWithPath: "")
     var copyingFileToStorage = false
+    
+    
+    @IBOutlet weak var welcomeReferenceView: UIView!
+    @IBOutlet var welcomeView: UIView!
     
     
     // MARK: - Header
@@ -57,6 +62,32 @@ class ViewController: UIViewController {
             viewController.topInset = visualEffectView.frame.height
             viewController.collectionType = .projects
             viewController.globalURL = self.globalURL
+            viewController.displayWelcome = { [weak self] display in
+                if display {
+                    if let selfU = self {
+                        
+                        selfU.welcomeReferenceView.addSubview(selfU.welcomeView)
+                        selfU.welcomeView.alpha = 0
+                        
+                        selfU.welcomeReferenceView.isUserInteractionEnabled = true
+                        
+                        selfU.welcomeView.snp.makeConstraints { (make) in
+                            make.edges.equalToSuperview()
+                        }
+                        
+                        UIView.animate(withDuration: 0.6, animations: {
+                            selfU.welcomeView.alpha = 1
+                        })
+                    }
+                } else {
+                    if let selfU = self {
+                        
+                        selfU.welcomeView.removeFromSuperview()
+                        selfU.welcomeReferenceView.isUserInteractionEnabled = false
+                    }
+                }
+            }
+            
             self.add(childViewController: viewController, inView: view)
             
             return viewController
@@ -114,7 +145,8 @@ class ViewController: UIViewController {
     
     @IBAction func photosPressed(_ sender: Any) {
         photosButton.scaleUp()
-        importVideo()
+//        importVideo()
+        presentPhotosPicker()
         handleAddButtonPress()
     }
     
@@ -136,6 +168,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        welcomeReferenceView.isUserInteractionEnabled = false
         /// make the import from files, import from photos, and import from clipboard buttons transparent
         setUpButtonAlpha()
         
@@ -152,8 +185,6 @@ class ViewController: UIViewController {
         print("global url: \(url)")
         /// initialize the collection view
         _ = collectionViewController
-        
-        
         
         documentPicker = DocumentPicker(presentationController: self, delegate: self)
         

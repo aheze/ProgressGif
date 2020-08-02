@@ -10,34 +10,7 @@ import Photos
 
 extension ViewController {
 
-    func importVideo() {
-
-        let photoPermissions = PHPhotoLibrary.authorizationStatus()
-
-        switch photoPermissions {
-
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization({status in
-                if status == .authorized {
-                    self.collectionViewController?.getAssetFromProjects()
-                    self.presentFromPhotosPicker()
-                }
-            })
-        case .restricted:
-            let alert = UIAlertController(title: "Restricted 😢", message: "You're restricted from accessing the photo library", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        case .denied:
-            askToGoToSettingsForPhotoLibrary()
-        case .authorized:
-            collectionViewController?.getAssetFromProjects()
-            presentFromPhotosPicker()
-        @unknown default:
-            break
-        }
-    }
-    
-    func presentFromPhotosPicker() {
+    func presentPhotosPicker() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let vc = storyboard.instantiateViewController(withIdentifier: "FromPhotosPicker") as?
