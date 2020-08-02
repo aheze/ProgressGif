@@ -40,3 +40,75 @@ extension TimeInterval {
         }
     }
 }
+extension URL {
+//    func generateImage(atTime time: CMTime = CMTimeMake(value: 1, timescale: 60)) -> UIImage? {
+//        let asset: AVAsset = AVAsset(url: self)
+//        let imageGenerator = AVAssetImageGenerator(asset: asset)
+//
+//        do {
+//            let thumbnailImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+//            return UIImage(cgImage: thumbnailImage)
+//        } catch let error {
+//            print(error)
+//            return nil
+//        }
+//    }
+    func generateImageAndDuration() -> (UIImage?, String?) {
+        
+        let asset: AVAsset = AVAsset(url: self)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.appliesPreferredTrackTransform = true
+        
+        let duration = CMTimeGetSeconds(asset.duration)
+        let durationString = duration.getFormattedString()
+
+        do {
+            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
+            return (UIImage(cgImage: thumbnailImage), durationString)
+        } catch let error {
+            print(error)
+            return (nil, durationString)
+        }
+    }
+    
+    func getThumbnailImageFromVideoUrl(url: URL, completion: @escaping ((_ image: UIImage?)->Void)) {
+        DispatchQueue.global().async { //1
+            let asset = AVAsset(url: url) //2
+            let avAssetImageGenerator = AVAssetImageGenerator(asset: asset) //3
+            avAssetImageGenerator.appliesPreferredTrackTransform = true //4
+            let thumnailTime = CMTimeMake(value: 2, timescale: 1) //5
+            do {
+                let cgThumbImage = try avAssetImageGenerator.copyCGImage(at: thumnailTime, actualTime: nil) //6
+                let thumbImage = UIImage(cgImage: cgThumbImage) //7
+                DispatchQueue.main.async { //8
+                    completion(thumbImage) //9
+                }
+            } catch {
+                print(error.localizedDescription) //10
+                DispatchQueue.main.async {
+                    completion(nil) //11
+                }
+            }
+        }
+    }
+    
+    func generateImage(atTime time: CMTime = CMTimeMake(value: 1, timescale: 60), completion: @escaping ((_ image: UIImage?) -> Void )) {
+        DispatchQueue.global().async {
+            let asset: AVAsset = AVAsset(url: self)
+            let imageGenerator = AVAssetImageGenerator(asset: asset)
+            imageGenerator.appliesPreferredTrackTransform = true
+            
+            do {
+                let thumbnailImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+                
+                let uiImage = UIImage(cgImage: thumbnailImage)
+                DispatchQueue.main.async {
+                    completion(uiImage)
+                }
+            } catch let error {
+                print(error)
+                completion(nil)
+            }
+        }
+    }
+}
