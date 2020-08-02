@@ -246,6 +246,8 @@ class EditingViewController: UIViewController {
                 self.percentageOfPreviewValue = CGFloat(projectMetadata.resolutionHeight) / self.playerHolderView.frame.height
             }
         }
+        
+        print("view did load")
     }
 }
 

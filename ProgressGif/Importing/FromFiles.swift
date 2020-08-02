@@ -83,8 +83,17 @@ extension ViewController: DocumentDelegate {
                         viewController.avAsset = avAsset
                         viewController.project = newProject
                         viewController.modalPresentationStyle = .fullScreen
+                        
                         self.present(viewController, animated: true, completion: nil)
                         
+                        print("SET UP DRAWING")
+                        
+                        permanentFileURL.generateImage { (generatedImage) in
+                            if let image = generatedImage {
+                                viewController.imageView.image = image
+                            }
+                        }
+                        viewController.setUpDrawing(with: viewController.editingConfiguration)
                         viewController.onDoneBlock = { [weak self] _ in
                             self?.refreshCollectionViewInsert()
                         }
