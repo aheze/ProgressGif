@@ -58,6 +58,7 @@ class PlayerView: UIView {
         return layer as! AVPlayerLayer
     }
     
+    
     private func setUpPlayerItem(with asset: AVAsset) {
         playerItem = AVPlayerItem(asset: asset)
         playerItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.old, .new], context: &playerItemContext)
