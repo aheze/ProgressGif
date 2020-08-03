@@ -62,6 +62,10 @@ class FromPhotosPicker: UIViewController {
     var windowStatusBarHeight = CGFloat(0)
     
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    @IBOutlet weak var xButton: UIButton!
+    @IBAction func xButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     @IBOutlet weak var photosImageView: UIImageView!
     @IBOutlet weak var photosLabel: UILabel!
