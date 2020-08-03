@@ -39,7 +39,6 @@ class ViewController: UIViewController {
             self.present(viewController, animated: true, completion: nil)
         }
     }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
@@ -48,6 +47,105 @@ class ViewController: UIViewController {
         collectionViewController?.topInset = visualEffectView.frame.height
         collectionViewController?.updateTopInset()
     }
+    // MARK: - Warning flag
+    var shouldGoToSettings = false
+    @IBOutlet weak var photoPermissionWarningView: UIView!
+    @IBOutlet weak var photoPermissionExplanationView: UIView!
+    @IBOutlet weak var photoPermissionExplanationTopC: NSLayoutConstraint!
+    @IBOutlet weak var photoPermissionWarningHeightC: NSLayoutConstraint!
+    @IBOutlet weak var photoWarningButton: UIButton!
+    @IBAction func photoWarningButtonPressed(_ sender: Any) {
+        animatePermissionExplanationOpen()
+    }
+    @IBOutlet weak var closePhotoPermissionButton: UIButton!
+    @IBAction func closePhotoPermissionButtonPressed(_ sender: Any) {
+        animatePermissionWarningClose()
+    }
+    
+    @IBOutlet weak var grantPhotoAccessButton: UIButton!
+    @IBAction func grantPhotoAccessButtonPressed(_ sender: Any) {
+        if shouldGoToSettings {
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl)
+            }
+        } else {
+            PHPhotoLibrary.requestAuthorization { (status) in
+                if status == .authorized {
+                    DispatchQueue.main.async {
+                        self.animatePermissionWarningClose()
+                        self.collectionViewController?.getAssetFromProjects()
+                        self.collectionViewController?.collectionView.reloadData()
+                    }
+                } else {
+                    self.shouldGoToSettings = true
+                    DispatchQueue.main.async {
+                        self.grantPhotoAccessButton.setTitle("Go to Settings", for: .normal)
+                    }
+                    
+                }
+            }
+        }
+    }
+    func animatePermissionWarningClose() {
+        photoPermissionWarningHeightC.constant = 0
+        photoPermissionExplanationTopC.constant = -20
+        
+        let topInset = visualEffectView.frame.height
+        self.collectionViewController?.topInset = topInset
+        self.collectionViewController?.collectionView.verticalScrollIndicatorInsets.top = topInset
+        self.collectionViewController?.collectionView.contentInset.top = topInset
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+            self.photoPermissionWarningView.alpha = 0
+            self.closePhotoPermissionButton.alpha = 0
+            self.photoPermissionExplanationView.alpha = 0
+            
+        }) { _ in
+            self.photoPermissionExplanationView.isUserInteractionEnabled = false
+        }
+    }
+    
+    func animatePermissionWarningOpen() {
+        let photoPermissions = PHPhotoLibrary.authorizationStatus()
+        switch photoPermissions {
+        case .notDetermined:
+            shouldGoToSettings = false
+        case .denied:
+            shouldGoToSettings = true
+            grantPhotoAccessButton.setTitle("Go to Settings", for: .normal)
+        default:
+            print("default warning open")
+        }
+        
+        let topInset = visualEffectView.frame.height + 40
+        self.collectionViewController?.topInset = topInset
+        self.collectionViewController?.collectionView.verticalScrollIndicatorInsets.top = topInset
+        self.collectionViewController?.collectionView.contentInset.top = topInset
+        
+        photoPermissionWarningHeightC.constant = 40
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+            self.photoPermissionWarningView.alpha = 1
+            self.closePhotoPermissionButton.alpha = 1
+            self.photoPermissionWarningView.alpha = 1
+        })
+    }
+    
+    func animatePermissionExplanationOpen() {
+        photoPermissionExplanationView.isUserInteractionEnabled = true
+        grantPhotoAccessButton.layer.cornerRadius = 6
+        photoPermissionExplanationTopC.constant = 0
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+            self.photoPermissionExplanationView.alpha = 1
+        })
+    }
+    
     
     // MARK: - Import From Files
     var documentPicker: DocumentPicker!
@@ -85,6 +183,14 @@ class ViewController: UIViewController {
                         selfU.welcomeView.removeFromSuperview()
                         selfU.welcomeReferenceView.isUserInteractionEnabled = false
                     }
+                }
+            }
+            
+            viewController.displayPhotoPermissionWarning = { [weak self] () in
+                print("display!!!!!")
+                
+                DispatchQueue.main.async {
+                    self?.animatePermissionWarningOpen()
                 }
             }
             
@@ -167,6 +273,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        photoPermissionWarningHeightC.constant = 0
+        photoPermissionWarningView.alpha = 0
+        closePhotoPermissionButton.alpha = 0
+        photoPermissionWarningView.alpha = 0
+        photoPermissionExplanationView.alpha = 0
+        photoPermissionExplanationView.isUserInteractionEnabled = false
         
         welcomeReferenceView.isUserInteractionEnabled = false
         /// make the import from files, import from photos, and import from clipboard buttons transparent
