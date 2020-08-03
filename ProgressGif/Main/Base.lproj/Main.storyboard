@@ -584,9 +584,21 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ukg-cv-Zgi">
                                 <rect key="frame" x="24" y="94" width="366" height="366"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VGS-4W-MbO">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JjG-cm-fmw">
                                         <rect key="frame" x="0.0" y="0.0" width="366" height="366"/>
-                                    </imageView>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VGS-4W-MbO">
+                                                <rect key="frame" x="0.0" y="0.0" width="366" height="366"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="VGS-4W-MbO" secondAttribute="bottom" id="YzD-ss-S1t"/>
+                                            <constraint firstItem="VGS-4W-MbO" firstAttribute="top" secondItem="JjG-cm-fmw" secondAttribute="top" id="f7b-cG-k6i"/>
+                                            <constraint firstItem="VGS-4W-MbO" firstAttribute="leading" secondItem="JjG-cm-fmw" secondAttribute="leading" id="hT4-eT-SKc"/>
+                                            <constraint firstAttribute="trailing" secondItem="VGS-4W-MbO" secondAttribute="trailing" id="u2O-Er-jHz"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9Q-eI-MZu">
                                         <rect key="frame" x="153.66666666666666" y="154.66666666666666" width="59" height="57"/>
                                         <color key="tintColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -604,18 +616,18 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="VGS-4W-MbO" secondAttribute="bottom" id="97N-G5-2VU"/>
+                                    <constraint firstItem="JjG-cm-fmw" firstAttribute="leading" secondItem="ukg-cv-Zgi" secondAttribute="leading" id="19A-be-J6c"/>
                                     <constraint firstAttribute="width" secondItem="ukg-cv-Zgi" secondAttribute="height" multiplier="1:1" id="Dhf-kL-P5z"/>
                                     <constraint firstItem="x9Q-eI-MZu" firstAttribute="centerY" secondItem="ukg-cv-Zgi" secondAttribute="centerY" id="N1C-tt-o5d"/>
                                     <constraint firstItem="x9Q-eI-MZu" firstAttribute="centerX" secondItem="ukg-cv-Zgi" secondAttribute="centerX" id="Qzq-Ix-Piy"/>
+                                    <constraint firstAttribute="trailing" secondItem="JjG-cm-fmw" secondAttribute="trailing" id="WyB-Dy-Mcc"/>
+                                    <constraint firstItem="JjG-cm-fmw" firstAttribute="top" secondItem="ukg-cv-Zgi" secondAttribute="top" id="bAD-1n-Ehx"/>
                                     <constraint firstAttribute="trailing" secondItem="SYK-pS-tv0" secondAttribute="trailing" constant="24" id="eRb-rF-zYn"/>
+                                    <constraint firstAttribute="bottom" secondItem="JjG-cm-fmw" secondAttribute="bottom" id="hog-zR-M0g"/>
                                     <constraint firstItem="SYK-pS-tv0" firstAttribute="centerY" secondItem="ukg-cv-Zgi" secondAttribute="centerY" id="jDJ-dc-phl"/>
-                                    <constraint firstAttribute="trailing" secondItem="VGS-4W-MbO" secondAttribute="trailing" id="ozo-Jd-RqD"/>
-                                    <constraint firstItem="VGS-4W-MbO" firstAttribute="leading" secondItem="ukg-cv-Zgi" secondAttribute="leading" id="ral-pI-DwZ"/>
                                     <constraint firstItem="SYK-pS-tv0" firstAttribute="leading" secondItem="ukg-cv-Zgi" secondAttribute="leading" constant="24" id="waR-2X-bLI"/>
-                                    <constraint firstItem="VGS-4W-MbO" firstAttribute="top" secondItem="ukg-cv-Zgi" secondAttribute="top" id="xkX-Ch-ZkZ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ytD-Di-c6v">
@@ -716,6 +728,11 @@
                         <outlet property="chooseButton" destination="WDq-V3-l1b" id="bIG-df-4uq"/>
                         <outlet property="chooseButtonView" destination="fAa-Tx-XQM" id="mxQ-xh-Ils"/>
                         <outlet property="chooseViewWidthC" destination="c87-pk-cTE" id="Jwy-5p-iH7"/>
+                        <outlet property="imageBackgroundBottomC" destination="hog-zR-M0g" id="qEP-gK-rkd"/>
+                        <outlet property="imageBackgroundLeftC" destination="19A-be-J6c" id="L9V-Fk-xN7"/>
+                        <outlet property="imageBackgroundRightC" destination="WyB-Dy-Mcc" id="zX4-h9-qeQ"/>
+                        <outlet property="imageBackgroundTopC" destination="bAD-1n-Ehx" id="3dF-nD-TuH"/>
+                        <outlet property="imageBackgroundView" destination="JjG-cm-fmw" id="Oai-3g-Pjp"/>
                         <outlet property="imageView" destination="VGS-4W-MbO" id="aNm-lh-nIu"/>
                         <outlet property="inBetweenButtonC" destination="kkv-gm-gXg" id="8F6-dC-qcR"/>
                         <outlet property="inBetweenChooseActivityC" destination="S5y-ce-8to" id="3uf-YO-Wfb"/>
