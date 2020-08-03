@@ -10,6 +10,10 @@ import Photos
 
 extension ViewController {
 
+    func importFromFiles() {
+        documentPicker.displayPicker()
+    }
+    
     func presentPhotosPicker() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -24,6 +28,21 @@ extension ViewController {
         }
     }
     
+    func presentPasteController() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "PasteViewController") as?
+                PasteViewController {
+                
+//                vc.onDoneBlock = { [weak self] _ in
+//                    self?.refreshCollectionViewInsert()
+//                }
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    /// after dismissing the editing view controller, add the new project to the home screen
     func refreshCollectionViewInsert() {
         if let collectionVC = self.collectionViewController {
             collectionVC.updateAssets()
@@ -40,19 +59,5 @@ extension ViewController {
             }
         }
     }
-
-    func askToGoToSettingsForPhotoLibrary() {
-        let alert = UIAlertController(title: "Photo Library Permissions", message: "We need to access your photo library to import videos", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: {(action: UIAlertAction) in
-            if let url = URL(string: UIApplication.openSettingsURLString) {
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            }
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
 }
 

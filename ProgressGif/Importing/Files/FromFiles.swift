@@ -12,10 +12,6 @@ import AVKit
 
 extension ViewController: DocumentDelegate {
     
-    func importFromFiles() {
-        documentPicker.displayPicker()
-    }
-    
     func didPickDocument(document: Document?) {
         if let pickedDoc = document {
             let fileURL = pickedDoc.fileURL
