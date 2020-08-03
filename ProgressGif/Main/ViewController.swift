@@ -236,7 +236,6 @@ class ViewController: UIViewController {
     
     @IBAction func filesPressed(_ sender: Any) {
         filesButton.scaleUp()
-//        presentImportController()
         importFromFiles()
         handleAddButtonPress()
     }
@@ -251,7 +250,6 @@ class ViewController: UIViewController {
     
     @IBAction func photosPressed(_ sender: Any) {
         photosButton.scaleUp()
-//        importVideo()
         presentPhotosPicker()
         handleAddButtonPress()
     }
@@ -265,6 +263,7 @@ class ViewController: UIViewController {
     }
     @IBAction func clipboardPressed(_ sender: Any) {
         clipboardButton.scaleUp()
+        presentPasteController()
         handleAddButtonPress()
     }
     @IBAction func clipboardTouchUpOutside(_ sender: Any) {
