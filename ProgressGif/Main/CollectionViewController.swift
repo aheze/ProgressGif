@@ -32,6 +32,9 @@ class CollectionViewController: UIViewController {
     var displayWelcome: ((Bool) -> Void)?
     var displayPhotoPermissions: ((PhotoPermissionType) -> Void)?
     
+    var displayedPhotoWarning = false
+    var displayPhotoPermissionWarning: (() -> Void)?
+    
     let realm = try! Realm()
     var globalURL = URL(fileURLWithPath: "")
     
@@ -60,30 +63,6 @@ class CollectionViewController: UIViewController {
         
         if collectionType == .projects {
             getAssetFromProjects()
-//            projects = realm.objects(Project.self)
-//            if let projs = projects {
-//                if projs.count == 0 {
-//                    print("No projects yet!")
-//
-//                    displayWelcome?(true)
-//
-////                    view.addSubview(welcomeView)
-////                    welcomeView.snp.makeConstraints { (make) in
-//////                        make.width.equalToSuperview()
-////////                        make.height.equalTo()
-//////                        make.top.equalToSuperview().inset(topInset * 2)
-//////                        make.bottom.equalToSuperview().inset(topInset * 2)
-//////                        make.left.equalToSuperview()
-//////                        make.right.equalToSuperview()
-////                        make.edges.equalToSuperview()
-////                    }
-//
-//                } else {
-//                    getAssetFromProjects()
-//                }
-//            } else {
-//                getAssetFromProjects()
-//            }
         } else {
             getAssetFromPhoto()
         }
@@ -168,31 +147,50 @@ class CollectionViewController: UIViewController {
             }
         }
         
-        var rawPHAssets: PHFetchResult<PHAsset>!
-        rawPHAssets = PHAsset.fetchAssets(withLocalIdentifiers: photoIDs, options: nil)
-        
-        if rawPHAssets != nil {
-            if rawPHAssets.count > 0 {
-                /// the user may have multiple projects with the same video
-                /// so we need to make a new array that contains possible duplicate video
-                let phAssets = rawPHAssets.objects(at: IndexSet(0...rawPHAssets.count - 1))
+        if projectsImportedFromPhotos.count > 0 {
+            print("at least one project imported from photos!")
+            
+            let photoPermissions = PHPhotoLibrary.authorizationStatus()
+            if photoPermissions == .authorized {
+                var rawPHAssets: PHFetchResult<PHAsset>!
+                rawPHAssets = PHAsset.fetchAssets(withLocalIdentifiers: photoIDs, options: nil)
                 
-                for project in projectsImportedFromPhotos {
-                    if let identifier = project.metadata?.localIdentifier {
-                        for asset in phAssets {
-                            if asset.localIdentifier == identifier {
-                                let thumbnail = ProjectThumbnailAsset()
-                                thumbnail.project = project
-                                thumbnail.savingMethod = .realmSwift
-                                thumbnail.phAsset = asset
-                                thumbnail.dateCreated = project.dateCreated
-                                
-                                thumbs.append(thumbnail)
+                if rawPHAssets != nil {
+                    if rawPHAssets.count > 0 {
+                        /// the user may have multiple projects with the same video
+                        /// so we need to make a new array that contains possible duplicate video
+                        let phAssets = rawPHAssets.objects(at: IndexSet(0...rawPHAssets.count - 1))
+                        
+                        for project in projectsImportedFromPhotos {
+                            if let identifier = project.metadata?.localIdentifier {
+                                for asset in phAssets {
+                                    if asset.localIdentifier == identifier {
+                                        let thumbnail = ProjectThumbnailAsset()
+                                        thumbnail.project = project
+                                        thumbnail.savingMethod = .realmSwift
+                                        thumbnail.phAsset = asset
+                                        thumbnail.dateCreated = project.dateCreated
+                                        
+                                        thumbs.append(thumbnail)
+                                    }
+                                }
                             }
                         }
                     }
                 }
+            } else {
+                if !displayedPhotoWarning {
+                    displayedPhotoWarning = true
+                    
+                    print("first time display warning")
+                    displayPhotoPermissionWarning?()
+                } else {
+                    print("displayed warning already")
+                }
+                
             }
+        } else {
+            print("NO projects imported from photos!")
         }
         
         thumbs = thumbs.sorted(by: {
@@ -456,6 +454,13 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                         
                         do {
                             try self.realm.write {
+                                if let config = selectedProject.configuration {
+                                    self.realm.delete(config)
+                                }
+                                if let meta = selectedProject.metadata {
+                                    self.realm.delete(meta)
+                                }
+                                
                                 self.realm.delete(selectedProject)
                             }
                             self.getAssetFromProjects()

@@ -276,8 +276,9 @@ public:
     Obj create_object(ObjKey key = {}, const FieldValues& = {});
     // Create an object with specific GlobalKey.
     Obj create_object(GlobalKey object_id, const FieldValues& = {});
-    // Create an object with primary key
-    Obj create_object_with_primary_key(const Mixed& primary_key);
+    // Create an object with primary key. If an object with the given primary key already exists, it
+    // will be returned and did_create (if supplied) will be set to false.
+    Obj create_object_with_primary_key(const Mixed& primary_key, bool* did_create = nullptr);
     /// Create a number of objects and add corresponding keys to a vector
     void create_objects(size_t number, std::vector<ObjKey>& keys);
     /// Create a number of objects with keys supplied
@@ -699,12 +700,10 @@ private:
 
     // Migration support
     void migrate_column_info(util::FunctionRef<void()>);
-    void migrate_indexes(util::FunctionRef<void()>);
+    void migrate_indexes(ColKey pk_col_key, util::FunctionRef<void()>);
     void migrate_subspec(util::FunctionRef<void()>);
-    void convert_links_from_ndx_to_key(util::FunctionRef<void()>);
-    ref_type get_oid_column_ref() const;
     void create_columns(util::FunctionRef<void()>);
-    void migrate_objects(util::FunctionRef<void()>);
+    void migrate_objects(ColKey pk_col_key, util::FunctionRef<void()>);
     void migrate_links(util::FunctionRef<void()>);
     void finalize_migration();
 
