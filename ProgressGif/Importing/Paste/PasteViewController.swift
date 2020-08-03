@@ -26,7 +26,6 @@ class PasteViewController: UIViewController {
     var assetForImport: AVAsset?
     var urlChecked: Bool = false {
         didSet {
-            print("set url checked: \(urlChecked)")
             if urlChecked {
                 chooseButton.isEnabled = true
                 chooseButtonView.alpha = 1
@@ -91,14 +90,10 @@ class PasteViewController: UIViewController {
     @IBAction func chooseButtonPressed(_ sender: Any) {
     }
     
-    
-    
     @IBOutlet weak var inBetweenButtonC: NSLayoutConstraint!
     @IBOutlet weak var chooseViewWidthC: NSLayoutConstraint!
     @IBOutlet weak var inBetweenChooseActivityC: NSLayoutConstraint!
     @IBOutlet weak var activityIndicatorWidthC: NSLayoutConstraint!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,14 +110,9 @@ class PasteViewController: UIViewController {
         
         playButton.alpha = 0
         
-//        chooseButton.isEnabled = false
-        
         chooseButton.isEnabled = false
         chooseButtonView.alpha = 0.6
-        
-//        checkingView.alpha = 0
     }
-    
 }
 
 extension PasteViewController {
@@ -145,7 +135,6 @@ extension PasteViewController {
         
         UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()
-//            self.checkingView.alpha = 1
             self.activityIndicatorView.alpha = 1
         }) { _ in
             self.urlLabel.fadeTransition(0.3)
@@ -172,17 +161,13 @@ extension PasteViewController {
             self.urlLabel.alpha = 0
         }) { _ in
             self.activityIndicatorView.stopAnimating()
-            
             self.urlChecked = true
-            
-            
             self.pasteButton.setTitle("Repaste", for: .normal)
             self.chooseButton.setTitle("Choose", for: .normal)
         }
     }
     
     func animateInvalidURLPasted(urlError: URLError) {
-        
         
         inBetweenButtonC.constant = 0
         chooseViewWidthC.constant = 0
@@ -195,7 +180,6 @@ extension PasteViewController {
             self.view.layoutIfNeeded()
         }) { _ in
             
-//            self.chooseButton.isEnabled = false
             self.urlChecked = false
             
             self.activityIndicatorView.stopAnimating()
@@ -215,66 +199,22 @@ extension PasteViewController {
         }
     }
     
-//    func validateURL(url: URL) {
-//        print("validate")
-//        let avAsset = AVAsset(url: url)
-//        assetForImport = avAsset
-//        setUpPlayerItem(with: avAsset)
-//    }
-    
     func validateURL(url: URL) {
-        
-        
-//        guard let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-        
-        // check if the file already exist at the destination folder if you don't want to download it twice
-//        if !FileManager.default.fileExists(atPath: documentsDirectoryURL.appendingPathComponent(url.lastPathComponent).path) {
+        URLSession.shared.downloadTask(with: url) { (location, response, error) -> Void in
             
-            // set up your download task
-            URLSession.shared.downloadTask(with: url) { (location, response, error) -> Void in
+            guard let location = location else { return }
+            let temporaryFileURL = TemporaryFileURL(extension: url.pathExtension)
+            do {
                 
-                // use guard to unwrap your optional url
-                guard let location = location else { return }
+                try FileManager.default.moveItem(at: location, to: temporaryFileURL.contentURL)
                 
-                // create a deatination url with the server response suggested file name
-//                let destinationURL = documentsDirectoryURL.appendingPathComponent(response?.suggestedFilename ?? url.lastPathComponent)
+                self.temporaryURLForImport = temporaryFileURL.contentURL
+                let avAsset = AVAsset(url: url)
+                self.setUpPlayerItem(with: avAsset)
                 
-                print("path ext: \(url.pathExtension)")
-                let temporaryFileURL = TemporaryFileURL(extension: url.pathExtension)
-                do {
-                    
-                    try FileManager.default.moveItem(at: location, to: temporaryFileURL.contentURL)
-                    
-                    print("move item!")
-                    
-                    self.temporaryURLForImport = temporaryFileURL.contentURL
-                    let avAsset = AVAsset(url: url)
-                    self.setUpPlayerItem(with: avAsset)
-                    
-                    
-//                    PHPhotoLibrary.requestAuthorization({ (authorizationStatus: PHAuthorizationStatus) -> Void in
-//
-//                        // check if user authorized access photos for your app
-//                        if authorizationStatus == .authorized {
-//                            PHPhotoLibrary.shared().performChanges({
-//                                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: destinationURL)}) { completed, error in
-//                                    if completed {
-//                                        print("Video asset created")
-//                                    } else {
-//                                        print(error)
-//                                    }
-//                            }
-//                        }
-//                    })
-                    
-                } catch { print(error) }
-                
-            }.resume()
+            } catch { print("Error downloading video \(error)") }
             
-//        } else {
-//            print("File already exists at destination url")
-//        }
-        
+        }.resume()
     }
     
     private func setUpPlayerItem(with asset: AVAsset) {
@@ -300,12 +240,10 @@ extension PasteViewController {
                 status = .unknown
             }
             
-            // Switch over status value
-            print("Finished check! \(status)")
+            
             if status == .readyToPlay {
                 urlChecked = true
                 if let temporaryURL = temporaryURLForImport {
-                    print("yes temporary url!")
                     animateCheckedURL(validURL: temporaryURL)
                 }
             } else {
@@ -321,14 +259,13 @@ public protocol ManagedURL {
 }
 
 public extension ManagedURL {
-    public func keepAlive() { }
+    func keepAlive() { }
 }
 
 extension URL: ManagedURL {
     public var contentURL: URL { return self }
 }
 public final class TemporaryFileURL: ManagedURL {
-    
     public let contentURL: URL
     
     public init(extension ext: String) {
@@ -336,7 +273,6 @@ public final class TemporaryFileURL: ManagedURL {
             .appendingPathComponent(UUID().uuidString)
             .appendingPathExtension(ext)
     }
-    
     deinit {
         DispatchQueue.global(qos: .utility).async { [contentURL = self.contentURL] in
             try? FileManager.default.removeItem(at: contentURL)
