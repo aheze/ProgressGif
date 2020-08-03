@@ -48,8 +48,14 @@ class PasteViewController: UIViewController {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var urlLabel: UILabel!
     
-    
     @IBOutlet weak var baseImageHolderView: UIView!
+    @IBOutlet weak var imageBackgroundView: UIView!
+    
+    @IBOutlet weak var imageBackgroundLeftC: NSLayoutConstraint!
+    @IBOutlet weak var imageBackgroundRightC: NSLayoutConstraint!
+    @IBOutlet weak var imageBackgroundTopC: NSLayoutConstraint!
+    @IBOutlet weak var imageBackgroundBottomC: NSLayoutConstraint!
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var playButton: UIButton!
     @IBAction func playButtonPressed(_ sender: Any) {
@@ -102,7 +108,7 @@ class PasteViewController: UIViewController {
         inBetweenButtonC.constant = 0
         chooseViewWidthC.constant = 0
         
-        baseImageHolderView.layer.cornerRadius = 12
+        imageBackgroundView.layer.cornerRadius = 12
         
         pasteButton.layer.cornerRadius = 6
         chooseButtonView.layer.cornerRadius = 6
@@ -142,31 +148,8 @@ extension PasteViewController {
             self.pasteButton.setTitle("Repaste", for: .normal)
             self.chooseButton.setTitle("Checking...", for: .normal)
             
-            self.urlChecked = false
         }
     }
-    
-    func animateCheckedURL(validURL: URL) {
-        print("checked")
-        inBetweenButtonC.constant = 12
-        chooseViewWidthC.constant = 160
-        pasteButtonWidthC.constant = 140
-        
-        inBetweenChooseActivityC.constant = 0
-        activityIndicatorWidthC.constant = 0
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            self.view.layoutIfNeeded()
-            self.activityIndicatorView.alpha = 0
-            self.urlLabel.alpha = 0
-        }) { _ in
-            self.activityIndicatorView.stopAnimating()
-            self.urlChecked = true
-            self.pasteButton.setTitle("Repaste", for: .normal)
-            self.chooseButton.setTitle("Choose", for: .normal)
-        }
-    }
-    
     func animateInvalidURLPasted(urlError: URLError) {
         
         inBetweenButtonC.constant = 0
@@ -199,6 +182,99 @@ extension PasteViewController {
         }
     }
     
+    /// URL is checked and saved, ready to import.
+    func animateCheckedURL(validURL: URL) {
+        if urlChecked {
+            print("url checked")
+            
+            if let avAsset = assetForImport {
+                print("has asset for import")
+                if let resolution = avAsset.resolutionSize() {
+                    print("originla res size: \(resolution)")
+                    let currentImageLength = baseImageHolderView.frame.size.height
+//                    let resolutionAspect =
+                    
+                    if resolution.width > resolution.height { /// fatter
+                        let resolutionAspect = currentImageLength / resolution.width
+                        let newResolutionWidth = resolution.width * resolutionAspect
+                        let newResolutionHeight = newResolutionWidth * (resolution.height / resolution.width)
+                        
+                        print("1 new res size: w: \(newResolutionWidth), h: \(newResolutionHeight)")
+                        let yOffset = (currentImageLength - newResolutionHeight) / 2
+                        
+                        print("yoffset: \(yOffset)")
+                        print("set choose 1, \(self.urlChecked)")
+                        
+                        imageBackgroundLeftC.constant = 0
+                        imageBackgroundRightC.constant = 0
+//                        imageBackgroundTopC.constant = 40
+//                        imageBackgroundBottomC.constant = 60
+                        imageBackgroundTopC.constant = yOffset
+                        imageBackgroundBottomC.constant = yOffset
+                        
+                        inBetweenButtonC.constant = 12
+                        chooseViewWidthC.constant = 160
+                        pasteButtonWidthC.constant = 140
+                        
+                        inBetweenChooseActivityC.constant = 0
+                        activityIndicatorWidthC.constant = 0
+                        
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.view.layoutIfNeeded()
+                            print("layout view")
+                            self.activityIndicatorView.alpha = 0
+                            self.urlLabel.alpha = 0
+                        }) { _ in
+                            self.activityIndicatorView.stopAnimating()
+                            self.pasteButton.setTitle("Repaste", for: .normal)
+                            self.chooseButton.setTitle("Choose", for: .normal)
+                            print("set choose, \(self.urlChecked)")
+                        }
+                    } else {
+                        let resolutionAspect = currentImageLength / resolution.height
+                        let newResolutionHeight = resolution.height * resolutionAspect
+                        let newResolutionWidth = newResolutionHeight * (resolution.width / resolution.height)
+                        
+                        print("2 new res size: w: \(newResolutionWidth), h: \(newResolutionHeight)")
+                        let xOffset = (currentImageLength - newResolutionWidth) / 2
+                        
+                        imageBackgroundLeftC.constant = xOffset
+                        imageBackgroundRightC.constant = xOffset
+                        imageBackgroundTopC.constant = 0
+                        imageBackgroundBottomC.constant = 0
+                        
+                        inBetweenButtonC.constant = 12
+                        chooseViewWidthC.constant = 160
+                        pasteButtonWidthC.constant = 140
+                        
+                        inBetweenChooseActivityC.constant = 0
+                        activityIndicatorWidthC.constant = 0
+                        
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.view.layoutIfNeeded()
+                            print("layout view")
+                            self.activityIndicatorView.alpha = 0
+                            self.urlLabel.alpha = 0
+                        }) { _ in
+                            self.activityIndicatorView.stopAnimating()
+                            self.pasteButton.setTitle("Repaste", for: .normal)
+                            self.chooseButton.setTitle("Choose", for: .normal)
+                            print("set choose, \(self.urlChecked)")
+                        }
+                    }
+                    
+                    
+                    
+                }
+                
+            }
+            
+            
+        } else {
+            print("url not checked")
+        }
+    }
+    
     func validateURL(url: URL) {
         URLSession.shared.downloadTask(with: url) { (location, response, error) -> Void in
             
@@ -210,6 +286,7 @@ extension PasteViewController {
                 
                 self.temporaryURLForImport = temporaryFileURL.contentURL
                 let avAsset = AVAsset(url: url)
+                self.assetForImport = avAsset
                 self.setUpPlayerItem(with: avAsset)
                 
             } catch { print("Error downloading video \(error)") }
