@@ -16,6 +16,7 @@ extension ViewController {
         clipboardButton.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
         clipboardButton.alpha = 0
         
+        helpButton.alpha = 0
         importVideoLabel.alpha = 0
         importVideoBottomC.constant = importVideoBottomCHiddenConstant
     }

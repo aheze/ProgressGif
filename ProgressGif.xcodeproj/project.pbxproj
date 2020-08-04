@@ -66,6 +66,7 @@
 		49B4CFA324C7A90900A2A22A /* Rendering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CFA224C7A90900A2A22A /* Rendering.swift */; };
 		49B4CFA524C7B2B600A2A22A /* ExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CFA424C7B2B600A2A22A /* ExportViewController.swift */; };
 		49BE74F424D8FA0F0098121A /* PasteVC+Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BE74F324D8FA0F0098121A /* PasteVC+Present.swift */; };
+		49BE74F624D9E49D0098121A /* ImportInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BE74F524D9E49D0098121A /* ImportInfoViewController.swift */; };
 		49E41ECC24B967E900EA7BB2 /* ViewController+AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */; };
 		49E75FA724C015DC004B3F41 /* EditingEdgesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */; };
 		49E75FA924C015E6004B3F41 /* EditingOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */; };
@@ -140,6 +141,7 @@
 		49B4CFA224C7A90900A2A22A /* Rendering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rendering.swift; sourceTree = "<group>"; };
 		49B4CFA424C7B2B600A2A22A /* ExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewController.swift; sourceTree = "<group>"; };
 		49BE74F324D8FA0F0098121A /* PasteVC+Present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasteVC+Present.swift"; sourceTree = "<group>"; };
+		49BE74F524D9E49D0098121A /* ImportInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportInfoViewController.swift; sourceTree = "<group>"; };
 		49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AddButton.swift"; sourceTree = "<group>"; };
 		49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingEdgesVC.swift; sourceTree = "<group>"; };
 		49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingOptionsVC.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				49B236BA24CA3BA900905917 /* Licenses.swift */,
+				49BE74F524D9E49D0098121A /* ImportInfoViewController.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				49B236BB24CA3BA900905917 /* Licenses.swift in Sources */,
 				4980302524B946F200AE277C /* ViewController+Buttons.swift in Sources */,
 				49240FC924BFC7CA00DC9446 /* EditingVC+PlayerControls.swift in Sources */,
+				49BE74F624D9E49D0098121A /* ImportInfoViewController.swift in Sources */,
 				49E75FA724C015DC004B3F41 /* EditingEdgesVC.swift in Sources */,
 				49A7F43E24D357C100DD4DEA /* SettingsVC+Setup.swift in Sources */,
 				49240FCF24BFC9FE00DC9446 /* EditingVC+UpdateSliderProgress.swift in Sources */,
