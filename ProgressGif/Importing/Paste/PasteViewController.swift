@@ -97,10 +97,34 @@ class PasteViewController: UIViewController {
     }
     @IBOutlet weak var pasteButtonWidthC: NSLayoutConstraint!
     
-    
     @IBOutlet weak var chooseButtonView: UIView!
+    @IBOutlet weak var chooseButtonLabel: UILabel!
     @IBOutlet weak var chooseButton: UIButton!
+    
+    
+    @IBAction func chooseButtonDown(_ sender: Any) {
+        if urlChecked {
+            UIView.animate(withDuration: 0.1, animations: {
+                self.chooseButtonLabel.alpha = 0.2
+            })
+        }
+    }
     @IBAction func chooseButtonPressed(_ sender: Any) {
+        if urlChecked {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.chooseButtonLabel.alpha = 1
+            })
+        }
+    }
+    @IBAction func chooseButtonUpOutside(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.chooseButtonLabel.alpha = 1
+        })
+    }
+    @IBAction func chooseButtonTouchCancel(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.chooseButtonLabel.alpha = 1
+        })
     }
     
     @IBOutlet weak var inBetweenButtonC: NSLayoutConstraint!
@@ -152,7 +176,9 @@ extension PasteViewController {
             self.urlLabel.fadeTransition(0.3)
             self.urlLabel.text = "Valid URL Format!\n\(validURL)"
             self.pasteButton.setTitle("Repaste", for: .normal)
-            self.chooseButton.setTitle("Checking...", for: .normal)
+//            self.chooseButton.setTitle("Checking...", for: .normal)
+//            self.chooseButtonLabel.fadeTransition(0.6)
+//            self.chooseButtonLabel.text = "Checking..."
             
         }
     }
@@ -238,8 +264,9 @@ extension PasteViewController {
                         }) { _ in
                             self.activityIndicatorView.stopAnimating()
                             self.pasteButton.setTitle("Repaste", for: .normal)
-                            self.chooseButton.setTitle("Choose", for: .normal)
-                            
+//                            self.chooseButton.setTitle("Choose", for: .normal)
+//                            self.chooseButtonLabel.fadeTransition(0.6)
+//                            self.chooseButtonLabel.text = "Choose"
                             validURL.keepAlive()
                             validURL.contentURL.generateImage { (generatedImage) in
                                 print("get generated")
@@ -278,7 +305,9 @@ extension PasteViewController {
                         }) { _ in
                             self.activityIndicatorView.stopAnimating()
                             self.pasteButton.setTitle("Repaste", for: .normal)
-                            self.chooseButton.setTitle("Choose", for: .normal)
+//                            self.chooseButton.setTitle("Choose", for: .normal)
+//                            self.chooseButtonLabel.fadeTransition(0.6)
+//                            self.chooseButtonLabel.text = "Choose"
                         }
                     }
                 }
