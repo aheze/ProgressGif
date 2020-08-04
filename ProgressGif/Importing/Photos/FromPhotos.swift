@@ -56,7 +56,6 @@ class FromPhotosPicker: UIViewController {
         }
     }
     
-    
     var onDoneBlock: ((Bool) -> Void)?
     
     var windowStatusBarHeight = CGFloat(0)
@@ -130,6 +129,7 @@ class FromPhotosPicker: UIViewController {
         super.viewDidAppear(animated)
         
         windowStatusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        print("window height: \(windowStatusBarHeight)")
         collectionViewController?.windowStatusBarHeight = self.windowStatusBarHeight
         
     }

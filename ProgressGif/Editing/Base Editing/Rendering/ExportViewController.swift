@@ -58,12 +58,12 @@ class ExportViewController: UIViewController {
         self.present(activityViewController, animated: true, completion: nil)
         
         /// the following was for testing (the rendered video, not yet converted to gif)
-//        let player = AVPlayer(url: playerURL)
-//        let playerViewController = AVPlayerViewController()
-//        playerViewController.player = player
-//        self.present(playerViewController, animated: true) {
-//            playerViewController.player!.play()
-//        }
+        //        let player = AVPlayer(url: playerURL)
+        //        let playerViewController = AVPlayerViewController()
+        //        playerViewController.player = player
+        //        self.present(playerViewController, animated: true) {
+        //            playerViewController.player!.play()
+        //        }
     }
     
     var export: AVAssetExportSession?
@@ -135,20 +135,9 @@ class ExportViewController: UIViewController {
         progressStatusLabel.fadeTransition(0.6)
         
         let frameRate = self.defaults.string(forKey: DefaultKeys.fps)?.getFPS().getValue() ?? FPS.normal.getValue()
-        progressStatusLabel.text = "Finishing (\(frameRate) FPS)"
-        
+        progressStatusLabel.text = "Converting (\(frameRate) FPS)"
         
         var aspectRect = imageView.frame
-//        if let image = playerURL.generateImage() {
-//            imageView.image = image
-//            let adjustedRect = AVMakeRect(aspectRatio: image.size, insideRect: imageView.bounds)
-//            aspectRect = imageView.convert(adjustedRect, to: playerBaseView)
-//
-//            playerBackgroundLeftC.constant = aspectRect.origin.x
-//            playerBackgroundTopC.constant = aspectRect.origin.y
-//            playerBackgroundRightC.constant = (playerBaseView.bounds.width - aspectRect.width) / 2
-//            playerBackgroundBottomC.constant = (playerBaseView.bounds.height - aspectRect.height) / 2
-        //        }
         playerURL.generateImage() { (image) in
             if let generatedImage = image {
                 self.imageView.image = image
@@ -171,10 +160,8 @@ class ExportViewController: UIViewController {
                 if let selfU = self {
                     
                     Regift.createGIFFromSource(selfU.playerURL, startTime: 0, duration: Float(CMTimeGetSeconds(selfU.renderingAsset.duration)), frameRate: frameRate, progress: { (progress) in
-                        print("progress: \(progress)")
+                        
                         DispatchQueue.main.async {
-                            print("progress MAIN: \(progress)")
-                            
                             let progressPercent = (progress * 50) + 50
                             selfU.segmentIndicator.updateProgress(percent: Degrees(progressPercent))
                             selfU.progressLabel.fadeTransition(0.1)
@@ -195,7 +182,7 @@ class ExportViewController: UIViewController {
             }
         }
     }
-
+    
     func finishedConversion(gifURL: URL) {
         processingLabel.layer.removeAllAnimations()
         

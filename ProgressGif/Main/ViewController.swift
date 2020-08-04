@@ -301,6 +301,15 @@ class ViewController: UIViewController {
         documentPicker = DocumentPicker(presentationController: self, delegate: self)
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let windowStatusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        print("window height: \(windowStatusBarHeight)")
+        collectionViewController?.windowStatusBarHeight = windowStatusBarHeight
+        
+    }
 
 
 }

@@ -33,14 +33,11 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
             
             if playerControlsView.customSlider.value > 0 {
                 print("over 0")
-//                if let generatedImage = generateImageFromCurrentPlayer() {
-//                    transition.thumbnailImage = generatedImage
-//                }
-                generateImageFromCurrentPlayer() { (generatedImage) in
-                    if let image = generatedImage {
-                        self.transition.thumbnailImage = image
-                    }
+                let generatedImage = generateImageFromCurrentPlayer()
+                if let image = generatedImage {
+                    self.transition.thumbnailImage = image
                 }
+                
             } else {
                 print("not over 0")
                 if let currentImage = currentViewController.image {
@@ -48,32 +45,32 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
                 }
             }
             
+            let aspectImageFrame = currentViewController.imageView.getAspectFitRect() ?? CGRect(x: 0, y: 0, width: 100, height: 100)
             
-            if let aspectImageFrame = currentViewController.imageView.getAspectFitRect() {
-                let biggerOverOriginal = (aspectImageFrame.height + normalStatusBarHeight) / aspectImageFrame.height
+            print("asp frame: \(aspectImageFrame)")
+            let biggerOverOriginal = (aspectImageFrame.height + normalStatusBarHeight) / aspectImageFrame.height
+            
+            let newWidth = aspectImageFrame.width * biggerOverOriginal
+            let offsetEdgeHalf = (newWidth - aspectImageFrame.width) / 2
+            
+            /// adjusted bigger to make up for the status bar
+            let adjustedStatusFrame = CGRect(x: aspectImageFrame.origin.x - offsetEdgeHalf,
+                                             y: aspectImageFrame.origin.y - normalStatusBarHeight,
+                                             width: newWidth,
+                                             height: aspectImageFrame.height * biggerOverOriginal)
+            
+            if adjustedStatusFrame.width >= adjustedStatusFrame.height {
+                /// fatter image
+                let topMinus = (adjustedStatusFrame.width - adjustedStatusFrame.height) / 2
                 
-                let newWidth = aspectImageFrame.width * biggerOverOriginal
-                let offsetEdgeHalf = (newWidth - aspectImageFrame.width) / 2
+                let adjustedImageFrame = CGRect(x: adjustedStatusFrame.origin.x, y: adjustedStatusFrame.origin.y - topMinus, width: adjustedStatusFrame.width, height: adjustedStatusFrame.width)
+                transition.originFrame = adjustedImageFrame
+            } else {
                 
-                /// adjusted bigger to make up for the status bar
-                let adjustedStatusFrame = CGRect(x: aspectImageFrame.origin.x - offsetEdgeHalf,
-                                                 y: aspectImageFrame.origin.y - normalStatusBarHeight,
-                                                 width: newWidth,
-                                                 height: aspectImageFrame.height * biggerOverOriginal)
+                let leftMinus = (adjustedStatusFrame.height - adjustedStatusFrame.width) / 2
+                let adjustedImageFrame = CGRect(x: adjustedStatusFrame.origin.x - leftMinus, y: adjustedStatusFrame.origin.y, width: adjustedStatusFrame.height, height: adjustedStatusFrame.height)
                 
-                if adjustedStatusFrame.width >= adjustedStatusFrame.height {
-                    /// fatter image
-                    let topMinus = (adjustedStatusFrame.width - adjustedStatusFrame.height) / 2
-                    
-                    let adjustedImageFrame = CGRect(x: adjustedStatusFrame.origin.x, y: adjustedStatusFrame.origin.y - topMinus, width: adjustedStatusFrame.width, height: adjustedStatusFrame.width)
-                    transition.originFrame = adjustedImageFrame
-                } else {
-                    
-                    let leftMinus = (adjustedStatusFrame.height - adjustedStatusFrame.width) / 2
-                    let adjustedImageFrame = CGRect(x: adjustedStatusFrame.origin.x - leftMinus, y: adjustedStatusFrame.origin.y, width: adjustedStatusFrame.height, height: adjustedStatusFrame.height)
-                    
-                    transition.originFrame = adjustedImageFrame
-                }
+                transition.originFrame = adjustedImageFrame
             }
             
             transition.presenting = true
@@ -110,25 +107,24 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
 }
 
 extension PhotoPageViewController {
-    func generateImageFromCurrentPlayer(completion: @escaping ((_ image: UIImage?) -> Void )) {
+    func generateImageFromCurrentPlayer() -> UIImage? {
         if currentViewController.hasInitializedPlayer {
             if let avAssetURL = currentViewController.playerView.avURLAsset {
                 if let time = currentViewController.playerView.player?.currentTime() {
-                    avAssetURL.url.generateImage(atTime: time) { (image) in
-                        completion(image)
-                    }
+                    let image = avAssetURL.url.generateImageAsync(atTime: time)
+                    return image
                 }
             }
         } else {
             //            return asset
             if let thumbnailImage = currentViewController.image {
-//                return thumbnailImage
-                completion(thumbnailImage)
+                //                return thumbnailImage
+                return thumbnailImage
             } else {
-                completion(nil)
+                return nil
             }
         }
-        completion(nil)
+        return nil
     }
 }
 
