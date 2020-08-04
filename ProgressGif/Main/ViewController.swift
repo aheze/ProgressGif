@@ -39,6 +39,7 @@ class ViewController: UIViewController {
             self.present(viewController, animated: true, completion: nil)
         }
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
@@ -47,6 +48,17 @@ class ViewController: UIViewController {
         collectionViewController?.topInset = visualEffectView.frame.height
         collectionViewController?.updateTopInset()
     }
+    
+    // MARK: - Help
+    
+    @IBOutlet weak var helpButton: UIButton!
+    @IBAction func helpButtonPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "ImportInfoViewController") as? ImportInfoViewController {
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: - Warning flag
     var shouldGoToSettings = false
     @IBOutlet weak var photoPermissionWarningView: UIView!
