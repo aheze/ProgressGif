@@ -9,18 +9,8 @@ import UIKit
 
 extension EditingViewController {
     
-    func calculatePreviewScale() {
-        if let videoResolution = actualVideoResolution {
-            if videoResolution.width >= videoResolution.height {
-                /// fatter
-                self.percentageOfPreviewValue = CGFloat(videoResolution.width) / self.playerHolderView.frame.width
-            } else {
-                self.percentageOfPreviewValue = CGFloat(videoResolution.height) / self.playerHolderView.frame.height
-            }
-        }
-    }
-    
     func setUpDrawing(with configuration: EditableEditingConfiguration) {
+        print("set up drawing...")
         let progressWidth = CGFloat(playerControlsView.customSlider.value) * progressBarFullWidth
         progressBarWidthC.constant = progressWidth
         
@@ -62,7 +52,9 @@ extension EditingViewController {
         }
     }
     func calculateAspectDrawingFrame() {
+//        print("calc asp")
         if let aspectFrame = imageView.getAspectFitRect() {
+//            print("get aspect, \(aspectFrame)")
             imageAspectRect = aspectFrame
             
             drawingViewLeftC.constant = aspectFrame.origin.x
@@ -70,22 +62,29 @@ extension EditingViewController {
             drawingViewTopC.constant = aspectFrame.origin.y
             drawingViewBottomC.constant = (playerHolderView.frame.height - aspectFrame.height) / 2
             
+//            print("set up first consts")
             
             transparentBackgroundImageViewLeftC.constant = aspectFrame.origin.x
             transparentBackgroundImageViewRightC.constant = (playerHolderView.frame.width - aspectFrame.width) / 2
             transparentBackgroundImageViewTopC.constant = aspectFrame.origin.y
             transparentBackgroundImageViewBottomC.constant = (playerHolderView.frame.height - aspectFrame.height) / 2
             
+//            print("set up second consts")
+            
             shadowMaskingViewLeftC.constant = aspectFrame.origin.x
             shadowMaskingViewRightC.constant = (playerHolderView.frame.width - aspectFrame.width) / 2
             shadowMaskingViewTopC.constant = aspectFrame.origin.y
             shadowMaskingViewBottomC.constant = (playerHolderView.frame.height - aspectFrame.height) / 2
             
-            
+//            print("set up third consts")
             
             updateProgressBar(to: playerControlsView.customSlider.value, animated: true)
+            
+//            print("up prog")
+            
             progressBarBackgroundHeightC.constant = CGFloat(editingConfiguration.barHeight) * unit
-//            maskingView.layer.cornerRadius = (CGFloat(editingConfiguration.edgeCornerRadius) * unit)
+            
+//            print("unit const")
             
             let scale = 1 - (CGFloat(editingConfiguration.edgeInset) * Constants.transformMultiplier)
             shadowScale = scale

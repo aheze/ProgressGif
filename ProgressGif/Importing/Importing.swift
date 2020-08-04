@@ -34,9 +34,10 @@ extension ViewController {
             if let vc = storyboard.instantiateViewController(withIdentifier: "PasteViewController") as?
                 PasteViewController {
                 
-//                vc.onDoneBlock = { [weak self] _ in
-//                    self?.refreshCollectionViewInsert()
-//                }
+                vc.globalURL = self.globalURL
+                vc.onDoneBlock = { [weak self] () in
+                    self?.refreshCollectionViewInsert()
+                }
                 self.present(vc, animated: true, completion: nil)
             }
         }
