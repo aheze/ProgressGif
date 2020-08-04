@@ -13,7 +13,6 @@ extension EditingViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         loadConfig()
-//        setUpPreview()
         
         titleTextField.text = project?.title
         

@@ -79,6 +79,9 @@ extension ViewController: DocumentDelegate {
                         viewController.avAsset = avAsset
                         viewController.project = newProject
                         viewController.modalPresentationStyle = .fullScreen
+                        viewController.statusHeight = self.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+                        
+                        print("stat height.. \(self.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0)")
                         
                         self.present(viewController, animated: true, completion: nil)
                         
@@ -88,8 +91,9 @@ extension ViewController: DocumentDelegate {
                             if let image = generatedImage {
                                 viewController.imageView.image = image
                             }
+                            viewController.setUpDrawing(with: viewController.editingConfiguration)
                         }
-                        viewController.setUpDrawing(with: viewController.editingConfiguration)
+                        
                         viewController.onDoneBlock = { [weak self] _ in
                             self?.refreshCollectionViewInsert()
                         }

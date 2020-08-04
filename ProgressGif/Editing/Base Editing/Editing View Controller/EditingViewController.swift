@@ -12,8 +12,6 @@ import RealmSwift
 
 class EditingViewController: UIViewController {
     
-//    var transitionController = GalleryTransitionController()
-    
     var dismissing = false
     
     let realm = try! Realm()
@@ -32,7 +30,8 @@ class EditingViewController: UIViewController {
     /// the values changed in the number stepper are multiplied by this.
     var unit: CGFloat {
         get {
-            return drawingView.frame.height / Constants.unitDivision
+            let largerSide = max(drawingView.frame.width, drawingView.frame.height)
+            return largerSide / Constants.unitDivision
         }
     }
     
@@ -41,7 +40,7 @@ class EditingViewController: UIViewController {
     /// how much to multiply the preview values by, for rendering
     /// example: `percentageOfPreviewValue` = 4
     /// then, a setting of `5` for the bar height would actually be `20` for rendering
-    var percentageOfPreviewValue = CGFloat(1)
+//    var percentageOfPreviewValue = CGFloat(1)
     
     // MARK: - Video
     
@@ -56,11 +55,12 @@ class EditingViewController: UIViewController {
     /// these constraints will be calculated based on the heights of subviews in the base view.
     @IBOutlet weak var playerHolderTopC: NSLayoutConstraint!
     @IBOutlet weak var playerControlsBottomC: NSLayoutConstraint!
+    var statusHeight = CGFloat(0)
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !dismissing {
-            let statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+//            let statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
             topBarTopC.constant = statusHeight
             view.layoutIfNeeded()
             updateFrames(statusHeight: statusHeight)
@@ -79,15 +79,16 @@ class EditingViewController: UIViewController {
         
         let bottomConstant = bottomReferenceView.frame.height
         
-        
-//        topBarTopC.constant = statusHeight
         playerHolderTopC.constant = topConstant
         playerControlsBottomC.constant = bottomConstant
         
-        
+        print("about to calc")
         calculateAspectDrawingFrame()
+        print("about to bar height")
         barHeightChanged(to: editingConfiguration.barHeight)
-        calculatePreviewScale()
+        
+        print("about to cal preview scale")
+//        calculatePreviewScale()
     }
   
     
@@ -239,12 +240,12 @@ class EditingViewController: UIViewController {
         
         if let projectMetadata = project?.metadata {
             actualVideoResolution = CGSize(width: projectMetadata.resolutionWidth, height: projectMetadata.resolutionHeight)
-            if projectMetadata.resolutionWidth >= projectMetadata.resolutionHeight {
-                /// fatter
-                self.percentageOfPreviewValue = CGFloat(projectMetadata.resolutionWidth) / self.playerHolderView.frame.width
-            } else {
-                self.percentageOfPreviewValue = CGFloat(projectMetadata.resolutionHeight) / self.playerHolderView.frame.height
-            }
+//            if projectMetadata.resolutionWidth >= projectMetadata.resolutionHeight {
+//                /// fatter
+//                self.percentageOfPreviewValue = CGFloat(projectMetadata.resolutionWidth) / self.playerHolderView.frame.width
+//            } else {
+//                self.percentageOfPreviewValue = CGFloat(projectMetadata.resolutionHeight) / self.playerHolderView.frame.height
+//            }
         }
         
         print("view did load")

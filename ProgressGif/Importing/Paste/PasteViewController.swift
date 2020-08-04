@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import AVKit
+import RealmSwift
 
 enum URLError {
     case emptyClipboard
@@ -18,10 +19,15 @@ enum URLError {
 
 class PasteViewController: UIViewController {
     
+    let realm = try! Realm()
+    var globalURL = URL(fileURLWithPath: "")
+    var onDoneBlock: (() -> Void)?
+    
     // MARK: - URL Validation
     private var playerItem: AVPlayerItem?
     private var player = AVPlayer()
     private var playerItemContext = 0
+    private var playerImage: UIImage?
     
     var temporaryURLForImport: TemporaryFileURL?
     var assetForImport: AVAsset?
@@ -88,12 +94,6 @@ class PasteViewController: UIViewController {
         } else {
             animateInvalidURLPasted(urlError: .emptyClipboard)
         }
-//        let string = "google.com"
-//        if string.isValidURL {
-//            animateValidURLPasted(validURL: string)
-//        } else {
-//            animateInvalidURLPasted(urlError: .invalidURLFormat)
-//        }
     }
     @IBOutlet weak var pasteButtonWidthC: NSLayoutConstraint!
     
@@ -111,6 +111,14 @@ class PasteViewController: UIViewController {
     }
     @IBAction func chooseButtonPressed(_ sender: Any) {
         if urlChecked {
+//            presentEditing
+            if let avAsset = assetForImport,
+                let fromURL = temporaryURLForImport,
+                let thumbnail = playerImage {
+                fromURL.keepAlive()
+                presentEditingVC(asset: avAsset, pathExtension: fromURL.contentURL.pathExtension, fromURL: fromURL.contentURL, thumbnailImage: thumbnail)
+            }
+            
             UIView.animate(withDuration: 0.3, animations: {
                 self.chooseButtonLabel.alpha = 1
             })
@@ -176,10 +184,6 @@ extension PasteViewController {
             self.urlLabel.fadeTransition(0.3)
             self.urlLabel.text = "Valid URL Format!\n\(validURL)"
             self.pasteButton.setTitle("Repaste", for: .normal)
-//            self.chooseButton.setTitle("Checking...", for: .normal)
-//            self.chooseButtonLabel.fadeTransition(0.6)
-//            self.chooseButtonLabel.text = "Checking..."
-            
         }
     }
     func animateInvalidURLPasted(urlError: URLError, customMessage: String = "") {
@@ -204,7 +208,6 @@ extension PasteViewController {
             self.playButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
             
             self.urlLabel.alpha = 1
-           
         }) { _ in
             
             self.urlChecked = false
@@ -264,13 +267,12 @@ extension PasteViewController {
                         }) { _ in
                             self.activityIndicatorView.stopAnimating()
                             self.pasteButton.setTitle("Repaste", for: .normal)
-//                            self.chooseButton.setTitle("Choose", for: .normal)
-//                            self.chooseButtonLabel.fadeTransition(0.6)
-//                            self.chooseButtonLabel.text = "Choose"
+                            
                             validURL.keepAlive()
                             validURL.contentURL.generateImage { (generatedImage) in
                                 print("get generated")
                                 if let image = generatedImage {
+                                    self.playerImage = image
                                     self.imageView.image = image
                                     UIView.animate(withDuration: 0.5, animations: {
                                         self.imageView.alpha = 1
@@ -305,9 +307,6 @@ extension PasteViewController {
                         }) { _ in
                             self.activityIndicatorView.stopAnimating()
                             self.pasteButton.setTitle("Repaste", for: .normal)
-//                            self.chooseButton.setTitle("Choose", for: .normal)
-//                            self.chooseButtonLabel.fadeTransition(0.6)
-//                            self.chooseButtonLabel.text = "Choose"
                         }
                     }
                 }

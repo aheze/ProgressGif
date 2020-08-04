@@ -104,10 +104,10 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let viewController = storyboard.instantiateViewController(withIdentifier: "EditingViewController") as? EditingViewController {
                     viewController.transitioningDelegate = self
-//                    viewController.asset = self.currentViewController.asset
                     viewController.avAsset = avAsset
                     viewController.project = newProject
                     viewController.onDoneBlock = self.onDoneBlock
+                    viewController.statusHeight = self.normalStatusBarHeight
                     self.present(viewController, animated: true, completion: nil)
                 }
             }

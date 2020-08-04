@@ -256,6 +256,11 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
             editingViewController.project = projectThumb.project
             editingViewController.onDoneBlock = self.onDoneBlock
             
+//            print("window st: \(windowStatusBarHeight)")
+//            let windowStatusHeight = self.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+            editingViewController.statusHeight = windowStatusBarHeight
+            print("window st: \(windowStatusBarHeight)")
+            
             if projectThumb.savingMethod == .realmSwift {
                 
                 guard let savedPHAsset = projectThumb.phAsset else { print("no phAsset"); return }
@@ -320,7 +325,10 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
             mainContentVC.delegate = self
             mainContentVC.currentIndex = self.selectedIndexPath.item
             mainContentVC.photoAssets = photoAssets
-            mainContentVC.normalStatusBarHeight = windowStatusBarHeight
+            
+            let windowStatusHeight = self.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+            print("window st: \(windowStatusHeight)")
+            mainContentVC.normalStatusBarHeight = windowStatusHeight
             mainContentVC.onDoneBlock = onDoneBlock
             
             present(mainContentVC, animated: true, completion: nil)
