@@ -601,7 +601,7 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9Q-eI-MZu">
                                         <rect key="frame" x="153.66666666666666" y="154.66666666666666" width="59" height="57"/>
-                                        <color key="tintColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" cocoaTouchSystemColor="lightTextColor"/>
                                         <state key="normal" image="play.circle.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50"/>
                                         </state>
@@ -651,8 +651,22 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAa-Tx-XQM">
                                         <rect key="frame" x="152" y="0.0" width="160" height="60"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bSH-7I-WOE">
-                                                <rect key="frame" x="15.666666666666657" y="0.0" width="129" height="60"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDq-V3-l1b">
+                                                <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="chooseButtonDown:" destination="IRt-Bn-D9P" eventType="touchDown" id="w7x-Fx-vKy"/>
+                                                    <action selector="chooseButtonPressed:" destination="IRt-Bn-D9P" eventType="touchUpInside" id="K6A-Zl-lpK"/>
+                                                    <action selector="chooseButtonTouchCancel:" destination="IRt-Bn-D9P" eventType="touchCancel" id="Rp8-Tm-CbK"/>
+                                                    <action selector="chooseButtonUpOutside:" destination="IRt-Bn-D9P" eventType="touchUpOutside" id="WSF-1p-57T"/>
+                                                </connections>
+                                            </button>
+                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bSH-7I-WOE">
+                                                <rect key="frame" x="32.333333333333336" y="0.0" width="95.333333333333314" height="60"/>
                                                 <subviews>
                                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="s4W-aa-8ha">
                                                         <rect key="frame" x="0.0" y="20" width="20" height="20"/>
@@ -662,33 +676,33 @@
                                                         </constraints>
                                                         <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </activityIndicatorView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDq-V3-l1b">
-                                                        <rect key="frame" x="26" y="12" width="103" height="36"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQa-YX-kZl">
+                                                        <rect key="frame" x="25.999999999999972" y="0.0" width="69.333333333333329" height="60"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                        <state key="normal" title="Checking...">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="chooseButtonPressed:" destination="IRt-Bn-D9P" eventType="touchUpInside" id="K6A-Zl-lpK"/>
-                                                        </connections>
-                                                    </button>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="WDq-V3-l1b" secondAttribute="trailing" id="9nW-ge-wfJ"/>
-                                                    <constraint firstItem="WDq-V3-l1b" firstAttribute="centerY" secondItem="bSH-7I-WOE" secondAttribute="centerY" id="Pe0-T3-k5j"/>
-                                                    <constraint firstItem="WDq-V3-l1b" firstAttribute="leading" secondItem="s4W-aa-8ha" secondAttribute="trailing" constant="6" id="S5y-ce-8to"/>
+                                                    <constraint firstItem="LQa-YX-kZl" firstAttribute="top" secondItem="bSH-7I-WOE" secondAttribute="top" id="L8A-eQ-xTB"/>
+                                                    <constraint firstItem="LQa-YX-kZl" firstAttribute="leading" secondItem="s4W-aa-8ha" secondAttribute="trailing" constant="6" id="eV7-DW-Wmb"/>
+                                                    <constraint firstAttribute="trailing" secondItem="LQa-YX-kZl" secondAttribute="trailing" id="hSV-yZ-SHd"/>
                                                     <constraint firstItem="s4W-aa-8ha" firstAttribute="leading" secondItem="bSH-7I-WOE" secondAttribute="leading" id="m9K-ro-Vj3"/>
                                                     <constraint firstItem="s4W-aa-8ha" firstAttribute="centerY" secondItem="bSH-7I-WOE" secondAttribute="centerY" id="qBG-av-YGr"/>
+                                                    <constraint firstAttribute="bottom" secondItem="LQa-YX-kZl" secondAttribute="bottom" id="rDq-6Y-TnI"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" name="Yellorange"/>
                                         <constraints>
+                                            <constraint firstItem="WDq-V3-l1b" firstAttribute="top" secondItem="fAa-Tx-XQM" secondAttribute="top" id="28o-Gd-202"/>
                                             <constraint firstItem="bSH-7I-WOE" firstAttribute="centerX" secondItem="fAa-Tx-XQM" secondAttribute="centerX" id="5b4-sC-GiA"/>
+                                            <constraint firstAttribute="trailing" secondItem="WDq-V3-l1b" secondAttribute="trailing" id="Caa-72-anW"/>
                                             <constraint firstItem="bSH-7I-WOE" firstAttribute="top" secondItem="fAa-Tx-XQM" secondAttribute="top" id="HKY-Pu-jaj"/>
+                                            <constraint firstItem="WDq-V3-l1b" firstAttribute="leading" secondItem="fAa-Tx-XQM" secondAttribute="leading" id="MqU-jY-SHG"/>
                                             <constraint firstAttribute="bottom" secondItem="bSH-7I-WOE" secondAttribute="bottom" id="WbU-jw-2UJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="WDq-V3-l1b" secondAttribute="bottom" id="Xlf-7T-qZf"/>
                                             <constraint firstAttribute="width" constant="160" id="c87-pk-cTE"/>
                                         </constraints>
                                     </view>
@@ -726,6 +740,7 @@
                         <outlet property="baseImageHolderView" destination="ukg-cv-Zgi" id="F3O-xh-hf2"/>
                         <outlet property="checkingView" destination="bSH-7I-WOE" id="RNt-HV-rZc"/>
                         <outlet property="chooseButton" destination="WDq-V3-l1b" id="bIG-df-4uq"/>
+                        <outlet property="chooseButtonLabel" destination="LQa-YX-kZl" id="7JO-Hw-q7P"/>
                         <outlet property="chooseButtonView" destination="fAa-Tx-XQM" id="mxQ-xh-Ils"/>
                         <outlet property="chooseViewWidthC" destination="c87-pk-cTE" id="Jwy-5p-iH7"/>
                         <outlet property="imageBackgroundBottomC" destination="hog-zR-M0g" id="qEP-gK-rkd"/>
@@ -735,7 +750,7 @@
                         <outlet property="imageBackgroundView" destination="JjG-cm-fmw" id="Oai-3g-Pjp"/>
                         <outlet property="imageView" destination="VGS-4W-MbO" id="aNm-lh-nIu"/>
                         <outlet property="inBetweenButtonC" destination="kkv-gm-gXg" id="8F6-dC-qcR"/>
-                        <outlet property="inBetweenChooseActivityC" destination="S5y-ce-8to" id="3uf-YO-Wfb"/>
+                        <outlet property="inBetweenChooseActivityC" destination="eV7-DW-Wmb" id="Bam-Ig-gQf"/>
                         <outlet property="pasteButton" destination="qQp-a9-LfL" id="i0J-Wr-KdB"/>
                         <outlet property="pasteButtonWidthC" destination="dca-4X-cYL" id="lz3-lv-4zE"/>
                         <outlet property="playButton" destination="x9Q-eI-MZu" id="A68-RG-fpF"/>
