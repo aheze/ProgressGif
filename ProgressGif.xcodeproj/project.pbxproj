@@ -256,9 +256,9 @@
 				49B4CF8C24C6016500A2A22A /* Storage */,
 				493E9BEE24C0E59A0068973B /* Utilities */,
 				4980302A24B95D8F00AE277C /* Importing */,
+				496F7F8724BE3B010045DDCB /* Editing */,
 				4944CAB124B912F000E893AE /* Assets.xcassets */,
 				4944CAB624B912F000E893AE /* Info.plist */,
-				496F7F8724BE3B010045DDCB /* Editing */,
 			);
 			path = ProgressGif;
 			sourceTree = "<group>";

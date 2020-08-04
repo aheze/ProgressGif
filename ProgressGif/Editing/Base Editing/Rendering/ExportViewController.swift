@@ -138,61 +138,61 @@ class ExportViewController: UIViewController {
         progressStatusLabel.text = "Converting (\(frameRate) FPS)"
         
         var aspectRect = imageView.frame
-        playerURL.generateImage() { (image) in
-            if let generatedImage = image {
-                self.imageView.image = image
-                let adjustedRect = AVMakeRect(aspectRatio: generatedImage.size, insideRect: self.imageView.bounds)
-                aspectRect = self.imageView.convert(adjustedRect, to: self.playerBaseView)
+        //        playerURL.generateImage() { (image) in
+        //            if let generatedImage = image {
+        //                self.imageView.image = image
+        let adjustedRect = AVMakeRect(aspectRatio: renderingAsset.resolutionSize() ?? CGSize(width: 100, height: 100), insideRect: self.imageView.bounds)
+        aspectRect = self.imageView.convert(adjustedRect, to: self.playerBaseView)
+        
+        self.playerBackgroundLeftC.constant = aspectRect.origin.x
+        self.playerBackgroundTopC.constant = aspectRect.origin.y
+        self.playerBackgroundRightC.constant = (self.playerBaseView.bounds.width - aspectRect.width) / 2
+        self.playerBackgroundBottomC.constant = (self.playerBaseView.bounds.height - aspectRect.height) / 2
+        //            }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.4, options: .curveEaseOut, animations: {
+            self.playerBackgroundView.layer.cornerRadius = 0
+            self.playerBaseView.layoutIfNeeded()
+        })
+        
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            /// start exporting to gif
+            if let selfU = self {
                 
-                self.playerBackgroundLeftC.constant = aspectRect.origin.x
-                self.playerBackgroundTopC.constant = aspectRect.origin.y
-                self.playerBackgroundRightC.constant = (self.playerBaseView.bounds.width - aspectRect.width) / 2
-                self.playerBackgroundBottomC.constant = (self.playerBaseView.bounds.height - aspectRect.height) / 2
-            }
-            
-            UIView.animate(withDuration: 0.5, delay: 0.4, options: .curveEaseOut, animations: {
-                self.playerBackgroundView.layer.cornerRadius = 0
-                self.playerBaseView.layoutIfNeeded()
-            })
-            
-            DispatchQueue.global(qos: .utility).async { [weak self] in
-                /// start exporting to gif
-                if let selfU = self {
+                Regift.createGIFFromSource(selfU.playerURL, startTime: 0, duration: Float(CMTimeGetSeconds(selfU.renderingAsset.duration)), frameRate: frameRate, progress: { (progress) in
                     
-                    Regift.createGIFFromSource(selfU.playerURL, startTime: 0, duration: Float(CMTimeGetSeconds(selfU.renderingAsset.duration)), frameRate: frameRate, progress: { (progress) in
-                        
-                        DispatchQueue.main.async {
-                            let progressPercent = (progress * 50) + 50
-                            selfU.segmentIndicator.updateProgress(percent: Degrees(progressPercent))
-                            selfU.progressLabel.fadeTransition(0.1)
-                            selfU.progressLabel.text = "\(Int(progressPercent))%"
-                        }
-                    }) { (url) in
-                        DispatchQueue.main.async {
-                            if let gifUrl = url {
-                                print("Convert to GIF completed! Export URL: \(gifUrl)")
-                                selfU.finishedConversion(gifURL: gifUrl)
-                                selfU.exportedGifURL = gifUrl
-                            } else {
-                                selfU.processingLabel.text = "Error"
-                            }
+                    DispatchQueue.main.async {
+                        let progressPercent = (progress * 50) + 50
+                        selfU.segmentIndicator.updateProgress(percent: Degrees(progressPercent))
+                        selfU.progressLabel.fadeTransition(0.1)
+                        selfU.progressLabel.text = "\(Int(progressPercent))%"
+                    }
+                }) { (url) in
+                    DispatchQueue.main.async {
+                        if let gifUrl = url {
+                            print("Convert to GIF completed! Export URL: \(gifUrl)")
+                            selfU.finishedConversion(gifURL: gifUrl)
+                            selfU.exportedGifURL = gifUrl
+                        } else {
+                            selfU.processingLabel.text = "Error"
                         }
                     }
                 }
             }
         }
+        
     }
     
     func finishedConversion(gifURL: URL) {
         processingLabel.layer.removeAllAnimations()
         
-        do {
-            let imageData = try Data(contentsOf: gifURL)
-            self.imageView.image = UIImage.gif(data: imageData)
-        } catch {
-            print("error reading gif file: \(error)")
-        }
-        
+//        do {
+//            let imageData = try Data(contentsOf: gifURL)
+//            self.imageView.image = UIImage.gif(data: imageData)
+//        } catch {
+//            print("error reading gif file: \(error)")
+//        }
+        self.imageView.image = UIImage.gif(url: gifURL.absoluteString)
         UIView.animate(withDuration: 0.6, animations: {
             self.processingLabel.alpha = 0
             self.cancelButton.alpha = 0
