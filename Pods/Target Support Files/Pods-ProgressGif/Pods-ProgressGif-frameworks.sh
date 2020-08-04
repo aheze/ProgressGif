@@ -166,7 +166,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftGifOrigin/SwiftGifOrigin.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework"
@@ -174,7 +174,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftGifOrigin/SwiftGifOrigin.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -10,6 +10,6 @@ target 'ProgressGif' do
 	pod 'Parchment'
 	pod 'SnapKit', '~> 5.0.0'
   pod 'SDWebImage'
-  pod 'SwiftGifOrigin', '~> 1.7.0'
+  pod 'SwiftyGif'
   pod 'SnapKit'
 end

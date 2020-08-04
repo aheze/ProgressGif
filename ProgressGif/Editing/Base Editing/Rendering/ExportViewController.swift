@@ -8,7 +8,8 @@
 import UIKit
 import AVFoundation
 import AVKit
-import SwiftGifOrigin
+import SwiftUI
+import SwiftyGif
 
 class ExportViewController: UIViewController {
     
@@ -16,6 +17,7 @@ class ExportViewController: UIViewController {
     var editingConfiguration: EditableEditingConfiguration!
     var playerURL = URL(fileURLWithPath: "")
     var exportedGifURL = URL(fileURLWithPath: "")
+//    var tempGifURL: TemporaryFileURL?
     
     /// for framerate
     let defaults = UserDefaults.standard
@@ -130,7 +132,7 @@ class ExportViewController: UIViewController {
     /// finished rendering video. Then need to convert to gif.
     func finishedExport() {
         segmentIndicator.updateProgress(percent: 50)
-        progressLabel.text = "100%"
+        progressLabel.text = "50%"
         
         progressStatusLabel.fadeTransition(0.6)
         
@@ -158,9 +160,11 @@ class ExportViewController: UIViewController {
         DispatchQueue.global(qos: .utility).async { [weak self] in
             /// start exporting to gif
             if let selfU = self {
+//                let tempFile = TemporaryFileURL(extension: "gif")
+//                tempFile.keepAlive()
                 
                 Regift.createGIFFromSource(selfU.playerURL, startTime: 0, duration: Float(CMTimeGetSeconds(selfU.renderingAsset.duration)), frameRate: frameRate, progress: { (progress) in
-                    
+//                    tempFile.keepAlive()
                     DispatchQueue.main.async {
                         let progressPercent = (progress * 50) + 50
                         selfU.segmentIndicator.updateProgress(percent: Degrees(progressPercent))
@@ -168,6 +172,7 @@ class ExportViewController: UIViewController {
                         selfU.progressLabel.text = "\(Int(progressPercent))%"
                     }
                 }) { (url) in
+//                    tempFile.keepAlive()
                     DispatchQueue.main.async {
                         if let gifUrl = url {
                             print("Convert to GIF completed! Export URL: \(gifUrl)")
@@ -178,6 +183,8 @@ class ExportViewController: UIViewController {
                         }
                     }
                 }
+                
+//                Regift.createGIFFromSource(<#T##sourceFileURL: URL##URL#>, destinationFileURL: <#T##URL?#>, startTime: <#T##Float#>, duration: <#T##Float#>, frameRate: <#T##Int#>, loopCount: <#T##Int#>, size: <#T##CGSize?#>, progress: <#T##ProgressHandler?##ProgressHandler?##(Double) -> Void#>, completion: <#T##(URL?) -> Void#>)
             }
         }
         
@@ -192,7 +199,20 @@ class ExportViewController: UIViewController {
 //        } catch {
 //            print("error reading gif file: \(error)")
 //        }
-        self.imageView.image = UIImage.gif(url: gifURL.absoluteString)
+//        self.imageView.image = UIImage.gif(url: gifURL.absoluteString)
+        
+        
+//        imageView.animationManager?.deleteImageView(imageView)
+//        imageView.clear()
+//        imageView.setGifFromURL(gifURL)
+//        imageView.stopAnimatingGif()
+        imageView.setGifFromURL(gifURL)
+        
+//        print("animation? \(imageView.isAnimatingGif())") // Returns wether the gif is currently playing
+//
+//            print("frames count: \(imageView.gifImage!.framesCount())")
+//        imageView.setGi
+        
         UIView.animate(withDuration: 0.6, animations: {
             self.processingLabel.alpha = 0
             self.cancelButton.alpha = 0
