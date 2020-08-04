@@ -13,6 +13,7 @@ enum URLError {
     case emptyClipboard
     case invalidURLFormat
     case urlCantBePlayed
+    case customMessage
 }
 
 class PasteViewController: UIViewController {
@@ -22,7 +23,7 @@ class PasteViewController: UIViewController {
     private var player = AVPlayer()
     private var playerItemContext = 0
     
-    var temporaryURLForImport: URL?
+    var temporaryURLForImport: TemporaryFileURL?
     var assetForImport: AVAsset?
     var urlChecked: Bool = false {
         didSet {
@@ -87,6 +88,12 @@ class PasteViewController: UIViewController {
         } else {
             animateInvalidURLPasted(urlError: .emptyClipboard)
         }
+//        let string = "google.com"
+//        if string.isValidURL {
+//            animateValidURLPasted(validURL: string)
+//        } else {
+//            animateInvalidURLPasted(urlError: .invalidURLFormat)
+//        }
     }
     @IBOutlet weak var pasteButtonWidthC: NSLayoutConstraint!
     
@@ -114,7 +121,9 @@ class PasteViewController: UIViewController {
         chooseButtonView.layer.cornerRadius = 6
         chooseButtonView.clipsToBounds = true
         
+        imageView.alpha = 0
         playButton.alpha = 0
+        playButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
         
         chooseButton.isEnabled = false
         chooseButtonView.alpha = 0.6
@@ -123,7 +132,6 @@ class PasteViewController: UIViewController {
 
 extension PasteViewController {
     func animateValidURLPasted(validURL: String) {
-        
         inBetweenButtonC.constant = 12
         chooseViewWidthC.constant = 160
         pasteButtonWidthC.constant = 140
@@ -134,8 +142,6 @@ extension PasteViewController {
         activityIndicatorView.startAnimating()
         
         if let formattedURL = URL(string: validURL) {
-            
-            print("properly formatted")
             validateURL(url: formattedURL)
         }
         
@@ -150,7 +156,12 @@ extension PasteViewController {
             
         }
     }
-    func animateInvalidURLPasted(urlError: URLError) {
+    func animateInvalidURLPasted(urlError: URLError, customMessage: String = "") {
+        
+        imageBackgroundLeftC.constant = 0
+        imageBackgroundRightC.constant = 0
+        imageBackgroundTopC.constant = 0
+        imageBackgroundBottomC.constant = 0
         
         inBetweenButtonC.constant = 0
         chooseViewWidthC.constant = 0
@@ -161,6 +172,13 @@ extension PasteViewController {
         
         UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()
+            self.imageBackgroundView.layer.cornerRadius = 12
+            self.imageView.alpha = 0
+            self.playButton.alpha = 0
+            self.playButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            
+            self.urlLabel.alpha = 1
+           
         }) { _ in
             
             self.urlChecked = false
@@ -178,37 +196,30 @@ extension PasteViewController {
             case .urlCantBePlayed:
                 self.urlLabel.text = "URL isn't a video"
                 self.pasteButton.setTitle("Repaste", for: .normal)
+            case .customMessage:
+                self.urlLabel.text = customMessage
+                self.pasteButton.setTitle("Repaste", for: .normal)
             }
         }
     }
     
     /// URL is checked and saved, ready to import.
-    func animateCheckedURL(validURL: URL) {
+    func animateCheckedURL(validURL: TemporaryFileURL) {
+        
         if urlChecked {
-            print("url checked")
-            
             if let avAsset = assetForImport {
-                print("has asset for import")
                 if let resolution = avAsset.resolutionSize() {
-                    print("originla res size: \(resolution)")
                     let currentImageLength = baseImageHolderView.frame.size.height
-//                    let resolutionAspect =
+                    
                     
                     if resolution.width > resolution.height { /// fatter
                         let resolutionAspect = currentImageLength / resolution.width
                         let newResolutionWidth = resolution.width * resolutionAspect
                         let newResolutionHeight = newResolutionWidth * (resolution.height / resolution.width)
-                        
-                        print("1 new res size: w: \(newResolutionWidth), h: \(newResolutionHeight)")
                         let yOffset = (currentImageLength - newResolutionHeight) / 2
-                        
-                        print("yoffset: \(yOffset)")
-                        print("set choose 1, \(self.urlChecked)")
                         
                         imageBackgroundLeftC.constant = 0
                         imageBackgroundRightC.constant = 0
-//                        imageBackgroundTopC.constant = 40
-//                        imageBackgroundBottomC.constant = 60
                         imageBackgroundTopC.constant = yOffset
                         imageBackgroundBottomC.constant = yOffset
                         
@@ -221,21 +232,31 @@ extension PasteViewController {
                         
                         UIView.animate(withDuration: 0.5, animations: {
                             self.view.layoutIfNeeded()
-                            print("layout view")
                             self.activityIndicatorView.alpha = 0
                             self.urlLabel.alpha = 0
+                            self.imageBackgroundView.layer.cornerRadius = 0
                         }) { _ in
                             self.activityIndicatorView.stopAnimating()
                             self.pasteButton.setTitle("Repaste", for: .normal)
                             self.chooseButton.setTitle("Choose", for: .normal)
-                            print("set choose, \(self.urlChecked)")
+                            
+                            validURL.keepAlive()
+                            validURL.contentURL.generateImage { (generatedImage) in
+                                print("get generated")
+                                if let image = generatedImage {
+                                    self.imageView.image = image
+                                    UIView.animate(withDuration: 0.5, animations: {
+                                        self.imageView.alpha = 1
+                                        self.playButton.alpha = 1
+                                        self.playButton.transform = .identity
+                                    })
+                                }
+                            }
                         }
                     } else {
                         let resolutionAspect = currentImageLength / resolution.height
                         let newResolutionHeight = resolution.height * resolutionAspect
                         let newResolutionWidth = newResolutionHeight * (resolution.width / resolution.height)
-                        
-                        print("2 new res size: w: \(newResolutionWidth), h: \(newResolutionHeight)")
                         let xOffset = (currentImageLength - newResolutionWidth) / 2
                         
                         imageBackgroundLeftC.constant = xOffset
@@ -252,45 +273,44 @@ extension PasteViewController {
                         
                         UIView.animate(withDuration: 0.5, animations: {
                             self.view.layoutIfNeeded()
-                            print("layout view")
                             self.activityIndicatorView.alpha = 0
                             self.urlLabel.alpha = 0
                         }) { _ in
                             self.activityIndicatorView.stopAnimating()
                             self.pasteButton.setTitle("Repaste", for: .normal)
                             self.chooseButton.setTitle("Choose", for: .normal)
-                            print("set choose, \(self.urlChecked)")
                         }
                     }
-                    
-                    
-                    
                 }
                 
             }
-            
-            
-        } else {
-            print("url not checked")
         }
     }
     
     func validateURL(url: URL) {
         URLSession.shared.downloadTask(with: url) { (location, response, error) -> Void in
             
-            guard let location = location else { return }
-            let temporaryFileURL = TemporaryFileURL(extension: url.pathExtension)
-            do {
-                
-                try FileManager.default.moveItem(at: location, to: temporaryFileURL.contentURL)
-                
-                self.temporaryURLForImport = temporaryFileURL.contentURL
-                let avAsset = AVAsset(url: url)
-                self.assetForImport = avAsset
-                self.setUpPlayerItem(with: avAsset)
-                
-            } catch { print("Error downloading video \(error)") }
-            
+            if let errorMessage = error {
+                let message = errorMessage.localizedDescription
+                DispatchQueue.main.async {
+                    self.animateInvalidURLPasted(urlError: .customMessage, customMessage: "Error: \(message)")
+                }
+            } else {
+                guard let location = location else { return }
+                let temporaryFileURL = TemporaryFileURL(extension: url.pathExtension)
+                do {
+                    try FileManager.default.moveItem(at: location, to: temporaryFileURL.contentURL)
+                    
+                    self.temporaryURLForImport = temporaryFileURL
+                    let avAsset = AVAsset(url: url)
+                    self.assetForImport = avAsset
+                    self.setUpPlayerItem(with: avAsset)
+                    
+                } catch {
+                    print("Error downloading video \(error)")
+                    self.animateInvalidURLPasted(urlError: .customMessage, customMessage: "The video couldn't be downloaded.")
+                }
+            }
         }.resume()
     }
     
@@ -316,7 +336,6 @@ extension PasteViewController {
             } else {
                 status = .unknown
             }
-            
             
             if status == .readyToPlay {
                 urlChecked = true
