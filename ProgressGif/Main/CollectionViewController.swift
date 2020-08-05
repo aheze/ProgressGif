@@ -212,7 +212,6 @@ class CollectionViewController: UIViewController {
             viewControllerToPresent.modalPresentationStyle = .fullScreen
         super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
-    
 }
 extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -526,14 +525,15 @@ extension CollectionViewController: ZoomAnimatorDelegate {
         return referenceImageView
     }
     
-    func getImageViewFrame() -> CGRect? {
+    func getCellContentFrame() -> CGRect? {
         self.view.layoutIfNeeded()
         self.collectionView.layoutIfNeeded()
         
         //Get a guarded reference to the cell's frame
-        let unconvertedFrame = getFrameFromCollectionViewCell(for: self.selectedIndexPath)
+        let unconvertedFrame = getRealFrameFromCollectionViewCell(for: self.selectedIndexPath)
         
         var cellFrame = self.collectionView.convert(unconvertedFrame, to: self.view)
+        print("realmframe: \(cellFrame)")
         
         if cellFrame.minY < self.collectionView.contentInset.top {
             return CGRect(x: cellFrame.minX, y: self.collectionView.contentInset.top, width: cellFrame.width, height: cellFrame.height - (self.collectionView.contentInset.top - cellFrame.minY))
@@ -551,7 +551,6 @@ extension CollectionViewController: ZoomAnimatorDelegate {
         return cellFrame
     }
     func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
-        
         self.view.layoutIfNeeded()
         self.collectionView.layoutIfNeeded()
         
@@ -614,6 +613,40 @@ extension CollectionViewController: ZoomAnimatorDelegate {
         
     }
     
+    func getRealFrameFromCollectionViewCell(for selectedIndexPath: IndexPath) -> CGRect {
+        
+        //Get the currently visible cells from the collectionView
+        let visibleCells = self.collectionView.indexPathsForVisibleItems
+        
+        //If the current indexPath is not visible in the collectionView,
+        //scroll the collectionView to the cell to prevent it from returning a nil value
+        if !visibleCells.contains(self.selectedIndexPath) {
+            
+            //Scroll the collectionView to the cell that is currently offscreen
+            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
+            
+            //Reload the items at the newly visible indexPaths
+            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+            self.collectionView.layoutIfNeeded()
+            
+            //Prevent the collectionView from returning a nil value
+            guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? PhotoCell) else {
+                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
+            }
+            
+            return guardedCell.frame
+        }
+            //Otherwise the cell should be visible
+        else {
+            //Prevent the collectionView from returning a nil value
+            guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? PhotoCell) else {
+                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
+            }
+            //The cell was found successfully
+            return guardedCell.frame
+        }
+    }
+    
     //This function prevents the collectionView from accessing a deallocated cell. In the
     //event that the cell for the selectedIndexPath is nil, a default CGRect is returned in its place
     func getFrameFromCollectionViewCell(for selectedIndexPath: IndexPath) -> CGRect {
@@ -634,7 +667,6 @@ extension CollectionViewController: ZoomAnimatorDelegate {
             
             //Prevent the collectionView from returning a nil value
             guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? PhotoCell) else {
-                print("No guardedCell1")
                 return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
             }
             
@@ -651,7 +683,6 @@ extension CollectionViewController: ZoomAnimatorDelegate {
         else {
             //Prevent the collectionView from returning a nil value
             guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? PhotoCell) else {
-                print("No guardedCell3")
                 return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
             }
             

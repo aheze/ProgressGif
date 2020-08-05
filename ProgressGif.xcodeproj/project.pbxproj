@@ -52,7 +52,6 @@
 		49B236B824CA1E0700905917 /* RenderingProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236B724CA1E0700905917 /* RenderingProgress.swift */; };
 		49B236BB24CA3BA900905917 /* Licenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236BA24CA3BA900905917 /* Licenses.swift */; };
 		49B236BE24CA6D9400905917 /* Regift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236BD24CA6D9400905917 /* Regift.swift */; };
-		49B236C624CA86C500905917 /* EditingVC+GalleryAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B236C524CA86C500905917 /* EditingVC+GalleryAnimation.swift */; };
 		49B4CF8B24C51C3F00A2A22A /* DropShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF8A24C51C3F00A2A22A /* DropShadow.swift */; };
 		49B4CF8E24C6018500A2A22A /* Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF8D24C6018500A2A22A /* Saving.swift */; };
 		49B4CF9224C6661C00A2A22A /* EditingVC+Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */; };
@@ -127,7 +126,6 @@
 		49B236B724CA1E0700905917 /* RenderingProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingProgress.swift; sourceTree = "<group>"; };
 		49B236BA24CA3BA900905917 /* Licenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Licenses.swift; sourceTree = "<group>"; };
 		49B236BD24CA6D9400905917 /* Regift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regift.swift; sourceTree = "<group>"; };
-		49B236C524CA86C500905917 /* EditingVC+GalleryAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+GalleryAnimation.swift"; sourceTree = "<group>"; };
 		49B4CF8A24C51C3F00A2A22A /* DropShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadow.swift; sourceTree = "<group>"; };
 		49B4CF8D24C6018500A2A22A /* Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saving.swift; sourceTree = "<group>"; };
 		49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+Saving.swift"; sourceTree = "<group>"; };
@@ -357,7 +355,6 @@
 			children = (
 				49240FD024BFFB2F00DC9446 /* Paging View Controllers */,
 				496F7F8524BE3AE90045DDCB /* EditingViewController.swift */,
-				49B236C524CA86C500905917 /* EditingVC+GalleryAnimation.swift */,
 				49B4CF9124C6661C00A2A22A /* EditingVC+Saving.swift */,
 				49F8C12924C28803004686DF /* EditingVC+Setup.swift */,
 				49AC2D0E24C237880009AEBE /* EditingVC+Drawing.swift */,
@@ -616,7 +613,6 @@
 				491816B224BA9AD800E318FC /* FromFiles.swift in Sources */,
 				49A7F43C24D3563500DD4DEA /* SettingsVC+LoadValues.swift in Sources */,
 				495EBAFF24D79AB80065BB8B /* PasteViewController.swift in Sources */,
-				49B236C624CA86C500905917 /* EditingVC+GalleryAnimation.swift in Sources */,
 				4944CAA924B912EB00E893AE /* AppDelegate.swift in Sources */,
 				49B4CF9A24C74FD800A2A22A /* ColorMapView.swift in Sources */,
 				49F8C12A24C28803004686DF /* EditingVC+Setup.swift in Sources */,

@@ -318,7 +318,6 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         
         let windowStatusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        print("window height: \(windowStatusBarHeight)")
         collectionViewController?.windowStatusBarHeight = windowStatusBarHeight
         
     }
