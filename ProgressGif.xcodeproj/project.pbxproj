@@ -28,6 +28,9 @@
 		495573B724DB670B00B10D8A /* AboutTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495573B624DB670B00B10D8A /* AboutTableCell.swift */; };
 		495573B924DB672500B10D8A /* Contributors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495573B824DB672500B10D8A /* Contributors.swift */; };
 		495573BB24DB6C9800B10D8A /* Contributing.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 495573BA24DB6C9700B10D8A /* Contributing.xcassets */; };
+		495573C024DB75C400B10D8A /* Carte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495573BD24DB75C400B10D8A /* Carte.swift */; };
+		495573C124DB75C400B10D8A /* CarteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495573BE24DB75C400B10D8A /* CarteViewController.swift */; };
+		495573C224DB75C400B10D8A /* CarteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495573BF24DB75C400B10D8A /* CarteItem.swift */; };
 		495EBAFF24D79AB80065BB8B /* PasteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EBAFE24D79AB80065BB8B /* PasteViewController.swift */; };
 		49649F7224D4AB800048D59D /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49649F7124D4AB800048D59D /* DocumentPicker.swift */; };
 		496DD41C24BA4927007380AF /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496DD41B24BA4927007380AF /* CollectionViewController.swift */; };
@@ -106,6 +109,9 @@
 		495573B624DB670B00B10D8A /* AboutTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableCell.swift; sourceTree = "<group>"; };
 		495573B824DB672500B10D8A /* Contributors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contributors.swift; sourceTree = "<group>"; };
 		495573BA24DB6C9700B10D8A /* Contributing.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Contributing.xcassets; sourceTree = "<group>"; };
+		495573BD24DB75C400B10D8A /* Carte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carte.swift; sourceTree = "<group>"; };
+		495573BE24DB75C400B10D8A /* CarteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarteViewController.swift; sourceTree = "<group>"; };
+		495573BF24DB75C400B10D8A /* CarteItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarteItem.swift; sourceTree = "<group>"; };
 		495EBAFE24D79AB80065BB8B /* PasteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PasteViewController.swift; path = ProgressGif/Importing/Paste/PasteViewController.swift; sourceTree = SOURCE_ROOT; };
 		49649F7124D4AB800048D59D /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		496DD41B24BA4927007380AF /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +286,16 @@
 			path = "Video Player";
 			sourceTree = "<group>";
 		};
+		495573BC24DB75C400B10D8A /* Carte */ = {
+			isa = PBXGroup;
+			children = (
+				495573BD24DB75C400B10D8A /* Carte.swift */,
+				495573BE24DB75C400B10D8A /* CarteViewController.swift */,
+				495573BF24DB75C400B10D8A /* CarteItem.swift */,
+			);
+			path = Carte;
+			sourceTree = "<group>";
+		};
 		495EBB0024D79C540065BB8B /* Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,6 +402,7 @@
 		49B236B924CA3B9A00905917 /* About */ = {
 			isa = PBXGroup;
 			children = (
+				495573BC24DB75C400B10D8A /* Carte */,
 				49B236BA24CA3BA900905917 /* Licenses.swift */,
 				49BE74F524D9E49D0098121A /* ImportInfoViewController.swift */,
 				495573B424DB655F00B10D8A /* AboutViewController.swift */,
@@ -601,6 +618,7 @@
 				49BE74F624D9E49D0098121A /* ImportInfoViewController.swift in Sources */,
 				49E75FA724C015DC004B3F41 /* EditingEdgesVC.swift in Sources */,
 				49A7F43E24D357C100DD4DEA /* SettingsVC+Setup.swift in Sources */,
+				495573C224DB75C400B10D8A /* CarteItem.swift in Sources */,
 				49240FCF24BFC9FE00DC9446 /* EditingVC+UpdateSliderProgress.swift in Sources */,
 				4980302124B9427800AE277C /* Utilities.swift in Sources */,
 				49A7AE9724C1335200318F1A /* OpacityPicker.swift in Sources */,
@@ -634,6 +652,7 @@
 				49F8C12A24C28803004686DF /* EditingVC+Setup.swift in Sources */,
 				49AC2D0F24C237880009AEBE /* EditingVC+Drawing.swift in Sources */,
 				4980302924B95D8900AE277C /* FromPhotos.swift in Sources */,
+				495573C124DB75C400B10D8A /* CarteViewController.swift in Sources */,
 				4944CAAB24B912EB00E893AE /* SceneDelegate.swift in Sources */,
 				49240FCD24BFC8F000DC9446 /* PlayerView.swift in Sources */,
 				49B4CF9224C6661C00A2A22A /* EditingVC+Saving.swift in Sources */,
@@ -644,6 +663,7 @@
 				49240FD324BFFB6E00DC9446 /* EditingBarVC.swift in Sources */,
 				493E9BF224C0E8910068973B /* ColorPickerViewController.swift in Sources */,
 				493E9BED24C0BA820068973B /* NumberStepper.swift in Sources */,
+				495573C024DB75C400B10D8A /* Carte.swift in Sources */,
 				49B4CF9B24C74FD800A2A22A /* ColorPicker.swift in Sources */,
 				4980302724B94CDD00AE277C /* SetupButtons.swift in Sources */,
 				49A362DD24BB92B100019FC6 /* ZoomTransitionController.swift in Sources */,

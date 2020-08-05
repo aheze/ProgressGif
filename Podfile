@@ -9,7 +9,5 @@ target 'ProgressGif' do
   pod 'RealmSwift'
 	pod 'Parchment'
 	pod 'SnapKit', '~> 5.0.0'
-  pod 'SDWebImage'
   pod 'SwiftyGif'
-  pod 'SnapKit'
 end
