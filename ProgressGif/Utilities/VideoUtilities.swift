@@ -44,7 +44,7 @@ extension URL {
     func generateImageAsync(atTime time: CMTime = CMTimeMake(value: 1, timescale: 60)) -> UIImage? {
         let asset: AVAsset = AVAsset(url: self)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
-
+        imageGenerator.appliesPreferredTrackTransform = true
         do {
             let thumbnailImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
             return UIImage(cgImage: thumbnailImage)
