@@ -36,28 +36,54 @@ extension CollectionViewController: UIViewControllerTransitioningDelegate {
             
             transition.presenting = true
             
+            var imageFrame = CGRect(x: 0, y: 0, width: 100, height: 100)
+            
+            
             let currentImageView = getImageViewFromCollectionViewCell(for: selectedIndexPath)
-            var baseCurrentImageFrame = CGRect(x: 0, y: 0, width: 100, height: 100)
-            if let realBaseImageFrame = getImageViewFrame() {
-                baseCurrentImageFrame = realBaseImageFrame
+            
+            
+            
+            if let contentFrame = getCellContentFrame() {
+                print("contentFrame: \(contentFrame)")
+                let imageViewFrame = currentImageView.frame
+                print("iamge frame: \(imageViewFrame)")
+                
+                /// offset for the aspect ratio
+//                var aspectImageFrame = currentImageView.getAspectFitRect() ?? CGRect(x: 0, y: 0, width: 100, height: 100)
+//                aspectImageFrame.origin.y -= windowStatusBarHeight
+//                print("aspect image frame: \(aspectImageFrame)")
+//
+//                let finalFrame = CGRect(x: contentFrame.origin.x + imageViewFrame.origin.x + aspectImageFrame.origin.x,
+//                                        y: contentFrame.origin.y + imageViewFrame.origin.y + aspectImageFrame.origin.y,
+//                                        width: aspectImageFrame.width,
+//                                        height: aspectImageFrame.height)
+                let finalFrame = CGRect(x: contentFrame.origin.x + imageViewFrame.origin.x,
+                                        y: contentFrame.origin.y + imageViewFrame.origin.y - windowStatusBarHeight,
+                                        width: imageViewFrame.width,
+                                        height: imageViewFrame.height)
+                imageFrame = finalFrame
+                
             }
             
-            transition.originFrame = baseCurrentImageFrame
+//            if let squareImageViewFrame = getImageViewFrame() {
+                
+                
+//            }
             
-            print("base frame: \(baseCurrentImageFrame)")
+            transition.originFrame = imageFrame
             
-            let controlsFrame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: 140)
+            print("origin frame: \(imageFrame)")
             
+            let controlsFrame = CGRect(x: 16, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: 140)
+            
+            print("windowSt: \(windowStatusBarHeight)")
             
             transition.playerOriginFrame = controlsFrame
-            transition.statusBarHeight = windowStatusBarHeight
             transition.sliderValue = Float(0.5)
             
             if let image = currentImageView.image {
                 transition.thumbnailImage = image
             }
-            
-//            transition.presentationOrigin = .gallery
             
             UIView.animate(withDuration: 0.2, animations: {
                 self.view.alpha = 0

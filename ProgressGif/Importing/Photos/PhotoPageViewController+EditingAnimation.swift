@@ -75,7 +75,6 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
             
             transition.presenting = true
             transition.playerOriginFrame = playerControlsView.frame
-            transition.statusBarHeight = normalStatusBarHeight
             transition.sliderValue = playerControlsView.customSlider.value
             
             playerControlsView.playingState = .paused

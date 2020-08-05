@@ -10,7 +10,6 @@ import UIKit
 extension EditingViewController {
     
     func setUpDrawing(with configuration: EditableEditingConfiguration) {
-        print("set up drawing...")
         let progressWidth = CGFloat(playerControlsView.customSlider.value) * progressBarFullWidth
         progressBarWidthC.constant = progressWidth
         
@@ -90,8 +89,6 @@ extension EditingViewController {
             shadowScale = scale
             updateShadow(scale: scale)
             maskingView.frame = aspectFrame
-            print("mask frame: \(aspectFrame)")
-            
         }
     }
     

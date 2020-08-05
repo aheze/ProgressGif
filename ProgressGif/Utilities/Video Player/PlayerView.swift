@@ -228,6 +228,5 @@ class PlayerView: UIView {
     
     deinit {
         playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
-        print("deinit of PlayerView")
     }
 }

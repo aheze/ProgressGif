@@ -53,7 +53,6 @@ class EditingViewController: UIViewController {
         super.viewDidLayoutSubviews()
         if !dismissing {
             statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-            print("LAYOTU SUBVIEWS stat height: \(statusHeight)")
             topBarTopC.constant = statusHeight
             view.layoutIfNeeded()
             updateFrames(statusHeight: statusHeight)
@@ -82,8 +81,6 @@ class EditingViewController: UIViewController {
     }
     
     func updateFrames(statusHeight: CGFloat) {
-        
-        print("Update frames, status height: \(statusHeight)")
         
         let topBarheight = topActionBarBlurView.frame.height
         let topBarToPreview = topBarAndPreviewVerticalC.constant

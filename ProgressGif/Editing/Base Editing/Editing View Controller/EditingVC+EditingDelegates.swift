@@ -53,8 +53,6 @@ extension EditingViewController {
         shadowScale = scale
     }
     func edgeCornerRadiusChangePreview(to radius: Int, animate: Bool = false) {
-        print("corner change")
-        
         let previewRadius = radius.getRadiusFromValue(withUnit: unit)
         if animate {
             maskingView.animateCornerRadius(to: previewRadius, duration: 0.5)
