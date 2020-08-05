@@ -14,22 +14,47 @@ class AboutViewController: UIViewController {
     @IBOutlet weak var reportIssueBlurView: UIVisualEffectView!
     @IBOutlet weak var reportIssueButton: UIButton!
     @IBAction func reportIssuePressed(_ sender: Any) {
+        let link = URL(string: "https://github.com/aheze/ProgressGif/issues")
+        if let urlToOpen = link {
+            UIApplication.shared.open(urlToOpen)
+        }
     }
     
     
     @IBOutlet weak var rateAppBlurView: UIVisualEffectView!
     @IBOutlet weak var rateAppButton: UIButton!
     @IBAction func rateAppPressed(_ sender: Any) {
+        if let productURL = URL(string: "https://apps.apple.com/app/id1506500202") {
+            var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
+            
+            // 2.
+            components?.queryItems = [
+                URLQueryItem(name: "action", value: "write-review")
+            ]
+            
+            // 3.
+            guard let writeReviewURL = components?.url else {
+                return
+            }
+            
+            // 4.
+            UIApplication.shared.open(writeReviewURL)
+        }
     }
     
     @IBOutlet weak var sourceCodeBlurView: UIVisualEffectView!
     @IBOutlet weak var sourceCodeButton: UIButton!
     @IBAction func sourceCodePressed(_ sender: Any) {
+        let link = URL(string: "https://github.com/aheze/ProgressGif")
+        if let urlToOpen = link {
+            UIApplication.shared.open(urlToOpen)
+        }
     }
     
     @IBOutlet weak var licensesBlurView: UIVisualEffectView!
     @IBOutlet weak var licensesButton: UIButton!
     @IBAction func licensesPressed(_ sender: Any) {
+        presentLicenses()
     }
     
     var contributors = [Contributor]()
