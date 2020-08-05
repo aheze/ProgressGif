@@ -35,18 +35,10 @@ class EditingViewController: UIViewController {
         }
     }
     
-    var actualVideoResolution: CGSize?
-    
-    /// how much to multiply the preview values by, for rendering
-    /// example: `percentageOfPreviewValue` = 4
-    /// then, a setting of `5` for the bar height would actually be `20` for rendering
-//    var percentageOfPreviewValue = CGFloat(1)
-    
     // MARK: - Video
-    
-//    var asset: PHAsset!
     var avAsset: AVAsset!
     var hasInitializedPlayer = false
+    var actualVideoResolution: CGSize?
     
     // MARK: - Player Constraint Calculations
     
@@ -60,12 +52,35 @@ class EditingViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !dismissing {
-//            let statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+            statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+            print("LAYOTU SUBVIEWS stat height: \(statusHeight)")
             topBarTopC.constant = statusHeight
             view.layoutIfNeeded()
             updateFrames(statusHeight: statusHeight)
         }
     }
+    
+    // MARK: - Size Classes
+    
+    @IBOutlet weak var holderHorizontalRightC: NSLayoutConstraint!
+    @IBOutlet weak var playerControlsHorizontalRightC: NSLayoutConstraint!
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        print("Change trait!!!")
+        statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        topBarTopC.constant = statusHeight
+        view.layoutIfNeeded()
+        print("Change trait stat height: \(statusHeight)")
+        
+        if traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .compact {
+            print("HORIZONTAL size class, safe inset esge: \(view.safeAreaInsets.right)")
+            
+            holderHorizontalRightC.constant = (bottomReferenceView.frame.width - view.safeAreaInsets.right) + 16
+            playerControlsHorizontalRightC.constant = (bottomReferenceView.frame.width - view.safeAreaInsets.right) + 16
+        }
+    }
+    
     func updateFrames(statusHeight: CGFloat) {
         
         print("Update frames, status height: \(statusHeight)")
@@ -82,13 +97,8 @@ class EditingViewController: UIViewController {
         playerHolderTopC.constant = topConstant
         playerControlsBottomC.constant = bottomConstant
         
-        print("about to calc")
         calculateAspectDrawingFrame()
-        print("about to bar height")
         barHeightChanged(to: editingConfiguration.barHeight)
-        
-        print("about to cal preview scale")
-//        calculatePreviewScale()
     }
   
     
@@ -221,7 +231,15 @@ class EditingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("got asset: \(avAsset)")
-//        playerHolderView.alpha = 0
+
+//        bottomReferenceView.layer.maskedCorners = [.layerMinXMinYCorner]
+//        bottomReferenceView.layer.cornerRadius = 0
+//        bottomReferenceView.clipsToBounds = true
+        
+//        if view.traitCollection.horizontalSizeClass == .regular && view.traitCollection.verticalSizeClass == .compact {
+//            bottomReferenceView.layer.cornerRadius = 4
+//        }
+        
         transparentBackgroundImageView.alpha = 0
         shadowView.alpha = 0
         maskingView.isHidden = true
@@ -240,12 +258,6 @@ class EditingViewController: UIViewController {
         
         if let projectMetadata = project?.metadata {
             actualVideoResolution = CGSize(width: projectMetadata.resolutionWidth, height: projectMetadata.resolutionHeight)
-//            if projectMetadata.resolutionWidth >= projectMetadata.resolutionHeight {
-//                /// fatter
-//                self.percentageOfPreviewValue = CGFloat(projectMetadata.resolutionWidth) / self.playerHolderView.frame.width
-//            } else {
-//                self.percentageOfPreviewValue = CGFloat(projectMetadata.resolutionHeight) / self.playerHolderView.frame.height
-//            }
         }
         
         print("view did load")
