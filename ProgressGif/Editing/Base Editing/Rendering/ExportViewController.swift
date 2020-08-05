@@ -8,8 +8,8 @@
 import UIKit
 import AVFoundation
 import AVKit
-import SwiftUI
 import SwiftyGif
+import LinkPresentation
 
 class ExportViewController: UIViewController {
     
@@ -17,7 +17,6 @@ class ExportViewController: UIViewController {
     var editingConfiguration: EditableEditingConfiguration!
     var playerURL = URL(fileURLWithPath: "")
     var exportedGifURL = URL(fileURLWithPath: "")
-//    var tempGifURL: TemporaryFileURL?
     
     /// for framerate
     let defaults = UserDefaults.standard
@@ -55,8 +54,8 @@ class ExportViewController: UIViewController {
     @IBOutlet weak var exportButton: UIButton!
     @IBAction func exportButtonPressed(_ sender: Any) {
         
-        let shareItems = [exportedGifURL]
-        let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+//        let shareItems = [exportedGifURL]
+        let activityViewController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
         self.present(activityViewController, animated: true, completion: nil)
         
         /// the following was for testing (the rendered video, not yet converted to gif)
@@ -160,11 +159,7 @@ class ExportViewController: UIViewController {
         DispatchQueue.global(qos: .utility).async { [weak self] in
             /// start exporting to gif
             if let selfU = self {
-//                let tempFile = TemporaryFileURL(extension: "gif")
-//                tempFile.keepAlive()
-                
                 Regift.createGIFFromSource(selfU.playerURL, startTime: 0, duration: Float(CMTimeGetSeconds(selfU.renderingAsset.duration)), frameRate: frameRate, progress: { (progress) in
-//                    tempFile.keepAlive()
                     DispatchQueue.main.async {
                         let progressPercent = (progress * 50) + 50
                         selfU.segmentIndicator.updateProgress(percent: Degrees(progressPercent))
@@ -172,7 +167,6 @@ class ExportViewController: UIViewController {
                         selfU.progressLabel.text = "\(Int(progressPercent))%"
                     }
                 }) { (url) in
-//                    tempFile.keepAlive()
                     DispatchQueue.main.async {
                         if let gifUrl = url {
                             print("Convert to GIF completed! Export URL: \(gifUrl)")
@@ -183,35 +177,14 @@ class ExportViewController: UIViewController {
                         }
                     }
                 }
-                
-//                Regift.createGIFFromSource(<#T##sourceFileURL: URL##URL#>, destinationFileURL: <#T##URL?#>, startTime: <#T##Float#>, duration: <#T##Float#>, frameRate: <#T##Int#>, loopCount: <#T##Int#>, size: <#T##CGSize?#>, progress: <#T##ProgressHandler?##ProgressHandler?##(Double) -> Void#>, completion: <#T##(URL?) -> Void#>)
             }
         }
-        
     }
     
     func finishedConversion(gifURL: URL) {
         processingLabel.layer.removeAllAnimations()
         
-//        do {
-//            let imageData = try Data(contentsOf: gifURL)
-//            self.imageView.image = UIImage.gif(data: imageData)
-//        } catch {
-//            print("error reading gif file: \(error)")
-//        }
-//        self.imageView.image = UIImage.gif(url: gifURL.absoluteString)
-        
-        
-//        imageView.animationManager?.deleteImageView(imageView)
-//        imageView.clear()
-//        imageView.setGifFromURL(gifURL)
-//        imageView.stopAnimatingGif()
         imageView.setGifFromURL(gifURL)
-        
-//        print("animation? \(imageView.isAnimatingGif())") // Returns wether the gif is currently playing
-//
-//            print("frames count: \(imageView.gifImage!.framesCount())")
-//        imageView.setGi
         
         UIView.animate(withDuration: 0.6, animations: {
             self.processingLabel.alpha = 0
@@ -235,5 +208,60 @@ class ExportViewController: UIViewController {
             }, completion: nil)
         }
         
+    }
+}
+
+extension ExportViewController: UIActivityItemSource {
+
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return UIImage() // an empty UIImage is sufficient to ensure share sheet shows right actions
+    }
+
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        return exportedGifURL
+    }
+
+    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+        let metadata = LPLinkMetadata()
+
+        metadata.title = "A gif with a progress bar" // Preview Title
+        let fileSize = exportedGifURL.fileSizeString
+        print("fileSize: \(fileSize)")
+        let formattedFileSize = fileSize.replacingOccurrences(of: " ", with: "-", options: .literal, range: nil)
+        let startID = String(exportedGifURL.lastPathComponent.prefix(6))
+        
+        if let displayURL = URL(string: "\(formattedFileSize)~\(startID).gif") {
+            print("display url: \(displayURL)")
+            metadata.originalURL = displayURL
+        }
+        
+        metadata.url = exportedGifURL
+        metadata.imageProvider = NSItemProvider.init(contentsOf: exportedGifURL)
+        metadata.iconProvider = NSItemProvider.init(contentsOf: exportedGifURL)
+
+        return metadata
+    }
+}
+
+extension URL {
+    var attributes: [FileAttributeKey : Any]? {
+        do {
+            return try FileManager.default.attributesOfItem(atPath: path)
+        } catch let error as NSError {
+            print("FileAttribute error: \(error)")
+        }
+        return nil
+    }
+
+    var fileSize: UInt64 {
+        return attributes?[.size] as? UInt64 ?? UInt64(0)
+    }
+
+    var fileSizeString: String {
+        return ByteCountFormatter.string(fromByteCount: Int64(fileSize), countStyle: .file)
+    }
+
+    var creationDate: Date? {
+        return attributes?[.creationDate] as? Date
     }
 }
