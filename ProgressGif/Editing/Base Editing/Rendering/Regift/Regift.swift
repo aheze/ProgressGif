@@ -327,27 +327,11 @@ public struct Regift {
         if self.destinationFileURL != nil {
             fileURL = self.destinationFileURL
         } else {
-//            let temporaryFile = (NSTemporaryDirectory() as NSString).appendingPathComponent(Constants.FileName)
-            let temporaryFile = (NSTemporaryDirectory() as NSString).appendingPathComponent(UUID().uuidString)
+            let temporaryFile = (NSTemporaryDirectory() as NSString).appendingPathComponent("\(UUID().uuidString).gif")
             fileURL = URL(fileURLWithPath: temporaryFile)
         }
         
-        let fileManger = FileManager.default
         if let fileURL = fileURL {
-            print("has file, \(fileURL)")
-            if fileManger.fileExists(atPath: fileURL.path) {
-                print("exist")
-                do{
-                    try fileManger.removeItem(at: fileURL)
-                    
-                    
-                    
-                } catch let error {
-                    print("error occurred, here are the details:\n \(error)")
-                }
-            } else {
-                print("doesnt exist")
-            }
             
             guard let destination = CGImageDestinationCreateWithURL(fileURL as CFURL, kUTTypeGIF, frameCount, nil) else {
                 throw RegiftError.DestinationNotFound
@@ -365,17 +349,17 @@ public struct Regift {
             let tolerance = CMTimeMakeWithSeconds(Constants.Tolerance, preferredTimescale: Constants.TimeInterval)
             generator.requestedTimeToleranceBefore = tolerance
             generator.requestedTimeToleranceAfter = tolerance
-
+            
             // Transform timePoints to times for the async asset generator method.
             var times = [NSValue]()
             for time in timePoints {
                 times.append(NSValue(time: time))
             }
-
+            
             // Create a dispatch group to force synchronous behavior on an asynchronous method.
             let gifGroup = Group()
             gifGroup.enter()
-
+            
             var handledTimes: Double = 0
             generator.generateCGImagesAsynchronously(forTimes: times, completionHandler: { (requestedTime, image, actualTime, result, error) in
                 handledTimes += 1
@@ -386,14 +370,14 @@ public struct Regift {
                     }
                     return
                 }
-
+                
                 CGImageDestinationAddImage(destination, imageRef, frameProperties as CFDictionary)
                 self.progress?(min(1.0, handledTimes/max(1.0, Double(times.count))))
                 if requestedTime == times.last?.timeValue {
                     gifGroup.leave()
                 }
             })
-
+            
             // Wait for the asynchronous generator to finish.
             gifGroup.wait()
             
