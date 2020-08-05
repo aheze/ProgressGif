@@ -29,7 +29,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var logoButton: UIButton!
     @IBAction func logoButtonPressed(_ sender: Any) {
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "AboutViewController") as? AboutViewController {
+            self.present(viewController, animated: true, completion: nil)
+        }
     }
     
     @IBOutlet weak var settingsButton: UIButton!

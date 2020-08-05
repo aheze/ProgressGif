@@ -24,6 +24,10 @@
 		4944CAB224B912F000E893AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4944CAB124B912F000E893AE /* Assets.xcassets */; };
 		4944CAB524B912F000E893AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4944CAB324B912F000E893AE /* LaunchScreen.storyboard */; };
 		4948C8E124C0F49400E5F5F6 /* EditingVC+EditingDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4948C8E024C0F49400E5F5F6 /* EditingVC+EditingDelegates.swift */; };
+		495573B524DB655F00B10D8A /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495573B424DB655F00B10D8A /* AboutViewController.swift */; };
+		495573B724DB670B00B10D8A /* AboutTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495573B624DB670B00B10D8A /* AboutTableCell.swift */; };
+		495573B924DB672500B10D8A /* Contributors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495573B824DB672500B10D8A /* Contributors.swift */; };
+		495573BB24DB6C9800B10D8A /* Contributing.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 495573BA24DB6C9700B10D8A /* Contributing.xcassets */; };
 		495EBAFF24D79AB80065BB8B /* PasteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EBAFE24D79AB80065BB8B /* PasteViewController.swift */; };
 		49649F7224D4AB800048D59D /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49649F7124D4AB800048D59D /* DocumentPicker.swift */; };
 		496DD41C24BA4927007380AF /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496DD41B24BA4927007380AF /* CollectionViewController.swift */; };
@@ -98,6 +102,10 @@
 		4944CAB424B912F000E893AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4944CAB624B912F000E893AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4948C8E024C0F49400E5F5F6 /* EditingVC+EditingDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+EditingDelegates.swift"; sourceTree = "<group>"; };
+		495573B424DB655F00B10D8A /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		495573B624DB670B00B10D8A /* AboutTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableCell.swift; sourceTree = "<group>"; };
+		495573B824DB672500B10D8A /* Contributors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contributors.swift; sourceTree = "<group>"; };
+		495573BA24DB6C9700B10D8A /* Contributing.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Contributing.xcassets; sourceTree = "<group>"; };
 		495EBAFE24D79AB80065BB8B /* PasteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PasteViewController.swift; path = ProgressGif/Importing/Paste/PasteViewController.swift; sourceTree = SOURCE_ROOT; };
 		49649F7124D4AB800048D59D /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		496DD41B24BA4927007380AF /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
@@ -256,6 +264,7 @@
 				4980302A24B95D8F00AE277C /* Importing */,
 				496F7F8724BE3B010045DDCB /* Editing */,
 				4944CAB124B912F000E893AE /* Assets.xcassets */,
+				495573BA24DB6C9700B10D8A /* Contributing.xcassets */,
 				4944CAB624B912F000E893AE /* Info.plist */,
 			);
 			path = ProgressGif;
@@ -379,6 +388,9 @@
 			children = (
 				49B236BA24CA3BA900905917 /* Licenses.swift */,
 				49BE74F524D9E49D0098121A /* ImportInfoViewController.swift */,
+				495573B424DB655F00B10D8A /* AboutViewController.swift */,
+				495573B624DB670B00B10D8A /* AboutTableCell.swift */,
+				495573B824DB672500B10D8A /* Contributors.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -520,6 +532,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4944CAB524B912F000E893AE /* LaunchScreen.storyboard in Resources */,
+				495573BB24DB6C9800B10D8A /* Contributing.xcassets in Resources */,
 				4944CAB224B912F000E893AE /* Assets.xcassets in Resources */,
 				4944CAB024B912EB00E893AE /* Main.storyboard in Resources */,
 				493E9BE924C0BA070068973B /* NumberStepper.xib in Resources */,
@@ -579,8 +592,10 @@
 				498BF59924BE3CCD00F7F2C6 /* PopAnimator.swift in Sources */,
 				4948C8E124C0F49400E5F5F6 /* EditingVC+EditingDelegates.swift in Sources */,
 				496DD41C24BA4927007380AF /* CollectionViewController.swift in Sources */,
+				495573B524DB655F00B10D8A /* AboutViewController.swift in Sources */,
 				49A7F43A24D354C300DD4DEA /* SettingsVC+EditingDelegates.swift in Sources */,
 				49B236BB24CA3BA900905917 /* Licenses.swift in Sources */,
+				495573B924DB672500B10D8A /* Contributors.swift in Sources */,
 				4980302524B946F200AE277C /* ViewController+Buttons.swift in Sources */,
 				49240FC924BFC7CA00DC9446 /* EditingVC+PlayerControls.swift in Sources */,
 				49BE74F624D9E49D0098121A /* ImportInfoViewController.swift in Sources */,
@@ -593,6 +608,7 @@
 				49A362E124BB96E800019FC6 /* PhotoPageViewController.swift in Sources */,
 				4944CAAD24B912EB00E893AE /* ViewController.swift in Sources */,
 				49F80C2D24BCF6A500C0C142 /* PlayerControlsView.swift in Sources */,
+				495573B724DB670B00B10D8A /* AboutTableCell.swift in Sources */,
 				49E75FA924C015E6004B3F41 /* EditingOptionsVC.swift in Sources */,
 				496F7F8424BD3C1E0045DDCB /* PhotoPageViewController+UpdateSliderProgress.swift in Sources */,
 				49B4CF8E24C6018500A2A22A /* Saving.swift in Sources */,
