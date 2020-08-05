@@ -2,7 +2,7 @@
   <img width="500" height="123.3" src="https://raw.githubusercontent.com/zjohnzheng/ProgressGif/main/Assets/Logos/Beta%20Logo.png?token=AL4C6P7HP63TJTRBSAFGCJK7C46UQ">
 </p>
 
-# ProgressGif is currently under development, and almost finished. Check back in a few days!
+# Almost done! Working on some touch-ups + app preview, plan to submit to the App Store on 8/6/20!
 
 
 ## Overview
