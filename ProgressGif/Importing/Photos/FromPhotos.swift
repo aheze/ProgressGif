@@ -127,11 +127,8 @@ class FromPhotosPicker: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         windowStatusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        print("window height: \(windowStatusBarHeight)")
         collectionViewController?.windowStatusBarHeight = self.windowStatusBarHeight
-        
     }
 }
 
