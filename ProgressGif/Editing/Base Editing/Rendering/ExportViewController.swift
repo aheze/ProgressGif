@@ -54,8 +54,12 @@ class ExportViewController: UIViewController {
     @IBOutlet weak var exportButton: UIButton!
     @IBAction func exportButtonPressed(_ sender: Any) {
         
-//        let shareItems = [exportedGifURL]
+        
+        imageView.stopAnimatingGif()
         let activityViewController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
+            self.imageView.startAnimatingGif()
+        }
         self.present(activityViewController, animated: true, completion: nil)
         
         /// the following was for testing (the rendered video, not yet converted to gif)
