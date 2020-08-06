@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -533,26 +533,26 @@
             <objects>
                 <viewController storyboardIdentifier="ImportInfoViewController" id="uvg-1M-wzq" customClass="ImportInfoViewController" customModule="ProgressGif" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bsq-AH-GM0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eF9-QA-8em">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vMT-hy-il4">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chK-be-D7j">
-                                            <rect key="frame" x="0.0" y="164" width="414" height="408"/>
+                                            <rect key="frame" x="24" y="244" width="366" height="408"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Importing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNh-r0-LOy">
-                                                    <rect key="frame" x="153.66666666666666" y="0.0" width="106.99999999999997" height="29"/>
+                                                    <rect key="frame" x="129.66666666666666" y="0.0" width="107" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                                     <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ida-QF-ytg">
-                                                    <rect key="frame" x="0.0" y="44.999999999999993" width="414" height="86.333333333333314"/>
+                                                    <rect key="frame" x="0.0" y="44.999999999999993" width="366" height="86.333333333333314"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="files" translatesAutoresizingMaskIntoConstraints="NO" id="r0V-YU-Wxm">
                                                             <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
@@ -562,13 +562,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Files" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOe-r2-K7a">
-                                                            <rect key="frame" x="67" y="0.0" width="347" height="25.333333333333332"/>
+                                                            <rect key="frame" x="67" y="0.0" width="299" height="25.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                                             <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import from the Files app on your phone. Videos will be copied into ProgressGif's local storage." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6OL-av-HUK">
-                                                            <rect key="frame" x="67" y="25.333333333333343" width="347" height="61"/>
+                                                            <rect key="frame" x="67" y="25.333333333333314" width="299" height="61"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -588,7 +588,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GOu-SU-8ei">
-                                                    <rect key="frame" x="0.0" y="147.33333333333331" width="414" height="106.66666666666669"/>
+                                                    <rect key="frame" x="0.0" y="147.33333333333331" width="366" height="106.66666666666669"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photos" translatesAutoresizingMaskIntoConstraints="NO" id="e5C-6P-HSS">
                                                             <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
@@ -631,7 +631,7 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whq-vF-Pwk">
-                                                            <rect key="frame" x="67" y="25.333333333333364" width="347" height="81.333333333333314"/>
+                                                            <rect key="frame" x="67" y="25.333333333333364" width="299" height="81.333333333333314"/>
                                                             <string key="text">Import from the Photos app on your phone. To save storage, only a reference is copied over, so make sure not to delete the original video.</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -651,7 +651,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OwV-nW-DA2">
-                                                    <rect key="frame" x="0.0" y="270" width="414" height="66"/>
+                                                    <rect key="frame" x="0.0" y="270" width="366" height="66"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clipboard" translatesAutoresizingMaskIntoConstraints="NO" id="XNN-zo-Brd">
                                                             <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
@@ -667,7 +667,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import via a URL. Videos will be copied into ProgressGif's local storage." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQ6-rO-w0o">
-                                                            <rect key="frame" x="67" y="25.333333333333311" width="347" height="40.666666666666657"/>
+                                                            <rect key="frame" x="67" y="25.333333333333368" width="299" height="40.666666666666657"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -686,7 +686,7 @@
                                                     </constraints>
                                                 </view>
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RR4-yf-e0Q">
-                                                    <rect key="frame" x="169.66666666666666" y="372" width="75" height="36"/>
+                                                    <rect key="frame" x="145.66666666666666" y="372" width="75" height="36"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yLc-5m-WJf">
                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="36"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -735,19 +735,19 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fk5-JR-jMn" userLabel="Left Spacer">
-                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="736"/>
+                                            <rect key="frame" x="24" y="0.0" width="0.0" height="896"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Or-r6-Ujo" userLabel="Right Spacer">
-                                            <rect key="frame" x="414" y="0.0" width="0.0" height="736"/>
+                                            <rect key="frame" x="390" y="0.0" width="0.0" height="896"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="fk5-JR-jMn" firstAttribute="leading" secondItem="vMT-hy-il4" secondAttribute="leading" id="1ec-HY-vIo"/>
+                                        <constraint firstItem="fk5-JR-jMn" firstAttribute="leading" secondItem="vMT-hy-il4" secondAttribute="leading" constant="24" id="1ec-HY-vIo"/>
                                         <constraint firstItem="chK-be-D7j" firstAttribute="leading" secondItem="fk5-JR-jMn" secondAttribute="trailing" id="Acf-6i-mWy"/>
                                         <constraint firstItem="chK-be-D7j" firstAttribute="centerY" secondItem="vMT-hy-il4" secondAttribute="centerY" id="DLs-Ij-Qak"/>
-                                        <constraint firstAttribute="trailing" secondItem="2Or-r6-Ujo" secondAttribute="trailing" id="E0V-hZ-UG3"/>
+                                        <constraint firstAttribute="trailing" secondItem="2Or-r6-Ujo" secondAttribute="trailing" constant="24" id="E0V-hZ-UG3"/>
                                         <constraint firstItem="fk5-JR-jMn" firstAttribute="top" secondItem="vMT-hy-il4" secondAttribute="top" id="KLk-en-FTA"/>
                                         <constraint firstItem="2Or-r6-Ujo" firstAttribute="leading" secondItem="chK-be-D7j" secondAttribute="trailing" id="Src-MY-Sg5"/>
                                         <constraint firstItem="2Or-r6-Ujo" firstAttribute="top" secondItem="vMT-hy-il4" secondAttribute="top" id="bks-Cy-6ce"/>
@@ -757,16 +757,16 @@
                                 </view>
                                 <blurEffect style="prominent"/>
                             </visualEffectView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SIs-WH-RAQ" userLabel="Safe Area Reference">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SIs-WH-RAQ" userLabel="Safe Area Reference">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TVk-Ul-rdT">
-                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PRz-6t-vqC">
-                                <rect key="frame" x="414" y="0.0" width="0.0" height="736"/>
+                                <rect key="frame" x="414" y="0.0" width="0.0" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -810,11 +810,11 @@
             <objects>
                 <viewController storyboardIdentifier="PasteViewController" id="IRt-Bn-D9P" customClass="PasteViewController" customModule="ProgressGif" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7OK-b9-weV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jeB-DI-HtP">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="70"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SLw-M6-3kV">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -859,7 +859,7 @@
                                 <blurEffect style="regular"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ukg-cv-Zgi">
-                                <rect key="frame" x="24" y="94" width="366" height="366"/>
+                                <rect key="frame" x="24" y="138" width="366" height="366"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JjG-cm-fmw">
                                         <rect key="frame" x="0.0" y="0.0" width="366" height="366"/>
@@ -877,7 +877,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9Q-eI-MZu">
-                                        <rect key="frame" x="153.66666666666666" y="154.66666666666666" width="59" height="57"/>
+                                        <rect key="frame" x="153.66666666666666" y="154.66666666666669" width="59" height="57"/>
                                         <color key="tintColor" cocoaTouchSystemColor="lightTextColor"/>
                                         <state key="normal" image="play.circle.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50"/>
@@ -908,7 +908,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ytD-Di-c6v">
-                                <rect key="frame" x="51" y="484" width="312" height="60"/>
+                                <rect key="frame" x="51" y="528" width="312" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qQp-a9-LfL">
                                         <rect key="frame" x="0.0" y="0.0" width="140" height="60"/>
@@ -1044,17 +1044,17 @@
             <objects>
                 <viewController storyboardIdentifier="AboutViewController" id="Ktf-uy-amk" customClass="AboutViewController" customModule="ProgressGif" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Ot-XW-8U1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j8Q-ag-NfK">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="IST-27-ojG">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ProgressGif" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhX-Ca-jN3">
-                                            <rect key="frame" x="111.33333333333333" y="64" width="191.66666666666669" height="43"/>
+                                            <rect key="frame" x="111.33333333333331" y="64" width="191.66666666666669" height="43"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
                                             <color key="textColor" red="1" green="0.61568627450980395" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1371,33 +1371,33 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ProgressGif" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pa-97-evy">
-                                <rect key="frame" x="0.0" y="90" width="414" height="539.66666666666663"/>
+                                <rect key="frame" x="0.0" y="90" width="414" height="665.66666666666663"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lgl-cL-oa2">
-                                <rect key="frame" x="0.0" y="90" width="414" height="646"/>
+                                <rect key="frame" x="0.0" y="90" width="414" height="806"/>
                                 <color key="backgroundColor" name="Yellorange"/>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lf-xK-EsQ">
-                                <rect key="frame" x="0.0" y="90" width="414" height="646"/>
+                                <rect key="frame" x="0.0" y="90" width="414" height="806"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Rcf-cQ-bln">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="646"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="806"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="regular"/>
                             </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import Video" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7g-PZ-MoI">
-                                <rect key="frame" x="144" y="465.66666666666669" width="126.33333333333331" height="27"/>
+                                <rect key="frame" x="144" y="591.66666666666663" width="126.33333333333331" height="27"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                 <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKe-UH-wl8" customClass="CustomButton" customModule="ProgressGif" customModuleProvider="target">
-                                <rect key="frame" x="63" y="571" width="75" height="75"/>
+                                <rect key="frame" x="63" y="697" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="JB1-Sp-XyP"/>
                                     <constraint firstAttribute="height" constant="75" id="bOz-rP-fLy"/>
@@ -1413,7 +1413,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O26-6f-dwq" customClass="CustomButton" customModule="ProgressGif" customModuleProvider="target">
-                                <rect key="frame" x="169.66666666666666" y="518.66666666666663" width="75" height="75"/>
+                                <rect key="frame" x="169.66666666666666" y="644.66666666666663" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="QU9-8M-Rhz"/>
                                     <constraint firstAttribute="width" constant="75" id="tgM-nX-4ZZ"/>
@@ -1429,7 +1429,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zop-BQ-yMq" customClass="CustomButton" customModule="ProgressGif" customModuleProvider="target">
-                                <rect key="frame" x="276" y="571" width="75" height="75"/>
+                                <rect key="frame" x="276" y="697" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="OE1-o2-jsY"/>
                                     <constraint firstAttribute="width" constant="75" id="lYY-b5-xWY"/>
@@ -1445,7 +1445,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exg-u3-a8z" customClass="CustomButton" customModule="ProgressGif" customModuleProvider="target">
-                                <rect key="frame" x="162" y="629.66666666666663" width="90" height="90"/>
+                                <rect key="frame" x="162" y="755.66666666666663" width="90" height="90"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="LNN-pa-op1"/>
@@ -1615,7 +1615,7 @@
                                 <blurEffect style="regular"/>
                             </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ort-xD-HbI">
-                                <rect key="frame" x="16" y="687.66666666666663" width="33" height="32.333333333333371"/>
+                                <rect key="frame" x="16" y="813.66666666666663" width="33" height="32.333333333333371"/>
                                 <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="questionmark.circle.fill" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="28" scale="medium" weight="medium"/>
@@ -1729,7 +1729,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXa-QG-iuV">
-                            <rect key="frame" x="98" y="258" width="118.33333333333331" height="26.333333333333314"/>
+                            <rect key="frame" x="98" y="302" width="118.33333333333331" height="26.333333333333314"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="26.329999999999998" id="aoQ-MI-87F"/>
                             </constraints>
@@ -1738,25 +1738,25 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ProgressGif" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKm-Bh-qBP">
-                            <rect key="frame" x="77.000000000000014" y="278.33333333333331" width="160.33333333333337" height="36"/>
+                            <rect key="frame" x="77.000000000000014" y="322.33333333333331" width="160.33333333333337" height="36"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                             <color key="textColor" red="1" green="0.61568627450980395" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="welcome" translatesAutoresizingMaskIntoConstraints="NO" id="tlf-3A-QsF">
-                            <rect key="frame" x="0.0" y="0.0" width="314" height="250"/>
+                            <rect key="frame" x="0.0" y="44" width="314" height="250"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="250" id="5wk-hN-9hf"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get started in 3 steps:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFi-L8-CTs">
-                            <rect key="frame" x="73.000000000000014" y="326.33333333333331" width="168.33333333333337" height="19.333333333333314"/>
+                            <rect key="frame" x="73.000000000000014" y="370.33333333333331" width="168.33333333333337" height="19.333333333333314"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                             <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Igw-uj-BWp">
-                            <rect key="frame" x="87.666666666666671" y="353.66666666666669" width="138.66666666666663" height="70"/>
+                            <rect key="frame" x="87.666666666666671" y="397.66666666666669" width="138.66666666666663" height="70"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Export" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ToV-y1-tAS">
                                     <rect key="frame" x="0.0" y="52" width="138.66666666666666" height="18"/>
@@ -1817,11 +1817,11 @@
             <objects>
                 <viewController storyboardIdentifier="CollectionViewController" id="oDn-7h-CeM" customClass="CollectionViewController" customModule="ProgressGif" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oag-hB-fRF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0ik-bF-9h6">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2P2-hA-xEB">
                                     <size key="itemSize" width="128" height="177"/>
@@ -1948,7 +1948,7 @@
             <objects>
                 <viewController storyboardIdentifier="FromPhotosPicker" id="TlY-9J-Zfz" customClass="FromPhotosPicker" customModule="ProgressGif" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Y3r-jg-Zld">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xq2-81-kTA">
@@ -2028,7 +2028,7 @@
                                 <blurEffect style="regular"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AFk-Yp-YTX">
-                                <rect key="frame" x="0.0" y="70" width="414" height="666"/>
+                                <rect key="frame" x="0.0" y="70" width="414" height="792"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -2062,25 +2062,25 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Permissions" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSM-LE-1Hl">
-                            <rect key="frame" x="146.66666666666666" y="258" width="121.99999999999997" height="26.333333333333314"/>
+                            <rect key="frame" x="146.66666666666666" y="302" width="121.99999999999997" height="26.333333333333314"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                             <color key="textColor" red="0.4498912903121336" green="0.84150965073529416" blue="0.22764972819088342" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Access Photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7H-PP-8wc">
-                            <rect key="frame" x="106.66666666666667" y="278.33333333333331" width="201.66666666666663" height="36"/>
+                            <rect key="frame" x="106.66666666666667" y="322.33333333333331" width="201.66666666666663" height="36"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                             <color key="textColor" red="0.15294117647058825" green="0.80000000000000004" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="photoLibraryPermissions" translatesAutoresizingMaskIntoConstraints="NO" id="M6s-6e-PPr">
-                            <rect key="frame" x="0.0" y="0.0" width="415" height="250"/>
+                            <rect key="frame" x="0.0" y="44" width="415" height="250"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="250" id="sre-uP-vPY"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To import videos, we need your permission to access the photo library! " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rla-Ci-y01">
-                            <rect key="frame" x="34.333333333333343" y="326.33333333333331" width="346.66666666666663" height="38.333333333333314"/>
+                            <rect key="frame" x="34.333333333333343" y="370.33333333333331" width="346.66666666666663" height="38.333333333333314"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="KsL-u8-i5s"/>
                             </constraints>
@@ -2089,7 +2089,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0d-9i-Hpg">
-                            <rect key="frame" x="122.66666666666669" y="376.66666666666669" width="170" height="50"/>
+                            <rect key="frame" x="122.66666666666669" y="420.66666666666669" width="170" height="50"/>
                             <color key="backgroundColor" red="0.15294117647058825" green="0.80000000000000004" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="170" id="Z2L-UH-rEk"/>
@@ -2131,11 +2131,11 @@
             <objects>
                 <viewController storyboardIdentifier="EditingViewController" id="3Bb-QV-9X3" customClass="EditingViewController" customModule="ProgressGif" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="K7e-ls-pGr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ra-lK-57d" userLabel="Base View">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TN7-vy-io7">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="105"/>
@@ -2196,7 +2196,7 @@
                                         <blurEffect style="regular"/>
                                     </visualEffectView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZN-Lq-wcl">
-                                        <rect key="frame" x="0.0" y="441.66666666666674" width="414" height="294.33333333333326"/>
+                                        <rect key="frame" x="0.0" y="537.66666666666663" width="414" height="358.33333333333337"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXy-gi-ONQ">
@@ -2235,13 +2235,13 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4SI-eu-1Qk" userLabel="Player Holder">
-                                <rect key="frame" x="16" y="110" width="382" height="214"/>
+                                <rect key="frame" x="16" y="110" width="382" height="374"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparentBackground" translatesAutoresizingMaskIntoConstraints="NO" id="mz6-Mf-sQK">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="214"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="374"/>
                                     </imageView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQ8-tY-uLS">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="214"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="374"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oC7-up-fe7" customClass="ResizableShadowView" customModule="ProgressGif" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="234" height="234"/>
@@ -2252,21 +2252,21 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tlX-b6-Ef7">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="214"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="374"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PP6-Mm-AjX" customClass="PlayerView" customModule="ProgressGif" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="214"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="374"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h4o-bs-cEF">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="214"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="374"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2cM-Mt-1yB">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="214"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="374"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rca-6i-8mN">
-                                                        <rect key="frame" x="0.0" y="199" width="382" height="15"/>
+                                                        <rect key="frame" x="0.0" y="359" width="382" height="15"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y7e-FM-qwP">
                                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="15"/>
@@ -2332,7 +2332,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cUa-BM-Lxi" customClass="PlayerControlsView" customModule="ProgressGif" customModuleProvider="target">
-                                <rect key="frame" x="16" y="336" width="382" height="100"/>
+                                <rect key="frame" x="16" y="496" width="382" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="wT8-vd-nvn"/>
@@ -2344,7 +2344,7 @@
                             <constraint firstAttribute="trailing" secondItem="6ra-lK-57d" secondAttribute="trailing" id="B8H-Lf-4b6"/>
                             <constraint firstItem="NXy-gi-ONQ" firstAttribute="centerX" secondItem="4SI-eu-1Qk" secondAttribute="centerX" id="HnG-17-SLI"/>
                             <constraint firstItem="rM1-RF-sVU" firstAttribute="trailing" secondItem="4SI-eu-1Qk" secondAttribute="trailing" constant="400" id="ST7-XZ-Ysy"/>
-                            <constraint firstAttribute="bottom" secondItem="6ra-lK-57d" secondAttribute="bottom" id="ZXg-KL-Oq6"/>
+                            <constraint firstAttribute="bottom" secondItem="6ra-lK-57d" secondAttribute="bottom" id="SrN-a9-Occ"/>
                             <constraint firstItem="rM1-RF-sVU" firstAttribute="trailing" secondItem="cUa-BM-Lxi" secondAttribute="trailing" constant="16" id="jfr-58-LtL"/>
                             <constraint firstItem="6ra-lK-57d" firstAttribute="leading" secondItem="K7e-ls-pGr" secondAttribute="leading" id="m0C-yu-m0v"/>
                             <constraint firstItem="rM1-RF-sVU" firstAttribute="trailing" secondItem="cUa-BM-Lxi" secondAttribute="trailing" constant="400" id="mpb-fB-VPE"/>
@@ -2425,42 +2425,42 @@
             <objects>
                 <viewController storyboardIdentifier="ExportViewController" id="Fvd-Dm-k27" customClass="ExportViewController" customModule="ProgressGif" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yhX-Ap-ALt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BFD-2e-sAL">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="tW6-ei-wrX">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="regular"/>
                             </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Processing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWZ-ll-5oo">
-                                <rect key="frame" x="126.66666666666667" y="24" width="160.66666666666663" height="34"/>
+                                <rect key="frame" x="126.66666666666667" y="68" width="160.66666666666663" height="34"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
                                 <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VQO-Hj-ekC">
-                                <rect key="frame" x="16" y="70" width="382" height="578"/>
+                                <rect key="frame" x="16" y="114" width="382" height="660"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WU2-Cd-Cg1">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="578"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="660"/>
                                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xkm-TP-UCm" customClass="PlayerView" customModule="ProgressGif" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="578"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="660"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wzk-Oy-TI8">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="578"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="660"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tCz-dm-vff">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="578"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="660"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8px-c7-l1g" customClass="ANSegmentIndicator" customModule="ProgressGif" customModuleProvider="target">
-                                                <rect key="frame" x="61" y="159" width="260" height="260"/>
+                                                <rect key="frame" x="61" y="200" width="260" height="260"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="260" id="1d9-3e-mRm"/>
@@ -2468,7 +2468,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYV-A0-bew">
-                                                <rect key="frame" x="0.0" y="232.66666666666666" width="382" height="112.66666666666666"/>
+                                                <rect key="frame" x="0.0" y="273.66666666666669" width="382" height="112.66666666666669"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rui-Vc-Ym3">
                                                         <rect key="frame" x="137" y="23.000000000000007" width="108" height="89.666666666666686"/>
@@ -2525,7 +2525,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3h-PP-b3i">
-                                <rect key="frame" x="16" y="660" width="382" height="60"/>
+                                <rect key="frame" x="16" y="786" width="382" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PeQ-M7-AY5">
                                         <rect key="frame" x="162.66666666666666" y="13" width="57" height="34"/>
@@ -2608,11 +2608,11 @@
             <objects>
                 <viewController storyboardIdentifier="EditingBarVC" id="5Em-q2-ZGC" customClass="EditingBarVC" customModule="ProgressGif" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3tf-s2-Qtv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2yi-eN-Za5">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sce-xy-Vds">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="297"/>
@@ -2627,7 +2627,7 @@
                                                 <rect key="frame" x="16" y="37" width="382" height="65"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2a1-ib-DAu">
-                                                        <rect key="frame" x="12.000000000000004" y="20.666666666666664" width="60.333333333333343" height="24"/>
+                                                        <rect key="frame" x="12.000000000000004" y="20.666666666666671" width="60.333333333333343" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -2691,7 +2691,7 @@
                                                 <rect key="frame" x="16" y="216" width="382" height="65"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Background" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOG-La-vmA">
-                                                        <rect key="frame" x="12" y="20.666666666666657" width="108" height="24"/>
+                                                        <rect key="frame" x="12" y="20.666666666666686" width="108" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -2776,15 +2776,15 @@
             <objects>
                 <viewController storyboardIdentifier="ColorPickerViewController" id="zPL-Ia-MNd" customClass="ColorPickerViewController" customModule="ProgressGif" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VWK-1o-UCP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qRF-na-n36" customClass="ColorPicker" customModule="ProgressGif" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46m-a0-G2R">
-                                <rect key="frame" x="374.33333333333331" y="12" width="27.666666666666686" height="25"/>
+                                <rect key="frame" x="374.33333333333331" y="56" width="27.666666666666686" height="25"/>
                                 <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="xmark" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="26" weight="medium"/>
@@ -2819,11 +2819,11 @@
             <objects>
                 <viewController storyboardIdentifier="EditingEdgesVC" id="oKD-KG-fbg" customClass="EditingEdgesVC" customModule="ProgressGif" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TNF-zB-zHA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rbf-9J-PeU">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMe-je-fKE">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="511.66666666666669"/>
@@ -2838,7 +2838,7 @@
                                                 <rect key="frame" x="16" y="37" width="382" height="65"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jK8-wr-8wq">
-                                                        <rect key="frame" x="12.000000000000004" y="20.666666666666664" width="44.333333333333343" height="24"/>
+                                                        <rect key="frame" x="12.000000000000004" y="20.666666666666671" width="44.333333333333343" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -3066,17 +3066,17 @@
             <objects>
                 <viewController storyboardIdentifier="PhotoPageViewController" automaticallyAdjustsScrollViewInsets="NO" id="OcC-f7-Hxg" customClass="PhotoPageViewController" customModule="ProgressGif" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nz0-wr-1d5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95s-vk-vcl">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <connections>
                                     <segue destination="cNN-Tu-7P6" kind="embed" id="rsZ-Rc-rJP"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iy3-NN-9yn">
-                                <rect key="frame" x="16" y="16" width="84" height="43"/>
+                                <rect key="frame" x="16" y="60" width="84" height="43"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I4K-tN-er4">
                                         <rect key="frame" x="0.0" y="0.0" width="84" height="43"/>
@@ -3114,7 +3114,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8YI-dS-ghX">
-                                <rect key="frame" x="291" y="16" width="107" height="43"/>
+                                <rect key="frame" x="291" y="60" width="107" height="43"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ve0-PO-TGC">
                                         <rect key="frame" x="0.0" y="0.0" width="107" height="43"/>
@@ -3152,7 +3152,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HVC-Z8-LIV" customClass="PlayerControlsView" customModule="ProgressGif" customModuleProvider="target">
-                                <rect key="frame" x="16" y="620" width="382" height="100"/>
+                                <rect key="frame" x="16" y="746" width="382" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="yij-FF-Tnq"/>
@@ -3206,21 +3206,21 @@
             <objects>
                 <viewController storyboardIdentifier="PhotoZoomViewController" automaticallyAdjustsScrollViewInsets="NO" id="eXn-Yc-vkA" customClass="PhotoZoomViewController" customModule="ProgressGif" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aeh-1F-73U">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="aml-gs-XzF">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Syl-By-kuZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLo-s9-6Sf" customClass="PlayerView" customModule="ProgressGif" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Si6-Yk-uMD">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
