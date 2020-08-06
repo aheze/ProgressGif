@@ -100,7 +100,9 @@ class ExportViewController: UIViewController {
         exportButton.alpha = 0
         
         if let urlAsset = renderingAsset as? AVURLAsset {
+            print("start , got asset")
             render(from: urlAsset, with: editingConfiguration) { exportedURL in
+                print("finish export")
                 guard let exportedURL = exportedURL else {
                     return
                 }

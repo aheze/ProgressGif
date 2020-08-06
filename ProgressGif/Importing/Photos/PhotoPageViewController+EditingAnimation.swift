@@ -37,7 +37,6 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
                 if let image = generatedImage {
                     self.transition.thumbnailImage = image
                 }
-                
             } else {
                 print("not over 0")
                 if let currentImage = currentViewController.image {
@@ -115,9 +114,7 @@ extension PhotoPageViewController {
                 }
             }
         } else {
-            //            return asset
             if let thumbnailImage = currentViewController.image {
-                //                return thumbnailImage
                 return thumbnailImage
             } else {
                 return nil
