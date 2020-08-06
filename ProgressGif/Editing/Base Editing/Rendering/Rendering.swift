@@ -97,7 +97,7 @@ extension ExportViewController {
     
     
     func render(from asset: AVURLAsset, with configuration: EditableEditingConfiguration, onComplete: @escaping (URL?) -> Void) {
-        
+        print("render")
         let composition = AVMutableComposition()
         
         guard
@@ -109,7 +109,7 @@ extension ExportViewController {
                 print("Something is wrong with the asset.")
                 return
         }
-        
+        print("finish guard")
         do {
             let timeRange = CMTimeRange(start: .zero, duration: asset.duration)
             try compositionTrack.insertTimeRange(timeRange, of: assetTrack, at: .zero)
@@ -121,7 +121,6 @@ extension ExportViewController {
         }
 
         compositionTrack.preferredTransform = assetTrack.preferredTransform
-//        let videoInfo = orientation(from: assetTrack.preferredTransform)
         
         let videoInfo = assetTrack.preferredTransform.getOrientation()
         
@@ -157,7 +156,6 @@ extension ExportViewController {
         /// add corner radius
         maskCorners(for: videoLayer, maskSize: adjustedVideoFrame.size, configuration: configuration)
         maskCorners(for: overlayLayer, maskSize: adjustedVideoFrame.size, configuration: configuration)
-        
         
         addProgressBar(to: overlayLayer, drawingSize: adjustedVideoFrame.size, configuration: configuration)
         addShadow(to: backgroundLayer, drawingRect: adjustedVideoFrame, configuration: configuration)
@@ -216,6 +214,7 @@ extension ExportViewController {
             self.updateProgress(to: exportSession.progress)
         }
         
+        print("start export")
         exportSession.exportAsynchronously {
             exportProgressBarTimer.invalidate()
             DispatchQueue.main.async {
