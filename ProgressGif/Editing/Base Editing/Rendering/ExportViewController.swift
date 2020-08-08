@@ -13,6 +13,8 @@ import LinkPresentation
 
 class ExportViewController: UIViewController {
     
+    var shouldPresentError = false
+    
     var renderingAsset: AVAsset!
     var editingConfiguration: EditableEditingConfiguration!
     var playerURL = URL(fileURLWithPath: "")
@@ -32,7 +34,7 @@ class ExportViewController: UIViewController {
     @IBOutlet weak var playerBackgroundTopC: NSLayoutConstraint!
     @IBOutlet weak var playerBackgroundBottomC: NSLayoutConstraint!
     
-    @IBOutlet weak var playerView: PlayerView!
+//    @IBOutlet weak var playerView: PlayerView!
     @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var progressBaseView: UIView!
@@ -80,6 +82,21 @@ class ExportViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        if shouldPresentError {
+            shouldPresentError = false
+            
+            var fileExtension = ""
+            if let urlAsset = renderingAsset as? AVURLAsset {
+                fileExtension = "(.\(urlAsset.url.pathExtension)) "
+            }
+            print("file ext: \(fileExtension)")
+            let alert = UIAlertController(title: "The file format \(fileExtension)is not supported", message: ".mp4 and .mov are recommended", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
         /// animate pulsing processing fade in/out
         UIView.animate(withDuration: 0.5, animations: {
             self.processingLabel.alpha = 0.5
@@ -108,6 +125,7 @@ class ExportViewController: UIViewController {
             render(from: urlAsset, with: editingConfiguration) { exportedURL in
                 print("finish export")
                 guard let exportedURL = exportedURL else {
+                    self.shouldPresentError = true
                     return
                 }
                 self.playerURL = exportedURL

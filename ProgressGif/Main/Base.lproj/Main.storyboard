@@ -1054,7 +1054,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ProgressGif" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhX-Ca-jN3">
-                                            <rect key="frame" x="111.33333333333331" y="64" width="191.66666666666669" height="43"/>
+                                            <rect key="frame" x="111.33333333333333" y="64" width="191.66666666666669" height="43"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
                                             <color key="textColor" red="1" green="0.61568627450980395" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1688,9 +1688,9 @@
                             <mask key="constraints">
                                 <exclude reference="HJY-qj-V1r"/>
                                 <exclude reference="INV-AP-lsp"/>
-                                <exclude reference="9vI-r5-6AP"/>
-                                <exclude reference="dDV-24-Xta"/>
                                 <exclude reference="nYI-7V-edR"/>
+                                <exclude reference="dDV-24-Xta"/>
+                                <exclude reference="9vI-r5-6AP"/>
                                 <exclude reference="2No-m3-xdo"/>
                                 <exclude reference="3fA-OH-KfL"/>
                                 <exclude reference="J3t-sV-hYE"/>
@@ -1830,7 +1830,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCellId" translatesAutoresizingMaskIntoConstraints="NO" id="JsH-b4-N1a" customClass="PhotoCell" customModule="ProgressGif" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="PhotoCellId" translatesAutoresizingMaskIntoConstraints="NO" id="JsH-b4-N1a" customClass="PhotoCell" customModule="ProgressGif" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="177"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cC7-gA-faU">
@@ -2591,7 +2591,6 @@
                         <outlet property="playerBackgroundTopC" destination="9P4-74-8i7" id="Lp6-pB-25U"/>
                         <outlet property="playerBackgroundView" destination="WU2-Cd-Cg1" id="EIn-sM-GJV"/>
                         <outlet property="playerBaseView" destination="VQO-Hj-ekC" id="0n7-zw-QsY"/>
-                        <outlet property="playerView" destination="xkm-TP-UCm" id="IiP-Xo-QvJ"/>
                         <outlet property="processingLabel" destination="UWZ-ll-5oo" id="fJ9-R7-n6J"/>
                         <outlet property="progressBaseView" destination="tCz-dm-vff" id="bux-mW-CXN"/>
                         <outlet property="progressLabel" destination="rui-Vc-Ym3" id="5Uc-IM-DSH"/>

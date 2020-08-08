@@ -533,7 +533,6 @@ extension CollectionViewController: ZoomAnimatorDelegate {
         let unconvertedFrame = getRealFrameFromCollectionViewCell(for: self.selectedIndexPath)
         
         var cellFrame = self.collectionView.convert(unconvertedFrame, to: self.view)
-        print("realmframe: \(cellFrame)")
         
         if cellFrame.minY < self.collectionView.contentInset.top {
             return CGRect(x: cellFrame.minX, y: self.collectionView.contentInset.top, width: cellFrame.width, height: cellFrame.height - (self.collectionView.contentInset.top - cellFrame.minY))
