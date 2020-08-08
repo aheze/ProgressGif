@@ -106,7 +106,7 @@ extension URL {
                     completion(uiImage)
                 }
             } catch let error {
-                print(error)
+                print("Error generating image: \(error)")
                 completion(nil)
             }
         }

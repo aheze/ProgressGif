@@ -91,7 +91,10 @@ extension ViewController: DocumentDelegate {
                             if let image = generatedImage {
                                 viewController.imageView.image = image
                             }
-                            viewController.setUpDrawing(with: viewController.editingConfiguration)
+                            DispatchQueue.main.async {
+                                viewController.setUpDrawing(with: viewController.editingConfiguration)
+                            }
+                            
                         }
                         
                         viewController.onDoneBlock = { [weak self] _ in
