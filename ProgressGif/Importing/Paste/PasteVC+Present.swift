@@ -80,7 +80,9 @@ extension PasteViewController {
                         viewController.imageView.image = thumbnailImage
                         //                            }
                         print("set")
-                        viewController.setUpDrawing(with: viewController.editingConfiguration)
+                        DispatchQueue.main.async {
+                            viewController.setUpDrawing(with: viewController.editingConfiguration)
+                        }
                         //                        }
                         
                         viewController.onDoneBlock = { [weak self] _ in

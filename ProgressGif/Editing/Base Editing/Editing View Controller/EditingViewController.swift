@@ -251,6 +251,21 @@ class EditingViewController: UIViewController {
         playerControlsView.playerControlsDelegate = self
         playerView.updateSliderProgress = self
         
+        playerView.failedPlaying = { [weak self] () in
+            var fileExtension = ""
+            if let urlAsset = self?.avAsset as? AVURLAsset {
+                fileExtension = "(.\(urlAsset.url.pathExtension)) "
+            }
+//            let fileExtension = self?.avAsset.url
+            
+            
+            let alert = UIAlertController(title: "The file format \(fileExtension)is not supported", message: ".mp4 and .mov are recommended", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                self?.dismiss(animated: true, completion: nil)
+            }))
+            self?.present(alert, animated: true, completion: nil)
+        }
+        
         setUpPagingViewControllers()
         
         if let projectMetadata = project?.metadata {

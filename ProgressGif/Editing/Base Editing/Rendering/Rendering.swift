@@ -105,8 +105,12 @@ extension ExportViewController {
                 withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid),
             let assetTrack = asset.tracks(withMediaType: .video).first
             else {
-                onComplete(nil)
                 print("Something is wrong with the asset.")
+                
+                
+                onComplete(nil)
+                
+                
                 return
         }
         print("finish guard")

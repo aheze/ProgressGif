@@ -168,7 +168,10 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                     editingView.frame.origin.y = UIScreen.main.bounds.height
                 }
         }, completion: { _ in
-            editingViewController.setUpDrawing(with: editingViewController.editingConfiguration)
+            DispatchQueue.main.async {
+                editingViewController.setUpDrawing(with: editingViewController.editingConfiguration)
+            }
+            
             transitionContext.completeTransition(true)
         })
     }

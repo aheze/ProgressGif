@@ -26,6 +26,7 @@ class PlayerView: UIView {
     
     var startValue = Float(-5)
     
+    var failedPlaying: (() -> Void)?
     weak var updateSliderProgress: UpdateSliderProgress?
     
     override class var layerClass: AnyClass {
@@ -175,14 +176,20 @@ class PlayerView: UIView {
                 
             case .failed:
                 print(".failed")
+                failedToPlay()
             case .unknown:
                 print(".unknown")
+                failedToPlay()
             @unknown default:
                 print("@unknown default")
+                failedToPlay()
             }
         }
     }
     
+    func failedToPlay() {
+        failedPlaying?()
+    }
     func startPlay(with asset: AVAsset, playerContext: PlayerContext = .none, value: Float = -5) {
         startValue = value
         self.playerContext = playerContext

@@ -53,7 +53,19 @@ extension EditingViewController {
     func calculateAspectDrawingFrame() {
 //        print("calc asp")
         if let aspectFrame = imageView.getAspectFitRect() {
-//            print("get aspect, \(aspectFrame)")
+            print("get aspect, \(aspectFrame)")
+            
+            guard
+                !aspectFrame.origin.x.isNaN,
+                !aspectFrame.origin.y.isNaN,
+                !aspectFrame.width.isNaN,
+                !aspectFrame.height.isNaN
+                else {
+                    print("has nan value!!")
+                    return
+            }
+            
+            
             imageAspectRect = aspectFrame
             
             drawingViewLeftC.constant = aspectFrame.origin.x
