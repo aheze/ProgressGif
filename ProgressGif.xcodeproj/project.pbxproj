@@ -86,7 +86,6 @@
 
 /* Begin PBXFileReference section */
 		4905C0FF24CCBAB9004C27EE /* CollectionVC+GalleryAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionVC+GalleryAnimation.swift"; sourceTree = "<group>"; };
-		491816B024BA9A9500E318FC /* ProgressGif.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProgressGif.entitlements; sourceTree = "<group>"; };
 		491816B124BA9AD800E318FC /* FromFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromFiles.swift; sourceTree = "<group>"; };
 		49240FC824BFC7CA00DC9446 /* EditingVC+PlayerControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+PlayerControls.swift"; sourceTree = "<group>"; };
 		49240FCA24BFC88400DC9446 /* EditingVC+PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+PlayerView.swift"; sourceTree = "<group>"; };
@@ -234,7 +233,6 @@
 			children = (
 				4944CAA824B912EB00E893AE /* AppDelegate.swift */,
 				4944CAAA24B912EB00E893AE /* SceneDelegate.swift */,
-				491816B024BA9A9500E318FC /* ProgressGif.entitlements */,
 				49F80C2924BCF62200C0C142 /* Video Player */,
 				4980302024B9427800AE277C /* Utilities.swift */,
 				49F8C12724C28669004686DF /* VideoUtilities.swift */,
@@ -821,7 +819,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ProgressGif/Utilities/ProgressGif.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = ProgressGif/Info.plist;
@@ -843,7 +841,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ProgressGif/Utilities/ProgressGif.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = ProgressGif/Info.plist;
