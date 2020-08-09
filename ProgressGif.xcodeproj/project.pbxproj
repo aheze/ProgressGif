@@ -495,6 +495,7 @@
 			buildConfigurationList = 4944CAB924B912F000E893AE /* Build configuration list for PBXNativeTarget "ProgressGif" */;
 			buildPhases = (
 				C6B19C79D76940A76B453560 /* [CP] Check Pods Manifest.lock */,
+				49B8DD2824DF513A00F9D164 /* ShellScript */,
 				4944CAA124B912EB00E893AE /* Sources */,
 				4944CAA224B912EB00E893AE /* Frameworks */,
 				4944CAA324B912EB00E893AE /* Resources */,
@@ -574,6 +575,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ProgressGif/Pods-ProgressGif-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		49B8DD2824DF513A00F9D164 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#!/bin/bash\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN += 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n\n";
 		};
 		C6B19C79D76940A76B453560 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -828,7 +846,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.ProgressGif;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ahzzheng.ProgressGif;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -850,7 +868,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.ProgressGif;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ahzzheng.ProgressGif;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
