@@ -15,6 +15,7 @@
 
 ### App Store Download
 Get it here: https://apps.apple.com/us/app/id1526969349
+
 ProgressGif is open-source, which means it's free!
 
 ### Features
