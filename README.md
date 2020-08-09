@@ -2,7 +2,7 @@
   <img width="500" height="123.3" src="https://raw.githubusercontent.com/zjohnzheng/ProgressGif/main/Assets/Logos/Beta%20Logo.png?token=AL4C6P7HP63TJTRBSAFGCJK7C46UQ">
 </p>
 
-# [Availible now](https://apps.apple.com/us/app/id1526969349)!
+# [Available now](https://apps.apple.com/us/app/id1526969349)!
 
 
 ## Overview
