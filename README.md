@@ -13,13 +13,13 @@
   <br>
 </p>
 
-### [App Store Download](https://apps.apple.com/us/app/id1526969349)
+### App Store Download
+Get it here: https://apps.apple.com/us/app/id1526969349
+ProgressGif is open-source, which means it's free!
 
 ### Features
-ProgressGif does one thing only.
-1. Import video
-2. Add a progress bar
-3. Export as gif
+ProgressGif does one thing only: Add progress bars to gifs.
+
 
 ### Usage
 | Step 1        | Step 2           | Step 3  |
