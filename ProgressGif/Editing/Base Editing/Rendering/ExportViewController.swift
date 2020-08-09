@@ -62,6 +62,11 @@ class ExportViewController: UIViewController {
         activityViewController.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
             self.imageView.startAnimatingGif()
         }
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceRect = exportButtonBaseView.bounds
+            popoverController.sourceView = exportButtonBaseView
+        }
+        
         self.present(activityViewController, animated: true, completion: nil)
         
         /// the following was for testing (the rendered video, not yet converted to gif)
@@ -138,7 +143,7 @@ class ExportViewController: UIViewController {
         settings.segmentBorderType = .round
         settings.segmentsCount = 2
         settings.segmentWidth = 16
-        settings.animationDuration = 0.1
+        settings.animationDuration = 0.2
         settings.segmentColor = UIColor(named: "Yellorange")!
         
         segmentIndicator.settings = settings
