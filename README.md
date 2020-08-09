@@ -13,7 +13,7 @@
   <br>
 </p>
 
-# [App Store Download](https://apps.apple.com/us/app/id1526969349)
+### [App Store Download](https://apps.apple.com/us/app/id1526969349)
 
 ### Features
 ProgressGif does one thing only.
