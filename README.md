@@ -4,13 +4,13 @@
 
 <p align="center">
   <b>Add progress bars to gifs!:</b><br>
-  <a href="https://apps.apple.com/us/app/id1526969349m">App Store</a> |
+  <b><a href="https://apps.apple.com/us/app/id1526969349m">App Store</a><b> |
   <a href="#features">Features</a> |
   <a href="#usage">Usage</a> |
   <a href="#about">About</a> |
   <a href="#uses">License</a> |
   <a href="#about">Contributing</a>
-  <br><br>
+  <br>
 </p>
 
 # [Available now](https://apps.apple.com/us/app/id1526969349)!
