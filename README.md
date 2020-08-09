@@ -14,9 +14,7 @@
 </p>
 
 ### App Store Download
-Get it here: https://apps.apple.com/us/app/id1526969349
-
-ProgressGif is open-source, which means it's free!
+Get it here: [https://apps.apple.com/us/app/id1526969349](https://apps.apple.com/us/app/id1526969349)<br>ProgressGif is open-source, which means it's free!
 
 ### Features
 ProgressGif does one thing only: Add progress bars to gifs.
