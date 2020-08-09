@@ -21,8 +21,8 @@ ProgressGif is open-source, which means it's free!
 ### Features
 ProgressGif does one thing only: Add progress bars to gifs.
 
-
 ### Usage
+
 | Step 1        | Step 2           | Step 3  |
 | :-------------: |:-------------:| :-----:|
 | Import video      | Add the bar | Export |
