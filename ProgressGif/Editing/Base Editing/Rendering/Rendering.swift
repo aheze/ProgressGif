@@ -121,25 +121,18 @@ extension ExportViewController {
 
         compositionTrack.preferredTransform = assetTrack.preferredTransform
         
-//        let videoInfo = assetTrack.preferredTransform.getOrientation()
         let videoInfo = orientation(from: assetTrack.preferredTransform)
         
         
-        var videoIsPortrait = false
         let videoSize: CGSize
         if videoInfo.isPortrait {
             videoSize = CGSize(
                 width: assetTrack.naturalSize.height,
                 height: assetTrack.naturalSize.width)
-            print("IS PORTRAIT")
-            videoIsPortrait = true
         } else {
-            print("NOT PORTRAIT")
-            videoIsPortrait = false
             videoSize = assetTrack.naturalSize
         }
         
-        print("videoInfo: \(videoInfo.orientation)")
         /// the clear background + shadow
         let backgroundLayer = CALayer()
         backgroundLayer.frame = CGRect(origin: .zero, size: videoSize)
@@ -180,8 +173,6 @@ extension ExportViewController {
             postProcessingAsVideoLayer: videoLayer,
             in: outputLayer)
         
-        
-        
         let instruction = AVMutableVideoCompositionInstruction()
         instruction.timeRange = CMTimeRange(
             start: .zero,
@@ -189,7 +180,7 @@ extension ExportViewController {
         videoComposition.instructions = [instruction]
         let layerInstruction = compositionLayerInstruction(
             for: compositionTrack,
-            assetTrack: assetTrack, isPortrait: videoIsPortrait, orientation: videoInfo.orientation)
+            assetTrack: assetTrack, orientation: videoInfo.orientation)
         instruction.layerInstructions = [layerInstruction]
 
         export = AVAssetExportSession(
@@ -242,55 +233,18 @@ extension ExportViewController {
     private func compositionLayerInstruction(for track: AVCompositionTrack, assetTrack: AVAssetTrack, isPortrait: Bool, orientation: UIImage.Orientation) -> AVMutableVideoCompositionLayerInstruction {
         let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
         
-//        var transform = assetTrack.preferredTransform
-        
         var transform = CGAffineTransform.identity
-        
         let assetSize = assetTrack.naturalSize
-        print("ASSET SIZE: \(assetSize)")
-        print("Natural isPortrait: \(assetSize.height >= assetSize.width), transformed isPortrait: \(isPortrait)")
-//        if isPortrait {
-//            transform.tx = assetTrack.naturalSize.height
-////            transform = transform.translatedBy(x: assetTrack.naturalSize.height, y: 0)
-//        } else {
-////            transform.ty = assetTrack.naturalSize.width
-//        }
-        
         
         switch orientation {
-        
         case .up:
-            print("up orient")
-            
-//                .scaledBy(x: 1, y: -1)
             transform = CGAffineTransform(a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0)
-            
         case .down:
-            print("down orient")
-//            transform.t
-//            transform.tx = assetTrack.naturalSize.width
-//            transform = CGAffineTransform(rotationAngle: .pi).
-            
-            
             transform = CGAffineTransform(a: -1, b: 0, c: 0, d: -1, tx: assetSize.width, ty: assetSize.height)
-//                .scaledBy(x: 1, y: -1)
-            
         case .left:
-            print("left orient")
-//            transform.ty = assetTrack.naturalSize.width
-            
-//            transform = CGAffineTransformMake(-1, 0, 0, -1, assetTrack.naturalSize.width, assetTrack.naturalSize.height);
             transform = CGAffineTransform(a: 0, b: -1, c: 1, d: 0, tx: 0, ty: assetSize.width)
-//                .scaledBy(x: 1, y: -1)
         case .right:
-            print("right orient")
-//            transform.tx = assetTrack.naturalSize.height
-            
             transform = CGAffineTransform(a: 0, b: 1, c: -1, d: 0, tx: assetSize.height, ty: 0)
-            
-            
-            
-//                .scaledBy(x: 1, y: -1)
          default:
             print("DEFAULT ERROR")
         }
