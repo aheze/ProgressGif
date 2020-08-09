@@ -2,6 +2,14 @@
   <img width="600" height="138.4133611691" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png">
 </p>
 
+<p align="center">
+  <b>Add progress bars to gifs!:</b><br>
+  <a href="https://apps.apple.com/us/app/id1526969349m">App Store</a> |
+  <a href="#overview">Features</a> |
+  <a href="#">Link 3</a>
+  <br><br>
+</p>
+
 # [Available now](https://apps.apple.com/us/app/id1526969349)!
 
 
