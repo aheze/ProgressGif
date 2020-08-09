@@ -30,6 +30,8 @@ ProgressGif does one thing only: Add progress bars to gifs.
 
 
 ### About
+**For the writers and bloggers out there:**
+
 Tutorials with only words are boring, so we add images. And if they need to be more detailed, we add video... but video isn't always the best choice.
 - Readers may not want to turn on audio.
 - If they're on their phone, the video will open in a full-screen modal. That disrupts the reading experience.
@@ -37,7 +39,7 @@ Tutorials with only words are boring, so we add images. And if they need to be m
 
 That's why we use gifs instead! (Yes, gifs are memory-inefficient, but they're really convenient... and ProgressGif has options for framerate.)
 
-ProgressGif is an iOS app made with Swift 5 and UIKit. SwiftUI would be fine for building the UI, but because there's a lot of under-the-hood work with video rendering, I thought it would be better to just go with UIKit.
+ProgressGif is an iOS app made with Swift 5 and UIKit, inspired by this [article](https://www.excelcampus.com/tips-shortcuts/add-progress-bar-to-gif/). SwiftUI would have be fine for building the UI, but because there's a lot of under-the-hood work with video rendering, I thought it would be better to just go with UIKit.
 
 ### License
 ```
