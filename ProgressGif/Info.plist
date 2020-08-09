@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPrincipalClass</key>
-	<string></string>
-	<key>NSDocumentsFolderUsageDescription</key>
-	<string>Access the Files app to import video!</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Access your photo library to import video!</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -23,9 +17,15 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>32</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>Access the Files app to import video!</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access your photo library to import video!</string>
+	<key>NSPrincipalClass</key>
+	<string></string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
