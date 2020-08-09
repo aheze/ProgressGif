@@ -24,7 +24,7 @@ class AboutViewController: UIViewController {
     @IBOutlet weak var rateAppBlurView: UIVisualEffectView!
     @IBOutlet weak var rateAppButton: UIButton!
     @IBAction func rateAppPressed(_ sender: Any) {
-        if let productURL = URL(string: "https://apps.apple.com/app/id1506500202") {
+        if let productURL = URL(string: "https://apps.apple.com/app/id1526969349") {
             var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
             
             // 2.
