@@ -1,6 +1,7 @@
 ---
-Support
+title: Support
 ---
+
 
 # Need help? 
 Chat with me on [Reddit](https://www.reddit.com/u/aheze), or file an [issue](https://github.com/aheze/ProgressGif/issues) here!
