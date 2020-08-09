@@ -133,7 +133,7 @@ class ViewController: UIViewController {
             shouldGoToSettings = true
             grantPhotoAccessButton.setTitle("Go to Settings", for: .normal)
         default:
-            print("default warning open")
+            print("default warning open, TEST")
         }
         
         let topInset = visualEffectView.frame.height + 40
