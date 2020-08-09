@@ -230,7 +230,7 @@ extension ExportViewController {
         }
     }
     
-    private func compositionLayerInstruction(for track: AVCompositionTrack, assetTrack: AVAssetTrack, isPortrait: Bool, orientation: UIImage.Orientation) -> AVMutableVideoCompositionLayerInstruction {
+    private func compositionLayerInstruction(for track: AVCompositionTrack, assetTrack: AVAssetTrack, orientation: UIImage.Orientation) -> AVMutableVideoCompositionLayerInstruction {
         let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
         
         var transform = CGAffineTransform.identity
