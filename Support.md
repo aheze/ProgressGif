@@ -4,7 +4,7 @@ title: Support
 
 
 # Need help? 
-Chat with me on [Reddit](https://www.reddit.com/u/aheze), or file an [issue](https://github.com/aheze/ProgressGif/issues) here!
+Chat with me on [reddit](https://www.reddit.com/u/aheze), or file an [issue](https://github.com/aheze/ProgressGif/issues) here!
 
 # Found an issue? 
 File an [issue](https://github.com/aheze/ProgressGif/issues) here
