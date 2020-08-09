@@ -3,35 +3,38 @@
 </p>
 
 <p align="center">
-  <b>Add progress bars to gifs!:</b><br>
-  <a href="https://apps.apple.com/us/app/id1526969349m"><b>App Store</b></a> |
+  <b>Add progress bars to gifs!:/b><br>
+  <a href="https://apps.apple.com/us/app/id1526969349m"><b>App Store Download</b></a> |
   <a href="#features">Features</a> |
   <a href="#usage">Usage</a> |
   <a href="#about">About</a> |
-  <a href="#uses">License</a> |
-  <a href="#about">Contributing</a>
+  <a href="#icense">License</a> |
+  <a href="#contributing">Contributing</a>
   <br>
 </p>
 
-# [Available now](https://apps.apple.com/us/app/id1526969349)!
+# [App Store Download](https://apps.apple.com/us/app/id1526969349)
 
-
-## Overview
 ### Features
 ProgressGif does one thing only.
 1. Import video
 2. Add a progress bar
 3. Export as gif
 
-### Uses
+### Usage
+| Step 1        | Step 2           | Step 3  |
+| :-------------: |:-------------:| :-----:|
+| Import video      | Add the bar | Export |
+
+
+### About
 Tutorials with only words are boring, so we add images. And if they need to be more detailed, we add video... but video isn't always the best choice.
 - Readers may not want to turn on audio.
 - If they're on their phone, the video will open in a full-screen modal. That disrupts the reading experience.
 - Some blogging sites don't allow video embeds
 
-That's why we use gifs instead! (Yes, gifs are memory-inefficient, but they're really convenient... and I'll be adding options to change framerate / scale soon.)
+That's why we use gifs instead! (Yes, gifs are memory-inefficient, but they're really convenient... and ProgressGif has options for framerate.)
 
-### About
 ProgressGif is an iOS app made with Swift 5 and UIKit. SwiftUI would be fine for building the UI, but because there's a lot of under-the-hood work with video rendering, I thought it would be better to just go with UIKit.
 
 ### License
