@@ -26,6 +26,7 @@ ProgressGif does one thing only: Add progress bars to gifs.
 | Step 1        | Step 2           | Step 3  |
 | :-------------: |:-------------:| :-----:|
 | Import video      | Add the bar | Export |
+| ![Step1] | ![Step2] |![Step3] |
 
 
 ### About
@@ -64,3 +65,7 @@ SOFTWARE.
 ```
 ### Contributing
 Contributions are welcome!
+
+[step1]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Usage/Step1.gif
+[step2]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Usage/Step2.gif
+[step3]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Usage/Step3.gif
