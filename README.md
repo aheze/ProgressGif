@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="500" height="123.3" src="https://raw.githubusercontent.com/zjohnzheng/ProgressGif/main/Assets/Logos/Beta%20Logo.png?token=AL4C6P7HP63TJTRBSAFGCJK7C46UQ">
+  <img width="600" height="138.4133611691" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png">
 </p>
 
 # [Available now](https://apps.apple.com/us/app/id1526969349)!
