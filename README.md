@@ -23,6 +23,8 @@ ProgressGif does one thing only: Add progress bars to gifs.
 | :-------------: |:-------------:| :-----:| :-----:| :-----:| :-----:|
 | ![Example1] | ![Example2] | ![Example3] | ![Example4] | ![Example5] | ![Example6] |
 
+Yeah, that's it. ProgressGif serves one purpose, and one purpose only... but in a highly customizable way! Customize height, bar color, bar background color, edge inset, corner radius… and shadows are in beta!
+
 ### Usage
 
 | Step 1        | Step 2           | Step 3  |
