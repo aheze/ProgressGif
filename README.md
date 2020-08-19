@@ -72,6 +72,10 @@ SOFTWARE.
 ```
 ### Contributing
 Contributions are welcome!
+Stuff that I need help with:
+- {x] Horizontal layout
+- [ ] Allow picking colors with transparency
+- [ ] Export as MOV instead of gif only
 
 [example1]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Examples/13A3607F-1BE9-4CB4-9642-3155EB44D1BE.gif
 [example2]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Examples/4EFA4E62-E533-4244-A469-27B771878CCF.gif
