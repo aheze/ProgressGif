@@ -314,8 +314,19 @@ class ViewController: UIViewController {
         _ = collectionViewController
         
         documentPicker = DocumentPicker(presentationController: self, delegate: self)
-        
+    
     }
+    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        func didPickDocument(document: Document?) {
+//            if let pickedDoc = document {
+//                let fileURL = pickedDoc.fileURL
+//                saveDocument(temporaryDocumentURL: fileURL)
+//            }
+//        }
+//        documentPicker = DocumentPicker(presentationController: self, delegate: self)
+//    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -327,6 +338,24 @@ class ViewController: UIViewController {
 
 
 }
+
+//class ViewControllers: UIViewController, DocumentDelegate {
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        
+//        /// set up the document picker
+//        documentPicker = DocumentPicker(presentationController: self, delegate: self)
+//    }
+//    
+//    /// callback from the document picker
+//    func didPickDocument(document: Document?) {
+//        if let pickedDoc = document {
+//            let fileURL = pickedDoc.fileURL
+//            
+//            /// do what you want with the file URL
+//        }
+//    }
+//}
 
 
 
