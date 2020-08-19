@@ -72,9 +72,10 @@ SOFTWARE.
 ```
 ### Contributing
 Contributions are welcome!
-Stuff that I need help with:
+Help wanted:
 - [x] Horizontal layout
 - [ ] Allow picking colors with transparency
+- [ ] Allow picking opaque color for background (so that shadows show up)
 - [ ] Export as MOV instead of gif only
 
 [example1]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Examples/13A3607F-1BE9-4CB4-9642-3155EB44D1BE.gif
