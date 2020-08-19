@@ -21,7 +21,9 @@ extension PhotoPageViewController: PlayerControlsDelegate {
             
             if let currentTimescale = currentViewController.playerView.player?.currentItem?.duration.timescale {
                 let newCMTime = CMTimeMakeWithSeconds(back5seconds, preferredTimescale: currentTimescale)
-                currentViewController.playerView.player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
+                
+                currentViewController.playerView.seekToTime(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30), completionHandler: { _ in })
+//                currentViewController.playerView.player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
                 
                 if currentViewController.playerView.playingState == .paused {
                     let backSliderValue = Float(back5seconds / currentViewController.asset.duration)
@@ -48,7 +50,9 @@ extension PhotoPageViewController: PlayerControlsDelegate {
                 
                 if let currentTimescale = currentViewController.playerView.player?.currentItem?.duration.timescale {
                     let newCMTime = CMTimeMakeWithSeconds(forward5seconds, preferredTimescale: currentTimescale)
-                    currentViewController.playerView.player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
+//                    currentViewController.playerView.player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
+                    
+                    currentViewController.playerView.seekToTime(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30), completionHandler: { _ in })
                     
                     if currentViewController.playerView.playingState == .paused {
                         let forwardSliderValue = Float(forward5seconds / currentViewController.asset.duration)
@@ -73,7 +77,8 @@ extension PhotoPageViewController: PlayerControlsDelegate {
             if let currentTimescale = currentViewController.playerView.player?.currentItem?.duration.timescale {
                 let timeStamp = value * Float(currentViewController.asset.duration)
                 let time = CMTimeMakeWithSeconds(Float64(timeStamp), preferredTimescale: currentTimescale)
-                currentViewController.playerView.player?.seek(to: time, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
+//                currentViewController.playerView.player?.seek(to: time, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
+                currentViewController.playerView.seekToTime(to: time, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30), completionHandler: { _ in })
             }
         case .ended:
             /// slider went to end
