@@ -73,7 +73,7 @@ SOFTWARE.
 ### Contributing
 Contributions are welcome!
 Stuff that I need help with:
-- {x] Horizontal layout
+- [x] Horizontal layout
 - [ ] Allow picking colors with transparency
 - [ ] Export as MOV instead of gif only
 
