@@ -41,6 +41,7 @@ class PlayerView: UIView {
     var playerContext = PlayerContext.none
     var playingState = PlayingState.paused
     var hasFinishedVideo = false
+    var readyToPlay = false
     
     private var avAsset: AVAsset?
     var avURLAsset: AVURLAsset?
@@ -95,6 +96,9 @@ class PlayerView: UIView {
             switch status {
             case .readyToPlay:
                 
+                readyToPlay = true
+                print("ready now!")
+                
                 switch playerContext {
                 case .none:
                     playingState = .playing
@@ -110,7 +114,7 @@ class PlayerView: UIView {
                             
                             if let currentTimescale = player?.currentItem?.duration.timescale {
                                 let newCMTime = CMTimeMakeWithSeconds(finalSeconds, preferredTimescale: currentTimescale)
-                                player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
+                                seekToTime(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30), completionHandler: { _ in })
                                 
                                 if playingState == .paused {
                                     let forwardSliderValue = Float(finalSeconds / CMTimeGetSeconds(videoDuration))
@@ -166,7 +170,7 @@ class PlayerView: UIView {
                                 print("end")
                             } else {
                                 print("seek, start value: \(startValue), CMTIme: \(newCMTime)")
-                                player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
+                                seekToTime(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30), completionHandler: { _ in })
                                 self.playingState = .playing
                                 self.player?.play()
                             }
@@ -184,6 +188,13 @@ class PlayerView: UIView {
                 print("@unknown default")
                 failedToPlay()
             }
+        }
+    }
+    
+    func seekToTime(to: CMTime, toleranceBefore: CMTime, toleranceAfter: CMTime, completionHandler: @escaping ((Bool) -> Void)) {
+        if readyToPlay {
+            print("ready!")
+            player?.seek(to: to, toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter, completionHandler: completionHandler)
         }
     }
     
@@ -211,7 +222,7 @@ class PlayerView: UIView {
         
         if hasFinishedVideo {
             hasFinishedVideo = false
-            player?.seek(to: CMTime.zero, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30)) { [weak self](state) in
+            seekToTime(to: CMTime.zero, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30)) { [weak self](state) in
                 self?.player?.play()
             }
         } else {
