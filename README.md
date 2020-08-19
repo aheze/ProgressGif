@@ -71,7 +71,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 ### Contributing
-Contributions are welcome!
+Contributions are welcome!<br>
 Help wanted:
 - [x] Horizontal layout
 - [ ] Allow picking colors with transparency
