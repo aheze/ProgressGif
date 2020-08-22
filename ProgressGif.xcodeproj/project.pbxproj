@@ -76,6 +76,7 @@
 		49E41ECC24B967E900EA7BB2 /* ViewController+AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */; };
 		49E75FA724C015DC004B3F41 /* EditingEdgesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */; };
 		49E75FA924C015E6004B3F41 /* EditingOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */; };
+		49ED713524F0A1D900AF9F86 /* BackwardsCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED713424F0A1D900AF9F86 /* BackwardsCompatibility.swift */; };
 		49F80C2D24BCF6A500C0C142 /* PlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F80C2C24BCF6A500C0C142 /* PlayerControlsView.swift */; };
 		49F80C2F24BCF6E800C0C142 /* PlayerControlsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F80C2E24BCF6E800C0C142 /* PlayerControlsView.xib */; };
 		49F80C3124BD1C2B00C0C142 /* PlayerUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F80C3024BD1C2B00C0C142 /* PlayerUtilities.swift */; };
@@ -156,6 +157,7 @@
 		49E41ECB24B967E900EA7BB2 /* ViewController+AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AddButton.swift"; sourceTree = "<group>"; };
 		49E75FA624C015DC004B3F41 /* EditingEdgesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingEdgesVC.swift; sourceTree = "<group>"; };
 		49E75FA824C015E6004B3F41 /* EditingOptionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingOptionsVC.swift; sourceTree = "<group>"; };
+		49ED713424F0A1D900AF9F86 /* BackwardsCompatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackwardsCompatibility.swift; sourceTree = "<group>"; };
 		49F80C2C24BCF6A500C0C142 /* PlayerControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlsView.swift; sourceTree = "<group>"; };
 		49F80C2E24BCF6E800C0C142 /* PlayerControlsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerControlsView.xib; sourceTree = "<group>"; };
 		49F80C3024BD1C2B00C0C142 /* PlayerUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerUtilities.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				49F80C2924BCF62200C0C142 /* Video Player */,
 				4980302024B9427800AE277C /* Utilities.swift */,
 				49F8C12724C28669004686DF /* VideoUtilities.swift */,
+				49ED713424F0A1D900AF9F86 /* BackwardsCompatibility.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				49B236B824CA1E0700905917 /* RenderingProgress.swift in Sources */,
 				498BF59B24BE3D3600F7F2C6 /* PhotoPageViewController+EditingAnimation.swift in Sources */,
 				4980301D24B91DE000AE277C /* Model.swift in Sources */,
+				49ED713524F0A1D900AF9F86 /* BackwardsCompatibility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -841,7 +845,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = ProgressGif/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -864,7 +868,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = ProgressGif/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

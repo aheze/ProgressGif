@@ -183,9 +183,16 @@ extension ExportViewController {
             assetTrack: assetTrack, orientation: videoInfo.orientation)
         instruction.layerInstructions = [layerInstruction]
 
-        export = AVAssetExportSession(
+        if #available(iOS 13.0, *) {
+            export = AVAssetExportSession(
+                asset: composition,
+                presetName: AVAssetExportPresetHEVCHighestQualityWithAlpha)
+        } else {
+            export = AVAssetExportSession(
             asset: composition,
-            presetName: AVAssetExportPresetHEVCHighestQualityWithAlpha)
+            presetName: AVAssetExportPresetHighestQuality)
+            // Fallback on earlier versions
+        }
        
         guard let exportSession = export
             else {

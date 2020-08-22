@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_5" orientation="landscape" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -607,7 +608,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ky9-2G-cJK">
-                                                                    <rect key="frame" x="70" y="3.3333333333333321" width="25" height="18.666666666666664"/>
+                                                                    <rect key="frame" x="70" y="3.666666666666675" width="25" height="18.666666666666664"/>
                                                                     <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="21" scale="medium" weight="medium"/>
                                                                 </imageView>
@@ -1273,9 +1274,21 @@
                                                 <constraint firstAttribute="trailing" secondItem="k7p-JQ-81P" secondAttribute="trailing" id="qoc-jG-lyL"/>
                                             </constraints>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cn5-6a-1aW" userLabel="xButton">
+                                            <rect key="frame" x="808.33333333333337" y="16" width="27.666666666666629" height="25.666666666666671"/>
+                                            <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <state key="normal" image="xmark" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="large" weight="medium"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="headerCloseButtonPressed:" destination="O04-hX-fom" eventType="touchUpInside" id="is7-9z-1wc"/>
+                                                <action selector="xPressed:" destination="Ktf-uy-amk" eventType="touchUpInside" id="v22-tZ-pMf"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="sZG-oH-MfW" secondAttribute="trailing" constant="24" id="0KO-an-rKq"/>
+                                        <constraint firstItem="t9m-Rx-oXX" firstAttribute="trailing" secondItem="cn5-6a-1aW" secondAttribute="trailing" constant="16" id="0rJ-ZG-T01"/>
                                         <constraint firstAttribute="trailing" secondItem="70O-Zl-kt9" secondAttribute="trailing" constant="36" id="1D2-fn-KGY"/>
                                         <constraint firstAttribute="trailing" secondItem="5Dm-HO-r0e" secondAttribute="trailing" constant="36" id="2hJ-nw-9U2"/>
                                         <constraint firstItem="5Dm-HO-r0e" firstAttribute="leading" secondItem="IST-27-ojG" secondAttribute="leading" constant="36" id="5EH-Wm-ta6"/>
@@ -1289,6 +1302,7 @@
                                         <constraint firstItem="bVu-xh-cko" firstAttribute="leading" secondItem="IST-27-ojG" secondAttribute="leading" constant="36" id="chU-JC-JMc"/>
                                         <constraint firstItem="WzW-wA-Dcn" firstAttribute="leading" secondItem="IST-27-ojG" secondAttribute="leading" constant="24" id="lLl-07-RFX"/>
                                         <constraint firstItem="WzW-wA-Dcn" firstAttribute="top" secondItem="70O-Zl-kt9" secondAttribute="bottom" constant="12" id="mpN-lk-l5p"/>
+                                        <constraint firstItem="cn5-6a-1aW" firstAttribute="top" secondItem="t9m-Rx-oXX" secondAttribute="top" constant="16" id="ndx-Fq-0lc"/>
                                         <constraint firstItem="LiX-jK-osz" firstAttribute="top" secondItem="sZG-oH-MfW" secondAttribute="bottom" constant="14" id="qPA-K2-vTe"/>
                                         <constraint firstItem="70O-Zl-kt9" firstAttribute="leading" secondItem="IST-27-ojG" secondAttribute="leading" constant="36" id="rdk-qt-OAr"/>
                                         <constraint firstItem="jhX-Ca-jN3" firstAttribute="top" secondItem="IST-27-ojG" secondAttribute="top" constant="64" id="szK-oy-B1P"/>
@@ -1296,6 +1310,7 @@
                                         <constraint firstItem="jhX-Ca-jN3" firstAttribute="centerX" secondItem="IST-27-ojG" secondAttribute="centerX" id="xxr-N9-wEp"/>
                                         <constraint firstItem="sZG-oH-MfW" firstAttribute="top" secondItem="bVu-xh-cko" secondAttribute="bottom" constant="14" id="zJf-ja-1Gj"/>
                                     </constraints>
+                                    <viewLayoutGuide key="safeArea" id="t9m-Rx-oXX"/>
                                 </view>
                                 <blurEffect style="prominent"/>
                             </visualEffectView>
@@ -1649,9 +1664,9 @@
                             <mask key="constraints">
                                 <exclude reference="HJY-qj-V1r"/>
                                 <exclude reference="INV-AP-lsp"/>
-                                <exclude reference="nYI-7V-edR"/>
-                                <exclude reference="dDV-24-Xta"/>
                                 <exclude reference="9vI-r5-6AP"/>
+                                <exclude reference="dDV-24-Xta"/>
+                                <exclude reference="nYI-7V-edR"/>
                                 <exclude reference="2No-m3-xdo"/>
                                 <exclude reference="3fA-OH-KfL"/>
                                 <exclude reference="J3t-sV-hYE"/>
@@ -1791,7 +1806,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCellId" translatesAutoresizingMaskIntoConstraints="NO" id="JsH-b4-N1a" customClass="PhotoCell" customModule="ProgressGif" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="PhotoCellId" translatesAutoresizingMaskIntoConstraints="NO" id="JsH-b4-N1a" customClass="PhotoCell" customModule="ProgressGif" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="177"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cC7-gA-faU">
@@ -2399,6 +2414,18 @@
                                 </view>
                                 <blurEffect style="regular"/>
                             </visualEffectView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6b-MF-HFC" userLabel="xButton">
+                                <rect key="frame" x="808.33333333333337" y="16" width="27.666666666666629" height="25.666666666666671"/>
+                                <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="xmark" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="large" weight="medium"/>
+                                </state>
+                                <connections>
+                                    <action selector="headerCloseButtonPressed:" destination="O04-hX-fom" eventType="touchUpInside" id="u7c-3T-aWk"/>
+                                    <action selector="xPressed:" destination="Ktf-uy-amk" eventType="touchUpInside" id="0hY-gd-BQa"/>
+                                    <action selector="xPressed:" destination="Fvd-Dm-k27" eventType="touchUpInside" id="Mtt-HW-L3W"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Processing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWZ-ll-5oo">
                                 <rect key="frame" x="367.66666666666669" y="24" width="160.66666666666669" height="34"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
@@ -2526,6 +2553,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ChU-gq-zKr" firstAttribute="trailing" secondItem="W6b-MF-HFC" secondAttribute="trailing" constant="16" id="3NT-pq-cWW"/>
                             <constraint firstItem="ChU-gq-zKr" firstAttribute="trailing" secondItem="VQO-Hj-ekC" secondAttribute="trailing" constant="16" id="6iP-DV-C4I"/>
                             <constraint firstAttribute="trailing" secondItem="BFD-2e-sAL" secondAttribute="trailing" id="D2D-iQ-4Eq"/>
                             <constraint firstItem="VQO-Hj-ekC" firstAttribute="leading" secondItem="ChU-gq-zKr" secondAttribute="leading" constant="16" id="DY0-8R-jv3"/>
@@ -2539,6 +2567,7 @@
                             <constraint firstItem="u3h-PP-b3i" firstAttribute="top" secondItem="VQO-Hj-ekC" secondAttribute="bottom" constant="12" id="hWT-Ap-KdR"/>
                             <constraint firstItem="UWZ-ll-5oo" firstAttribute="top" secondItem="ChU-gq-zKr" secondAttribute="top" constant="24" id="hgO-yO-l12"/>
                             <constraint firstItem="u3h-PP-b3i" firstAttribute="leading" secondItem="ChU-gq-zKr" secondAttribute="leading" constant="16" id="vza-r2-Gqr"/>
+                            <constraint firstItem="W6b-MF-HFC" firstAttribute="top" secondItem="ChU-gq-zKr" secondAttribute="top" constant="16" id="ypk-uQ-b5x"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ChU-gq-zKr"/>
                     </view>

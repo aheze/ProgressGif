@@ -13,12 +13,20 @@ import LinkPresentation
 
 class ExportViewController: UIViewController {
     
+    @IBAction func xPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     var shouldPresentError = false
     
     var renderingAsset: AVAsset!
     var editingConfiguration: EditableEditingConfiguration!
     var playerURL = URL(fileURLWithPath: "")
     var exportedGifURL = URL(fileURLWithPath: "")
+    
+//    var isModalInPresentation: Bool
+        
+    
     
     /// for framerate
     let defaults = UserDefaults.standard
@@ -115,6 +123,8 @@ class ExportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        lightenView(view: view)
+        
         imageView.alpha = 0
         
         processingLabel.alpha = 0
@@ -139,7 +149,7 @@ class ExportViewController: UIViewController {
         }
         
         var settings = ANSegmentIndicatorSettings()
-        settings.defaultSegmentColor = UIColor.tertiarySystemBackground
+        settings.defaultSegmentColor = ColorCompatibility.tertiarySystemBackground
         settings.segmentBorderType = .round
         settings.segmentsCount = 2
         settings.segmentWidth = 16
@@ -250,6 +260,7 @@ extension ExportViewController: UIActivityItemSource {
         return exportedGifURL
     }
 
+    @available(iOS 13.0, *)
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         let metadata = LPLinkMetadata()
 

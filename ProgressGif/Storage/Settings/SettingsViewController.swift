@@ -96,6 +96,8 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        lightenView(view: view)
+        
         let topInset = headerBlurView.frame.height
         scrollView.contentInset.top = topInset
         scrollView.verticalScrollIndicatorInsets.top = topInset
