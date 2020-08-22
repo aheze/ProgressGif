@@ -9,6 +9,10 @@ import UIKit
 
 class AboutViewController: UIViewController {
     
+    @IBAction func xPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBOutlet weak var tableView: SelfSizedTableView!
     
     @IBOutlet weak var reportIssueBlurView: UIVisualEffectView!
@@ -61,6 +65,8 @@ class AboutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        lightenView(view: view)
         
         populateContributors()
         

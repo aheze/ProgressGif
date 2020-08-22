@@ -46,17 +46,32 @@ class PlayerControlsView: UIView {
     @IBAction func playPressed(_ sender: Any) {
         if playingState == .playing {
             playingState = .paused
-            playButton.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
+            if #available(iOS 13.0, *) {
+                playButton.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
+            } else {
+                playButton.setImage(UIImage(named: "arrowtriangle.right.fill"), for: .normal)
+                // Fallback on earlier versions
+            }
         } else {
             playingState = .playing
-            playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            if #available(iOS 13.0, *) {
+                playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            } else {
+                playButton.setImage(UIImage(named: "pause.fill"), for: .normal)
+                // Fallback on earlier versions
+            }
         }
         
         playerControlsDelegate?.changedPlay(playingState: playingState)
     }
     func stop() {
         playingState = .paused
-        playButton.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
+        if #available(iOS 13.0, *) {
+            playButton.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
+        } else {
+            playButton.setImage(UIImage(named: "arrowtriangle.right.fill"), for: .normal)
+            // Fallback on earlier versions
+        }
     }
     
     func backToBeginning() {

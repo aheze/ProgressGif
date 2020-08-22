@@ -40,7 +40,7 @@ open class DocumentPicker: NSObject {
     }
 
     public func displayPicker() {
-        self.pickerController = UIDocumentPickerViewController(documentTypes: [kUTTypeMovie as String, kUTTypeImage as String], in: .import)
+        self.pickerController = UIDocumentPickerViewController(documentTypes: [kUTTypeMovie as String], in: .import)
         self.pickerController!.delegate = self
         self.presentationController?.present(self.pickerController!, animated: true)
     }

@@ -52,7 +52,15 @@ class EditingViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !dismissing {
-            statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+            
+            if #available(iOS 13.0, *) {
+                statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+            } else {
+                statusHeight = UIApplication.shared.statusBarFrame.height
+                // Fallback on earlier versions
+            }
+            
+            
             topBarTopC.constant = statusHeight
             view.layoutIfNeeded()
             updateFrames(statusHeight: statusHeight)
@@ -67,7 +75,13 @@ class EditingViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         print("Change trait!!!")
-        statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+//        statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        if #available(iOS 13.0, *) {
+            statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        } else {
+            statusHeight = UIApplication.shared.statusBarFrame.height
+            // Fallback on earlier versions
+        }
         topBarTopC.constant = statusHeight
         view.layoutIfNeeded()
         print("Change trait stat height: \(statusHeight)")

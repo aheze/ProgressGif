@@ -72,7 +72,14 @@ extension PasteViewController {
                         viewController.avAsset = avAsset
                         viewController.project = newProject
                         viewController.modalPresentationStyle = .fullScreen
-                        viewController.statusHeight = self.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+                        
+                        if #available(iOS 13.0, *) {
+                            viewController.statusHeight = self.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+                        } else {
+                            viewController.statusHeight = UIApplication.shared.statusBarFrame.height
+                            // Fallback on earlier versions
+                        }
+                        
                         self.present(viewController, animated: true, completion: nil)
                         
                         //                        permanentFileURL.generateImage { (generatedImage) in

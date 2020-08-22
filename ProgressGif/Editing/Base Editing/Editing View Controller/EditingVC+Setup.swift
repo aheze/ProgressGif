@@ -49,17 +49,17 @@ extension EditingViewController {
             //          editingOptionsVC
         ])
         
-        pagingViewController.textColor = UIColor.label
+        pagingViewController.textColor = ColorCompatibility.label
         pagingViewController.selectedTextColor = UIColor(named: "YellorangeText") ?? UIColor.blue /// will look terrible but it won't happen
         
         pagingViewController.indicatorColor = UIColor(named: "Yellorange") ?? UIColor.blue
         pagingViewController.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         pagingViewController.selectedFont = UIFont.systemFont(ofSize: 16, weight: .semibold)
         
-        pagingViewController.borderColor = UIColor.systemFill /// the border line below the menu buttons
+        pagingViewController.borderColor = ColorCompatibility.systemFill /// the border line below the menu buttons
         
-        pagingViewController.backgroundColor = UIColor.systemBackground
-        pagingViewController.selectedBackgroundColor = UIColor.systemBackground
+        pagingViewController.backgroundColor = ColorCompatibility.systemBackground
+        pagingViewController.selectedBackgroundColor = ColorCompatibility.systemBackground
         
         self.add(childViewController: pagingViewController, inView: bottomReferenceView)
     }

@@ -325,9 +325,16 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
             mainContentVC.currentIndex = self.selectedIndexPath.item
             mainContentVC.photoAssets = photoAssets
             
-            let windowStatusHeight = self.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-            print("window st: \(windowStatusHeight)")
-            mainContentVC.normalStatusBarHeight = windowStatusHeight
+            if #available(iOS 13.0, *) {
+                let windowStatusHeight = self.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+                print("window st: \(windowStatusHeight)")
+                mainContentVC.normalStatusBarHeight = windowStatusHeight
+            } else {
+                let windowStatusHeight = UIApplication.shared.statusBarFrame.height
+                mainContentVC.normalStatusBarHeight = windowStatusHeight
+                // Fallback on earlier versions
+            }
+            
             mainContentVC.onDoneBlock = onDoneBlock
             
             present(mainContentVC, animated: true, completion: nil)
@@ -428,6 +435,7 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
         return inset
     }
     
+    @available(iOS 13.0, *)
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         UIContextMenuConfiguration(identifier: indexPath as NSIndexPath, previewProvider: nil) { suggestedActions in
             
