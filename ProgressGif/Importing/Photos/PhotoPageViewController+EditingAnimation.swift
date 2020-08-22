@@ -77,7 +77,12 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
             transition.sliderValue = playerControlsView.customSlider.value
             
             playerControlsView.playingState = .paused
-            playerControlsView.playButton.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
+            if #available(iOS 13.0, *) {
+                playerControlsView.playButton.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
+            } else {
+                playerControlsView.playButton.setImage(UIImage(named: "arrowtriangle.right.fill"), for: .normal)
+                // Fallback on earlier versions
+            }
             
             currentViewController.stopVideo()
             

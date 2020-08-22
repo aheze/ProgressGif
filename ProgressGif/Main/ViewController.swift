@@ -45,8 +45,17 @@ class ViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        topMarginC.constant = statusHeight
+        if #available(iOS 13.0, *) {
+            let statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+            topMarginC.constant = statusHeight
+        } else {
+            
+            let statusHeight = UIApplication.shared.statusBarFrame.height
+            topMarginC.constant = statusHeight
+            // Fallback on earlier versions
+        }
+        
+        
         view.layoutIfNeeded()
         collectionViewController?.topInset = visualEffectView.frame.height
         collectionViewController?.updateTopInset()
@@ -110,7 +119,12 @@ class ViewController: UIViewController {
         
         let topInset = visualEffectView.frame.height
         self.collectionViewController?.topInset = topInset
-        self.collectionViewController?.collectionView.verticalScrollIndicatorInsets.top = topInset
+        if #available(iOS 11.1, *) {
+            self.collectionViewController?.collectionView.verticalScrollIndicatorInsets.top = topInset
+        } else {
+            self.collectionViewController?.collectionView.scrollIndicatorInsets.top = topInset
+            // Fallback on earlier versions
+        }
         self.collectionViewController?.collectionView.contentInset.top = topInset
         
         UIView.animate(withDuration: 0.5, animations: {
@@ -139,7 +153,6 @@ class ViewController: UIViewController {
         let topInset = visualEffectView.frame.height + 40
         self.collectionViewController?.topInset = topInset
         self.collectionViewController?.collectionView.verticalScrollIndicatorInsets.top = topInset
-        self.collectionViewController?.collectionView.contentInset.top = topInset
         
         photoPermissionWarningHeightC.constant = 40
         UIView.animate(withDuration: 0.5, animations: {
@@ -314,6 +327,17 @@ class ViewController: UIViewController {
         _ = collectionViewController
         
         documentPicker = DocumentPicker(presentationController: self, delegate: self)
+        
+        if #available(iOS 13.0, *) {
+            print("set ios13")
+            addButton.setImage(UIImage(systemName: "plus")!, for: .normal)
+        } else {
+            addButton.setImage(UIImage(named: "largerPlus")!, for: .normal)
+            addButton.tintColor = UIColor(named: "Yellorange")
+            addButton.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+            print("not avail")
+            // Fallback on earlier versions
+        }
     
     }
     
@@ -330,9 +354,16 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if #available(iOS 13.0, *) {
+            let windowStatusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+            collectionViewController?.windowStatusBarHeight = windowStatusBarHeight
+        } else {
+            
+            let windowStatusBarHeight = UIApplication.shared.statusBarFrame.height
+            collectionViewController?.windowStatusBarHeight = windowStatusBarHeight
+            // Fallback on earlier versions
+        }
         
-        let windowStatusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        collectionViewController?.windowStatusBarHeight = windowStatusBarHeight
         
     }
 

@@ -194,7 +194,7 @@ class ShadowView: UIView {
             if shadowLayer == nil {
                 shadowLayer = CAShapeLayer()
                 shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.width / 2).cgPath
-                shadowLayer.fillColor = UIColor.systemFill.cgColor
+                shadowLayer.fillColor = ColorCompatibility.systemFill.cgColor
                 
                 shadowLayer.shadowColor = UIColor.darkGray.cgColor
                 shadowLayer.shadowPath = shadowLayer.path
@@ -235,9 +235,9 @@ class CustomButton: UIButton {
         if shadowLayer == nil {
             shadowLayer = CAShapeLayer()
             shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.width / 2).cgPath
-            shadowLayer.fillColor = UIColor.systemBackground.cgColor
+            shadowLayer.fillColor = ColorCompatibility.systemBackground.cgColor
             
-            shadowLayer.shadowColor = UIColor.secondaryLabel.cgColor
+            shadowLayer.shadowColor = ColorCompatibility.secondaryLabel.cgColor
             shadowLayer.shadowPath = shadowLayer.path
             shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
             shadowLayer.shadowOpacity = 0.4
