@@ -3210,7 +3210,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="808" height="414"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Si6-Yk-uMD">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photos" translatesAutoresizingMaskIntoConstraints="NO" id="Si6-Yk-uMD">
                                                 <rect key="frame" x="0.0" y="0.0" width="808" height="414"/>
                                             </imageView>
                                         </subviews>
@@ -3230,11 +3230,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Syl-By-kuZ" firstAttribute="top" secondItem="aml-gs-XzF" secondAttribute="top" id="6nQ-Hk-LQA"/>
-                                    <constraint firstItem="Syl-By-kuZ" firstAttribute="centerY" secondItem="aml-gs-XzF" secondAttribute="centerY" id="ARf-xN-7XX"/>
                                     <constraint firstAttribute="trailing" secondItem="Syl-By-kuZ" secondAttribute="trailing" id="GCm-hc-6DZ"/>
-                                    <constraint firstItem="Syl-By-kuZ" firstAttribute="centerX" secondItem="aml-gs-XzF" secondAttribute="centerX" id="aUL-m0-ZJh"/>
                                     <constraint firstAttribute="bottom" secondItem="Syl-By-kuZ" secondAttribute="bottom" id="e5e-XQ-OqR"/>
                                     <constraint firstItem="Syl-By-kuZ" firstAttribute="leading" secondItem="aml-gs-XzF" secondAttribute="leading" id="mpu-Wg-nYM"/>
+                                    <constraint firstItem="Syl-By-kuZ" firstAttribute="width" secondItem="aml-gs-XzF" secondAttribute="width" id="oxu-g4-B11"/>
+                                    <constraint firstItem="Syl-By-kuZ" firstAttribute="height" secondItem="aml-gs-XzF" secondAttribute="height" id="tXq-tS-pIY"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
