@@ -43,6 +43,29 @@ class PhotoZoomViewController: UIViewController {
         self.doubleTapGestureRecognizer.numberOfTapsRequired = 2
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setZoomScale()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setZoomScale()
+    }
+
+    func setZoomScale() {
+
+        var minZoom = min(self.view.bounds.size.width / imageView!.bounds.size.width, self.view.bounds.size.height / imageView!.bounds.size.height);
+
+        if (minZoom > 1.0) {
+            minZoom = 1.0;
+        }
+
+        scrollView.minimumZoomScale = minZoom;
+        scrollView.zoomScale = minZoom;
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.scrollView.delegate = self
@@ -57,21 +80,29 @@ class PhotoZoomViewController: UIViewController {
             if let image = imageU {
                 
                 self.imageView.image = image
-                let rectFrame = CGRect(x: self.baseView.frame.origin.x,
-                                       y: self.baseView.frame.origin.y,
-                                       width: self.targetSize.width,
-                                       height: self.targetSize.width)
-                
-                self.imageView.frame = rectFrame
+//                let rectFrame = CGRect(x: self.baseView.frame.origin.x,
+//                                       y: self.baseView.frame.origin.y,
+//                                       width: self.targetSize.width,
+//                                       height: self.targetSize.width)
+//                print("rect: \(rectFrame)")
+//                self.imageView.frame = rectFrame
                 self.image = image
                 
+                print("image size: \(image.size)")
+                
+//                let widthScale = self.view.bounds.size.width / self.targetSize.width
+//                let heightScale = self.view.bounds.size.height / self.targetSize.height
+//                let minScale = min(widthScale, heightScale)
+//                self.scrollView.minimumZoomScale = minScale
+//
+//                self.scrollView.zoomScale = minScale
+//                self.scrollView.maximumZoomScale = minScale * 4
             }
         }
         
         
         self.view.addGestureRecognizer(self.doubleTapGestureRecognizer)
         
-//        playVideo()
     }
     
     func playVideo() {
