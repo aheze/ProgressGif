@@ -149,12 +149,14 @@ class ExportViewController: UIViewController {
         }
         
         var settings = ANSegmentIndicatorSettings()
-        settings.defaultSegmentColor = ColorCompatibility.tertiarySystemBackground
+        
+        settings.segmentColor = editingConfiguration.barForegroundColor
+        settings.defaultSegmentColor = editingConfiguration.barBackgroundColor
+        
         settings.segmentBorderType = .round
         settings.segmentsCount = 2
         settings.segmentWidth = 16
         settings.animationDuration = 0.2
-        settings.segmentColor = UIColor(named: "Yellorange")!
         
         segmentIndicator.settings = settings
     }
