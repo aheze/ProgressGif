@@ -12,13 +12,15 @@ extension ExportViewController {
     
     private func addProgressBar(to layer: CALayer, drawingSize: CGSize, configuration: EditableEditingConfiguration) {
         
+        let adjustedWidth = drawingSize.width * 1.05 /// extend out a little
+        
         let progressBarBackgroundLayer = CALayer()
         progressBarBackgroundLayer.backgroundColor = configuration.barBackgroundColor.cgColor
         
         let height = configuration.barHeight.getBarHeightFromValue(withUnit: unit)
         
         let startRect = CGRect(x: 0, y: 0, width: 0, height: height)
-        let endRect = CGRect(x: 0, y: 0, width: drawingSize.width, height: height)
+        let endRect = CGRect(x: 0, y: 0, width: adjustedWidth, height: height)
         
         progressBarBackgroundLayer.frame = endRect
         
@@ -30,7 +32,7 @@ extension ExportViewController {
         progressBarForegroundLayer.frame = startRect
         progressBarForegroundLayer.displayIfNeeded()
         
-        progressBarForegroundLayer.bounds = CGRect(x: 0, y: 0, width: drawingSize.width, height: height)
+        progressBarForegroundLayer.bounds = CGRect(x: 0, y: 0, width: adjustedWidth, height: height)
         progressBarForegroundLayer.position = CGPoint(x: 0, y: 0)
         progressBarForegroundLayer.anchorPoint = CGPoint(x: 0, y: 0)
         
