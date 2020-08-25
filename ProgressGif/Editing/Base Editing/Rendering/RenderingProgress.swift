@@ -98,6 +98,11 @@ class ANSegmentIndicator: UIView {
                                           endInAngle: endPoint,
                                           color: settings.defaultSegmentColor,
                                           strokeEnd: 1)
+            segmentShape.shadowColor = ColorCompatibility.systemGray2.cgColor
+            segmentShape.shadowOffset = CGSize(width: 1.0, height: 1.0)
+            segmentShape.shadowOpacity = 0.5
+            segmentShape.shadowRadius = 2.0
+            
             staticSegments.append(segmentShape)
             self.layer.addSublayer(segmentShape)
         }
