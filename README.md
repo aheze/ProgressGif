@@ -78,6 +78,8 @@ Help wanted:
 - [ ] Allow picking opaque color for background (so that shadows show up)
 - [ ] Export as MOV instead of gif only
 
+*ProgressGif is inspired by this awesome [article](https://www.excelcampus.com/tips-shortcuts/add-progress-bar-to-gif/).*
+
 [example1]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Examples/13A3607F-1BE9-4CB4-9642-3155EB44D1BE.gif
 [example2]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Examples/4EFA4E62-E533-4244-A469-27B771878CCF.gif
 [example3]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Examples/56CC30DC-21BE-4A28-81C0-EC310D0CF79F.gif
@@ -88,3 +90,5 @@ Help wanted:
 [step1]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Usage/Step1.gif
 [step2]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Usage/Step2.gif
 [step3]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Usage/Step3.gif
+
+
