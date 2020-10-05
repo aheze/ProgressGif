@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="600" height="138.4133611691" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png">
+  <img width="600" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png">
 </p>
 
 <h2 align="center">
