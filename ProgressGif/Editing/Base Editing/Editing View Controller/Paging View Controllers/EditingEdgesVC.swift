@@ -14,10 +14,12 @@ protocol EditingEdgesChanged: class {
     func edgeShadowRadiusChanged(to radius: Int)
     func edgeShadowColorChanged(to color: UIColor, hex: String)
 //    func backgroundColorChanged(to color: UIColor)
+    /// backgroundBaseView and backgroundColorButton are removed: changing the background color of the gif will be added in later versions.
 }
 
-/// backgroundBaseView and backgroundColorButton are removed: changing the background color of the gif will be added in later versions.
 
+// MARK: - the second option screen
+/// controls edge properties like inset and corner radius
 class EditingEdgesVC: UIViewController {
     
     weak var editingEdgesChanged: EditingEdgesChanged?
@@ -27,7 +29,7 @@ class EditingEdgesVC: UIViewController {
     var originalEdgeShadowIntensity = 0
     var originalEdgeShadowRadius = 0
     var originalEdgeShadowColor = UIColor.black
-//    var originalEdgeBackgroundColor = UIColor.clear
+//    var originalEdgeBackgroundColor = UIColor.clear /// currently removed
     
     
     @IBOutlet weak var insetBaseView: UIView!
@@ -35,7 +37,7 @@ class EditingEdgesVC: UIViewController {
     @IBOutlet weak var shadowIntensityBaseView: UIView!
     @IBOutlet weak var shadowRadiusBaseView: UIView!
     @IBOutlet weak var shadowColorBaseView: UIView!
-//    @IBOutlet weak var backgroundBaseView: UIView!
+//    @IBOutlet weak var backgroundBaseView: UIView! /// currently removed
     
     @IBOutlet weak var insetNumberStepper: NumberStepper!
     @IBOutlet weak var cornerRadiusNumberStepper: NumberStepper!
@@ -130,12 +132,6 @@ class EditingEdgesVC: UIViewController {
 
 extension EditingEdgesVC: NumberStepperChanged {
     func valueChanged(to value: Int, stepperType: NumberStepperType) {
-//        if stepperType == .edgeInset {
-//            editingEdgesChanged?.edgeInsetChanged(to: value)
-//        } else if stepperType == .edgeCornerRadius {
-//            editingEdgesChanged?.edgeCornerRadiusChanged(to: value)
-//        }
-        
         switch stepperType {
         case .edgeInset:
             editingEdgesChanged?.edgeInsetChanged(to: value)
@@ -145,7 +141,6 @@ extension EditingEdgesVC: NumberStepperChanged {
             enableOrDisableShadow(shadowIntensity: value)
             editingEdgesChanged?.edgeShadowIntensityChanged(to: value)
         case .edgeShadowRadius:
-            print("radius value: \(value)")
             editingEdgesChanged?.edgeShadowRadiusChanged(to: value)
         default:
             break
@@ -160,11 +155,6 @@ extension EditingEdgesVC: ColorChanged {
             shadowColorButton.backgroundColor = color
             editingEdgesChanged?.edgeShadowColorChanged(to: color, hex: hexCode)
         }
-//        else if colorPickerType == .edgeBackground {
-//            originalEdgeBackgroundColor = color
-//            backgroundColorButton.backgroundColor = color
-//            editingEdgesChanged?.backgroundColorChanged(to: color)
-//        }
     }
 }
 extension EditingEdgesVC: UIPopoverPresentationControllerDelegate {

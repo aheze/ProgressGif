@@ -6,7 +6,6 @@
 //
 
 import UIKit
-//import Colorful
 
 enum ColorPickerType {
     case barForeground
@@ -18,6 +17,7 @@ protocol ColorChanged: class {
     func colorChanged(color: UIColor, hexCode: String, colorPickerType: ColorPickerType)
 }
 
+// MARK: - color picker
 class ColorPickerViewController: UIViewController {
     
     @IBOutlet weak var dismissButton: UIButton!

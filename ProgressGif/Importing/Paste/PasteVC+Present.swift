@@ -82,16 +82,11 @@ extension PasteViewController {
                         
                         self.present(viewController, animated: true, completion: nil)
                         
-                        //                        permanentFileURL.generateImage { (generatedImage) in
-                        //                            if let image = generatedImage {
                         viewController.imageView.image = thumbnailImage
-                        //                            }
-                        print("set")
+                        
                         DispatchQueue.main.async {
                             viewController.setUpDrawing(with: viewController.editingConfiguration)
                         }
-                        //                        }
-                        
                         viewController.onDoneBlock = { [weak self] _ in
                             self?.onDoneBlock?()
                         }

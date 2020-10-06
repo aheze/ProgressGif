@@ -8,6 +8,7 @@
 import UIKit
 import Photos
 
+// MARK: - Import options
 extension ViewController {
 
     func importFromFiles() {

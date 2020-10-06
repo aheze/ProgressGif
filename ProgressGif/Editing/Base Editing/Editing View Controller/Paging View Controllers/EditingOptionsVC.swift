@@ -6,7 +6,12 @@
 //
 
 
-/// adding options in a later release. Options will include chaging FPS and/or scale (for shrinking file size).
+/// **adding options in a later release. Options will include chaging FPS and/or scale (for shrinking file size).**
+
+
+// MARK: - the third option screen
+/// *will* control mostly performance-based attributes
+
 
 //import UIKit
 //

@@ -8,6 +8,8 @@
 import UIKit
 import AVFoundation
 
+// MARK: - A bunch of random utilities.
+
 extension String {
     var isValidURL: Bool {
         let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
@@ -20,8 +22,9 @@ extension String {
     }
 }
 
+/// for the FPS picker
+/// allow a toolbar to be added to the picker
 class InputViewButton: UIButton {
-    
     var viewForInput = UIView()
     var toolBarView = UIView()
     
@@ -47,7 +50,6 @@ class InputViewButton: UIButton {
     override var canBecomeFirstResponder: Bool {
         return true
     }
-
 }
 
 extension UIView {
@@ -178,8 +180,6 @@ extension UIImageView {
         }
     }
 }
-
-
 
 /// for the collectionview. The shadow for the editing preview is in DropShadow.swift
 class ShadowView: UIView {

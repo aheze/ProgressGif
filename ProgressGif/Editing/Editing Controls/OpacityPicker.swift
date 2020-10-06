@@ -9,6 +9,8 @@ import UIKit
 
 class OpacityPicker: UIViewController {
     
+    /// in progress...
+    /// currently the Color picker doesn't support opacity.
     
     
     

@@ -9,6 +9,8 @@ import UIKit
 
 extension ViewController {
     
+    // MARK: - Animation for Add button
+    
     func handleAddButtonTouchDown() {
         var transform = CGAffineTransform.identity.scaledBy(x: 0.9, y: 0.9)
         if addButtonIsPressed {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// title
+// MARK: - the title at the top of the screen
 extension EditingViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -17,6 +17,7 @@ extension EditingViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: - called whenever a value changes
 extension EditingViewController {
     func saveConfig() {
         do {
@@ -38,6 +39,8 @@ extension EditingViewController {
             print("error adding object: \(error)")
         }
     }
+    
+    /// load all values from a saved project
     func loadConfig() {
         if let projectConfiguration = project?.configuration {
             editingConfiguration.barHeight = projectConfiguration.barHeight

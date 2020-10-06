@@ -19,6 +19,8 @@ enum NumberStepperType {
 protocol NumberStepperChanged: class {
     func valueChanged(to value: Int, stepperType: NumberStepperType)
 }
+
+// MARK: - Custom number stepper 
 class NumberStepper: UIView {
     
     var stepperType = NumberStepperType.barHeight

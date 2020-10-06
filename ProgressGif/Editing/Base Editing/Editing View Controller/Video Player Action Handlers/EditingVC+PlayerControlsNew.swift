@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 
+// MARK: - Handle the player control view
 extension EditingViewController: PlayerControlsDelegate {
     func backPressed() {
         if !hasInitializedPlayer {
@@ -24,7 +25,6 @@ extension EditingViewController: PlayerControlsDelegate {
                 
                 if let currentTimescale = playerView.player?.currentItem?.duration.timescale {
                     let newCMTime = CMTimeMakeWithSeconds(back5seconds, preferredTimescale: currentTimescale)
-//                    playerView.player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
                     
                     playerView.seekToTime(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30), completionHandler: { _ in })
                     
@@ -54,7 +54,6 @@ extension EditingViewController: PlayerControlsDelegate {
                 
                 if let currentTimescale = playerView.player?.currentItem?.duration.timescale {
                     let newCMTime = CMTimeMakeWithSeconds(forward5seconds, preferredTimescale: currentTimescale)
-//                    playerView.player?.seek(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
                     
                     playerView.seekToTime(to: newCMTime, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30), completionHandler: { _ in })
                     
@@ -81,7 +80,6 @@ extension EditingViewController: PlayerControlsDelegate {
             if let currentTimescale = playerView.player?.currentItem?.duration.timescale {
                 let timeStamp = value * Float(CMTimeGetSeconds(avAsset.duration))
                 let time = CMTimeMakeWithSeconds(Float64(timeStamp), preferredTimescale: currentTimescale)
-//                playerView.player?.seek(to: time, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30))
                 
                 playerView.seekToTime(to: time, toleranceBefore: CMTimeMake(value: 1, timescale: 30), toleranceAfter: CMTimeMake(value: 1, timescale: 30), completionHandler: { _ in })
                 
@@ -112,6 +110,4 @@ extension EditingViewController: PlayerControlsDelegate {
             pauseVideo()
         }
     }
-    
-    
 }

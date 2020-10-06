@@ -8,6 +8,41 @@
 import UIKit
 import AVFoundation
 
+
+//MARK: - Utilities for the video player
+
+/// for the Live editor
+
+class ResizableShadowView: UIView {
+    var cornerRadius = CGFloat(0) {
+        didSet {
+            updateShadow()
+        }
+    }
+    var color = UIColor.black {
+        didSet {
+            updateShadow()
+        }
+    }
+    var intensity = Int(1) {
+        didSet {
+            updateShadow()
+        }
+    }
+    var shadowRadius = Int(1) {
+        didSet {
+            updateShadow()
+        }
+    }
+    func updateShadow() {
+        layer.shadowColor = color.cgColor
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        layer.shadowOpacity = min(Float(intensity) / 10, 1) /// the stepper limit is 10, but this is just in case.
+        layer.shadowRadius = CGFloat(shadowRadius) * Constants.shadowRadiusMultiplier
+    }
+}
+
 extension AVAsset {
     func resolutionSize() -> CGSize? {
         guard let track = self.tracks(withMediaType: AVMediaType.video).first else { return nil }
@@ -17,6 +52,8 @@ extension AVAsset {
 }
 
 extension TimeInterval {
+    
+    /// convert the video duration to something readable, like "0:05"
     func getFormattedString() -> String? {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .positional
@@ -30,10 +67,8 @@ extension TimeInterval {
                 var adjustedDuration = formattedDuration
                 adjustedDuration.remove(at: formattedDuration.startIndex)
                 return adjustedDuration
-//                cell.nameLabel.text = adjustedDuration
             } else {
                 return formattedDuration
-//                cell.nameLabel.text = formattedDuration
             }
         } else {
             return nil

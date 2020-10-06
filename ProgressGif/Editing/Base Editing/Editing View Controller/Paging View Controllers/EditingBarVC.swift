@@ -13,6 +13,8 @@ protocol EditingBarChanged: class {
     func backgroundColorChanged(to color: UIColor, hex: String)
 }
 
+// MARK: - the first option screen
+/// controls bar properties like height and color
 class EditingBarVC: UIViewController {
     
     weak var editingBarChanged: EditingBarChanged?

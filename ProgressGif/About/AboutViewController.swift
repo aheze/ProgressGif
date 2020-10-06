@@ -7,8 +7,9 @@
 
 import UIKit
 
+// MARK: - the view that appears when you press "ProgressGif"
+/// contains metadata like licenses and contributors!
 class AboutViewController: UIViewController {
-    
     @IBAction func xPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -24,24 +25,22 @@ class AboutViewController: UIViewController {
         }
     }
     
-    
     @IBOutlet weak var rateAppBlurView: UIVisualEffectView!
     @IBOutlet weak var rateAppButton: UIButton!
     @IBAction func rateAppPressed(_ sender: Any) {
+        
+        /// this is ProgressGif's App Store URL
         if let productURL = URL(string: "https://apps.apple.com/app/id1526969349") {
             var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
             
-            // 2.
             components?.queryItems = [
                 URLQueryItem(name: "action", value: "write-review")
             ]
-            
-            // 3.
             guard let writeReviewURL = components?.url else {
                 return
             }
             
-            // 4.
+            /// open App Store to rate
             UIApplication.shared.open(writeReviewURL)
         }
     }
@@ -83,7 +82,6 @@ class AboutViewController: UIViewController {
         licensesBlurView.layer.cornerRadius = 6
         licensesBlurView.clipsToBounds = true
     }
-    
 }
 
 extension AboutViewController: UITableViewDelegate, UITableViewDataSource {

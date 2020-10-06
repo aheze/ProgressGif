@@ -32,13 +32,11 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
         -> UIViewControllerAnimatedTransitioning? {
             
             if playerControlsView.customSlider.value > 0 {
-                print("over 0")
                 let generatedImage = generateImageFromCurrentPlayer()
                 if let image = generatedImage {
                     self.transition.thumbnailImage = image
                 }
             } else {
-                print("not over 0")
                 if let currentImage = currentViewController.image {
                     transition.thumbnailImage = currentImage
                 }
@@ -46,7 +44,6 @@ extension PhotoPageViewController: UIViewControllerTransitioningDelegate {
             
             let aspectImageFrame = currentViewController.imageView.getAspectFitRect() ?? CGRect(x: 0, y: 0, width: 100, height: 100)
             
-            print("asp frame: \(aspectImageFrame)")
             let biggerOverOriginal = (aspectImageFrame.height + normalStatusBarHeight) / aspectImageFrame.height
             
             let newWidth = aspectImageFrame.width * biggerOverOriginal

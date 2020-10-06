@@ -8,6 +8,8 @@
 import UIKit
 
 extension ViewController {
+    
+    /// hide the import buttoms at launch
     func setUpButtonAlpha() {
         filesButton.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
         filesButton.alpha = 0

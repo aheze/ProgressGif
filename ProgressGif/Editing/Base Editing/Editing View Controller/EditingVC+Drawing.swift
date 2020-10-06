@@ -7,8 +7,24 @@
 
 import UIKit
 
+// MARK: - Set up the live preview
+/// The live preview is pretty simple.
+/// Instead of actively rendering the video to add a progress bar each time a value changes (that would take too much processing power)...
+/// I recreate the progress bar using `UIView`s. That's it!
+/// over the video player, there's a `drawingView`
+/// inside here is where all the overlays get added!
+
+/// This file contains a lot of live-preview drawing-related code!
+
+
 extension EditingViewController {
     
+    /// called when the transition to `editingViewController` is done:
+    /// from Files: `FromFiles.swift`, line 99
+    /// from Photos: `PopAnimator.swift`, line 85
+    /// from Pasting URL: `PasteVC+Present.swift`, line 88
+    
+    /// this function sets up the live preview with values from the configuration
     func setUpDrawing(with configuration: EditableEditingConfiguration) {
         let progressWidth = CGFloat(playerControlsView.customSlider.value) * progressBarFullWidth
         progressBarWidthC.constant = progressWidth
@@ -21,15 +37,6 @@ extension EditingViewController {
             self.progressBarBackgroundView.alpha = 1
             self.view.layoutIfNeeded()
         })
-        
-        /// setup the paging controllers
-        editingBarVC?.heightNumberStepper.value = configuration.barHeight
-        editingBarVC?.foregroundColorButton.backgroundColor = configuration.barForegroundColor
-        editingBarVC?.backgroundColorButton.backgroundColor = configuration.barBackgroundColor
-        
-        editingEdgesVC?.insetNumberStepper.value = configuration.edgeInset
-        editingEdgesVC?.cornerRadiusNumberStepper.value = configuration.edgeCornerRadius
-        editingEdgesVC?.shadowColorButton.backgroundColor = configuration.edgeShadowColor
         
         transparentBackgroundImageView.alpha = 1
         shadowView.alpha = 1
@@ -50,10 +57,9 @@ extension EditingViewController {
             })
         }
     }
+    
     func calculateAspectDrawingFrame() {
-//        print("calc asp")
         if let aspectFrame = imageView.getAspectFitRect() {
-//            print("get aspect, \(aspectFrame)")
             
             guard
                 !aspectFrame.origin.x.isNaN,
@@ -65,7 +71,6 @@ extension EditingViewController {
                     return
             }
             
-            
             imageAspectRect = aspectFrame
             
             drawingViewLeftC.constant = aspectFrame.origin.x
@@ -73,29 +78,19 @@ extension EditingViewController {
             drawingViewTopC.constant = aspectFrame.origin.y
             drawingViewBottomC.constant = (playerHolderView.frame.height - aspectFrame.height) / 2
             
-//            print("set up first consts")
-            
             transparentBackgroundImageViewLeftC.constant = aspectFrame.origin.x
             transparentBackgroundImageViewRightC.constant = (playerHolderView.frame.width - aspectFrame.width) / 2
             transparentBackgroundImageViewTopC.constant = aspectFrame.origin.y
             transparentBackgroundImageViewBottomC.constant = (playerHolderView.frame.height - aspectFrame.height) / 2
-            
-//            print("set up second consts")
             
             shadowMaskingViewLeftC.constant = aspectFrame.origin.x
             shadowMaskingViewRightC.constant = (playerHolderView.frame.width - aspectFrame.width) / 2
             shadowMaskingViewTopC.constant = aspectFrame.origin.y
             shadowMaskingViewBottomC.constant = (playerHolderView.frame.height - aspectFrame.height) / 2
             
-//            print("set up third consts")
-            
             updateProgressBar(to: playerControlsView.customSlider.value, animated: true)
             
-//            print("up prog")
-            
             progressBarBackgroundHeightC.constant = CGFloat(editingConfiguration.barHeight) * unit
-            
-//            print("unit const")
             
             let scale = 1 - (CGFloat(editingConfiguration.edgeInset) * Constants.transformMultiplier)
             shadowScale = scale

@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - the Settings view controller
+/// just a big scroll view
 class SettingsViewController: UIViewController {
     
     // MARK: - Header
@@ -105,5 +107,4 @@ class SettingsViewController: UIViewController {
         setUp()
         
     }
-    
 }

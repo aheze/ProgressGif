@@ -13,6 +13,7 @@ protocol PhotoZoomViewControllerDelegate: class {
     func photoZoomViewController(_ photoZoomViewController: PhotoZoomViewController, scrollViewDidScroll scrollView: UIScrollView)
 }
 
+// MARK: - the video preview controller
 class PhotoZoomViewController: UIViewController {
     
     var hasInitializedPlayer = false
@@ -35,7 +36,7 @@ class PhotoZoomViewController: UIViewController {
         return CGSize(width: imageView.bounds.width * scale, height: imageView.bounds.height * scale)
     }
 
-    var doubleTapGestureRecognizer: UITapGestureRecognizer!
+    var doubleTapGestureRecognizer: UITapGestureRecognizer! /// double-tap to zoom in
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

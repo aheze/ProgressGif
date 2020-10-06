@@ -10,16 +10,17 @@ import Photos
 import RealmSwift
 import SnapKit
 
+// MARK: - The base view controller
 class ViewController: UIViewController {
     
+    /// saving and loading projects
     let realm = try! Realm()
     var globalURL = URL(fileURLWithPath: "")
-    var copyingFileToStorage = false
     
     
+    /// the onboarding instructions
     @IBOutlet weak var welcomeReferenceView: UIView!
     @IBOutlet var welcomeView: UIView!
-    
     
     // MARK: - Header
     @IBOutlet weak var visualEffectView: UIVisualEffectView! /// the top bar
@@ -48,11 +49,11 @@ class ViewController: UIViewController {
         if #available(iOS 13.0, *) {
             let statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
             topMarginC.constant = statusHeight
-        } else {
+        } else { /// Fallback on earlier versions
             
             let statusHeight = UIApplication.shared.statusBarFrame.height
             topMarginC.constant = statusHeight
-            // Fallback on earlier versions
+            
         }
         
         
@@ -117,13 +118,14 @@ class ViewController: UIViewController {
         photoPermissionWarningHeightC.constant = 0
         photoPermissionExplanationTopC.constant = -20
         
+        /// set the inset so that the header gets a nice "blur"
+        /// the collection view is pinned to `Superview`, not the header.
         let topInset = visualEffectView.frame.height
         self.collectionViewController?.topInset = topInset
         if #available(iOS 11.1, *) {
             self.collectionViewController?.collectionView.verticalScrollIndicatorInsets.top = topInset
-        } else {
+        } else { /// Fallback on earlier versions
             self.collectionViewController?.collectionView.scrollIndicatorInsets.top = topInset
-            // Fallback on earlier versions
         }
         self.collectionViewController?.collectionView.contentInset.top = topInset
         
@@ -138,6 +140,7 @@ class ViewController: UIViewController {
         }
     }
     
+    /// when the user hasn't granted permission to the photo library
     func animatePermissionWarningOpen() {
         let photoPermissions = PHPhotoLibrary.authorizationStatus()
         switch photoPermissions {
@@ -147,7 +150,7 @@ class ViewController: UIViewController {
             shouldGoToSettings = true
             grantPhotoAccessButton.setTitle("Go to Settings", for: .normal)
         default:
-            print("default warning open, TEST")
+            print("unknown case")
         }
         
         let topInset = visualEffectView.frame.height + 40
@@ -215,8 +218,6 @@ class ViewController: UIViewController {
             }
             
             viewController.displayPhotoPermissionWarning = { [weak self] () in
-                print("display!!!!!")
-                
                 DispatchQueue.main.async {
                     self?.animatePermissionWarningOpen()
                 }
@@ -323,34 +324,22 @@ class ViewController: UIViewController {
         globalURL = url
         
         print("global url: \(url)")
+        
         /// initialize the collection view
         _ = collectionViewController
         
         documentPicker = DocumentPicker(presentationController: self, delegate: self)
         
         if #available(iOS 13.0, *) {
-            print("set ios13")
             addButton.setImage(UIImage(systemName: "plus")!, for: .normal)
         } else {
             addButton.setImage(UIImage(named: "largerPlus")!, for: .normal)
             addButton.tintColor = UIColor(named: "Yellorange")
             addButton.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-            print("not avail")
             // Fallback on earlier versions
         }
     
     }
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        func didPickDocument(document: Document?) {
-//            if let pickedDoc = document {
-//                let fileURL = pickedDoc.fileURL
-//                saveDocument(temporaryDocumentURL: fileURL)
-//            }
-//        }
-//        documentPicker = DocumentPicker(presentationController: self, delegate: self)
-//    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -363,33 +352,7 @@ class ViewController: UIViewController {
             collectionViewController?.windowStatusBarHeight = windowStatusBarHeight
             // Fallback on earlier versions
         }
-        
-        
     }
-
-
 }
-
-//class ViewControllers: UIViewController, DocumentDelegate {
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        /// set up the document picker
-//        documentPicker = DocumentPicker(presentationController: self, delegate: self)
-//    }
-//    
-//    /// callback from the document picker
-//    func didPickDocument(document: Document?) {
-//        if let pickedDoc = document {
-//            let fileURL = pickedDoc.fileURL
-//            
-//            /// do what you want with the file URL
-//        }
-//    }
-//}
-
-
-
-
 
 

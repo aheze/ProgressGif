@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - All contributors to ProgressGif!
 class Contributor: NSObject {
     
     /// name to display in the table view

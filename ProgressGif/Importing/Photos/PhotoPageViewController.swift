@@ -10,7 +10,9 @@ import UIKit
 import Photos
 import RealmSwift
 
-
+// MARK: - The video previewer (appears when you click on a video when importing from Photos
+/// most of this code is from the open-source library FluidPhoto: https://github.com/masamichiueta/FluidPhoto
+/// this was originally a photo previewer, but I modified it to display videos
 protocol PhotoPageViewControllerDelegate: class {
     func containerViewController(_ containerViewController: PhotoPageViewController, indexDidUpdate currentIndex: Int)
 }
@@ -44,8 +46,9 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBOutlet weak var chooseButton: UIButton!
-    @IBAction func chooseButtonPressed(_ sender: Any) {
+    @IBAction func chooseButtonPressed(_ sender: Any) { /// when the user chooses the video
         
+        /// create a new project (Realm)
         let newProject = Project()
         newProject.title = "Untitled"
         newProject.dateCreated = Date()
@@ -147,9 +150,9 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpDismissCompletion()
+        setUpDismissCompletion() /// for the transition back to the Import from Photos screen
         
-        playerControlsView.playerControlsDelegate = self
+        playerControlsView.playerControlsDelegate = self /// video player delegate
         
         backBaseView.clipsToBounds = false
         chooseBaseView.clipsToBounds = false
@@ -189,8 +192,6 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
         previousViewController = currentViewController
         currentViewController.playerView.updateSliderProgress = self
     }
-    
-    
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         
@@ -303,7 +304,6 @@ extension PhotoPageViewController: UIPageViewControllerDelegate, UIPageViewContr
         vc.delegate = self
         
         vc.asset = photoAssets.object(at: currentIndex - 1)
-//        vc.url = self.photoAssets[currentIndex - 1]
         vc.index = currentIndex - 1
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
         return vc
@@ -319,7 +319,6 @@ extension PhotoPageViewController: UIPageViewControllerDelegate, UIPageViewContr
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(PhotoZoomViewController.self)") as! PhotoZoomViewController
         vc.delegate = self
         self.singleTapGestureRecognizer.require(toFail: vc.doubleTapGestureRecognizer)
-//        vc.url = self.photoAssets[currentIndex + 1]
         
         vc.asset = photoAssets.object(at: currentIndex + 1)
         vc.index = currentIndex + 1

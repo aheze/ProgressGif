@@ -10,6 +10,7 @@ import MobileCoreServices
 import AVFoundation
 import AVKit
 
+// MARK: - Import via Files
 extension ViewController: DocumentDelegate {
     
     func didPickDocument(document: Document?) {
@@ -42,6 +43,8 @@ extension ViewController: DocumentDelegate {
                 
                 DispatchQueue.main.async {
                     let avAsset = AVAsset(url: permanentFileURL)
+                    
+                    /// Make a new Project (Realm)
                     let newProject = Project()
                     newProject.title = "Untitled"
                     newProject.dateCreated = date
@@ -70,7 +73,6 @@ extension ViewController: DocumentDelegate {
                         }
                     } catch {
                         print("error adding object: \(error)")
-                        
                     }
                     
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -87,13 +89,7 @@ extension ViewController: DocumentDelegate {
                             // Fallback on earlier versions
                         }
                         
-//                        viewController.statusHeight = self.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-//
-//                        print("stat height.. \(self.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0)")
-//
                         self.present(viewController, animated: true, completion: nil)
-                        
-                        print("SET UP DRAWING")
                         
                         permanentFileURL.generateImage { (generatedImage) in
                             if let image = generatedImage {
@@ -102,7 +98,6 @@ extension ViewController: DocumentDelegate {
                             DispatchQueue.main.async {
                                 viewController.setUpDrawing(with: viewController.editingConfiguration)
                             }
-                            
                         }
                         
                         viewController.onDoneBlock = { [weak self] _ in
@@ -110,7 +105,6 @@ extension ViewController: DocumentDelegate {
                         }
                     }
                 }
-                self.copyingFileToStorage = false
             } catch {
                 print("Error making video data: \(error)")
             }

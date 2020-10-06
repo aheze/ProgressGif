@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Delegates from the steppers/pickers
 extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

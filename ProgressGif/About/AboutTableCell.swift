@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Contributor tableview cell
 class AboutTableCell: UITableViewCell {
     
     @IBOutlet weak var profileImageView: UIImageView!

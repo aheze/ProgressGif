@@ -10,6 +10,8 @@ import Photos
 import Parchment
 import RealmSwift
 
+// MARK: Editing view controller
+/// the base class for the live preview + editing options
 class EditingViewController: UIViewController {
     
     var dismissing = false
@@ -74,8 +76,7 @@ class EditingViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        print("Change trait!!!")
-//        statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        
         if #available(iOS 13.0, *) {
             statusHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
         } else {
@@ -84,11 +85,8 @@ class EditingViewController: UIViewController {
         }
         topBarTopC.constant = statusHeight
         view.layoutIfNeeded()
-        print("Change trait stat height: \(statusHeight)")
         
         if traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .compact {
-            print("HORIZONTAL size class, safe inset esge: \(view.safeAreaInsets.right)")
-            
             holderHorizontalRightC.constant = (bottomReferenceView.frame.width - view.safeAreaInsets.right) + 16
             playerControlsHorizontalRightC.constant = (bottomReferenceView.frame.width - view.safeAreaInsets.right) + 16
         }
@@ -112,9 +110,6 @@ class EditingViewController: UIViewController {
         barHeightChanged(to: editingConfiguration.barHeight)
     }
   
-    
-//    @IBOutlet weak var topStatusBlurView: UIVisualEffectView!
-    
     @IBOutlet weak var topBarTopC: NSLayoutConstraint!
     
     @IBOutlet weak var topActionBarBlurView: UIVisualEffectView!
@@ -142,7 +137,11 @@ class EditingViewController: UIViewController {
     
     // MARK: - Drawing
     
-    /// progress bar
+    /// The live preview is pretty simple.
+    /// Instead of actively rendering the video to add a progress bar each time a value changes (that would take too much processing power)...
+    /// I recreate the progress bar using `UIView`s. That's it!
+    /// over the video player, there's a `drawingView`
+    /// inside here is where all the overlays get added!
     
     /// fits __right onto the aspect fit of the image__, so that the progress bar appears that it is on the image.
     @IBOutlet weak var drawingView: UIView!
@@ -241,15 +240,6 @@ class EditingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("got asset: \(avAsset)")
-
-//        bottomReferenceView.layer.maskedCorners = [.layerMinXMinYCorner]
-//        bottomReferenceView.layer.cornerRadius = 0
-//        bottomReferenceView.clipsToBounds = true
-        
-//        if view.traitCollection.horizontalSizeClass == .regular && view.traitCollection.verticalSizeClass == .compact {
-//            bottomReferenceView.layer.cornerRadius = 4
-//        }
         
         transparentBackgroundImageView.alpha = 0
         shadowView.alpha = 0
@@ -265,13 +255,12 @@ class EditingViewController: UIViewController {
         playerControlsView.playerControlsDelegate = self
         playerView.updateSliderProgress = self
         
+        /// error playing the video
         playerView.failedPlaying = { [weak self] () in
             var fileExtension = ""
             if let urlAsset = self?.avAsset as? AVURLAsset {
                 fileExtension = "(.\(urlAsset.url.pathExtension)) "
             }
-//            let fileExtension = self?.avAsset.url
-            
             
             let alert = UIAlertController(title: "The file format \(fileExtension)is not supported", message: ".mp4 and .mov are recommended", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in

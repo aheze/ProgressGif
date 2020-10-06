@@ -21,9 +21,5 @@ class ImportInfoViewController: UIViewController {
         
         doneBlurView.clipsToBounds = true
         doneBlurView.layer.cornerRadius = doneBlurView.frame.size.height / 2
-        
-        
     }
-    
-    
 }

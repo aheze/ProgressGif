@@ -7,10 +7,9 @@
 
 import UIKit
 
+// MARK: - Show and Hide buttons (when press "+" button)
 extension ViewController {
     func showButtons() {
- 
-        
         self.importVideoBottomC.constant = importVideoBottomCShownConstant
         UIView.animate(withDuration: 0.3, animations: {
             self.helpButton.alpha = 1
@@ -32,8 +31,6 @@ extension ViewController {
             self.clipboardButton.transform = CGAffineTransform.identity
             self.clipboardButton.alpha = 1
         })
-        
-        
     }
     
     func hideButtons() {

@@ -8,6 +8,7 @@
 import UIKit
 import RealmSwift
 
+/// used for the video editor and rendering
 class Constants {
     
     /// divide the video height by this,
@@ -32,6 +33,7 @@ class Constants {
     static var shadowRadiusMultiplier = CGFloat(0.5)
 }
 
+/// frames per second setting
 enum FPS {
     case low
     case medium

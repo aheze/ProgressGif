@@ -8,7 +8,6 @@
 import UIKit
 
 extension EditingViewController: UpdateSliderProgress {
-    
     func updateSlider(to value: Float) {
         playerControlsView.customSlider.setValue(value, animated: false)
         updateProgressBar(to: value, animated: false)

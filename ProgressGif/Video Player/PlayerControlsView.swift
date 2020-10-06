@@ -23,12 +23,13 @@ protocol PlayerControlsDelegate: class {
     func changedPlay(playingState: PlayingState)
 }
 
+// MARK: - the controls view
+/// includes scrubber, pause/play button, back/forward 5 seconds.
+/// dark mode support too!
 class PlayerControlsView: UIView {
     
     weak var playerControlsDelegate: PlayerControlsDelegate?
-    
     var playingState = PlayingState.paused
-
     
     @IBOutlet var contentView: UIView!
     
@@ -82,7 +83,7 @@ class PlayerControlsView: UIView {
         playerControlsDelegate?.forwardPressed()
     }
     
-    
+    /// scrubbed the slider
     @IBAction func sliderChangedValue(_ sender: Any, forEvent event: UIEvent) {
         
         if let touchEvent = event.allTouches?.first {

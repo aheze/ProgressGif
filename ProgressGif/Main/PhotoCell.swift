@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - the cell used for displaying projects/video thumbnails
 class PhotoCell: UICollectionViewCell {
     
     var representedAssetIdentifier: String!

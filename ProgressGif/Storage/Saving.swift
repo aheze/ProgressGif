@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// create global document folder if not created already
 extension URL {
     static func createFolder(folderName: String) -> URL? {
         let fileManager = FileManager.default

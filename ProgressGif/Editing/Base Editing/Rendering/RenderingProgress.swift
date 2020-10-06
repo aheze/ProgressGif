@@ -7,6 +7,9 @@
 //
 import UIKit
 
+// MARK: - the circular double-segment progress indicator
+// from an open-source library: https://github.com/alexnikol/SegmentProgressIndicator
+
 typealias Degrees = Double
 typealias Radians = CGFloat
 

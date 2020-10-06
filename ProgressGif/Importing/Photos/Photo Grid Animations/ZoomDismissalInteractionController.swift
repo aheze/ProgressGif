@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - From the open-source library FluidPhoto: https://github.com/masamichiueta/FluidPhoto
+/// for animating the transition between the collection view and the paging preview
 class ZoomDismissalInteractionController: NSObject {
     
     var transitionContext: UIViewControllerContextTransitioning?

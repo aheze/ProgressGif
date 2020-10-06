@@ -11,6 +11,7 @@ import AVKit
 import SwiftyGif
 import LinkPresentation
 
+// MARK: - The export screen!
 class ExportViewController: UIViewController {
     
     @IBAction func xPressed(_ sender: Any) {
@@ -23,9 +24,6 @@ class ExportViewController: UIViewController {
     var editingConfiguration: EditableEditingConfiguration!
     var playerURL = URL(fileURLWithPath: "")
     var exportedGifURL = URL(fileURLWithPath: "")
-    
-//    var isModalInPresentation: Bool
-        
     
     
     /// for framerate
@@ -42,7 +40,6 @@ class ExportViewController: UIViewController {
     @IBOutlet weak var playerBackgroundTopC: NSLayoutConstraint!
     @IBOutlet weak var playerBackgroundBottomC: NSLayoutConstraint!
     
-//    @IBOutlet weak var playerView: PlayerView!
     @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var progressBaseView: UIView!
@@ -102,7 +99,7 @@ class ExportViewController: UIViewController {
             if let urlAsset = renderingAsset as? AVURLAsset {
                 fileExtension = "(.\(urlAsset.url.pathExtension)) "
             }
-            print("file ext: \(fileExtension)")
+            
             let alert = UIAlertController(title: "The file format \(fileExtension)is not supported", message: ".mp4 and .mov are recommended", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
                 self.dismiss(animated: true, completion: nil)
@@ -136,9 +133,7 @@ class ExportViewController: UIViewController {
         exportButton.alpha = 0
         
         if let urlAsset = renderingAsset as? AVURLAsset {
-            print("start , got asset")
             render(from: urlAsset, with: editingConfiguration) { exportedURL in
-                print("finish export")
                 guard let exportedURL = exportedURL else {
                     self.shouldPresentError = true
                     return
@@ -180,9 +175,7 @@ class ExportViewController: UIViewController {
         progressStatusLabel.text = "Converting (\(frameRate) FPS)"
         
         var aspectRect = imageView.frame
-        //        playerURL.generateImage() { (image) in
-        //            if let generatedImage = image {
-        //                self.imageView.image = image
+        
         let adjustedRect = AVMakeRect(aspectRatio: renderingAsset.resolutionSize() ?? CGSize(width: 100, height: 100), insideRect: self.imageView.bounds)
         aspectRect = self.imageView.convert(adjustedRect, to: self.playerBaseView)
         
@@ -190,7 +183,6 @@ class ExportViewController: UIViewController {
         self.playerBackgroundTopC.constant = aspectRect.origin.y
         self.playerBackgroundRightC.constant = (self.playerBaseView.bounds.width - aspectRect.width) / 2
         self.playerBackgroundBottomC.constant = (self.playerBaseView.bounds.height - aspectRect.height) / 2
-        //            }
         
         UIView.animate(withDuration: 0.5, delay: 0.4, options: .curveEaseOut, animations: {
             self.playerBackgroundView.layer.cornerRadius = 0
@@ -234,7 +226,6 @@ class ExportViewController: UIViewController {
             self.progressLabel.alpha = 0
             self.progressStatusLabel.alpha = 0
         }) { _ in
-            
             self.processingLabel.text = "Here you go!"
             
             UIView.animate(withDuration: 0.6, animations: {
@@ -252,6 +243,7 @@ class ExportViewController: UIViewController {
     }
 }
 
+// MARK: - Data for the share sheet
 extension ExportViewController: UIActivityItemSource {
 
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {

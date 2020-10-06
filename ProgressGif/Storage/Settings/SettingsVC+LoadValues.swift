@@ -8,6 +8,7 @@
 import UIKit
 
 extension SettingsViewController {
+    /// load default values
     func loadValues() {
         fpsString = defaults.string(forKey: DefaultKeys.fps) ?? FPS.normal.getString()
         

@@ -9,7 +9,7 @@ import UIKit
 import Parchment
 
 extension EditingViewController {
-    func setUpPagingViewControllers() {
+    func setUpPagingViewControllers() { /// set up the option screens
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         loadConfig()
@@ -45,7 +45,7 @@ extension EditingViewController {
         
         let pagingViewController = PagingViewController(viewControllers: [
             editingBarViewController,
-            editingEdgesViewController,
+            editingEdgesViewController
             //          editingOptionsVC
         ])
         
@@ -61,6 +61,6 @@ extension EditingViewController {
         pagingViewController.backgroundColor = ColorCompatibility.systemBackground
         pagingViewController.selectedBackgroundColor = ColorCompatibility.systemBackground
         
-        self.add(childViewController: pagingViewController, inView: bottomReferenceView)
+        self.add(childViewController: pagingViewController, inView: bottomReferenceView) /// add it to the bottom of the screen
     }
 }

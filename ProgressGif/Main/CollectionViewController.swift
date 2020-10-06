@@ -10,7 +10,6 @@ import Photos
 import RealmSwift
 import SnapKit
 
-
 enum CollectionType {
     case projects
     case photos
@@ -23,18 +22,24 @@ class ProjectThumbnailAsset: NSObject {
     var filePathEnding: String?
 }
 
+// MARK: - the base class for the Gallery view and Import Photos view
+/// `collectionType` determines whether the Gallery view or the Photos view is shown
 class CollectionViewController: UIViewController {
     
     
     let transition = PopAnimator()
-    var onDoneBlock: ((Bool) -> Void)?
+    var onDoneBlock: ((Bool) -> Void)? /// refresh the Gallery collection view once the user finished editing a gif
     
     var displayWelcome: ((Bool) -> Void)?
     var displayPhotoPermissions: ((PhotoPermissionType) -> Void)?
     
+    /// in case the user doesn't allow access to the photo library
+    /// videos imported from Photos are synced (keeping an id reference)
+    /// so permissions must be granted in order to show all the projects in the Gallery
     var displayedPhotoWarning = false
     var displayPhotoPermissionWarning: (() -> Void)?
     
+    /// realm for storing projects
     let realm = try! Realm()
     var globalURL = URL(fileURLWithPath: "")
     
@@ -74,7 +79,7 @@ class CollectionViewController: UIViewController {
     }
     
     // get all videos from Photos library you need to import Photos framework
-    // user photos array in collectionView for disaplying video thumnail
+    // user photos array in collectionView for displaying video thumbnail
     func getAssetFromPhoto() {
         let photoPermissions = PHPhotoLibrary.authorizationStatus()
         switch photoPermissions {
@@ -99,12 +104,17 @@ class CollectionViewController: UIViewController {
             break
         }
     }
+    
+    /// called after finishing editing a new project
+    /// add it to the beginning
     func updateAssets() {
         getAssetFromProjects()
         
         let firstIndex = IndexPath(item: 0, section: 0)
         collectionView.insertItems(at: [firstIndex])
     }
+    
+    /// load saved projects
     func getAssetFromProjects() {
         
         projects = realm.objects(Project.self)
@@ -114,9 +124,7 @@ class CollectionViewController: UIViewController {
         
         guard let projs = projects,
             projs.count > 0 else  {
-                print("no projects!!!!!!")
                 projectThumbs.removeAll()
-//                collectionView.reloadData()
                 displayWelcome?(true)
                 return
         }
@@ -213,6 +221,8 @@ class CollectionViewController: UIViewController {
         super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
 }
+
+// MARK: - Collection View data sourse and delegate
 extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -255,14 +265,11 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
             editingViewController.project = projectThumb.project
             editingViewController.onDoneBlock = self.onDoneBlock
             
-//            print("window st: \(windowStatusBarHeight)")
-//            let windowStatusHeight = self.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
             editingViewController.statusHeight = windowStatusBarHeight
-            print("window st: \(windowStatusBarHeight)")
             
             if projectThumb.savingMethod == .realmSwift {
                 
-                guard let savedPHAsset = projectThumb.phAsset else { print("no phAsset"); return }
+                guard let savedPHAsset = projectThumb.phAsset else { return }
                 
                 PHCachingImageManager().requestAVAsset(forVideo: savedPHAsset, options: nil) { (avAsset, _, _) in
                     editingViewController.avAsset = avAsset
@@ -378,10 +385,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 
                 let videoURL = globalURL.appendingPathComponent(fileURLEnding)
                 
-                
-//                if let generatedImage = videoURL.generateImage() {
-//                    cell.imageView.image = generatedImage
-//                }
                 let generatedData = videoURL.generateImageAndDuration()
                 if let generatedImage = generatedData.0 {
                     cell.imageView.image = generatedImage
@@ -435,6 +438,8 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
         return inset
     }
     
+    /// for deleting projects
+    /// long-press each cell to delete
     @available(iOS 13.0, *)
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         UIContextMenuConfiguration(identifier: indexPath as NSIndexPath, previewProvider: nil) { suggestedActions in
@@ -446,7 +451,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                 alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { _ in
                     print("delete!")
                     
-//                    if let selectedProject = self.projects?[indexPath.item] {
                     let selectedProject = self.projectThumbs[indexPath.item].project
                         print("has delete select project")
                         
@@ -463,7 +467,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                                 } catch {
                                     print("Could not delete item: \(error)")
                                 }
-                                
                             }
                         }
                         
@@ -485,12 +488,10 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
                         } catch {
                             print("Error deleting project from realm: \(error)")
                         }
-//                    }
                 }))
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
-            
             
             if self.collectionType == .projects {
                 return UIMenu(title: "", children: [delete])
@@ -506,6 +507,8 @@ extension CollectionViewController: PhotoPageViewControllerDelegate {
         self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
     }
 }
+
+// MARK: - Animate transition from gallery to editor
 extension CollectionViewController: ZoomAnimatorDelegate {
     
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {

@@ -17,11 +17,12 @@ enum URLError {
     case customMessage
 }
 
+// MARK: - Import via paste URL
 class PasteViewController: UIViewController {
     
     let realm = try! Realm()
     var globalURL = URL(fileURLWithPath: "")
-    var onDoneBlock: (() -> Void)?
+    var onDoneBlock: (() -> Void)? /// refresh the Gallery collection view once the user finished editing a gif
     
     // MARK: - URL Validation
     private var playerItem: AVPlayerItem?
@@ -111,14 +112,12 @@ class PasteViewController: UIViewController {
     }
     @IBAction func chooseButtonPressed(_ sender: Any) {
         if urlChecked {
-//            presentEditing
             if let avAsset = assetForImport,
                 let fromURL = temporaryURLForImport,
                 let thumbnail = playerImage {
                 fromURL.keepAlive()
                 presentEditingVC(asset: avAsset, pathExtension: fromURL.contentURL.pathExtension, fromURL: fromURL.contentURL, thumbnailImage: thumbnail)
             }
-            
             UIView.animate(withDuration: 0.3, animations: {
                 self.chooseButtonLabel.alpha = 1
             })
@@ -234,7 +233,6 @@ extension PasteViewController {
     
     /// URL is checked and saved, ready to import.
     func animateCheckedURL(validURL: TemporaryFileURL) {
-        
         if urlChecked {
             if let avAsset = assetForImport {
                 if let resolution = avAsset.resolutionSize() {
@@ -377,15 +375,14 @@ extension PasteViewController {
     }
 }
 
+// MARK: - Temporary URL extensions
 public protocol ManagedURL {
     var contentURL: URL { get }
     func keepAlive()
 }
-
 public extension ManagedURL {
     func keepAlive() { }
 }
-
 extension URL: ManagedURL {
     public var contentURL: URL { return self }
 }

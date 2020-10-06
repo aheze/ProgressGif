@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - For dark mode backwards compatability
+
 extension UIViewController {
     func lightenView(view: UIView) {
         if modalPresentationStyle == .fullScreen {

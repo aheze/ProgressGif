@@ -8,8 +8,10 @@
 import UIKit
 import AVFoundation
 
+// MARK: Rendering!
 extension ExportViewController {
     
+    /// add the bar layer
     private func addProgressBar(to layer: CALayer, drawingSize: CGSize, configuration: EditableEditingConfiguration) {
         
         let adjustedWidth = drawingSize.width * 1.05 /// extend out a little
@@ -36,6 +38,7 @@ extension ExportViewController {
         progressBarForegroundLayer.position = CGPoint(x: 0, y: 0)
         progressBarForegroundLayer.anchorPoint = CGPoint(x: 0, y: 0)
         
+        /// this is the progress bar animation (from left to right)
         let boundsAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.bounds))
         
         boundsAnimation.fromValue = NSValue(cgRect: startRect)
@@ -46,12 +49,11 @@ extension ExportViewController {
 
         boundsAnimation.beginTime = AVCoreAnimationBeginTimeAtZero
         progressBarForegroundLayer.add(boundsAnimation, forKey: "bounds animation")
-
         
         layer.addSublayer(progressBarForegroundLayer)
     }
     
-    /// to background, so need to calculate frame
+    /// add a shadow if needed to the background, so need to get origin in addition to width and height (`drawingRect` parameter)
     private func addShadow(to layer: CALayer, drawingRect: CGRect, configuration: EditableEditingConfiguration) {
         
         let insetPath = UIBezierPath(roundedRect: drawingRect, cornerRadius: configuration.edgeCornerRadius.getRadiusFromValue(withUnit: unit))
@@ -72,6 +74,7 @@ extension ExportViewController {
         
     }
     
+    /// round corners if needed
     private func maskCorners(for layer: CALayer, maskSize: CGSize, configuration: EditableEditingConfiguration) {
         
         let insetPath = UIBezierPath(roundedRect: CGRect(origin: .zero, size: maskSize), cornerRadius: configuration.edgeCornerRadius.getRadiusFromValue(withUnit: unit))
@@ -85,6 +88,7 @@ extension ExportViewController {
         layer.mask = maskLayer
     }
     
+    /// add edge insets if needed
     private func getAdjustedFrame(for videoSize: CGSize, configuration: EditableEditingConfiguration) -> CGRect {
         let scale = configuration.edgeInset.getScaleFromInsetValue()
         
@@ -97,7 +101,7 @@ extension ExportViewController {
         return adjustedVideoRect
     }
     
-    
+    // MARK: - Render!
     func render(from asset: AVURLAsset, with configuration: EditableEditingConfiguration, onComplete: @escaping (URL?) -> Void) {
         let composition = AVMutableComposition()
         
@@ -123,8 +127,8 @@ extension ExportViewController {
 
         compositionTrack.preferredTransform = assetTrack.preferredTransform
         
+        /// get adjusted orientation of the video
         let videoInfo = orientation(from: assetTrack.preferredTransform)
-        
         
         let videoSize: CGSize
         if videoInfo.isPortrait {
@@ -179,7 +183,9 @@ extension ExportViewController {
         instruction.timeRange = CMTimeRange(
             start: .zero,
             duration: composition.duration)
-        videoComposition.instructions = [instruction]
+        videoComposition.instructions = [instruction] /// apply the instructions
+        
+        /// get size/orientation instructions
         let layerInstruction = compositionLayerInstruction(
             for: compositionTrack,
             assetTrack: assetTrack, orientation: videoInfo.orientation)
@@ -239,6 +245,7 @@ extension ExportViewController {
         }
     }
     
+    /// instructions for the renderer relating to size and orientation
     private func compositionLayerInstruction(for track: AVCompositionTrack, assetTrack: AVAssetTrack, orientation: UIImage.Orientation) -> AVMutableVideoCompositionLayerInstruction {
         let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
         
@@ -255,7 +262,7 @@ extension ExportViewController {
         case .right:
             transform = CGAffineTransform(a: 0, b: 1, c: -1, d: 0, tx: assetSize.height, ty: 0)
          default:
-            print("DEFAULT ERROR")
+            print("Unsupported orientation")
         }
         
         instruction.setTransform(transform, at: .zero)
@@ -263,6 +270,8 @@ extension ExportViewController {
         return instruction
     }
     
+    
+    /// adjust the video orientation is the source has a different orientation
     private func orientation(from transform: CGAffineTransform) -> (orientation: UIImage.Orientation, isPortrait: Bool) {
         var assetOrientation = UIImage.Orientation.up
         var isPortrait = false
@@ -281,23 +290,3 @@ extension ExportViewController {
         return (assetOrientation, isPortrait)
     }
 }
-
-//extension CGAffineTransform {
-//    func getOrientation() -> (orientation: UIImage.Orientation, isPortrait: Bool) {
-//        var assetOrientation = UIImage.Orientation.up
-//        var isPortrait = false
-//        if self.a == 0 && self.b == 1.0 && self.c == -1.0 && self.d == 0 {
-//            assetOrientation = .right
-//            isPortrait = true
-//        } else if self.a == 0 && self.b == -1.0 && self.c == 1.0 && self.d == 0 {
-//            assetOrientation = .left
-//            isPortrait = true
-//        } else if self.a == 1.0 && self.b == 0 && self.c == 0 && self.d == 1.0 {
-//            assetOrientation = .up
-//        } else if self.a == -1.0 && self.b == 0 && self.c == 0 && self.d == -1.0 {
-//            assetOrientation = .down
-//        }
-//
-//        return (assetOrientation, isPortrait)
-//    }
-//}

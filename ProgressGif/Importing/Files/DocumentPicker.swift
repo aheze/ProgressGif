@@ -8,6 +8,8 @@
 import UIKit
 import MobileCoreServices
 
+// MARK: - reusable document picker
+
 protocol DocumentDelegate: class {
     func didPickDocument(document: Document?)
 }

@@ -10,6 +10,8 @@ import MobileCoreServices
 import Photos
 import SnapKit
 
+// MARK: - Import via Photos
+
 enum PhotoPermissionType {
     case askForAccess
     case goToSettings
@@ -25,8 +27,7 @@ class FromPhotosPicker: UIViewController {
     @IBOutlet var accessPermissionsView: UIView!
     @IBOutlet weak var accessPhotosGrantAccessButton: UIButton!
     @IBAction func grantAccessButtonPressed(_ sender: Any) {
-        print("grant access!")
-        if shouldGoToSettings {
+        if shouldGoToSettings { /// user denied permission to photo library before, go to settings
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }
@@ -56,10 +57,11 @@ class FromPhotosPicker: UIViewController {
         }
     }
     
-    var onDoneBlock: ((Bool) -> Void)?
+    var onDoneBlock: ((Bool) -> Void)? /// refresh the Gallery collection view once the user finished editing a gif
     
     var windowStatusBarHeight = CGFloat(0)
     
+    /// the top blur header
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var xButton: UIButton!
     @IBAction func xButtonPressed(_ sender: Any) {
@@ -81,9 +83,7 @@ class FromPhotosPicker: UIViewController {
             viewController.collectionType = .photos
             viewController.onDoneBlock = onDoneBlock
             viewController.displayPhotoPermissions = { [weak self] permissionType in
-                print("permission")
                 if let selfU = self {
-                    print("add subview")
                     selfU.referencePhotoPermissionsView.isUserInteractionEnabled = true
                     selfU.referencePhotoPermissionsView.addSubview(selfU.accessPermissionsView)
                     selfU.accessPermissionsView.snp.makeConstraints { (make) in
@@ -103,7 +103,6 @@ class FromPhotosPicker: UIViewController {
                         print("dismiss permission view")
                     }
                 }
-                
             }
             
             self.add(childViewController: viewController, inView: view)

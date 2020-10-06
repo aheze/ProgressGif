@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        
+        /// register defaults if user hasn't set yet
         UserDefaults.standard.register(defaults: [
             DefaultKeys.fps: FPS.normal.getString(),
             

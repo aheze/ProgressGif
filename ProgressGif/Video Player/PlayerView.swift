@@ -14,6 +14,8 @@ protocol UpdateSliderProgress: class {
     func finishedVideo()
 }
 
+// MARK: - The custom video player
+/// Used for previewing videos (when importing from Photos) and while editing.
 class PlayerView: UIView {
     
     enum PlayerContext {
@@ -46,7 +48,7 @@ class PlayerView: UIView {
     private var avAsset: AVAsset?
     var avURLAsset: AVURLAsset?
     
-    
+    /// the AVPlayer instance
     var player: AVPlayer? {
         get {
             return playerLayer.player
@@ -97,8 +99,6 @@ class PlayerView: UIView {
             case .readyToPlay:
                 
                 readyToPlay = true
-                print("ready now!")
-                
                 switch playerContext {
                 case .none:
                     playingState = .playing
@@ -193,7 +193,6 @@ class PlayerView: UIView {
     
     func seekToTime(to: CMTime, toleranceBefore: CMTime, toleranceAfter: CMTime, completionHandler: @escaping ((Bool) -> Void)) {
         if readyToPlay {
-            print("ready!")
             player?.seek(to: to, toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter, completionHandler: completionHandler)
         }
     }
@@ -206,15 +205,12 @@ class PlayerView: UIView {
         self.playerContext = playerContext
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
         
-//        PHCachingImageManager().requestAVAsset(forVideo: asset, options: nil) { (avAsset, audioMix, info) in
-            self.avAsset = asset
-            if let avAssetU = asset as? AVURLAsset {
-                self.setUpPlayerItem(with: avAssetU)
-                self.avURLAsset = avAssetU
-                
-            }
+        self.avAsset = asset
+        if let avAssetU = asset as? AVURLAsset {
+            self.setUpPlayerItem(with: avAssetU)
+            self.avURLAsset = avAssetU
             
-//        }
+        }
     }
     
     func play() {
