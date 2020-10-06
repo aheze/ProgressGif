@@ -35,6 +35,22 @@ Steps:
 1. Fork the repo
 2. Make your changes (just stick on the `main` branch)
 3. Make a pull request
+4. [Add yourself](https://github.com/aheze/ProgressGif/blob/3c1a062aca5a36c5af54f5975e44158daf2048c5/ProgressGif/About/Contributors.swift#L45) to the `Contributors` screen in the app!
+```Swift
+let aheze = Contributor()
+aheze.name = "Zheng"
+aheze.additions = "199,405"
+aheze.deletions = "29,470"
+aheze.profileName = "ahezeProfile" /// the image name inside Contributing.xcassets
+aheze.linkImageName = "Medium"
+if let profileURL = URL(string: "https://medium.com/@ahzzheng") {
+    aheze.link = profileURL
+}
+contributors.append(aheze)
+
+Don't forget to add your profile pic inside `Contributing.xcassets`!
+```
+<img src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/contributors.jpg" width="300">
 
 If you have any questions, feel free to open an issue, or leave a comment somewhere!
 
