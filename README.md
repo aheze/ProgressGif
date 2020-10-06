@@ -1,13 +1,13 @@
 <p align="center">
-  <img width="600" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png"><br>
-</p>
+  <a href="#"><img width="600" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png"></a>
+</p><br>
 
 <p align="center">
-  <img width="50" src="https://raw.githubusercontent.com/aheze/DeveloperAssets/master/Plus.png">
-</p>
+  <a href="#"><img width="50" src="https://raw.githubusercontent.com/aheze/DeveloperAssets/master/Plus.png"></a>
+</p><br>
    
 <p align="center">
-  <img src="https://hacktoberfest.digitalocean.com/assets/HF-full-logo-b05d5eb32b3f3ecc9b2240526104cf4da3187b8b61963dd9042fdc2536e4a76c.svg" align="center" width="400">
+  <a href="https://hacktoberfest.digitalocean.com/" target="_blank"><img src="https://hacktoberfest.digitalocean.com/assets/HF-full-logo-b05d5eb32b3f3ecc9b2240526104cf4da3187b8b61963dd9042fdc2536e4a76c.svg" align="center" width="400"></a>
 </p>
 
 <h2 align="center">
