@@ -31,8 +31,18 @@ All contributions are welcome! Here are some issues to get started on:
 - [ ] [Display Gif size when export finishes](https://github.com/aheze/ProgressGif/issues/5)
 - [ ] [Add haptic feedback when export finishes](https://github.com/aheze/ProgressGif/issues/4)
 
+Steps:
+1. Fork the repo
+2. Make your changes (just stick on the `main` branch)
+3. Make a pull request
+
+If you have any questions, feel free to open an issue, or leave a comment somewhere!
+
+
+
+
 ### App Store Download
-Download ProgressGif [on the App Store](https://apps.apple.com/us/app/id1526969349). Because it's open-source, it's free!
+Download ProgressGif on the [App Store](https://apps.apple.com/us/app/id1526969349). Because it's open-source, it's free!
 
 ### About
 **For the writers and bloggers out there**
