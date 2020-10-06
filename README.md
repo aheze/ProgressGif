@@ -1,5 +1,13 @@
 <p align="center">
-  <img width="600" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png">
+  <img width="600" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png"><br>
+</p>
+
+<p align="center">
+  <img width="50" src="https://raw.githubusercontent.com/aheze/DeveloperAssets/master/Plus.png">
+</p>
+   
+<p align="center">
+  <img src="https://hacktoberfest.digitalocean.com/assets/HF-full-logo-b05d5eb32b3f3ecc9b2240526104cf4da3187b8b61963dd9042fdc2536e4a76c.svg" align="center" width="600">
 </p>
 
 <h2 align="center">
@@ -7,7 +15,8 @@
 </h2>
 
 <p align="center">
-  <a href="https://apps.apple.com/us/app/id1526969349"><b>App Store Download</b></a> |
+   <a href="#hacktoberfest"><strong>Hacktoberfest!</strong></a> |
+  <a href="https://apps.apple.com/us/app/id1526969349"><strong>App Store Download</strong></a> |
   <a href="#about">About</a> |
   <a href="#features">Features</a> |
   <a href="#usage">Usage</a> |
@@ -15,6 +24,9 @@
   <a href="#license">License</a>
   <br>
 </p>
+
+### Hacktoberfest
+
 
 ### App Store Download
 Download ProgressGif [on the App Store](https://apps.apple.com/us/app/id1526969349). Because it's open-source, it's free!
