@@ -8,6 +8,11 @@
    
 <p align="center">
   <a href="https://hacktoberfest.digitalocean.com/"><img src="https://hacktoberfest.digitalocean.com/assets/HF-full-logo-b05d5eb32b3f3ecc9b2240526104cf4da3187b8b61963dd9042fdc2536e4a76c.svg" align="center" width="400"></a>
+  
+</p>
+
+<p align="center">
+  <a href="https://hacktoberfest.digitalocean.com/"><img src="https://hacktoberfestswaglist.com/img/SponsorsDarkBoxed.svg" align="center" width="300"></a>
 </p>
 
 <h2 align="center">
