@@ -13,10 +13,10 @@ class Contributor: NSObject {
     var name = "You"
     
     /// How many lines of code you added
-    var additions = "10"
+    var additions = 10
     
     /// How many lines of code you deleted
-    var deletions = "1"
+    var deletions = 1
     
     /// Image name (should match the filename in Contributing.xcassets)
     var profileName = "You"
@@ -37,8 +37,8 @@ extension AboutViewController {
     func populateContributors() {
         let aheze = Contributor()
         aheze.name = "Zheng"
-        aheze.additions = "199,405"
-        aheze.deletions = "29,470"
+        aheze.additions = 199405
+        aheze.deletions = 29470
         aheze.profileName = "ahezeProfile"
         aheze.linkImageName = "Medium"
         if let profileURL = URL(string: "https://medium.com/@ahzzheng") {
@@ -48,8 +48,8 @@ extension AboutViewController {
         
         let hkamran = Contributor()
         hkamran.name = "H. Kamran"
-        hkamran.additions = ""
-        hkamran.deletions = ""
+        hkamran.additions = 0
+        hkamran.deletions = 
         hkamran.profileName = "You"
         hkamran.linkSfSymbol = true
         hkamran.linkImageName = "link.circle.fill"
@@ -59,9 +59,9 @@ extension AboutViewController {
         contributors.append(hkamran)
         
         let you = Contributor()
-        you.name = "You could be here!"
-        you.additions = "??"
-        you.deletions = "??"
+        you.name = "Your name here"
+        you.additions = 0
+        you.deletions = 0
         you.profileName = "You"
         you.linkImageName = "GitHub"
         if let profileURL = URL(string: "https://github.com/aheze/ProgressGif") {
