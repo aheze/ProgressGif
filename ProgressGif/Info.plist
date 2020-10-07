@@ -17,9 +17,14 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>138</string>
+	<string>145</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSDocumentsFolderUsageDescription</key>
 	<string>Access the Files app to import video!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
