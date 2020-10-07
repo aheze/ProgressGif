@@ -99,13 +99,20 @@ extension AboutViewController: UITableViewDelegate, UITableViewDataSource {
             cell.profileImageView.image = profileImage
         }
         
-        if !contributor.linkSfSymbols {
+        if !contributor.linkSfSymbol {
             if let linkImage = UIImage(named: contributor.linkImageName)?.withRenderingMode(.alwaysOriginal) {
                 cell.linkButton.setImage(linkImage, for: .normal)
             }
         } else {
-            if let symbolImage = UIImage(systemName: contributor.linkImageName)? {
-                cell.linkButton.setImage(symbolImage, for: .normal)
+            if #available(iOS 13, *) {
+                let largeSymbolConfiguration = UIImage.SymbolConfiguration(textStyle: .largeTitle)
+                if let symbol = UIImage(systemName: contributor.linkImageName, withConfiguration: largeSymbolConfiguration) {
+                    cell.linkButton.setImage(symbol, for: .normal)
+                }
+            } else {
+                if let symbolImage = UIImage(named: contributor.linkImageName) {
+                    cell.linkButton.setImage(symbolImage, for: .normal)
+                }
             }
         }
         cell.link = contributor.link

@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - All contributors to ProgressGif!
 class Contributor: NSObject {
-    /// name to display in the table view
+    /// Display name
     var name = "You"
     
     /// How many lines of code you added
@@ -48,8 +48,8 @@ extension AboutViewController {
         
         let hkamran = Contributor()
         hkamran.name = "H. Kamran"
-        hkamran.additions = 0
-        hkamran.deletions = 
+        hkamran.additions = 1000
+        hkamran.deletions = 370
         hkamran.profileName = "You"
         hkamran.linkSfSymbol = true
         hkamran.linkImageName = "link.circle.fill"
