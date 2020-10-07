@@ -1,5 +1,3 @@
-## Hey! Thanks for forking my repo! I messed up though... I used `git filter-branch` to edit some previous commits. As a result the forks have a completely different history. So before you make any changes, you should delete this fork and re-fork again. Again, sorry :(<br><br>-aheze
-
 <p align="center">
   <a href="#"><img width="600" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png"></a>
 </p><br>
@@ -38,8 +36,6 @@ All contributions are welcome! Here are some issues to get started on:
 - [ ] [Display Gif size when export finishes](https://github.com/aheze/ProgressGif/issues/5)
 - [ ] [Add haptic feedback when export finishes](https://github.com/aheze/ProgressGif/issues/4)
 
----
-
 Steps:
 1. Fork the repo
 2. Make your changes (just stick on the `main` branch)
@@ -50,7 +46,7 @@ let aheze = Contributor()
 aheze.name = "Zheng"
 aheze.additions = "199,405"
 aheze.deletions = "29,470"
-aheze.profileName = "ahezeProfile"
+aheze.profileName = "ahezeProfile" /// name of your profile pic
 aheze.linkImageName = "Medium"
 if let profileURL = URL(string: "https://medium.com/@ahzzheng") {
     aheze.link = profileURL
@@ -118,7 +114,7 @@ Once again, all contributions are welcome! Here's some harder issues that I need
 #### Development
 1. Open Xcode's Welcome to Xcode screen (Window > Welcome to Xcode)
 2. Click "Clone an existing project"
-3. Enter the repository URL into the text field
+3. Enter the repository URL into the text field, then press "clone" (just stay on the `main` branch)
 4. Open a terminal, and navigate to the project directory, where the `.xcodeproj` file is
 5. If you haven't already, download [CocoaPods](https://cocoapods.org/) by typing in `sudo gem install cocoapods` in the terminal
 6. Type `pod install` to install the dependencies
