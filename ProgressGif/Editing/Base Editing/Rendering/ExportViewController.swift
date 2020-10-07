@@ -225,18 +225,20 @@ class ExportViewController: UIViewController {
             self.segmentIndicator.alpha = 0
             self.progressLabel.alpha = 0
             self.progressStatusLabel.alpha = 0
-        }) { _ in
-            self.processingLabel.text = "Here you go!"
+        }) { [weak self] _ in
+            self?.processingLabel.text = "Here you go!"
             
             UIView.animate(withDuration: 0.6, animations: {
-                self.processingLabel.alpha = 1
-                self.imageView.alpha = 1
+                self?.processingLabel.alpha = 1
+                self?.imageView.alpha = 1
             })
             
-            self.exportButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            self?.exportButton.setTitle("Export! \(gifURL.fileSizeString)", for: .normal)
+            
+            self?.exportButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
             UIView.animate(withDuration: 1, delay: 0.4, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
-                self.exportButton.alpha = 1
-                self.exportButton.transform = CGAffineTransform.identity
+                self?.exportButton.alpha = 1
+                self?.exportButton.transform = CGAffineTransform.identity
             }, completion: nil)
         }
         
