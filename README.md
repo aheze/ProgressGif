@@ -39,8 +39,9 @@ All contributions are welcome! Here are some issues to get started on:
 Steps:
 1. Fork the repo
 2. Make your changes (just stick on the `main` branch)
-3. Make a pull request
-4. [Add yourself](https://github.com/aheze/ProgressGif/blob/main/ProgressGif/About/Contributors.swift) to the `Contributors` screen in the app!
+3. For how to clone into Xcode, see <a href="#development">here</a>
+4. Make a pull request
+5. [Add yourself](https://github.com/aheze/ProgressGif/blob/main/ProgressGif/About/Contributors.swift) to the `Contributors` screen in the app!
 ```swift
 let aheze = Contributor()
 aheze.name = "Zheng"
