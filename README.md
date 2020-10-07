@@ -56,8 +56,10 @@ if let profileURL = URL(string: "https://medium.com/@ahzzheng") {
 contributors.append(aheze)
 ```
 
+
+<img src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/contributors.jpg" width="300" alt="Contributors screenshot">
+
 Don't forget to add your profile pic inside `Contributing.xcassets`!
-<img src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/contributors.jpg" width="300">
 
 If you have any questions, feel free to open an issue, or leave a comment somewhere!
 
