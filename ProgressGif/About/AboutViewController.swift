@@ -93,8 +93,8 @@ extension AboutViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AboutCellID", for: indexPath) as! AboutTableCell
         let contributor = contributors[indexPath.row]
         cell.nameLabel.text = contributor.name
-        cell.additionsLabel.text = "\(contributor.additions) ++"
-        cell.deletionsLabel.text = "\(contributor.deletions) --"
+        cell.additionsLabel.text = "\(contributor.additions.delimiter) ++"
+        cell.deletionsLabel.text = "\(contributor.deletions.delimiter) --"
         if let profileImage = UIImage(named: contributor.profileName) {
             cell.profileImageView.image = profileImage
         }
@@ -115,5 +115,18 @@ extension AboutViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
+    }
+}
+
+extension Int {
+    private static var numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+
+        return numberFormatter
+    }()
+
+    var delimiter: String {
+        return Int.numberFormatter.string(from: NSNumber(value: self)) ?? ""
     }
 }
