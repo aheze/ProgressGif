@@ -9,30 +9,32 @@ import Foundation
 
 // MARK: - All contributors to ProgressGif!
 class Contributor: NSObject {
-    
     /// name to display in the table view
-    var name = "Bob"
+    var name = "You"
     
-    /// how many lines of code you added
+    /// How many lines of code you added
     var additions = "10"
     
-    /// how many lines of code you deleted
+    /// How many lines of code you deleted
     var deletions = "1"
     
+    /// Image name (should match the filename in Contributing.xcassets)
     var profileName = "You"
-    /// name of the image that your link should display
-    var linkImageName = "photos"
     
-    /// the link to go to when clicked
+    /// Whether to use treat linkImageName as a SF Symbol
+    var linkSfSymbol = false
+    
+    /// Media image (Medium, GitHub, etc)
+    var linkImageName = "GitHub"
+    
+    /// The link to navigate to on click
     var link = URL(string: "https://google.com")
 }
 
 extension AboutViewController {
-    
     // MARK: - Add your name here if you contributed!
     
     func populateContributors() {
-        
         let aheze = Contributor()
         aheze.name = "Zheng"
         aheze.additions = "199,405"
@@ -43,6 +45,18 @@ extension AboutViewController {
             aheze.link = profileURL
         }
         contributors.append(aheze)
+        
+        let hkamran = Contributor()
+        hkamran.name = "H. Kamran"
+        hkamran.additions = ""
+        hkamran.deletions = ""
+        hkamran.profileName = "You"
+        hkamran.linkSfSymbol = true
+        hkamran.linkImageName = "link.circle.fill"
+        if let profileURL = URL(string: "https://hkamran.com") {
+            hkamran.link = profileURL
+        }
+        contributors.append(hkamran)
         
         let you = Contributor()
         you.name = "You could be here!"
