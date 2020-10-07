@@ -28,7 +28,7 @@ class Contributor: NSObject {
     var linkImageName = "GitHub"
     
     /// The link to navigate to on click
-    var link = URL(string: "https://google.com")
+    var link = URL(string: "https://github.com")
 }
 
 extension AboutViewController {
