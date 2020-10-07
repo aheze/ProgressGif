@@ -98,8 +98,15 @@ extension AboutViewController: UITableViewDelegate, UITableViewDataSource {
         if let profileImage = UIImage(named: contributor.profileName) {
             cell.profileImageView.image = profileImage
         }
-        if let linkImage = UIImage(named: contributor.linkImageName)?.withRenderingMode(.alwaysOriginal) {
-            cell.linkButton.setImage(linkImage, for: .normal)
+        
+        if !contributor.linkSfSymbols {
+            if let linkImage = UIImage(named: contributor.linkImageName)?.withRenderingMode(.alwaysOriginal) {
+                cell.linkButton.setImage(linkImage, for: .normal)
+            }
+        } else {
+            if let symbolImage = UIImage(systemName: contributor.linkImageName)? {
+                cell.linkButton.setImage(symbolImage, for: .normal)
+            }
         }
         cell.link = contributor.link
         
