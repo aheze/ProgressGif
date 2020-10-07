@@ -1,3 +1,4 @@
+## Hey! Thanks for forking my repo! I messed up though... I used `git filter-branch` to edit some previous commits. As a result the forks have a completely different history. So before you make any changes, you should delete this fork and re-fork again. Again, sorry :(<br><br>-aheze
 <p align="center">
   <img width="500" height="123.3" src="https://raw.githubusercontent.com/zjohnzheng/ProgressGif/main/Assets/Logos/Beta%20Logo.png?token=AL4C6P7HP63TJTRBSAFGCJK7C46UQ">
 </p>
