@@ -16,7 +16,7 @@ class AboutTableCell: UITableViewCell {
     @IBOutlet weak var additionsLabel: UILabel!
     @IBOutlet weak var deletionsLabel: UILabel!
     
-    var link = URL(string: "https://google.com")
+    var link = URL(string: "https://github.com/aheze/ProgressGif")
     @IBOutlet weak var linkButton: UIButton!
     @IBAction func linkButtonPressed(_ sender: Any) {
         if let urlToOpen = link {
