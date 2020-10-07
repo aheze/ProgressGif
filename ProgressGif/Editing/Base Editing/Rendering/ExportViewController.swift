@@ -218,6 +218,9 @@ class ExportViewController: UIViewController {
         processingLabel.layer.removeAllAnimations()
         
         imageView.setGifFromURL(gifURL)
+              
+        let feedbackGenerator = UINotificationFeedbackGenerator()
+        feedbackGenerator.prepare()
         
         UIView.animate(withDuration: 0.6, animations: {
             self.processingLabel.alpha = 0
@@ -228,14 +231,16 @@ class ExportViewController: UIViewController {
         }) { [weak self] _ in
             self?.processingLabel.text = "Here you go!"
             
+            feedbackGenerator.notificationOccurred(.success)
+            
             UIView.animate(withDuration: 0.6, animations: {
                 self?.processingLabel.alpha = 1
                 self?.imageView.alpha = 1
             })
             
             self?.exportButton.setTitle("Export! \(gifURL.fileSizeString)", for: .normal)
-            
             self?.exportButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            
             UIView.animate(withDuration: 1, delay: 0.4, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
                 self?.exportButton.alpha = 1
                 self?.exportButton.transform = CGAffineTransform.identity

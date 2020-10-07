@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12FF0E80252D6BA100C45164 /* SFSymbols.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12FF0E7F252D6BA100C45164 /* SFSymbols.xcassets */; };
 		4905C10024CCBAB9004C27EE /* CollectionVC+GalleryAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905C0FF24CCBAB9004C27EE /* CollectionVC+GalleryAnimation.swift */; };
 		4917842F252D365900AE4CBA /* EditingVC+PlayerControlsNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4917842E252D365900AE4CBA /* EditingVC+PlayerControlsNew.swift */; };
 		49178432252D366F00AE4CBA /* EditingVC+PlayerViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49178431252D366F00AE4CBA /* EditingVC+PlayerViewNew.swift */; };
@@ -84,6 +85,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12FF0E7F252D6BA100C45164 /* SFSymbols.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SFSymbols.xcassets; sourceTree = "<group>"; };
 		4905C0FF24CCBAB9004C27EE /* CollectionVC+GalleryAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionVC+GalleryAnimation.swift"; sourceTree = "<group>"; };
 		4917842E252D365900AE4CBA /* EditingVC+PlayerControlsNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+PlayerControlsNew.swift"; sourceTree = "<group>"; };
 		49178431252D366F00AE4CBA /* EditingVC+PlayerViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditingVC+PlayerViewNew.swift"; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				4980302A24B95D8F00AE277C /* Importing */,
 				496F7F8724BE3B010045DDCB /* Editing */,
 				4944CAB124B912F000E893AE /* Assets.xcassets */,
+				12FF0E7F252D6BA100C45164 /* SFSymbols.xcassets */,
 				495573BA24DB6C9700B10D8A /* Contributing.xcassets */,
 				4944CAB624B912F000E893AE /* Info.plist */,
 			);
@@ -401,9 +404,9 @@
 				495573BC24DB75C400B10D8A /* Carte */,
 				49B236BA24CA3BA900905917 /* Licenses.swift */,
 				49BE74F524D9E49D0098121A /* ImportInfoViewController.swift */,
+				495573B824DB672500B10D8A /* Contributors.swift */,
 				495573B424DB655F00B10D8A /* AboutViewController.swift */,
 				495573B624DB670B00B10D8A /* AboutTableCell.swift */,
-				495573B824DB672500B10D8A /* Contributors.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 				4944CAB224B912F000E893AE /* Assets.xcassets in Resources */,
 				4944CAB024B912EB00E893AE /* Main.storyboard in Resources */,
 				493E9BE924C0BA070068973B /* NumberStepper.xib in Resources */,
+				12FF0E80252D6BA100C45164 /* SFSymbols.xcassets in Resources */,
 				49F80C2F24BCF6E800C0C142 /* PlayerControlsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
