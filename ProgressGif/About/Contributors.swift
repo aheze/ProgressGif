@@ -48,8 +48,8 @@ extension AboutViewController {
         
         let hkamran = Contributor()
         hkamran.name = "H. Kamran"
-        hkamran.additions = 1000
-        hkamran.deletions = 370
+        hkamran.additions = 268
+        hkamran.deletions = 156409
         hkamran.profileName = "You"
         hkamran.linkSfSymbol = true
         hkamran.linkImageName = "link.circle.fill"
