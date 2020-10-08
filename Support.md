@@ -6,7 +6,7 @@ title: Support
 
 <p align="left">
   <a href="/ProgressGif">Home</a> |
-  <a href="/Support">Support</a>
+  <a href="/ProgressGif/PrivacyPolicy">Privacy Policy</a>
 </p>
 
 ## Need help? 
