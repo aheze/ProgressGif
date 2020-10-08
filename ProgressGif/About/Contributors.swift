@@ -44,6 +44,17 @@ extension AboutViewController {
         }
         contributors.append(aheze)
         
+        let thejayhaykid = Contributor()
+        thejayhaykid.name = "Jake"
+        thejayhaykid.additions = "1"
+        thejayhaykid.deletions = "1"
+        thejayhaykid.profileName = "thejayhaykidProfile"
+        thejayhaykid.linkImageName = "GitHub"
+        if let profileURL = URL(string: "https://github.com/thejayhaykid") {
+            thejayhaykid.link = profileURL
+        }
+        contributors.append(thejayhaykid)
+        
         let you = Contributor()
         you.name = "You could be here!"
         you.additions = "??"
