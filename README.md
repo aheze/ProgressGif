@@ -46,8 +46,8 @@ Steps:
 ```swift
 let aheze = Contributor()
 aheze.name = "Zheng"
-aheze.additions = "199,405"
-aheze.deletions = "29,470"
+aheze.additions = 199405
+aheze.deletions = 29470
 aheze.profileName = "ahezeProfile" /// name of your profile pic
 aheze.linkImageName = "Medium"
 if let profileURL = URL(string: "https://medium.com/@ahzzheng") {
