@@ -68,6 +68,17 @@ extension AboutViewController {
         }
         contributors.append(hkamran)
         
+        let tiannahenrylewis = Contributor()
+        tiannahenrylewis.name = "Tianna Henry-Lewis"
+        tiannahenrylewis.additions = 24
+        tiannahenrylewis.deletions = 24
+        tiannahenrylewis.profileName = "tiannahenrylewisProfile"
+        tiannahenrylewis.linkImageName = "Medium"
+        if let profileURL = URL(string: "https://medium.com/@tianna_lewis05") {
+            tiannahenrylewis.link = profileURL
+        }
+        contributors.append(tiannahenrylewis)
+        
         let you = Contributor()
         you.name = "Your name here"
         you.additions = 0
