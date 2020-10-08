@@ -9,34 +9,36 @@ import Foundation
 
 // MARK: - All contributors to ProgressGif!
 class Contributor: NSObject {
+    /// Display name
+    var name = "You"
     
-    /// name to display in the table view
-    var name = "Bob"
+    /// How many lines of code you added
+    var additions = 10
     
-    /// how many lines of code you added
-    var additions = "10"
+    /// How many lines of code you deleted
+    var deletions = 1
     
-    /// how many lines of code you deleted
-    var deletions = "1"
-    
+    /// Image name (should match the filename in Contributing.xcassets)
     var profileName = "You"
-    /// name of the image that your link should display
-    var linkImageName = "photos"
     
-    /// the link to go to when clicked
-    var link = URL(string: "https://google.com")
+    /// Whether to use treat linkImageName as a SF Symbol
+    var linkSfSymbol = false
+    
+    /// Media image (Medium, GitHub, etc)
+    var linkImageName = "GitHub"
+    
+    /// The link to navigate to on click
+    var link = URL(string: "https://github.com")
 }
 
 extension AboutViewController {
-    
     // MARK: - Add your name here if you contributed!
     
     func populateContributors() {
-        
         let aheze = Contributor()
         aheze.name = "Zheng"
-        aheze.additions = "199,405"
-        aheze.deletions = "29,470"
+        aheze.additions = 199405
+        aheze.deletions = 29470
         aheze.profileName = "ahezeProfile"
         aheze.linkImageName = "Medium"
         if let profileURL = URL(string: "https://medium.com/@ahzzheng") {
@@ -54,11 +56,22 @@ extension AboutViewController {
             thejayhaykid.link = profileURL
         }
         contributors.append(thejayhaykid)
+        let hkamran = Contributor()
+        hkamran.name = "H. Kamran"
+        hkamran.additions = 268
+        hkamran.deletions = 156409
+        hkamran.profileName = "You"
+        hkamran.linkSfSymbol = true
+        hkamran.linkImageName = "link.circle.fill"
+        if let profileURL = URL(string: "https://hkamran.com") {
+            hkamran.link = profileURL
+        }
+        contributors.append(hkamran)
         
         let you = Contributor()
-        you.name = "You could be here!"
-        you.additions = "??"
-        you.deletions = "??"
+        you.name = "Your name here"
+        you.additions = 0
+        you.deletions = 0
         you.profileName = "You"
         you.linkImageName = "GitHub"
         if let profileURL = URL(string: "https://github.com/aheze/ProgressGif") {

@@ -93,13 +93,27 @@ extension AboutViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AboutCellID", for: indexPath) as! AboutTableCell
         let contributor = contributors[indexPath.row]
         cell.nameLabel.text = contributor.name
-        cell.additionsLabel.text = "\(contributor.additions) ++"
-        cell.deletionsLabel.text = "\(contributor.deletions) --"
+        cell.additionsLabel.text = "\(contributor.additions.delimiter) ++"
+        cell.deletionsLabel.text = "\(contributor.deletions.delimiter) --"
         if let profileImage = UIImage(named: contributor.profileName) {
             cell.profileImageView.image = profileImage
         }
-        if let linkImage = UIImage(named: contributor.linkImageName)?.withRenderingMode(.alwaysOriginal) {
-            cell.linkButton.setImage(linkImage, for: .normal)
+        
+        if !contributor.linkSfSymbol {
+            if let linkImage = UIImage(named: contributor.linkImageName)?.withRenderingMode(.alwaysOriginal) {
+                cell.linkButton.setImage(linkImage, for: .normal)
+            }
+        } else {
+            if #available(iOS 13, *) {
+                let largeSymbolConfiguration = UIImage.SymbolConfiguration(textStyle: .largeTitle)
+                if let symbol = UIImage(systemName: contributor.linkImageName, withConfiguration: largeSymbolConfiguration) {
+                    cell.linkButton.setImage(symbol, for: .normal)
+                }
+            } else {
+                if let symbolImage = UIImage(named: contributor.linkImageName) {
+                    cell.linkButton.setImage(symbolImage, for: .normal)
+                }
+            }
         }
         cell.link = contributor.link
         
@@ -108,5 +122,18 @@ extension AboutViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
+    }
+}
+
+extension Int {
+    private static var numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+
+        return numberFormatter
+    }()
+
+    var delimiter: String {
+        return Int.numberFormatter.string(from: NSNumber(value: self)) ?? ""
     }
 }
