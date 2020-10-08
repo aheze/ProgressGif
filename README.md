@@ -32,9 +32,10 @@
 
 ### Hacktoberfest
 All contributions are welcome! Here are some issues to get started on:
-- [ ] [Make dark mode look better](https://github.com/aheze/ProgressGif/issues/6)
+- [x] [Make dark mode look better](https://github.com/aheze/ProgressGif/issues/6)
 - [x] [Display Gif size when export finishes](https://github.com/aheze/ProgressGif/issues/5)
 - [x] [Add haptic feedback when export finishes](https://github.com/aheze/ProgressGif/issues/4)
+- [ ] [Plus button background doesn't change when Dark Mode is toggled](https://github.com/aheze/ProgressGif/issues/12)
 
 Steps:
 1. Fork the repo
