@@ -4,7 +4,13 @@
       "color" : {
         "color-space" : "srgb",
         "components" : {
+<<<<<<< HEAD:ProgressGif/Assets.xcassets/PrimaryBackgroundColor.colorset/Contents.json
           "alpha" : "0.200",
+||||||| merged common ancestors:ProgressGif/Assets.xcassets/YellorangeDarkerBackground.colorset/Contents.json
+          "alpha" : "1.000",
+=======
+          "alpha" : "0.750",
+>>>>>>> fe38b9ab47580119f7b9969e1e07baef934c5948:ProgressGif/Assets.xcassets/YellorangeDarkerBackground.colorset/Contents.json
           "blue" : "0.589",
           "green" : "0.860",
           "red" : "1.000"
@@ -22,10 +28,22 @@
       "color" : {
         "color-space" : "srgb",
         "components" : {
+<<<<<<< HEAD:ProgressGif/Assets.xcassets/PrimaryBackgroundColor.colorset/Contents.json
           "alpha" : "0.200",
           "blue" : "0.777",
           "green" : "0.917",
           "red" : "0.998"
+||||||| merged common ancestors:ProgressGif/Assets.xcassets/YellorangeDarkerBackground.colorset/Contents.json
+          "alpha" : "1.000",
+          "blue" : "0.333",
+          "green" : "0.573",
+          "red" : "0.620"
+=======
+          "alpha" : "0.400",
+          "blue" : "0.777",
+          "green" : "0.917",
+          "red" : "0.998"
+>>>>>>> fe38b9ab47580119f7b9969e1e07baef934c5948:ProgressGif/Assets.xcassets/YellorangeDarkerBackground.colorset/Contents.json
         }
       },
       "idiom" : "universal"

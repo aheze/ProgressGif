@@ -23,8 +23,16 @@
         "color-space" : "srgb",
         "components" : {
           "alpha" : "1.000",
+<<<<<<< HEAD:ProgressGif/Assets.xcassets/SecondaryBackgroundColor.colorset/Contents.json
           "blue" : "0.000",
           "green" : "0.766",
+||||||| merged common ancestors:ProgressGif/Assets.xcassets/YellorangeText.colorset/Contents.json
+          "blue" : "0.545",
+          "green" : "0.881",
+=======
+          "blue" : "0.000",
+          "green" : "0.740",
+>>>>>>> fe38b9ab47580119f7b9969e1e07baef934c5948:ProgressGif/Assets.xcassets/YellorangeText.colorset/Contents.json
           "red" : "1.000"
         }
       },
