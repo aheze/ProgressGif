@@ -33,8 +33,8 @@
 ### Hacktoberfest
 All contributions are welcome! Here are some issues to get started on:
 - [ ] [Make dark mode look better](https://github.com/aheze/ProgressGif/issues/6)
-- [ ] [Display Gif size when export finishes](https://github.com/aheze/ProgressGif/issues/5)
-- [ ] [Add haptic feedback when export finishes](https://github.com/aheze/ProgressGif/issues/4)
+- [x] [Display Gif size when export finishes](https://github.com/aheze/ProgressGif/issues/5)
+- [x] [Add haptic feedback when export finishes](https://github.com/aheze/ProgressGif/issues/4)
 
 Steps:
 1. Fork the repo
