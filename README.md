@@ -1,29 +1,104 @@
 <p align="center">
-  <img width="300" height="69.20668058455" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png">
+  <a href="#"><img width="600" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png"></a>
+</p><br>
+
+<p align="center">
+  <a href="#"><img width="50" src="https://raw.githubusercontent.com/aheze/DeveloperAssets/master/Plus.png"></a>
+</p><br>
+   
+<p align="center">
+  <a href="https://hacktoberfest.digitalocean.com/"><img src="https://hacktoberfest.digitalocean.com/assets/HF-full-logo-b05d5eb32b3f3ecc9b2240526104cf4da3187b8b61963dd9042fdc2536e4a76c.svg" align="center" width="400"></a>
+  
 </p>
 
 <p align="center">
-  <b>Add progress bars to gifs!</b><br>
-  <a href="https://apps.apple.com/us/app/id1526969349"><b>App Store Download</b></a> |
+  <a href="https://hacktoberfest.digitalocean.com/"><img src="https://hacktoberfestswaglist.com/img/SponsorsDarkBoxed.svg" align="center" width="300"></a>
+</p>
+
+<h2 align="center">
+  <strong>Add progress bars to gifs!</strong>
+</h2>
+
+<p align="center">
+  <a href="#hacktoberfest"><strong>Hacktoberfest!</strong></a> |
+  <a href="https://apps.apple.com/us/app/id1526969349"><strong>App Store Download</strong></a> |
+  <a href="#about">About</a> |
   <a href="#features">Features</a> |
   <a href="#usage">Usage</a> |
-  <a href="#about">About</a> |
-  <a href="#icense">License</a> |
-  <a href="#contributing">Contributing</a>
+  <a href="#contributing">Contributing</a> |
+  <a href="#license">License</a>
   <br>
 </p>
 
+<p align="center">
+  <a href="/ProgressGif/Support">Support</a> |
+  <a href="/ProgressGif/PrivacyPolicy">Privacy Policy</a>
+</p>
+
+### Hacktoberfest
+All contributions are welcome! Here are some issues to get started on:
+- [x] [Make dark mode look better](https://github.com/aheze/ProgressGif/issues/6)
+- [x] [Display Gif size when export finishes](https://github.com/aheze/ProgressGif/issues/5)
+- [x] [Add haptic feedback when export finishes](https://github.com/aheze/ProgressGif/issues/4)
+- [ ] [Plus button background doesn't change when Dark Mode is toggled](https://github.com/aheze/ProgressGif/issues/12)
+
+Steps:
+1. Fork the repo
+2. Make your changes (just stick on the `main` branch)
+3. For how to clone into Xcode, see <a href="#development">here</a>
+4. Make a pull request
+5. [Add yourself](https://github.com/aheze/ProgressGif/blob/main/ProgressGif/About/Contributors.swift) to the `Contributors` screen in the app!
+```swift
+let aheze = Contributor()
+aheze.name = "Zheng"
+aheze.additions = 199405
+aheze.deletions = 29470
+aheze.profileName = "ahezeProfile" /// name of your profile pic
+aheze.linkImageName = "Medium"
+if let profileURL = URL(string: "https://medium.com/@ahzzheng") {
+    aheze.link = profileURL
+}
+contributors.append(aheze)
+```
+
+
+<img src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/contributors.jpg" width="300" alt="Contributors screenshot">
+
+Don't forget to add your profile pic inside `Contributing.xcassets`!
+
+If you have any questions, feel free to open an issue, or leave a comment somewhere!
+
+---
+
 ### App Store Download
-Get it here: [https://apps.apple.com/us/app/id1526969349](https://apps.apple.com/us/app/id1526969349)<br>ProgressGif is [open-source](https://github.com/aheze/ProgressGif), which means it's free!
+Download ProgressGif on the [App Store](https://apps.apple.com/us/app/id1526969349). Because it's open-source, it's free!
+
+---
+
+### About
+**For the writers and bloggers out there**
+
+Tutorials with only words are boring, so we add images. And if they need to be more detailed, we add video... but video isn't always the best choice.
+- Readers may not want to turn on audio
+- If they're on their phone, the video will open in a full-screen modal, which disrupts the reading experience
+- Some blogging sites don't allow video embeds
+
+That's why we use GIFs instead! (Yes, GIFs are memory-inefficient, but they're really convenient, and ProgressGif has options for framerate)
+
+ProgressGif is an iOS app made with Swift 5 and UIKit, inspired by this [article](https://www.excelcampus.com/tips-shortcuts/add-progress-bar-to-gif/). SwiftUI would have be fine for building the UI, but because there's a lot of under-the-hood work with video rendering, I thought it would be better to just go with UIKit.
+
+---
 
 ### Features
-ProgressGif does one thing only: Add progress bars to gifs.
+ProgressGif does one thing only: Add progress bars to GIFs.
 
 | Example 1 | Example 2 | Example 3 | Example 4 | Example 5 | Example 6 |
 | :-------------: |:-------------:| :-----:| :-----:| :-----:| :-----:|
 | ![Example1] | ![Example2] | ![Example3] | ![Example4] | ![Example5] | ![Example6] |
 
 Yeah, that's it. ProgressGif serves one purpose, and one purpose only... but in a highly customizable way! Customize height, bar color, bar background color, edge inset, corner radius… and shadows are in beta!
+
+---
 
 ### Usage
 
@@ -32,19 +107,30 @@ Yeah, that's it. ProgressGif serves one purpose, and one purpose only... but in 
 | Import video      | Add the bar | Export |
 | ![Step1] | ![Step2] |![Step3] |
 
-*Gifs generated by ProgressGif*
+*GIFs generated by ProgressGif*
 
-### About
-**For the writers and bloggers out there:**
+---
 
-Tutorials with only words are boring, so we add images. And if they need to be more detailed, we add video... but video isn't always the best choice.
-- Readers may not want to turn on audio.
-- If they're on their phone, the video will open in a full-screen modal. That disrupts the reading experience.
-- Some blogging sites don't allow video embeds
+### Contributing
+Once again, all contributions are welcome! Here's some harder issues that I need help on:
+- [x] Horizontal layout
+- [ ] Allow picking colors with transparency
+- [ ] Allow picking opaque color for background (so that shadows show up)
+- [ ] Export as MOV instead of just GIF only
 
-That's why we use gifs instead! (Yes, gifs are memory-inefficient, but they're really convenient... and ProgressGif has options for framerate.)
+#### Development
+1. Open Xcode's Welcome to Xcode screen (Window > Welcome to Xcode)
+2. Click "Clone an existing project"
+3. Enter the repository URL into the text field, then press "clone" (just stay on the `main` branch)
+4. Open a terminal, and navigate to the project directory, where the `.xcodeproj` file is
+5. If you haven't already, download [CocoaPods](https://cocoapods.org/) by typing in `sudo gem install cocoapods` in the terminal
+6. Type `pod install` to install the dependencies
+7. Open the `.xcworkspace` file
+8. Use the `.xcworkspace` file to write your code in
 
-ProgressGif is an iOS app made with Swift 5 and UIKit, inspired by this [article](https://www.excelcampus.com/tips-shortcuts/add-progress-bar-to-gif/). SwiftUI would have be fine for building the UI, but because there's a lot of under-the-hood work with video rendering, I thought it would be better to just go with UIKit.
+*ProgressGif is inspired by this awesome [article](https://www.excelcampus.com/tips-shortcuts/add-progress-bar-to-gif/).*
+
+---
 
 ### License
 ```
@@ -70,15 +156,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-### Contributing
-Contributions are welcome!<br>
-Help wanted:
-- [x] Horizontal layout
-- [ ] Allow picking colors with transparency
-- [ ] Allow picking opaque color for background (so that shadows show up)
-- [ ] Export as MOV instead of gif only
-
-*ProgressGif is inspired by this awesome [article](https://www.excelcampus.com/tips-shortcuts/add-progress-bar-to-gif/).*
 
 [example1]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Examples/13A3607F-1BE9-4CB4-9642-3155EB44D1BE.gif
 [example2]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Examples/4EFA4E62-E533-4244-A469-27B771878CCF.gif
