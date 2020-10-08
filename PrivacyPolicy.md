@@ -6,7 +6,7 @@ title: Privacy Policy
 
 <p align="left">
   <a href="/ProgressGif">Home</a> |
-  <a href="/Support">Support</a>
+  <a href="/ProgressGif/Support">Support</a>
 </p>
 
 Zheng built the ProgressGif app as a Free app. This SERVICE is provided by Zheng at no cost and is intended for use as is.
