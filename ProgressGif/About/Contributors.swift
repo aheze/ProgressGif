@@ -46,8 +46,8 @@ extension AboutViewController {
         
         let thejayhaykid = Contributor()
         thejayhaykid.name = "Jake"
-        thejayhaykid.additions = "1"
-        thejayhaykid.deletions = "1"
+        thejayhaykid.additions = "324"
+        thejayhaykid.deletions = "244"
         thejayhaykid.profileName = "thejayhaykidProfile"
         thejayhaykid.linkImageName = "GitHub"
         if let profileURL = URL(string: "https://github.com/thejayhaykid") {
