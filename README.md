@@ -30,6 +30,11 @@
   <br>
 </p>
 
+<p align="center">
+  <a href="/ProgressGif/Support">Support</a>
+  <a href="/ProgressGif/PrivacyPolicy">Privacy Policy</a>
+</p>
+
 ### Hacktoberfest
 All contributions are welcome! Here are some issues to get started on:
 - [x] [Make dark mode look better](https://github.com/aheze/ProgressGif/issues/6)
