@@ -31,7 +31,7 @@
 </p>
 
 <p align="center">
-  <a href="/ProgressGif/Support">Support</a>
+  <a href="/ProgressGif/Support">Support</a> |
   <a href="/ProgressGif/PrivacyPolicy">Privacy Policy</a>
 </p>
 
