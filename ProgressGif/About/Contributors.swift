@@ -77,7 +77,7 @@ extension AboutViewController {
         if let profileURL = URL(string: "https://medium.com/@tianna_lewis05") {
             tiannahenrylewis.link = profileURL
         }
-        contributors.append(tiannahenrylewis)       
+        contributors.append(tiannahenrylewis)
 
         let janakshah = Contributor()
         janakshah.name = "Janak Shah"
@@ -91,7 +91,7 @@ extension AboutViewController {
         }
         contributors.append(janakshah)
 
-	let you = Contributor()
+        let you = Contributor()
         you.name = "Your name here"
         you.additions = 0
         you.deletions = 0
