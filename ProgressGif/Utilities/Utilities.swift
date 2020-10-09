@@ -246,6 +246,11 @@ class CustomButton: UIButton {
             layer.insertSublayer(shadowLayer, at: 0)
         }
     }
+    
+    override func tintColorDidChange() {
+        shadowLayer.fillColor = ColorCompatibility.systemBackground.cgColor
+        shadowLayer.shadowColor = ColorCompatibility.secondaryLabel.cgColor
+    }
 }
 
 /// for the video playback

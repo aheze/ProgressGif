@@ -69,7 +69,7 @@ class AboutViewController: UIViewController {
         
         populateContributors()
         
-        tableView.maxHeight = 400
+        tableView.maxHeight = 260
         tableView.delegate = self
         tableView.dataSource = self
         

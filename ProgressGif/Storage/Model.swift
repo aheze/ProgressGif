@@ -175,7 +175,7 @@ class EditableVideoMetadata: NSObject {
 }
 class EditableEditingConfiguration: NSObject {
     var barHeight = 5
-    var barForegroundColor = UIColor(named: "Yellorange")!
+    var barForegroundColor = UIColor(named: "PrimaryColor")!
     var barBackgroundColor = #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
     
     var barForegroundColorHex = "FFB500"

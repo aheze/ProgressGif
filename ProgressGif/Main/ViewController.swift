@@ -334,7 +334,7 @@ class ViewController: UIViewController {
             addButton.setImage(UIImage(systemName: "plus")!, for: .normal)
         } else {
             addButton.setImage(UIImage(named: "largerPlus")!, for: .normal)
-            addButton.tintColor = UIColor(named: "Yellorange")
+            addButton.tintColor = UIColor(named: "PrimaryColor")
             addButton.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
             // Fallback on earlier versions
         }
