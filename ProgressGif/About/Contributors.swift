@@ -77,9 +77,21 @@ extension AboutViewController {
         if let profileURL = URL(string: "https://medium.com/@tianna_lewis05") {
             tiannahenrylewis.link = profileURL
         }
-        contributors.append(tiannahenrylewis)
-        
-        let you = Contributor()
+        contributors.append(tiannahenrylewis)       
+
+        let janakshah = Contributor()
+        janakshah.name = "Janak Shah"
+        janakshah.additions = 9
+        janakshah.deletions = 7
+        janakshah.profileName = "You"
+        janakshah.linkSfSymbol = true
+        janakshah.linkImageName = "link.circle.fill"
+        if let profileURL = URL(string: "https://janakshah.com") {
+            janakshah.link = profileURL
+        }
+        contributors.append(janakshah)
+
+	let you = Contributor()
         you.name = "Your name here"
         you.additions = 0
         you.deletions = 0
