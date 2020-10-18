@@ -495,11 +495,11 @@
 			buildConfigurationList = 4944CAB924B912F000E893AE /* Build configuration list for PBXNativeTarget "ProgressGif" */;
 			buildPhases = (
 				C6B19C79D76940A76B453560 /* [CP] Check Pods Manifest.lock */,
-				49B8DD2824DF513A00F9D164 /* ShellScript */,
 				4944CAA124B912EB00E893AE /* Sources */,
 				4944CAA224B912EB00E893AE /* Frameworks */,
 				4944CAA324B912EB00E893AE /* Resources */,
 				16371A9821ED3A6DCA0449CC /* [CP] Embed Pods Frameworks */,
+				49582DF3253CB0660006B957 /* Build Increment */,
 			);
 			buildRules = (
 			);
@@ -577,7 +577,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ProgressGif/Pods-ProgressGif-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		49B8DD2824DF513A00F9D164 /* ShellScript */ = {
+		49582DF3253CB0660006B957 /* Build Increment */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -586,13 +586,14 @@
 			);
 			inputPaths = (
 			);
+			name = "Build Increment";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#!/bin/bash\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN += 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n\n";
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
 		};
 		C6B19C79D76940A76B453560 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -839,7 +840,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 195;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = ProgressGif/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
@@ -852,6 +853,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -863,7 +865,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 195;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = YA533DMD5J;
 				INFOPLIST_FILE = ProgressGif/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
@@ -876,6 +878,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
