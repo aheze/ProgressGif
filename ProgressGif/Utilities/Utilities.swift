@@ -247,7 +247,8 @@ class CustomButton: UIButton {
         }
     }
     
-    override func tintColorDidChange() {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
         shadowLayer.fillColor = ColorCompatibility.systemBackground.cgColor
         shadowLayer.shadowColor = ColorCompatibility.secondaryLabel.cgColor
     }
