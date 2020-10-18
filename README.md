@@ -35,7 +35,9 @@ All contributions are welcome! Here are some issues to get started on:
 - [x] [Make dark mode look better](https://github.com/aheze/ProgressGif/issues/6)
 - [x] [Display Gif size when export finishes](https://github.com/aheze/ProgressGif/issues/5)
 - [x] [Add haptic feedback when export finishes](https://github.com/aheze/ProgressGif/issues/4)
-- [ ] [Plus button background doesn't change when Dark Mode is toggled](https://github.com/aheze/ProgressGif/issues/12)
+- [x] [Plus button background doesn't change when Dark Mode is toggled](https://github.com/aheze/ProgressGif/issues/12)
+
+**UPDATE 10/18/2020:** It seems that these issues have all been resolved... but are always, there are <a href="#contributing">more</a>!
 
 Steps:
 1. Fork the repo
