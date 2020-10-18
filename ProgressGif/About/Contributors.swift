@@ -37,8 +37,8 @@ extension AboutViewController {
     func populateContributors() {
         let aheze = Contributor()
         aheze.name = "Zheng"
-        aheze.additions = 199405
-        aheze.deletions = 29470
+        aheze.additions = 204606
+        aheze.deletions = 32811
         aheze.profileName = "ahezeProfile"
         aheze.linkImageName = "Medium"
         if let profileURL = URL(string: "https://aheze.medium.com/") {
@@ -46,20 +46,10 @@ extension AboutViewController {
         }
         contributors.append(aheze)
         
-        let thejayhaykid = Contributor()
-        thejayhaykid.name = "Jake"
-        thejayhaykid.additions = 324
-        thejayhaykid.deletions = 244
-        thejayhaykid.profileName = "thejayhaykidProfile"
-        thejayhaykid.linkImageName = "GitHub"
-        if let profileURL = URL(string: "https://github.com/thejayhaykid") {
-            thejayhaykid.link = profileURL
-        }
-        contributors.append(thejayhaykid)
         let hkamran = Contributor()
         hkamran.name = "H. Kamran"
-        hkamran.additions = 268
-        hkamran.deletions = 156409
+        hkamran.additions = 1423
+        hkamran.deletions = 157562
         hkamran.profileName = "You"
         hkamran.linkSfSymbol = true
         hkamran.linkImageName = "link.circle.fill"
@@ -68,21 +58,32 @@ extension AboutViewController {
         }
         contributors.append(hkamran)
         
+        let thejayhaykid = Contributor()
+        thejayhaykid.name = "Jake"
+        thejayhaykid.additions = 473
+        thejayhaykid.deletions = 388
+        thejayhaykid.profileName = "thejayhaykidProfile"
+        thejayhaykid.linkImageName = "GitHub"
+        if let profileURL = URL(string: "https://github.com/thejayhaykid") {
+            thejayhaykid.link = profileURL
+        }
+        contributors.append(thejayhaykid)
+        
         let tiannahenrylewis = Contributor()
         tiannahenrylewis.name = "Tianna Henry-Lewis"
-        tiannahenrylewis.additions = 24
-        tiannahenrylewis.deletions = 24
+        tiannahenrylewis.additions = 107
+        tiannahenrylewis.deletions = 73
         tiannahenrylewis.profileName = "tiannahenrylewisProfile"
         tiannahenrylewis.linkImageName = "Medium"
-        if let profileURL = URL(string: "https://medium.com/@tianna_lewis05") {
+        if let profileURL = URL(string: "https://tiannahenrylewis.medium.com/") {
             tiannahenrylewis.link = profileURL
         }
         contributors.append(tiannahenrylewis)
 
         let janakshah = Contributor()
         janakshah.name = "Janak Shah"
-        janakshah.additions = 9
-        janakshah.deletions = 7
+        janakshah.additions = 31
+        janakshah.deletions = 15
         janakshah.profileName = "You"
         janakshah.linkSfSymbol = true
         janakshah.linkImageName = "link.circle.fill"
@@ -90,6 +91,8 @@ extension AboutViewController {
             janakshah.link = profileURL
         }
         contributors.append(janakshah)
+        
+        /// If you contributed, add yourself here!
 
         let you = Contributor()
         you.name = "Your name here"
