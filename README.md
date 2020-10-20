@@ -52,7 +52,7 @@ aheze.additions = 199405
 aheze.deletions = 29470
 aheze.profileName = "ahezeProfile" /// name of your profile pic
 aheze.linkImageName = "Medium"
-if let profileURL = URL(string: "https://medium.com/@ahzzheng") {
+if let profileURL = URL(string: "https://aheze.medium.com/") {
     aheze.link = profileURL
 }
 contributors.append(aheze)
