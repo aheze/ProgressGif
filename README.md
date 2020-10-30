@@ -133,7 +133,7 @@ Once again, all contributions are welcome! Here's some harder issues that I need
 ```
 MIT License
 
-Copyright (c) 2020 Zheng
+Copyright (c) 2020 A. Zheng
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
