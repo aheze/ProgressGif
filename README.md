@@ -116,14 +116,14 @@ Once again, all contributions are welcome! Here's some harder issues that I need
 - [ ] Export as MOV instead of just GIF only
 
 #### Development
-1. Open Xcode's Welcome to Xcode screen (Window > Welcome to Xcode)
+1. Open Xcode's "Welcome to Xcode" screen (Window → Welcome to Xcode)
 2. Click "Clone an existing project"
 3. Enter the repository URL into the text field, then press "clone" (just stay on the `main` branch)
-4. Open a terminal, and navigate to the project directory, where the `.xcodeproj` file is
+4. Open the terminal, and navigate to the project directory, where the `.xcodeproj` file is
 5. If you haven't already, download [CocoaPods](https://cocoapods.org/) by typing in `sudo gem install cocoapods` in the terminal
 6. Type `pod install` to install the dependencies
 7. Open the `.xcworkspace` file
-8. Use the `.xcworkspace` file to write your code in
+8. Make your changes in the `.xcworkspace` file!
 
 *ProgressGif is inspired by this awesome [article](https://www.excelcampus.com/tips-shortcuts/add-progress-bar-to-gif/).*
 
