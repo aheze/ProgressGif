@@ -7,7 +7,6 @@
 </h2>
 
 <p align="center">
-  <a href="#hacktoberfest"><strong>Hacktoberfest!</strong></a> |
   <a href="https://apps.apple.com/us/app/id1526969349"><strong>App Store Download</strong></a> |
   <a href="#about">About</a> |
   <a href="#features">Features</a> |
@@ -17,9 +16,6 @@
   <br>
 </p>
 
-
-
----
 
 ### App Store Download
 Download ProgressGif on the [App Store](https://apps.apple.com/us/app/id1526969349). Because it's open-source, it's free!
@@ -71,8 +67,15 @@ Once again, all contributions are welcome! Here's some harder issues that I need
 
 Steps:
 1. Fork the repo
-2. Make your changes (just stick on the `main` branch)
-3. For how to clone into Xcode, see <a href="#development">here</a>
+2. Clone into Xcode, see <a href="#development">here</a>
+   1. Open Xcode's "Welcome to Xcode" screen (Window → Welcome to Xcode)
+   2. Click "Clone an existing project"
+   3. Enter the repository URL into the text field, then press "clone" (just stay on the `main` branch)
+   4. Open the terminal, and navigate to the project directory, where the `.xcodeproj` file is
+   5. If you haven't already, download [CocoaPods](https://cocoapods.org/) by typing in `sudo gem install cocoapods` in the terminal
+   6. Type `pod install` to install the dependencies
+   7. Open the `.xcworkspace` file
+3. Make your changes (just stick on the `main` branch)
 4. Make a pull request
 5. [Add yourself](https://github.com/aheze/ProgressGif/blob/main/ProgressGif/About/Contributors.swift) to the `Contributors` screen in the app!
 ```swift
@@ -94,20 +97,6 @@ contributors.append(aheze)
 Don't forget to add your profile pic inside `Contributing.xcassets`!
 
 If you have any questions, feel free to open an issue, or leave a comment somewhere!
-
-#### Development (Clone into Xcode)
-1. Open Xcode's "Welcome to Xcode" screen (Window → Welcome to Xcode)
-2. Click "Clone an existing project"
-3. Enter the repository URL into the text field, then press "clone" (just stay on the `main` branch)
-4. Open the terminal, and navigate to the project directory, where the `.xcodeproj` file is
-5. If you haven't already, download [CocoaPods](https://cocoapods.org/) by typing in `sudo gem install cocoapods` in the terminal
-6. Type `pod install` to install the dependencies
-7. Open the `.xcworkspace` file
-8. Make your changes in the `.xcworkspace` file!
-
-*ProgressGif is inspired by this awesome [article](https://www.excelcampus.com/tips-shortcuts/add-progress-bar-to-gif/).*
-
----
 
 ### License
 ```
@@ -133,6 +122,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+
+*ProgressGif is inspired by this awesome [article](https://www.excelcampus.com/tips-shortcuts/add-progress-bar-to-gif/).*
 
 [example1]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Examples/13A3607F-1BE9-4CB4-9642-3155EB44D1BE.gif
 [example2]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Examples/4EFA4E62-E533-4244-A469-27B771878CCF.gif
