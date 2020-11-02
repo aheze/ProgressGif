@@ -2,19 +2,6 @@
   <a href="#"><img width="600" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png"></a>
 </p><br>
 
-<p align="center">
-  <a href="#"><img width="50" src="https://raw.githubusercontent.com/aheze/DeveloperAssets/master/Plus.png"></a>
-</p><br>
-   
-<p align="center">
-  <a href="https://hacktoberfest.digitalocean.com/"><img src="https://hacktoberfest.digitalocean.com/assets/HF-full-logo-b05d5eb32b3f3ecc9b2240526104cf4da3187b8b61963dd9042fdc2536e4a76c.svg" align="center" width="400"></a>
-  
-</p>
-
-<p align="center">
-  <a href="https://hacktoberfest.digitalocean.com/"><img src="https://hacktoberfestswaglist.com/img/SponsorsDarkBoxed.svg" align="center" width="300"></a>
-</p>
-
 <h2 align="center">
   <strong>Add progress bars to gifs!</strong>
 </h2>
@@ -30,40 +17,7 @@
   <br>
 </p>
 
-### Hacktoberfest
-All contributions are welcome! Here are some issues to get started on:
-- [x] [Make dark mode look better](https://github.com/aheze/ProgressGif/issues/6)
-- [x] [Display Gif size when export finishes](https://github.com/aheze/ProgressGif/issues/5)
-- [x] [Add haptic feedback when export finishes](https://github.com/aheze/ProgressGif/issues/4)
-- [x] [Plus button background doesn't change when Dark Mode is toggled](https://github.com/aheze/ProgressGif/issues/12)
 
-**UPDATE 10/18/2020:** It seems that these issues have all been resolved... but as always, there are <a href="#contributing">more</a>!
-
-Steps:
-1. Fork the repo
-2. Make your changes (just stick on the `main` branch)
-3. For how to clone into Xcode, see <a href="#development">here</a>
-4. Make a pull request
-5. [Add yourself](https://github.com/aheze/ProgressGif/blob/main/ProgressGif/About/Contributors.swift) to the `Contributors` screen in the app!
-```swift
-let aheze = Contributor()
-aheze.name = "Zheng"
-aheze.additions = 199405
-aheze.deletions = 29470
-aheze.profileName = "ahezeProfile" /// name of your profile pic
-aheze.linkImageName = "Medium"
-if let profileURL = URL(string: "https://aheze.medium.com/") {
-    aheze.link = profileURL
-}
-contributors.append(aheze)
-```
-
-
-<img src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/contributors.jpg" width="300" alt="Contributors screenshot">
-
-Don't forget to add your profile pic inside `Contributing.xcassets`!
-
-If you have any questions, feel free to open an issue, or leave a comment somewhere!
 
 ---
 
@@ -115,7 +69,33 @@ Once again, all contributions are welcome! Here's some harder issues that I need
 - [ ] Allow picking opaque color for background (so that shadows show up)
 - [ ] Export as MOV instead of just GIF only
 
-#### Development
+Steps:
+1. Fork the repo
+2. Make your changes (just stick on the `main` branch)
+3. For how to clone into Xcode, see <a href="#development">here</a>
+4. Make a pull request
+5. [Add yourself](https://github.com/aheze/ProgressGif/blob/main/ProgressGif/About/Contributors.swift) to the `Contributors` screen in the app!
+```swift
+let aheze = Contributor()
+aheze.name = "Zheng"
+aheze.additions = 199405
+aheze.deletions = 29470
+aheze.profileName = "ahezeProfile" /// name of your profile pic
+aheze.linkImageName = "Medium"
+if let profileURL = URL(string: "https://aheze.medium.com/") {
+    aheze.link = profileURL
+}
+contributors.append(aheze)
+```
+
+
+<img src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/contributors.jpg" width="300" alt="Contributors screenshot">
+
+Don't forget to add your profile pic inside `Contributing.xcassets`!
+
+If you have any questions, feel free to open an issue, or leave a comment somewhere!
+
+#### Development (Clone into Xcode)
 1. Open Xcode's "Welcome to Xcode" screen (Window → Welcome to Xcode)
 2. Click "Clone an existing project"
 3. Enter the repository URL into the text field, then press "clone" (just stay on the `main` branch)
