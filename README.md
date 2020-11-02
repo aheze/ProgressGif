@@ -16,6 +16,7 @@
   <br>
 </p>
 
+😀 Thanks to everyone who contributed during Hacktoberfest 2020!
 
 ### App Store Download
 Download ProgressGif on the [App Store](https://apps.apple.com/us/app/id1526969349). Because it's open-source, it's free!
