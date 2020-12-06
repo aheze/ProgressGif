@@ -31,8 +31,6 @@ extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         DispatchQueue.main.async {
             self.fpsButton.setTitle(fpsDescription, for: .normal)
         }
-        
-        
     }
 }
 
