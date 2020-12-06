@@ -2,25 +2,11 @@
   <a href="#"><img width="600" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png"></a>
 </p><br>
 
-<p align="center">
-  <a href="#"><img width="50" src="https://raw.githubusercontent.com/aheze/DeveloperAssets/master/Plus.png"></a>
-</p><br>
-   
-<p align="center">
-  <a href="https://hacktoberfest.digitalocean.com/"><img src="https://hacktoberfest.digitalocean.com/assets/HF-full-logo-b05d5eb32b3f3ecc9b2240526104cf4da3187b8b61963dd9042fdc2536e4a76c.svg" align="center" width="400"></a>
-  
-</p>
-
-<p align="center">
-  <a href="https://hacktoberfest.digitalocean.com/"><img src="https://hacktoberfestswaglist.com/img/SponsorsDarkBoxed.svg" align="center" width="300"></a>
-</p>
-
 <h2 align="center">
   <strong>Add progress bars to gifs!</strong>
 </h2>
 
 <p align="center">
-  <a href="#hacktoberfest"><strong>Hacktoberfest!</strong></a> |
   <a href="https://apps.apple.com/us/app/id1526969349"><strong>App Store Download</strong></a> |
   <a href="#about">About</a> |
   <a href="#features">Features</a> |
@@ -30,42 +16,7 @@
   <br>
 </p>
 
-### Hacktoberfest
-All contributions are welcome! Here are some issues to get started on:
-- [x] [Make dark mode look better](https://github.com/aheze/ProgressGif/issues/6)
-- [x] [Display Gif size when export finishes](https://github.com/aheze/ProgressGif/issues/5)
-- [x] [Add haptic feedback when export finishes](https://github.com/aheze/ProgressGif/issues/4)
-- [x] [Plus button background doesn't change when Dark Mode is toggled](https://github.com/aheze/ProgressGif/issues/12)
-
-**UPDATE 10/18/2020:** It seems that these issues have all been resolved... but as always, there are <a href="#contributing">more</a>!
-
-Steps:
-1. Fork the repo
-2. Make your changes (just stick on the `main` branch)
-3. For how to clone into Xcode, see <a href="#development">here</a>
-4. Make a pull request
-5. [Add yourself](https://github.com/aheze/ProgressGif/blob/main/ProgressGif/About/Contributors.swift) to the `Contributors` screen in the app!
-```swift
-let aheze = Contributor()
-aheze.name = "Zheng"
-aheze.additions = 199405
-aheze.deletions = 29470
-aheze.profileName = "ahezeProfile" /// name of your profile pic
-aheze.linkImageName = "Medium"
-if let profileURL = URL(string: "https://aheze.medium.com/") {
-    aheze.link = profileURL
-}
-contributors.append(aheze)
-```
-
-
-<img src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/contributors.jpg" width="300" alt="Contributors screenshot">
-
-Don't forget to add your profile pic inside `Contributing.xcassets`!
-
-If you have any questions, feel free to open an issue, or leave a comment somewhere!
-
----
+😀 Thanks to everyone who contributed during Hacktoberfest 2020!
 
 ### App Store Download
 Download ProgressGif on the [App Store](https://apps.apple.com/us/app/id1526969349). Because it's open-source, it's free!
@@ -115,25 +66,44 @@ Once again, all contributions are welcome! Here's some harder issues that I need
 - [ ] Allow picking opaque color for background (so that shadows show up)
 - [ ] Export as MOV instead of just GIF only
 
-#### Development
-1. Open Xcode's Welcome to Xcode screen (Window > Welcome to Xcode)
-2. Click "Clone an existing project"
-3. Enter the repository URL into the text field, then press "clone" (just stay on the `main` branch)
-4. Open a terminal, and navigate to the project directory, where the `.xcodeproj` file is
-5. If you haven't already, download [CocoaPods](https://cocoapods.org/) by typing in `sudo gem install cocoapods` in the terminal
-6. Type `pod install` to install the dependencies
-7. Open the `.xcworkspace` file
-8. Use the `.xcworkspace` file to write your code in
+Steps:
+1. Fork the repo
+2. Clone into Xcode, see <a href="#development">here</a>
+   1. Open Xcode's "Welcome to Xcode" screen (Window → Welcome to Xcode)
+   2. Click "Clone an existing project"
+   3. Enter the repository URL into the text field, then press "clone" (just stay on the `main` branch)
+   4. Open the terminal, and navigate to the project directory, where the `.xcodeproj` file is
+   5. If you haven't already, download [CocoaPods](https://cocoapods.org/) by typing in `sudo gem install cocoapods` in the terminal
+   6. Type `pod install` to install the dependencies
+   7. Open the `.xcworkspace` file
+3. Make your changes (just stick on the `main` branch)
+4. Make a pull request
+5. [Add yourself](https://github.com/aheze/ProgressGif/blob/main/ProgressGif/About/Contributors.swift) to the `Contributors` screen in the app!
+```swift
+let aheze = Contributor()
+aheze.name = "Zheng"
+aheze.additions = 199405
+aheze.deletions = 29470
+aheze.profileName = "ahezeProfile" /// name of your profile pic
+aheze.linkImageName = "Medium"
+if let profileURL = URL(string: "https://aheze.medium.com/") {
+    aheze.link = profileURL
+}
+contributors.append(aheze)
+```
 
-*ProgressGif is inspired by this awesome [article](https://www.excelcampus.com/tips-shortcuts/add-progress-bar-to-gif/).*
 
----
+<img src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/contributors.jpg" width="300" alt="Contributors screenshot">
+
+Don't forget to add your profile pic inside `Contributing.xcassets`!
+
+If you have any questions, feel free to open an issue, or leave a comment somewhere!
 
 ### License
 ```
 MIT License
 
-Copyright (c) 2020 Zheng
+Copyright (c) 2020 A. Zheng
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -153,6 +123,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+
+*ProgressGif is inspired by this awesome [article](https://www.excelcampus.com/tips-shortcuts/add-progress-bar-to-gif/).*
 
 [example1]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Examples/13A3607F-1BE9-4CB4-9642-3155EB44D1BE.gif
 [example2]: https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Examples/4EFA4E62-E533-4244-A469-27B771878CCF.gif
