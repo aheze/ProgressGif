@@ -1,10 +1,10 @@
 <p align="center">
   <a href="#"><img width="600" src="https://raw.githubusercontent.com/aheze/ProgressGif/main/Assets/GitHub/Logo/LogoWithText.png"></a>
-</p><br>
+</p>
 
-<h2 align="center">
+<h1 align="center">
   <strong>Add progress bars to gifs!</strong>
-</h2>
+</h1>
 
 <p align="center">
   <a href="https://apps.apple.com/us/app/id1526969349"><strong>App Store Download</strong></a> |
@@ -16,10 +16,10 @@
   <br>
 </p>
 
-😀 Thanks to everyone who contributed during Hacktoberfest 2020!
+😀 Thanks to everyone who contributed during Hacktoberfest 2020!
 
 ### App Store Download
-Download ProgressGif on the [App Store](https://apps.apple.com/us/app/id1526969349). Because it's open-source, it's free!
+Download ProgressGif on the [App Store](https://apps.apple.com/us/app/id1526969349).
 
 ---
 
@@ -31,9 +31,13 @@ Tutorials with only words are boring, so we add images. And if they need to be m
 - If they're on their phone, the video will open in a full-screen modal, which disrupts the reading experience
 - Some blogging sites don't allow video embeds
 
-That's why we use GIFs instead! (Yes, GIFs are memory-inefficient, but they're really convenient, and ProgressGif has options for framerate)
+That's why we use GIFs instead! (Well yes, GIFs are memory-inefficient, but they're really convenient, and ProgressGif has options for framerate...)
 
-ProgressGif is an iOS app made with Swift 5 and UIKit, inspired by this [article](https://www.excelcampus.com/tips-shortcuts/add-progress-bar-to-gif/). SwiftUI would have be fine for building the UI, but because there's a lot of under-the-hood work with video rendering, I thought it would be better to just go with UIKit.
+ProgressGif is an iOS app made with Swift and UIKit, inspired by this [article](https://www.excelcampus.com/tips-shortcuts/add-progress-bar-to-gif/). 
+
+**Why not SwiftUI?**
+
+SwiftUI would have be fine for building the UI, but because there's a lot of under-the-hood work with video rendering, I thought it would be better to just go with UIKit.
 
 ---
 
@@ -44,7 +48,7 @@ ProgressGif does one thing only: Add progress bars to GIFs.
 | :-------------: |:-------------:| :-----:| :-----:| :-----:| :-----:|
 | ![Example1] | ![Example2] | ![Example3] | ![Example4] | ![Example5] | ![Example6] |
 
-Yeah, that's it. ProgressGif serves one purpose, and one purpose only... but in a highly customizable way! Customize height, bar color, bar background color, edge inset, corner radius… and shadows are in beta!
+Yeah, that's it. ProgressGif serves one purpose, and one purpose only... but in a highly customizable way. Customize height, bar color, bar background color, edge inset, corner radius… and shadows are in beta.
 
 ---
 
@@ -60,7 +64,7 @@ Yeah, that's it. ProgressGif serves one purpose, and one purpose only... but in 
 ---
 
 ### Contributing
-Once again, all contributions are welcome! Here's some harder issues that I need help on:
+All contributions are welcome. Here's some harder issues that I need help on:
 - [x] Horizontal layout
 - [ ] Allow picking colors with transparency
 - [ ] Allow picking opaque color for background (so that shadows show up)
