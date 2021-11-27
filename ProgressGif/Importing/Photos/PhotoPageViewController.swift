@@ -170,6 +170,7 @@ class PhotoPageViewController: UIViewController, UIGestureRecognizerDelegate {
         
         self.pageViewController.delegate = self
         self.pageViewController.dataSource = self
+        
         self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPanWith(gestureRecognizer:)))
         self.panGestureRecognizer.delegate = self
         self.pageViewController.view.addGestureRecognizer(self.panGestureRecognizer)
