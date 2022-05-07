@@ -107,7 +107,7 @@ If you have any questions, feel free to open an issue, or leave a comment somewh
 ```
 MIT License
 
-Copyright (c) 2021 A. Zheng
+Copyright (c) 2022 A. Zheng
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
